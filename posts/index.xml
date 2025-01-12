@@ -9,7 +9,14 @@
     <managingEditor>dwightaspencer@gmail.com (Dwight Spencer)</managingEditor>
     <webMaster>dwightaspencer@gmail.com (Dwight Spencer)</webMaster>
     <copyright>2021 Dwight Spencer. All rights reserved</copyright>
-    <lastBuildDate></lastBuildDate>
+    <lastBuildDate>Tue, 07 Jan 2025 14:13:42 -0500</lastBuildDate>
     <atom:link href="https://dwightaspencer.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>00 Hellowrld</title>
+      <link>https://dwightaspencer.com/posts/00-hellowrld/</link>
+      <pubDate>Tue, 07 Jan 2025 14:13:42 -0500</pubDate><author>dwightaspencer@gmail.com (Dwight Spencer)</author>
+      <guid>https://dwightaspencer.com/posts/00-hellowrld/</guid>
+      <description>Hellowrld Reality is silly-putty. -Paul Krassner&#xA;Linux is bloat, Java is a virus, Rust is a mind virus, node is crack and no one understands system design andymore.&#xA;Now the old greybeards are done chasing off the PFY while screeming at clouds. We can get down to the real fun.&#xA;$ ssh hack.dapla.net help Thanks to Soft Serve one can find security research whitepapers, talks and presentations, and a few easter eggs on my self hosted git repos.</description>
+    </item>
   </channel>
 </rss>
