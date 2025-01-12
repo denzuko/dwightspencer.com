@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Articles on Dwight Spencer - 0x5DCBF78E3F9C3FE3</title>
+    <link>http://localhost:1313/categories/articles/</link>
+    <description>Recent content in Articles on Dwight Spencer - 0x5DCBF78E3F9C3FE3</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 Jan 2025 14:13:42 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/articles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>00 Hellowrld</title>
+      <link>http://localhost:1313/posts/00-hellowrld/</link>
+      <pubDate>Tue, 07 Jan 2025 14:13:42 -0500</pubDate>
+      <guid>http://localhost:1313/posts/00-hellowrld/</guid>
+      <description>Hellowrld (defun DwightSpencer#AboutMe(id) &amp;#34;Just a SysOp turned founder of #devops now coding AI, Blockchain, Commercial Systems.&amp;#34; ( (:Languages (Golang ANSI-C ASM TypeScript Python Lisp)) (:Projects ( (&amp;#34;Metis&amp;#34; https://github.com/3um-Group) (&amp;#34;2600 Moderator&amp;#34; https://reddit.com/r/2600) )) (:Certs ( (&amp;#34;ORCID&amp;#34; 0009-0001-0066-4646) (&amp;#34;Keybase&amp;#34; https://Keybase.io/Denzuko/pubkey) )) (:Volunteering ( (&amp;#34;Score&amp;#34; https://Score.org&amp;#34;) (&amp;#34;Internet Archive&amp;#34; https://archive.org) (&amp;#34;9front&amp;#34; https://only9fans.com) (&amp;#34;Debian&amp;#34; https://debian.org) )))) </description>
+    </item>
+  </channel>
+</rss>
