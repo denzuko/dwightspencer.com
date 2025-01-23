@@ -9,8 +9,15 @@
     <managingEditor>dwightaspencer@gmail.com (Dwight Spencer)</managingEditor>
     <webMaster>dwightaspencer@gmail.com (Dwight Spencer)</webMaster>
     <copyright>2021 Dwight Spencer. All rights reserved</copyright>
-    <lastBuildDate>Tue, 07 Jan 2025 14:13:42 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jan 2025 02:43:33 -0500</lastBuildDate>
     <atom:link href="https://dwightaspencer.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Privacy Canaries: A better tweety bird</title>
+      <link>https://dwightaspencer.com/posts/01-a-better-tweedy-bird/</link>
+      <pubDate>Mon, 20 Jan 2025 02:43:33 -0500</pubDate><author>dwightaspencer@gmail.com (Dwight Spencer)</author>
+      <guid>https://dwightaspencer.com/posts/01-a-better-tweedy-bird/</guid>
+      <description>Warrent Canaries A warrant canary is a statement that declares that an organization has not taken certain actions or received certain requests for information from government or law enforcement authorities. Many services use warrant canaries to let users know how private their data is. There are even attempts to formulize to a standard such as Canarytail.&#xA;Though the standard exposes a lot of meta data about the types of request of information and related nature of hush order issued doing the case which could potentially lead to legal issues.</description>
+    </item>
     <item>
       <title>00 Hellowrld</title>
       <link>https://dwightaspencer.com/posts/00-hellowrld/</link>
