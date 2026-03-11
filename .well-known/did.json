@@ -1,0 +1,27 @@
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:web:dwightaspencer.com",
+
+  "verificationMethod": [
+    {
+      "id": "did:web:dwightaspencer.com#git-hash",
+      "type": "DigestVerificationMethod2021",
+      "controller": "did:web:dwightaspencer.com",
+      "digestAlgorithm": "Sha256",
+      "digestValue": "4684d79bc97650e995238fc98f3317cdf9c4ab56"
+    }
+  ],
+
+  "assertionMethod": [
+    "did:web:dwightaspencer.com#git-hash"
+  ],
+
+  "service": [
+    {
+      "id": "did:web:dwightaspencer.com#git",
+      "type": "GitRepository",
+      "serviceEndpoint": "https://github.com/denzuko/dwightaspencer.com.git",
+      "description": "Canonical git repo – current commit hash 4684d79bc97650e995238fc98f3317cdf9c4ab56 cryptographically attests site content."
+    }
+  ]
+}

@@ -166,6 +166,12 @@
             "name": "public-inbox",
             "url": "https://public-inbox.org",
             "description": "Self-hosted mailing list archival and indexing system"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "git-bug",
+            "url": "https://github.com/src-d/git-bug",
+            "description": "Distributed issue tracker stored as git objects; see issue #1024 for SourceHut bridge"
           }
         ],
         "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
@@ -545,8 +551,31 @@ This GitHub mirror is archived and read-only.</code></pre>
 
       <p><a href="https://public-inbox.org">public-inbox.org</a> is an archival and indexing system for public mailing lists that makes every thread permanently searchable over HTTPS, NNTP, and IMAP. GitHub Issues exist entirely within GitHub's proprietary silo — if GitHub removes your repository or goes offline, your issue history vanishes. public-inbox provides a durable, decentralised archive that no platform can take away.</p>
 
-      <pre><code># Install public-inbox (Debian/Ubuntu)
-sudo apt install public-inbox
+      <pre><code># Clone source from the canonical repository
+git clone https://public-inbox.org/public-inbox.git
+cd public-inbox
+
+# Install required Perl dependencies (Perl 5.12+, Git 1.8+)
+# Core: DBD::SQLite (IMAP/NNTP/threading), URI (HTML/Atom output)
+# Optional but recommended: Plack (HTTP interface), Xapian (full-text search)
+#
+# On Debian/Ubuntu:
+#   sudo apt install perl libdbd-sqlite3-perl liburi-perl \
+#     libplack-perl libsearch-xapian-perl
+# On Alpine:
+#   apk add perl perl-dbd-sqlite perl-uri perl-plack
+# Or install via cpan:
+#   cpan DBD::SQLite URI Plack Search::Xapian
+
+# Build, test, and install to /usr/local
+perl Makefile.PL
+make
+make test
+sudo make install
+
+# --- Unprivileged / minimal install (symlinks into $HOME/bin) ---
+perl Makefile.PL
+make symlink-install prefix=$HOME
 
 # Initialise an inbox for your project list
 public-inbox-init -V2 myproject \
@@ -573,6 +602,51 @@ python3 issues2mbox.py issues.json > issues.mbox
 
 # Inject into public-inbox
 public-inbox-inject /srv/public-inbox/myproject &lt; issues.mbox</code></pre>
+
+      <h2>Part 3b — Decentralized Project Management with git-bug</h2>
+
+      <p><a href="https://github.com/src-d/git-bug" rel="noopener">git-bug</a> is a
+      platform‑independent issue tracker that stores issues, comments, and
+      metadata as native git objects inside your repository. There are no
+      separate files or web UI; the entire project management history lives in
+      the git database, pushes and pulls with any standard remote, and works
+      offline. A bridge for GitHub exists today, and an open feature request
+      for a <em>SourceHut</em> bridge can be found in
+      <a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">issue
+      #1024</a> (area/bridge · kind/feature · priority/important-longterm).  An
+      active pull request, <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR
+      #1499</a>, is adding native todo.sr.ht GraphQL synchronization; until that
+      lands the GitHub bridge can still push SourceHut by mirroring your repo.</p>
+
+      <p>Installation is simple:</p>
+      <pre><code># Go
+GO111MODULE=on go install github.com/src-d/git-bug/cmd/git-bug@latest
+</code></pre>
+
+      <p>Basic usage:</p>
+      <pre><code>git bug user create
+git bug add "Issue title"
+git bug ls          # list issues
+git bug termui      # curses interface
+git bug webui       # browser UI
+</code></pre>
+
+      <p>To import an existing GitHub project, configure the bridge and pull the
+      data using your GitHub token:</p>
+      <pre><code>git bug bridge configure github \
+    --repo youruser/yourrepo --token $GITHUB_TOKEN
+
+# fetch issues, comments, labels, and users
+GitHub bridge pulling…
+</code></pre>
+
+      <p>Because issues are stored in refs, pushing to SourceHut carries them
+      automatically; a simple <code>git push srht --mirror</code> will include
+      the <code>refs/git-bug/*</code> namespace.  The SourceHut bridge status
+      remains open: see <a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">issue
+      #1024</a> for the SourceHut-specific work and the linked
+      <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR
+      #1499</a> for the todo.sr.ht sync.</p>
 
       <h2>Part 4 — CI Pipelines on builds.sr.ht</h2>
 
@@ -683,7 +757,10 @@ NoAITrain: true</code></pre>
         <a href="https://sourcehut.org" rel="noopener">sourcehut.org</a> — official site, documentation, and subscription<br>
         <a href="https://sr.ht/~emersion/gh2srht/" rel="noopener">sr.ht/~emersion/gh2srht/</a> — GitHub &#x2192; SourceHut migration tool by Simon Ser<br>
         <a href="https://public-inbox.org" rel="noopener">public-inbox.org</a> — self-hosted mailing list archival and indexing<br>
-        <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" rel="noopener">docs.github.com/site-policy</a> — GitHub ToS (read Section D.
+        <a href="https://github.com/src-d/git-bug" rel="noopener">github.com/src-d/git-bug</a> — git-bug distributed issue tracker (see issue #1024 for SourceHut bridge)<br>
+        <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" rel="noopener">docs.github.com/site-policy</a> — GitHub ToS (read Section D.8)<br>
+        <a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">Issue #1024</a> — open feature request for SourceHut bridge<br>
+        <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR #1499</a> — todo.sr.ht GraphQL sync work in progress
       </p>
     </div>
   </article>
