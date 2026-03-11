@@ -1,1 +1,58 @@
-{"subject":"acct:denzuko@mastodon.social","aliases":["https://mastodon.social/@denzuko","https://mastodon.social/users/denzuko"],"links":[{"rel":"http://webfinger.net/rel/profile-page","type":"text/html","href":"https://mastodon.social/@denzuko"},{"rel":"self","type":"application/activity+json","href":"https://mastodon.social/users/denzuko"},{"rel":"http://ostatus.org/schema/1.0/subscribe","template":"https://mastodon.social/authorize_interaction?uri={uri}"},{"rel":"http://webfinger.net/rel/avatar","type":"image/jpeg","href":"https://files.mastodon.social/accounts/avatars/001/089/555/original/27cd0176342b3718.jpg"}]}
+{
+  "subject": "acct:denzuko@mastodon.social",
+  "aliases": [
+    "https://dwightaspencer.com/",
+    "https://github.com/denzuko",
+    "https://linkedin.com/in/denzuko",
+    "https://keybase.io/Denzuko",
+    "https://orcid.org/0009-0001-0066-4646",
+    "https://mastodon.social/@denzuko",
+    "https://mastodon.social/users/denzuko"
+  ],
+  "links": [
+    {
+      "rel": "http://webfinger.net/rel/profile-page",
+      "type": "text/html",
+      "href": "https://mastodon.social/@denzuko"
+    },
+    {
+      "rel":"self","type":"application/activity+json",
+      "href":"https://mastodon.social/users/denzuko"
+    },
+    {
+      "rel": "http://schemas.google.com/g/2010#updates-from",
+      "type": "application/atom+xml",
+      "href": "https://dwightaspencer.com/atom.xml"
+    },
+    {
+        "rel": "http://ostatus.org/schema/1.0/subscribe",
+        "template": "https://mastodon.social/authorize_interaction?uri={uri}"
+    },
+    {
+      "rel": "http://webfinger.net/rel/avatar",
+      "type": "image/jpg",
+      "href": "https://files.mastodon.social/accounts/avatars/001/089/555/original/27cd0176342b3718.jpg"
+    },
+    {
+      "rel": "me",
+      "href": "https://github.com/denzuko"
+    },
+    {
+      "rel": "me",
+      "href": "https://linkedin.com/in/denzuko"
+    },
+    {
+      "rel": "me",
+      "href": "https://keybase.io/Denzuko"
+    },
+    {
+      "rel": "me",
+      "href": "https://orcid.org/0009-0001-0066-4646"
+    },
+    {
+      "rel": "http://webfinger.net/rel/tdm-policy",
+      "type": "application/json",
+      "href": "https://dwightaspencer.com/.well-known/tdm-policy.json"
+    }
+  ]
+}
