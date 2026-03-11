@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"
   vocab="https://schema.org/"
-  prefix="og: https://ogp.me/ns# dc: https://purl.org/dc/terms/ geo: https://www.w3.org/2003/01/geo/wgs84_pos# aeo: https://data.nfld.nl/aeo/ article: https://ogp.me/ns/article#">
+  prefix="og: https://ogp.me/ns# dc: https://purl.org/dc/terms/ article: https://ogp.me/ns/article#">
 <head>
-    <meta http-equiv="Cache-Control" content="public, max-age=3600">
-  
-  <link rel="canonical" href="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/">
-  <link rel="icon" href="https://dwightaspencer.com/assets/favicon.ico">
-  <link rel="apple-touch-icon" href="https://dwightaspencer.com/assets/apple-touch-icon.png">
-  <link rel="author" href="https://dwightaspencer.com/#author">
-  <link rel="me" href="https://github.com/denzuko">
-  <link rel="me" href="https://linkedin.com/in/denzuko">
-  <link rel="me" href="https://keybase.io/Denzuko">
-  <link rel="me" href="https://orcid.org/0009-0001-0066-4646">
+    
+  <link rel="canonical" href="https://dwightaspencer.com/posts/01-a-better-tweedy-bird/">
+  <link rel="icon" href="https://dwightaspencer.com//assets/favicon.ico">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link href="https://www.google-analytics.com" rel="preconnect" crossorigin>
   <link rel="alternate" type="application/atom+xml" title="Dwight Spencer - 0x5DCBF78E3F9C3FE3" href="https://dwightaspencer.com/atom.xml" />
@@ -30,40 +23,7 @@
   <meta name="author" content="Dwight Spencer" />
   <meta name="keywords" content="GitHub, SourceHut, privacy, copyright, AI training, Copilot, gh2srht, public-inbox, FOSS, developer rights, TOS, terms of service" />
   <meta name="generator" content="handcrafted HTML" />
-  <link rel="canonical" href="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/" />
-
-  <!-- ═══════════════════════════════════════════════
-       DUBLIN CORE METADATA
-  ═══════════════════════════════════════════════ -->
-  <link rel="schema.DC" href="https://purl.org/dc/elements/1.1/">
-  <meta name="DC.title" content="GitHub's TOS Won't Save You">
-  <meta name="DC.creator" content="Dwight Spencer">
-  <meta name="DC.creator.orcid" content="https://orcid.org/0009-0001-0066-4646">
-  <meta name="orcid" content="0009-0001-0066-4646">
-  <meta name="DC.subject" content="GitHub; Privacy; Copyright; AI Training; SourceHut; Developer Rights">
-  <meta name="DC.description" content="How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox.">
-  <meta name="DC.publisher" content="dwightaspencer.com">
-  <meta name="DC.date" content="2026-03-11">
-  <meta name="DC.type" content="BlogPosting">
-  <meta name="DC.format" content="text/html">
-  <meta name="DC.identifier" content="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/">
-  <meta name="DC.language" content="en">
-  <meta name="DC.rights" content="Copyright 2026 Dwight Spencer. All rights reserved. AI training prohibited.">
-
-  <!-- ═══════════════════════════════════════════════
-       GEO METADATA
-  ═══════════════════════════════════════════════ -->
-  <meta name="geo.position" content="42.6526;-73.7562">
-  <meta name="ICBM" content="42.6526, -73.7562">
-  <meta name="geo.placename" content="Albany, New York, United States">
-  <meta name="geo.region" content="US-NY">
-
-  <!-- ═══════════════════════════════════════════════
-       AEO (AUTHOR EXPERTISE OPTIMIZATION) METADATA
-  ═══════════════════════════════════════════════ -->
-  <meta name="aeo:author" content="Dwight Spencer">
-  <meta name="aeo:expertise" content="DevOps, Privacy, Security, Open Source, Architecture">
-  <meta name="aeo:years_experience" content="25">
+  <link rel="canonical" href="https://dwightaspencer.com/posts/github-tos-privacy/" />
 
   <!-- ═══════════════════════════════════════════════
        AI / CRAWLER METADATA
@@ -96,14 +56,9 @@
   ═══════════════════════════════════════════════ -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Dwight Spencer - 0x5DCBF78E3F9C3FE3" />
-  <meta property="og:url" content="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/" />
+  <meta property="og:url" content="https://dwightaspencer.com/posts/github-tos-privacy/" />
   <meta property="og:title" content="GitHub's TOS Won't Save You: Why Your Code, Privacy &amp; Copyrights Are at Risk" />
   <meta property="og:description" content="How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox." />
-  <meta property="og:image" content="https://dwightaspencer.com/assets/og-post-github-tos.png">
-  <meta property="og:image:alt" content="GitHub TOS article by Dwight Spencer">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/png">
   <meta property="og:locale" content="en_US" />
   <meta property="article:author" content="Dwight Spencer" />
   <meta property="article:published_time" content="2026-03-11T00:00:00Z" />
@@ -119,30 +74,28 @@
   <!-- ═══════════════════════════════════════════════
        TWITTER / X CARDS
   ═══════════════════════════════════════════════ -->
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@denzuko" />
   <meta name="twitter:creator" content="@denzuko" />
   <meta name="twitter:title" content="GitHub's TOS Won't Save You: Why Your Code, Privacy &amp; Copyrights Are at Risk" />
   <meta name="twitter:description" content="Section D.8 forces you to waive your own protective terms. Here's what it means and how to migrate to SourceHut." />
-  <meta name="twitter:image" content="https://dwightaspencer.com/assets/twitter-github-tos.png">
-  <meta name="twitter:image:alt" content="GitHub TOS article by Dwight Spencer">
 
   <!-- ═══════════════════════════════════════════════
-       DUBLIN CORE (Duplicate section - to be consolidated)
+       DUBLIN CORE
   ═══════════════════════════════════════════════ -->
   <link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
   <meta name="DC.title" content="GitHub's TOS Won't Save You: Why Your Code, Privacy &amp; Copyrights Are at Risk" />
   <meta name="DC.creator" content="Dwight Spencer" />
-  <meta name="DC.creator.orcid" content="https://orcid.org/0009-0001-0066-4646">
   <meta name="DC.subject" content="GitHub Terms of Service; AI training; developer privacy; copyright; SourceHut migration" />
   <meta name="DC.description" content="Analysis of GitHub's TOS provisions that undermine developer privacy and copyright protections, with a practical migration guide to SourceHut." />
   <meta name="DC.publisher" content="dwightaspencer.com" />
   <meta name="DC.date" content="2026-03-11" />
-  <meta name="DC.type" content="BlogPosting" />
+  <meta name="DC.type" content="Text" />
   <meta name="DC.format" content="text/html" />
-  <meta name="DC.identifier" content="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/" />
+  <meta name="DC.identifier" content="https://dwightaspencer.com/posts/github-tos-privacy/" />
   <meta name="DC.language" content="en" />
   <meta name="DC.rights" content="Copyright 2026 Dwight Spencer. All rights reserved. AI training prohibited." />
+  <meta name="DC.coverage" content="Global" />
 
   <!-- ═══════════════════════════════════════════════
        SCHEMA.ORG JSON-LD
@@ -153,10 +106,10 @@
     "@graph": [
       {
         "@type": "BlogPosting",
-        "@id": "https://dwightaspencer.com/posts/02-github-tos-wont-save-you/#article",
+        "@id": "https://dwightaspencer.com/posts/github-tos-privacy/#article",
         "headline": "GitHub's TOS Won't Save You: Why Your Code, Privacy & Copyrights Are at Risk",
         "description": "How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox.",
-        "url": "https://dwightaspencer.com/posts/02-github-tos-wont-save-you/",
+        "url": "https://dwightaspencer.com/posts/github-tos-privacy/",
         "datePublished": "2026-03-11",
         "dateModified": "2026-03-11",
         "inLanguage": "en-US",
@@ -168,8 +121,7 @@
           "sameAs": [
             "https://github.com/denzuko",
             "https://linkedin.com/in/denzuko",
-            "https://keybase.io/Denzuko",
-            "https://orcid.org/0009-0001-0066-4646"
+            "https://keybase.io/Denzuko"
           ]
         },
         "publisher": {
@@ -178,7 +130,7 @@
         },
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://dwightaspencer.com/posts/02-github-tos-wont-save-you/"
+          "@id": "https://dwightaspencer.com/posts/github-tos-privacy/"
         },
         "isAccessibleForFree": true,
         "keywords": ["GitHub", "SourceHut", "privacy", "copyright", "AI training", "Copilot", "gh2srht", "public-inbox", "FOSS", "developer rights"],
@@ -214,6 +166,12 @@
             "name": "public-inbox",
             "url": "https://public-inbox.org",
             "description": "Self-hosted mailing list archival and indexing system"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "git-bug",
+            "url": "https://github.com/src-d/git-bug",
+            "description": "Distributed issue tracker stored as git objects; see issue #1024 for SourceHut bridge"
           }
         ],
         "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
@@ -252,7 +210,7 @@
             "@type": "ListItem",
             "position": 3,
             "name": "GitHub's TOS Won't Save You",
-            "item": "https://dwightaspencer.com/posts/02-github-tos-wont-save-you/"
+            "item": "https://dwightaspencer.com/posts/github-tos-privacy/"
           }
         ]
       }
@@ -404,7 +362,7 @@
   Microformats2: h-feed wrapper (page-level)
   The article below carries h-entry; the author carries h-card.
 -->
-<body lang="en" class="h-entry">
+<body class="h-feed">
 
 <a class="skip-link" href="#main">Skip to main</a>
 
@@ -593,8 +551,31 @@ This GitHub mirror is archived and read-only.</code></pre>
 
       <p><a href="https://public-inbox.org">public-inbox.org</a> is an archival and indexing system for public mailing lists that makes every thread permanently searchable over HTTPS, NNTP, and IMAP. GitHub Issues exist entirely within GitHub's proprietary silo — if GitHub removes your repository or goes offline, your issue history vanishes. public-inbox provides a durable, decentralised archive that no platform can take away.</p>
 
-      <pre><code># Install public-inbox (Debian/Ubuntu)
-sudo apt install public-inbox
+      <pre><code># Clone source from the canonical repository
+git clone https://public-inbox.org/public-inbox.git
+cd public-inbox
+
+# Install required Perl dependencies (Perl 5.12+, Git 1.8+)
+# Core: DBD::SQLite (IMAP/NNTP/threading), URI (HTML/Atom output)
+# Optional but recommended: Plack (HTTP interface), Xapian (full-text search)
+#
+# On Debian/Ubuntu:
+#   sudo apt install perl libdbd-sqlite3-perl liburi-perl \
+#     libplack-perl libsearch-xapian-perl
+# On Alpine:
+#   apk add perl perl-dbd-sqlite perl-uri perl-plack
+# Or install via cpan:
+#   cpan DBD::SQLite URI Plack Search::Xapian
+
+# Build, test, and install to /usr/local
+perl Makefile.PL
+make
+make test
+sudo make install
+
+# --- Unprivileged / minimal install (symlinks into $HOME/bin) ---
+perl Makefile.PL
+make symlink-install prefix=$HOME
 
 # Initialise an inbox for your project list
 public-inbox-init -V2 myproject \
@@ -621,6 +602,51 @@ python3 issues2mbox.py issues.json > issues.mbox
 
 # Inject into public-inbox
 public-inbox-inject /srv/public-inbox/myproject &lt; issues.mbox</code></pre>
+
+      <h2>Part 3b — Decentralized Project Management with git-bug</h2>
+
+      <p><a href="https://github.com/src-d/git-bug" rel="noopener">git-bug</a> is a
+      platform‑independent issue tracker that stores issues, comments, and
+      metadata as native git objects inside your repository. There are no
+      separate files or web UI; the entire project management history lives in
+      the git database, pushes and pulls with any standard remote, and works
+      offline. A bridge for GitHub exists today, and an open feature request
+      for a <em>SourceHut</em> bridge can be found in
+      <a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">issue
+      #1024</a> (area/bridge · kind/feature · priority/important-longterm).  An
+      active pull request, <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR
+      #1499</a>, is adding native todo.sr.ht GraphQL synchronization; until that
+      lands the GitHub bridge can still push SourceHut by mirroring your repo.</p>
+
+      <p>Installation is simple:</p>
+      <pre><code># Go
+GO111MODULE=on go install github.com/src-d/git-bug/cmd/git-bug@latest
+</code></pre>
+
+      <p>Basic usage:</p>
+      <pre><code>git bug user create
+git bug add "Issue title"
+git bug ls          # list issues
+git bug termui      # curses interface
+git bug webui       # browser UI
+</code></pre>
+
+      <p>To import an existing GitHub project, configure the bridge and pull the
+      data using your GitHub token:</p>
+      <pre><code>git bug bridge configure github \
+    --repo youruser/yourrepo --token $GITHUB_TOKEN
+
+# fetch issues, comments, labels, and users
+GitHub bridge pulling…
+</code></pre>
+
+      <p>Because issues are stored in refs, pushing to SourceHut carries them
+      automatically; a simple <code>git push srht --mirror</code> will include
+      the <code>refs/git-bug/*</code> namespace.  The SourceHut bridge status
+      remains open: see <a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">issue
+      #1024</a> for the SourceHut-specific work and the linked
+      <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR
+      #1499</a> for the todo.sr.ht sync.</p>
 
       <h2>Part 4 — CI Pipelines on builds.sr.ht</h2>
 
@@ -731,7 +757,10 @@ NoAITrain: true</code></pre>
         <a href="https://sourcehut.org" rel="noopener">sourcehut.org</a> — official site, documentation, and subscription<br>
         <a href="https://sr.ht/~emersion/gh2srht/" rel="noopener">sr.ht/~emersion/gh2srht/</a> — GitHub &#x2192; SourceHut migration tool by Simon Ser<br>
         <a href="https://public-inbox.org" rel="noopener">public-inbox.org</a> — self-hosted mailing list archival and indexing<br>
-        <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" rel="noopener">docs.github.com/site-policy</a> — GitHub ToS (read Section D.
+        <a href="https://github.com/src-d/git-bug" rel="noopener">github.com/src-d/git-bug</a> — git-bug distributed issue tracker (see issue #1024 for SourceHut bridge)<br>
+        <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" rel="noopener">docs.github.com/site-policy</a> — GitHub ToS (read Section D.8)<br>
+        <a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">Issue #1024</a> — open feature request for SourceHut bridge<br>
+        <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR #1499</a> — todo.sr.ht GraphQL sync work in progress
       </p>
     </div>
   </article>

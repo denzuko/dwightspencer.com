@@ -12,17 +12,24 @@
     <lastBuildDate>Mon, 20 Jan 2025 02:43:33 -0500</lastBuildDate>
     <atom:link href="https://dwightaspencer.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>GitHub's TOS Won't Save You: Why Your Code, Privacy & Copyrights Are at Risk</title>
+      <link>https://dwightaspencer.com/02-github-tos-wont-save-you/</link>
+      <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate><author>dwightaspencer@gmail.com (Dwight Spencer)</author>
+      <guid>https://dwightaspencer.com/02-github-tos-wont-save-you/</guid>
+      <description>How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox.</description>
+    </item>
+    <item>
       <title>Privacy Canaries: A better tweety bird</title>
-      <link>https://dwightaspencer.com/posts/01-a-better-tweedy-bird/</link>
+      <link>https://dwightaspencer.com/01-a-better-tweedy-bird/</link>
       <pubDate>Mon, 20 Jan 2025 02:43:33 -0500</pubDate><author>dwightaspencer@gmail.com (Dwight Spencer)</author>
-      <guid>https://dwightaspencer.com/posts/01-a-better-tweedy-bird/</guid>
+      <guid>https://dwightaspencer.com/01-a-better-tweedy-bird/</guid>
       <description>Warrent Canaries A warrant canary is a statement that declares that an organization has not taken certain actions or received certain requests for information from government or law enforcement authorities. Many services use warrant canaries to let users know how private their data is. There are even attempts to formulize to a standard such as Canarytail.&#xA;Though the standard exposes a lot of meta data about the types of request of information and related nature of hush order issued doing the case which could potentially lead to legal issues.</description>
     </item>
     <item>
       <title>00 Hellowrld</title>
-      <link>https://dwightaspencer.com/posts/00-hellowrld/</link>
+      <link>https://dwightaspencer.com/00-hellowrld/</link>
       <pubDate>Tue, 07 Jan 2025 14:13:42 -0500</pubDate><author>dwightaspencer@gmail.com (Dwight Spencer)</author>
-      <guid>https://dwightaspencer.com/posts/00-hellowrld/</guid>
+      <guid>https://dwightaspencer.com/00-hellowrld/</guid>
       <description>Hellowrld Reality is silly-putty. -Paul Krassner&#xA;Linux is bloat, Java is a virus, Rust is a mind virus, node is crack and no one understands system design andymore.&#xA;Now the old greybeards are done chasing off the PFY while screeming at clouds. We can get down to the real fun.&#xA;$ ssh hack.dapla.net help Thanks to Soft Serve one can find security research whitepapers, talks and presentations, and a few easter eggs on my self hosted git repos.</description>
     </item>
   </channel>

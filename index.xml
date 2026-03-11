@@ -6,16 +6,25 @@
     <link>https://dwightaspencer.com/</link>
     
     <language>en</language>
-    <copyright>Copyright 2025, Calvin Tran</copyright>
-    <lastBuildDate>Mon, 20 Jan 2025 02:43:33 -0500</lastBuildDate>
+    <copyright>Copyright 2026, Dwight Spencer</copyright>
+    <lastBuildDate>Wed, 11 Mar 2026 00:00:00 +0000</lastBuildDate>
     <generator>Hugo - gohugo.io</generator>
     <docs>http://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link href="https://dwightaspencer.com//atom.xml" rel="self" type="application/atom+xml"/>
     
     
     <item>
+      <title>GitHub's TOS Won't Save You: Why Your Code, Privacy & Copyrights Are at Risk</title>
+      <link>https://dwightaspencer.com/02-github-tos-wont-save-you/</link>
+      <description>How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox.</description>
+      <author>dwightaspencer@gmail.com (Dwight Spencer)</author>
+      <guid>https://dwightaspencer.com/02-github-tos-wont-save-you/</guid>
+      <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
+    </item>
+
+    <item>
       <title>Privacy Canaries: A better tweety bird</title>
-      <link>https://dwightaspencer.com/posts/01-a-better-tweedy-bird/</link>
+      <link>https://dwightaspencer.com/01-a-better-tweedy-bird/</link>
       <description>&lt;h1 id=&#34;warrent-canaries&#34;&gt;Warrent Canaries&lt;/h1&gt;
 &lt;p&gt;A warrant canary is a statement that declares that an organization has
 not taken certain actions or received certain requests for information from
@@ -112,13 +121,13 @@ sub domain then the fingerprint of the certrtificate is added to the DNS
 domain as a TXT record.&lt;/p&gt;
 </description>
       <author>map[email:dwightaspencer@gmail.com name:Dwight Spencer]</author>
-      <guid>https://dwightaspencer.com/posts/01-a-better-tweedy-bird/</guid>
+      <guid>https://dwightaspencer.com/01-a-better-tweedy-bird/</guid>
       <pubDate>Mon, 20 Jan 2025 02:43:33 -0500</pubDate>
     </item>
     
     <item>
       <title>00 Hellowrld</title>
-      <link>https://dwightaspencer.com/posts/00-hellowrld/</link>
+      <link>https://dwightaspencer.com/00-hellowrld/</link>
       <description>&lt;h2 id=&#34;hellowrld&#34;&gt;Hellowrld&lt;/h2&gt;
 &lt;p&gt;Reality is silly-putty.  -Paul Krassner&lt;/p&gt;
 &lt;p&gt;Linux is bloat, Java is a virus, Rust is a mind virus, node is crack and no
