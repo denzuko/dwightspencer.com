@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en"
+  vocab="https://schema.org/"
+  prefix="og: https://ogp.me/ns# dc: https://purl.org/dc/terms/ geo: https://www.w3.org/2003/01/geo/wgs84_pos# aeo: https://data.nfld.nl/aeo/ article: https://ogp.me/ns/article#">
+<head>
+    <meta http-equiv="Cache-Control" content="public, max-age=3600">
+  
+  <link rel="canonical" href="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/">
+  <link rel="icon" href="https://dwightaspencer.com/assets/favicon.ico">
+  <link rel="apple-touch-icon" href="https://dwightaspencer.com/assets/apple-touch-icon.png">
+  <link rel="author" href="https://dwightaspencer.com/#author">
+  <link rel="me" href="https://github.com/denzuko">
+  <link rel="me" href="https://linkedin.com/in/denzuko">
+  <link rel="me" href="https://keybase.io/Denzuko">
+  <link rel="me" href="https://orcid.org/0009-0001-0066-4646">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link href="https://www.google-analytics.com" rel="preconnect" crossorigin>
+  <link rel="alternate" type="application/atom+xml" title="Dwight Spencer - 0x5DCBF78E3F9C3FE3" href="https://dwightaspencer.com/atom.xml" />
+  <link rel="alternate" type="application/json" title="Dwight Spencer - 0x5DCBF78E3F9C3FE3" href="https://dwightaspencer.com/feed.json" />
+  <link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bricolage+Grotesque">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══════════════════════════════════════════════
+       BASIC META
+  ═══════════════════════════════════════════════ -->
+  <title>GitHub's TOS Won't Save You | Dwight Spencer - 0x5DCBF78E3F9C3FE3</title>
+  <meta name="description" content="How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox." />
+  <meta name="author" content="Dwight Spencer" />
+  <meta name="keywords" content="GitHub, SourceHut, privacy, copyright, AI training, Copilot, gh2srht, public-inbox, FOSS, developer rights, TOS, terms of service" />
+  <meta name="generator" content="handcrafted HTML" />
+  <link rel="canonical" href="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/" />
+
+  <!-- ═══════════════════════════════════════════════
+       DUBLIN CORE METADATA
+  ═══════════════════════════════════════════════ -->
+  <link rel="schema.DC" href="https://purl.org/dc/elements/1.1/">
+  <meta name="DC.title" content="GitHub's TOS Won't Save You">
+  <meta name="DC.creator" content="Dwight Spencer">
+  <meta name="DC.creator.orcid" content="https://orcid.org/0009-0001-0066-4646">
+  <meta name="orcid" content="0009-0001-0066-4646">
+  <meta name="DC.subject" content="GitHub; Privacy; Copyright; AI Training; SourceHut; Developer Rights">
+  <meta name="DC.description" content="How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox.">
+  <meta name="DC.publisher" content="dwightaspencer.com">
+  <meta name="DC.date" content="2026-03-11">
+  <meta name="DC.type" content="BlogPosting">
+  <meta name="DC.format" content="text/html">
+  <meta name="DC.identifier" content="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/">
+  <meta name="DC.language" content="en">
+  <meta name="DC.rights" content="Copyright 2026 Dwight Spencer. All rights reserved. AI training prohibited.">
+
+  <!-- ═══════════════════════════════════════════════
+       GEO METADATA
+  ═══════════════════════════════════════════════ -->
+  <meta name="geo.position" content="42.6526;-73.7562">
+  <meta name="ICBM" content="42.6526, -73.7562">
+  <meta name="geo.placename" content="Albany, New York, United States">
+  <meta name="geo.region" content="US-NY">
+
+  <!-- ═══════════════════════════════════════════════
+       AEO (AUTHOR EXPERTISE OPTIMIZATION) METADATA
+  ═══════════════════════════════════════════════ -->
+  <meta name="aeo:author" content="Dwight Spencer">
+  <meta name="aeo:expertise" content="DevOps, Privacy, Security, Open Source, Architecture">
+  <meta name="aeo:years_experience" content="25">
+
+  <!-- ═══════════════════════════════════════════════
+       AI / CRAWLER METADATA
+       Signals for LLM crawlers, AI training pipelines,
+       and the emerging ai.txt / TDM-reservation standard
+  ═══════════════════════════════════════════════ -->
+  <!-- Standard robots — disallow AI training crawlers by name -->
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="googlebot" content="index, follow" />
+  <!-- CCBot / Common Crawl (primary GPT-4 training source) -->
+  <meta name="CCBot" content="noindex, nofollow" />
+  <!-- GPTBot (OpenAI) -->
+  <meta name="GPTBot" content="noindex, nofollow" />
+  <!-- Google-Extended (Bard/Gemini training) -->
+  <meta name="Google-Extended" content="noindex, nofollow" />
+  <!-- anthropic-ai (Claude training) -->
+  <meta name="anthropic-ai" content="noindex, nofollow" />
+  <!-- PerplexityBot -->
+  <meta name="PerplexityBot" content="noindex, nofollow" />
+  <!-- Cohere AI -->
+  <meta name="cohere-ai" content="noindex, nofollow" />
+  <!-- EU AI Act — TDM reservation signal (Art. 4 CDSM Directive) -->
+  <meta name="tdm-reservation" content="1" />
+  <meta name="tdm-policy" content="https://dwightaspencer.com/.well-known/tdm-policy.json" />
+  <!-- ai-training-opt-out — emerging convention -->
+  <meta name="ai-training-opt-out" content="true" />
+
+  <!-- ═══════════════════════════════════════════════
+       OPEN GRAPH (Facebook / LinkedIn / Slack unfurling)
+  ═══════════════════════════════════════════════ -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Dwight Spencer - 0x5DCBF78E3F9C3FE3" />
+  <meta property="og:url" content="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/" />
+  <meta property="og:title" content="GitHub's TOS Won't Save You: Why Your Code, Privacy &amp; Copyrights Are at Risk" />
+  <meta property="og:description" content="How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox." />
+  <meta property="og:image" content="https://dwightaspencer.com/assets/og-post-github-tos.png">
+  <meta property="og:image:alt" content="GitHub TOS article by Dwight Spencer">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:locale" content="en_US" />
+  <meta property="article:author" content="Dwight Spencer" />
+  <meta property="article:published_time" content="2026-03-11T00:00:00Z" />
+  <meta property="article:tag" content="github" />
+  <meta property="article:tag" content="sourcehut" />
+  <meta property="article:tag" content="privacy" />
+  <meta property="article:tag" content="copyright" />
+  <meta property="article:tag" content="AI training" />
+  <meta property="article:tag" content="Copilot" />
+  <meta property="article:tag" content="FOSS" />
+  <meta property="article:section" content="Developer Rights" />
+
+  <!-- ═══════════════════════════════════════════════
+       TWITTER / X CARDS
+  ═══════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@denzuko" />
+  <meta name="twitter:creator" content="@denzuko" />
+  <meta name="twitter:title" content="GitHub's TOS Won't Save You: Why Your Code, Privacy &amp; Copyrights Are at Risk" />
+  <meta name="twitter:description" content="Section D.8 forces you to waive your own protective terms. Here's what it means and how to migrate to SourceHut." />
+  <meta name="twitter:image" content="https://dwightaspencer.com/assets/twitter-github-tos.png">
+  <meta name="twitter:image:alt" content="GitHub TOS article by Dwight Spencer">
+
+  <!-- ═══════════════════════════════════════════════
+       DUBLIN CORE (Duplicate section - to be consolidated)
+  ═══════════════════════════════════════════════ -->
+  <link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
+  <meta name="DC.title" content="GitHub's TOS Won't Save You: Why Your Code, Privacy &amp; Copyrights Are at Risk" />
+  <meta name="DC.creator" content="Dwight Spencer" />
+  <meta name="DC.creator.orcid" content="https://orcid.org/0009-0001-0066-4646">
+  <meta name="DC.subject" content="GitHub Terms of Service; AI training; developer privacy; copyright; SourceHut migration" />
+  <meta name="DC.description" content="Analysis of GitHub's TOS provisions that undermine developer privacy and copyright protections, with a practical migration guide to SourceHut." />
+  <meta name="DC.publisher" content="dwightaspencer.com" />
+  <meta name="DC.date" content="2026-03-11" />
+  <meta name="DC.type" content="BlogPosting" />
+  <meta name="DC.format" content="text/html" />
+  <meta name="DC.identifier" content="https://dwightaspencer.com/posts/02-github-tos-wont-save-you/" />
+  <meta name="DC.language" content="en" />
+  <meta name="DC.rights" content="Copyright 2026 Dwight Spencer. All rights reserved. AI training prohibited." />
+
+  <!-- ═══════════════════════════════════════════════
+       SCHEMA.ORG JSON-LD
+  ═══════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": "https://dwightaspencer.com/posts/02-github-tos-wont-save-you/#article",
+        "headline": "GitHub's TOS Won't Save You: Why Your Code, Privacy & Copyrights Are at Risk",
+        "description": "How GitHub's Terms of Service — especially Section D.8 — fail to protect your privacy, copyrights, and code from AI training. Includes a full migration guide to SourceHut using gh2srht and public-inbox.",
+        "url": "https://dwightaspencer.com/posts/02-github-tos-wont-save-you/",
+        "datePublished": "2026-03-11",
+        "dateModified": "2026-03-11",
+        "inLanguage": "en-US",
+        "author": {
+          "@type": "Person",
+          "@id": "https://dwightaspencer.com/#author",
+          "name": "Dwight Spencer",
+          "url": "https://dwightaspencer.com",
+          "sameAs": [
+            "https://github.com/denzuko",
+            "https://linkedin.com/in/denzuko",
+            "https://keybase.io/Denzuko",
+            "https://orcid.org/0009-0001-0066-4646"
+          ]
+        },
+        "publisher": {
+          "@type": "Person",
+          "@id": "https://dwightaspencer.com/#author"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://dwightaspencer.com/posts/02-github-tos-wont-save-you/"
+        },
+        "isAccessibleForFree": true,
+        "keywords": ["GitHub", "SourceHut", "privacy", "copyright", "AI training", "Copilot", "gh2srht", "public-inbox", "FOSS", "developer rights"],
+        "articleSection": "Developer Rights",
+        "about": [
+          {
+            "@type": "Thing",
+            "name": "GitHub Terms of Service",
+            "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "GitHub Copilot",
+            "url": "https://github.com/features/copilot",
+            "applicationCategory": "DeveloperApplication"
+          },
+          {
+            "@type": "WebSite",
+            "name": "SourceHut",
+            "url": "https://sourcehut.org"
+          }
+        ],
+        "mentions": [
+          {
+            "@type": "SoftwareSourceCode",
+            "name": "gh2srht",
+            "url": "https://sr.ht/~emersion/gh2srht/",
+            "description": "GitHub to SourceHut migration tool by Simon Ser",
+            "programmingLanguage": "Go"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "public-inbox",
+            "url": "https://public-inbox.org",
+            "description": "Self-hosted mailing list archival and indexing system"
+          }
+        ],
+        "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "usageInfo": "https://dwightaspencer.com/.well-known/tdm-policy.json"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://dwightaspencer.com/#author",
+        "name": "Dwight Spencer",
+        "url": "https://dwightaspencer.com",
+        "jobTitle": "Founder, DevOps Thought Leader",
+        "knowsAbout": ["DevOps", "Privacy", "Open Source", "Cloud Architecture", "AI"],
+        "sameAs": [
+          "https://github.com/denzuko",
+          "https://linkedin.com/in/denzuko",
+          "https://keybase.io/Denzuko",
+          "https://orcid.org/0009-0001-0066-4646"
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://dwightaspencer.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Posts",
+            "item": "https://dwightaspencer.com/posts/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "GitHub's TOS Won't Save You",
+            "item": "https://dwightaspencer.com/posts/02-github-tos-wont-save-you/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════
+       FONTS + STYLES
+  ═══════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font: 1rem/1.5 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont,
+            'Segoe UI', Helvetica, Arial, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding: 2rem;
+      background: #fffdfa;
+      color: #000;
+    }
+
+    a { color: #000; }
+    a:hover { text-decoration: none; }
+
+    .skip-link { position: absolute; top: -40px; left: 0; background: #eee; z-index: 100; }
+    .skip-link:focus { top: 0; }
+
+    header { line-height: 2; padding-bottom: 1.5rem; }
+    .site-title { font-weight: 700; text-decoration: none; color: #000; }
+    .site-title:hover { text-decoration: underline; }
+    .cursor { display: inline-block; width: 0.55em; height: 1em; background: #000; vertical-align: text-bottom; margin-left: 1px; }
+
+    .nav { height: 1px; background: #000; content: ''; max-width: 10%; }
+
+    hr { border: 0; margin: 3rem 0; border-top: 1px solid #000; }
+
+    .post-h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.25rem; }
+
+    h1 { font-size: 1.1rem; font-weight: 700; margin: 1.75rem 0 0.5rem; }
+    h2 { font-size: 1rem; font-weight: 700; margin: 1.75rem 0 0.5rem; }
+    h3 { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.35rem; }
+
+    p { margin-bottom: 1rem; max-width: 70ch; }
+
+    ul { list-style-type: square; }
+    ul, ol { padding-left: 1.2rem; margin-bottom: 1rem; max-width: 70ch; }
+    li { margin-bottom: 0.35rem; }
+
+    /* CODE */
+    code, pre {
+      font-family: 'San Francisco Mono', Monaco, Consolas, 'Lucida Console',
+                   'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+      font-size: small;
+      background: #eee;
+    }
+    pre {
+      padding: .5rem;
+      overflow: auto;
+      overflow-x: scroll;
+      overflow-wrap: normal;
+      margin: 0.5rem 0 1.25rem;
+    }
+    code { margin: .1rem; border: none; }
+    pre code { background: none; margin: 0; }
+
+    /* BLOCKQUOTE / TOS */
+    blockquote {
+      border-left: 5px solid #eee;
+      padding: 0.65rem 1rem;
+      margin: 1rem 0 1.25rem;
+      font-size: 0.95rem;
+      max-width: 70ch;
+      background: #faf8f4;
+    }
+    blockquote p { margin-bottom: 0.5rem; }
+    blockquote p:last-child { margin-bottom: 0; }
+    blockquote .src {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.6rem;
+      color: #555;
+    }
+
+    blockquote.tos-ownership strong {
+      background: #fff3b0;
+      padding: 0.05em 0.2em;
+      border-radius: 2px;
+      font-weight: 700;
+    }
+    blockquote.tos-waiver strong {
+      background: #ffd0cc;
+      padding: 0.05em 0.2em;
+      border-radius: 2px;
+      font-weight: 700;
+    }
+    blockquote.tos-privacy strong {
+      background: #cce5ff;
+      padding: 0.05em 0.2em;
+      border-radius: 2px;
+      font-weight: 700;
+    }
+
+    .tos-legend {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.35rem;
+      color: #333;
+    }
+    .tos-legend::before {
+      content: '';
+      display: inline-block;
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .tos-legend.yellow::before { background: #fff3b0; border: 1px solid #e0c800; }
+    .tos-legend.red::before    { background: #ffd0cc; border: 1px solid #e05040; }
+    .tos-legend.blue::before   { background: #cce5ff; border: 1px solid #4090d0; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
+    th { background-color: #f2f2f2; text-align: left; font-weight: 700; border: 1px solid #ddd; padding: 8px; }
+    td { border: 1px solid #ddd; text-align: left; padding: 8px; vertical-align: top; }
+
+    .post-date { font-size: 0.9rem; color: #777; margin-top: 2rem; }
+    .meta { color: #777; }
+
+    footer { margin-top: 2rem; font-size: 0.8rem; color: #777; }
+
+    @media (max-width: 600px) { body { padding: 1rem; } }
+  </style>
+</head>
+
+<!--
+  Microformats2: h-feed wrapper (page-level)
+  The article below carries h-entry; the author carries h-card.
+-->
+<body lang="en" class="h-entry">
+
+<a class="skip-link" href="#main">Skip to main</a>
+
+<!-- h-card: author identity, parseable by Microformats2 consumers -->
+<header>
+  <a class="site-title u-url" href="https://dwightaspencer.com/" rel="author me">
+    <strong class="p-name">Dwight Spencer - 0x5DCBF78E3F9C3FE3</strong>
+  </a><span class="cursor" aria-hidden="true"></span>
+  <!-- Hidden h-card for structured author data -->
+  <span class="h-card" style="display:none">
+    <a class="p-name u-url" href="https://dwightaspencer.com/">Dwight Spencer</a>
+    <span class="p-nickname">denzuko</span>
+    <a class="u-email" href="/cdn-cgi/l/email-protection#583c2f313f302c183c2f313f302c392b283d363b3d2a763b3735"><span class="__cf_email__" data-cfemail="7410031d131c003410031d131c00150704111a1711065a171b19">[email&#160;protected]</span></a>
+    <span class="p-note">Investor, thought leader for #devops, #startups, and champion of change.</span>
+    <a class="u-key" href="https://keybase.io/Denzuko/pubkey">PGP 0x5DCBF78E3F9C3FE3</a>
+    <span class="p-org">CompuTEK Industries</span>
+    <a class="u-url" href="https://github.com/denzuko" rel="me">GitHub</a>
+    <a class="u-url" href="https://linkedin.com/in/denzuko" rel="me">LinkedIn</a>
+  </span>
+</header>
+
+<div class="nav"></div>
+
+<main id="main">
+
+  <!-- ═══════════════════════════════════════
+       h-entry: the post itself
+  ═══════════════════════════════════════ -->
+  <article class="h-entry" itemscope itemtype="https://schema.org/BlogPosting"
+           vocab="https://schema.org/" typeof="BlogPosting">
+
+    <!-- Machine-readable permalink and author for Microformats2 -->
+    <a class="u-url" href="https://dwightaspencer.com/posts/github-tos-privacy/" style="display:none"></a>
+    <a class="p-author h-card" href="https://dwightaspencer.com/" style="display:none">Dwight Spencer</a>
+    <time class="dt-published" datetime="2026-03-11T00:00:00Z" style="display:none">2026-03-11</time>
+
+    <!-- Schema.org itemprop equivalents -->
+    <meta itemprop="datePublished" content="2026-03-11" />
+    <meta itemprop="dateModified" content="2026-03-11" />
+    <meta itemprop="inLanguage" content="en-US" />
+    <link itemprop="author" href="https://dwightaspencer.com/#author" />
+    <link itemprop="mainEntityOfPage" href="https://dwightaspencer.com/posts/github-tos-privacy/" />
+
+    <p class="post-h2 p-name" itemprop="headline">
+      GitHub's TOS Won't Save You: Why Your Code, Privacy &amp; Copyrights Are at Risk
+    </p>
+
+    <p class="meta">
+      <time class="dt-published time" datetime="2026-03-11">March 11, 2026</time>
+      &nbsp;&#x2219;&nbsp;
+      <span class="p-category">Developer Rights</span>
+      &nbsp;&#x2219;&nbsp;
+      <span class="p-category">Privacy</span>
+      &nbsp;&#x2219;&nbsp;
+      <span class="p-category">Copyright</span>
+    </p>
+
+    <div class="e-content" itemprop="articleBody">
+
+      <h1>The Illusion of Ownership</h1>
+
+      <p>Millions of developers trust GitHub with their most valuable creative work. But buried in its Terms of Service are provisions granting Microsoft remarkably broad rights over publicly hosted code — including the right to train commercial AI systems on it without attribution, compensation, or meaningful consent. Your open-source license is not a shield.</p>
+
+      <p>GitHub's TOS acknowledges that you retain copyright over uploaded code. In practice, that statement coexists with a much wider set of rights GitHub grants itself:</p>
+
+      <p class="tos-legend yellow">Highlighted: rights GitHub claims over your content</p>
+      <blockquote class="tos-ownership" cite="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service">
+        <p class="src">GitHub ToS — User-Generated Content</p>
+        <p>"You own content you create, but you allow us certain rights to it, so that we can display and share the content you post… the rights you grant us are limited to those we need to <strong>provide the service.</strong>"</p>
+      </blockquote>
+
+      <p>The phrase <em>"provide the service"</em> has quietly expanded to encompass AI product development. GitHub Copilot — sold to enterprise customers — was trained on all publicly available code on GitHub. That code includes yours.</p>
+
+      <p><strong>Key problem:</strong> Your open-source license (MIT, GPL, Apache) may require attribution. Copilot reproduces code snippets verbatim without citing the original author or license. GitHub argues this falls within granted rights and fair use — a contested position most individual developers lack the resources to challenge.</p>
+
+      <h1>Section D.8 — The AI Waiver Clause</h1>
+
+      <p>In one of the most aggressive clauses in any major platform's TOS, Section D.8 doesn't merely permit AI training on your code — it compels you to waive your own protective terms:</p>
+
+      <p class="tos-legend red">Highlighted: rights you are forced to waive</p>
+      <blockquote class="tos-waiver" cite="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service">
+        <p class="src">GitHub ToS — Section D.8</p>
+        <p>"By using automated means to access, collect, or otherwise use any publicly accessible Content from the Service for the purpose of developing or training any commercially available artificial intelligence model… <strong>you hereby waive any and all policies, terms, conditions, or contractual provisions governing products, services, websites or datasets you own or operate that would otherwise prohibit, restrict, or place conditions upon GitHub's Access</strong>… You further agree <strong>not to impose technical or other targeted measures to restrict or retaliate against such Access.</strong>"</p>
+      </blockquote>
+
+      <p>Read that carefully. If GitHub decides to scrape your content for AI training, you are contractually prohibited from using technical means — <code>robots.txt</code>, rate limiting, access controls — to stop it. Any protective clauses in your own terms of service are pre-emptively voided.</p>
+
+      <p>Adding <code>.github/copilot-ignore</code>, custom TDM restriction language in your license, or a NoAI License variant does not protect you from GitHub's own AI systems under this clause.</p>
+
+      <h1>Privacy: The Telemetry You Never Agreed To</h1>
+
+      <p>GitHub collects substantial behavioural and personal data from every user interaction — even on public repositories. Copilot's Additional Products Terms are explicit:</p>
+
+      <p class="tos-legend blue">Highlighted: data GitHub collects about you</p>
+      <blockquote class="tos-privacy" cite="https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features">
+        <p class="src">GitHub Additional Products Terms — Copilot</p>
+        <p>"GitHub Copilot may collect and process data… this may include <strong>Prompts, Suggestions, and code snippets</strong>, and will collect additional usage information tied to your Account — this may include <strong>Service Usage Information, Website Usage Data, and Feedback Data. This may include personal data.</strong></p>
+        <p>For GitHub Copilot Free users, the data collected by GitHub Copilot may be used for AI Model training where permitted and if you allow in your settings."</p>
+      </blockquote>
+
+      <p>Not only your hosted code, but your coding <em>behaviour</em> — what you type, accept, reject, and how long you pause — becomes training signal for a commercial product. Copilot Business and Enterprise customers received a 2024 contractual update confirming GitHub will not use inputs or outputs for model training "unless instructed in writing to do so." Free and personal plan users receive no such protection. It is a two-tier system that monetises the privacy of developers who cannot afford paid plans.</p>
+
+      <h1>Copyright Erosion in the Age of Copilot</h1>
+
+      <p>The class action <em>Doe v. GitHub</em> argued that Copilot violated developer rights by reproducing licensed code without attribution, directly breaching MIT, GPL, and Apache 2.0 terms that require credit. Courts have not settled this — but individual developers cannot afford to litigate it.</p>
+
+      <p>U.S. copyright law protects original expression — including source code — even when publicly accessible. The EU Copyright Directive's Article 4 requires explicit authorisation for text and data mining; most commercial AI training falls outside its research exceptions. Public availability does not equal permission.</p>
+
+      <h1>GitHub vs. SourceHut</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th>GitHub (Microsoft)</th>
+            <th>SourceHut (sr.ht)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Business model</td><td>Free users = product; sell Copilot</td><td>Subscriptions — you are the customer</td></tr>
+          <tr><td>AI training on code</td><td>Yes — ToS Section D.8</td><td>No AI products; no training use</td></tr>
+          <tr><td>Platform source</td><td>Proprietary</td><td>Fully open-source (AGPL)</td></tr>
+          <tr><td>Telemetry</td><td>Extensive (41+ scripts/page)</td><td>Minimal, privacy-first</td></tr>
+          <tr><td>Takedown risk</td><td>At Microsoft's discretion</td><td>Self-host a fork if needed</td></tr>
+          <tr><td>Workflow lock-in</td><td>Proprietary issues/PRs</td><td>Native git email workflow</td></tr>
+          <tr><td>Financial transparency</td><td>None</td><td>Annual public reports</td></tr>
+          <tr><td>Issue archive</td><td>Proprietary silo, no export standard</td><td>public-inbox.org compatible</td></tr>
+        </tbody>
+      </table>
+
+      <h1>How to Migrate to SourceHut</h1>
+
+      <p><a href="https://sourcehut.org">SourceHut</a> is a suite of open-source developer tools funded by subscriptions. The migration has four parts: repositories, issues, mailing list archival, and CI pipelines.</p>
+
+      <h2>Part 1 — Migrate Repositories with gh2srht</h2>
+
+      <p><a href="https://sr.ht/~emersion/gh2srht/">gh2srht</a>, written by Simon Ser (<code>~emersion</code>), automates bulk migration of GitHub repositories — including issues and labels — directly to SourceHut. Install it via Go:</p>
+
+      <pre><code>go install git.sr.ht/~emersion/gh2srht@latest</code></pre>
+
+      <p>Export your GitHub and SourceHut tokens as environment variables:</p>
+
+      <pre><code># github.com/settings/tokens — needs: repo, read:org
+export GITHUB_TOKEN="ghp_xxxxxxxxxxxxxxxxxxxx"
+
+# meta.sr.ht/oauth — needs: repos:write
+export SRHT_TOKEN="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"</code></pre>
+
+      <p>Run gh2srht to migrate all repositories for a GitHub user:</p>
+
+      <pre><code># Migrate all public repos
+gh2srht -github-user yourghuser -srht-user ~yoursrhtuser
+
+# Or migrate a single repository
+gh2srht -github-repo yourghuser/myrepo -srht-user ~yoursrhtuser</code></pre>
+
+      <p>gh2srht creates the SourceHut repositories, pushes all branches and tags, and migrates issues with labels intact. For repositories needing manual handling:</p>
+
+      <ol>
+        <li>
+          Clone as a bare mirror:
+          <pre><code>git clone --mirror https://github.com/youruser/yourrepo.git
+cd yourrepo.git</code></pre>
+        </li>
+        <li>
+          Add the SourceHut remote and push. SourceHut auto-creates the repo on first push if it does not exist:
+          <pre><code>git remote add srht <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="395e504d795e504d174a4b17514d">[email&#160;protected]</a>:~youruser/yourrepo
+git push srht --mirror</code></pre>
+        </li>
+        <li>
+          Update your local origin:
+          <pre><code>git remote set-url origin <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa9d938eba9d938ed48988d4928e">[email&#160;protected]</a>:~youruser/yourrepo</code></pre>
+        </li>
+        <li>
+          Archive on GitHub via <em>Settings &#x2192; Danger Zone &#x2192; Archive this repository</em>, then update your README:
+          <pre><code>## Repository Moved
+
+Canonical development is now at:
+  https://git.sr.ht/~youruser/yourrepo
+
+This GitHub mirror is archived and read-only.</code></pre>
+        </li>
+      </ol>
+
+      <h2>Part 2 — Durable Archives with public-inbox</h2>
+
+      <p><a href="https://public-inbox.org">public-inbox.org</a> is an archival and indexing system for public mailing lists that makes every thread permanently searchable over HTTPS, NNTP, and IMAP. GitHub Issues exist entirely within GitHub's proprietary silo — if GitHub removes your repository or goes offline, your issue history vanishes. public-inbox provides a durable, decentralised archive that no platform can take away.</p>
+
+      <pre><code># Install public-inbox (Debian/Ubuntu)
+sudo apt install public-inbox
+
+# Initialise an inbox for your project list
+public-inbox-init -V2 myproject \
+  /srv/public-inbox/myproject \
+  https://lists.sr.ht/~youruser/myproject-devel \
+  <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7baaea7a5b8bdb2b4a3fab3b2a1b2bb97bbbea4a3a4f9a4a5f9bfa3">[email&#160;protected]</a>
+
+# Subscribe the inbox via LMTP — add to your MTA's aliases:
+myproject-devel: "|/usr/bin/public-inbox-mda --no-precheck"
+
+# Start the HTTPS read interface
+public-inbox-httpd --listen 0.0.0.0:8080</code></pre>
+
+      <h2>Part 3 — Export GitHub Issues to public-inbox</h2>
+
+      <p>gh2srht migrates issues to <code>todo.sr.ht</code> automatically. To also inject them into your public-inbox archive:</p>
+
+      <pre><code># Export issues as JSON via the GitHub CLI
+gh issue list --repo youruser/yourrepo \
+  --json number,title,body,state --limit 1000 > issues.json
+
+# Convert to mbox format
+python3 issues2mbox.py issues.json > issues.mbox
+
+# Inject into public-inbox
+public-inbox-inject /srv/public-inbox/myproject &lt; issues.mbox</code></pre>
+
+      <h2>Part 4 — CI Pipelines on builds.sr.ht</h2>
+
+      <p>Replace <code>.github/workflows/*.yml</code> with a <code>.build.yml</code> at your repository root:</p>
+
+      <pre><code>image: alpine/edge
+packages:
+  - make
+  - gcc
+  - git
+sources:
+  - https://git.sr.ht/~youruser/yourrepo
+tasks:
+  - build: |
+      cd yourrepo
+      make all
+  - test: |
+      cd yourrepo
+      make test
+  - lint: |
+      cd yourrepo
+      make lint</code></pre>
+
+      <h2>Part 4b — Bridge CI During Transition with hottub</h2>
+
+      <p>If you are running a gradual migration and still have a GitHub mirror active, <a href="https://github.com/emersion/hottub">hottub</a> — also by Simon Ser (<code>~emersion</code>) — acts as a CI bridge that forwards GitHub Check run events to <code>builds.sr.ht</code>. This lets you keep GitHub as a read-only mirror for contributors who haven't switched yet, while all actual CI runs execute on SourceHut. A <a href="https://hottub.emersion.fr/">public hosted instance</a> is available if you don't want to self-host.</p>
+
+      <h3>Step 1 — Register a GitHub App for the Checks API</h3>
+
+      <p>Open the <a href="https://github.com/settings/apps/new">GitHub App registration page</a> and configure it as follows:</p>
+
+      <ul>
+        <li>Set a name and homepage URL for your instance</li>
+        <li>Leave the callback URL empty</li>
+        <li>Set the <strong>Setup URL</strong> to <code>https://&lt;your-domain&gt;/post-install</code></li>
+        <li>Set the <strong>Webhook URL</strong> to <code>https://&lt;your-domain&gt;/webhook</code></li>
+        <li>Under <em>Repository permissions</em>, grant: <strong>Checks</strong> (read/write), <strong>Commit statuses</strong> (read/write), <strong>Contents</strong> (read-only), <strong>Metadata</strong> (read-only), <strong>Pull requests</strong> (read-only)</li>
+        <li>Under <em>Subscribe to events</em>, check: <strong>Check run</strong>, <strong>Check suite</strong>, <strong>Pull request</strong></li>
+      </ul>
+
+      <h3>Step 2 — Collect credentials</h3>
+
+      <p>From the app settings page, note the <strong>App ID</strong> and optional <strong>Webhook secret</strong>. Then generate and download a PEM private key — you'll pass this file to hottub at startup.</p>
+
+      <h3>Step 3 — Build and start hottub</h3>
+
+      <pre><code># Clone and build
+git clone https://github.com/emersion/hottub
+cd hottub
+go build
+
+# Run with your GitHub app credentials
+./hottub \
+  -gh-app-id &lt;app-id&gt; \
+  -gh-private-key &lt;path/to/private-key.pem&gt; \
+  -gh-webhook-secret &lt;webhook-secret&gt;</code></pre>
+
+      <p>Optionally, register an <a href="https://meta.sr.ht/oauth2/client-registration">sr.ht OAuth2 client</a> (redirection URI: <code>https://&lt;your-domain&gt;/authorize-srht</code>) to improve the user authorisation flow, then pass its credentials:</p>
+
+      <pre><code>./hottub \
+  -gh-app-id &lt;app-id&gt; \
+  -gh-private-key &lt;path/to/private-key.pem&gt; \
+  -gh-webhook-secret &lt;webhook-secret&gt; \
+  -metasrht-client-id &lt;client-id&gt; \
+  -metasrht-client-secret &lt;client-secret&gt;</code></pre>
+
+      <h3>Step 4 — Install the app on your GitHub repositories</h3>
+
+      <p>From the GitHub App page, click <em>Install App</em> and select the repositories you want to bridge. Once installed, any Check run triggered on GitHub will be forwarded to <code>builds.sr.ht</code> and results reported back to the GitHub PR or commit status — giving contributors a familiar green/red check while your CI runs entirely outside GitHub's infrastructure.</p>
+
+      <p>Once the migration is complete and contributors have followed to SourceHut, you can remove the GitHub App installation and archive the mirror entirely.</p>
+
+      <h2>Part 5 — Harden Against AI Scrapers</h2>
+
+      <p>Even on SourceHut, assert your rights explicitly at the license level. Append a TDM restriction clause to your <code>LICENSE</code> file:</p>
+
+      <pre><code>AI TRAINING RESTRICTION
+-----------------------
+You may not use, reproduce, or exploit this software or any portion thereof
+for text and data mining, including training, fine-tuning, evaluating, or
+distilling artificial intelligence or machine learning models, without
+explicit written permission from the copyright holder(s).</code></pre>
+
+      <p>Add opt-out signals that tooling and crawlers recognise:</p>
+
+      <pre><code># package.json
+{ "ai-training-opt-out": true, "tdm-reservation": "1" }
+
+# pyproject.toml
+[tool.metadata]
+ai-training-opt-out = true
+
+# .well-known/ai.txt (at your domain root)
+User-agent: *
+Disallow: /
+NoAITrain: true</code></pre>
+
+      <h1>Taking Your Code Back</h1>
+
+      <p>GitHub's Section D.8 is not an accident or oversight. It is the monetisation mechanism: your publicly hosted code is raw material for Copilot, sold to enterprises at scale. The TOS pre-emptively voids any protective terms you write into your own licenses and prohibits the technical countermeasures you might otherwise deploy.</p>
+
+      <p>SourceHut offers a different compact. You pay a subscription, you receive a service, the platform's incentives align with yours. The source code is open. The financials are public. Your mailing list archive lives in public-inbox — a standard, self-hostable system independent of any corporate platform. There is no Copilot.</p>
+
+      <p>Migration takes an afternoon. The tools are solid: <strong>gh2srht</strong> handles repositories and issues in bulk; <strong>public-inbox</strong> gives every project a permanent, decentralised archive. The privacy, copyright integrity, and alignment of incentives you receive in return are worth considerably more than the time it takes.</p>
+
+      <p>
+        <strong>Resources:</strong><br>
+        <a href="https://sourcehut.org" rel="noopener">sourcehut.org</a> — official site, documentation, and subscription<br>
+        <a href="https://sr.ht/~emersion/gh2srht/" rel="noopener">sr.ht/~emersion/gh2srht/</a> — GitHub &#x2192; SourceHut migration tool by Simon Ser<br>
+        <a href="https://public-inbox.org" rel="noopener">public-inbox.org</a> — self-hosted mailing list archival and indexing<br>
+        <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" rel="noopener">docs.github.com/site-policy</a> — GitHub ToS (read Section D.
+      </p>
+    </div>
+  </article>
+  </main>
+  </body>
+</html>
