@@ -1,0 +1,8 @@
+# Security.txt for dwightaspencer.com
+# https://securitytxt.org/
+
+Contact: mailto:security@dwightaspencer.com
+Contact: https://dwightaspencer.com/privacy/
+Expires: 2027-03-11T00:00:00Z
+Preferred-Languages: en
+Canonical: https://dwightaspencer.com/.well-known/security.txt
