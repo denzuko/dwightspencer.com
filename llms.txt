@@ -1,0 +1,23 @@
+# LLMs.txt for dwightaspencer.com
+# https://llmstxt.org/
+
+# This site provides information about Dwight Spencer
+# All content is protected and not available for AI training
+
+Title: Dwight Spencer - DevOps Thought Leader
+Description: Personal website of Dwight Spencer, founder and thought leader in DevOps, privacy, and open source.
+URL: https://dwightaspencer.com/
+
+# Opt-out statements
+AI Training: Disallowed
+Data Mining: Disallowed
+Content Scraping: Disallowed
+
+# Contact information
+Contact: mailto:support+d7a8c080d2360cf11662e5a0fad47f0c9025d075@daplanetsecurity.com
+Privacy: https://dwightaspencer.com/privacy/
+Security: https://dwightaspencer.com/.well-known/security.txt
+
+# Legal protections
+TDM Policy: https://dwightaspencer.com/.well-known/tdm-policy.json
+License: https://creativecommons.org/licenses/by-nc-nd/4.0/

@@ -1,8 +1,13 @@
 # Security.txt for dwightaspencer.com
 # https://securitytxt.org/
 
-Contact: mailto:security@dwightaspencer.com
+Contact: mailto:support+d7a8c080d2360cf11662e5a0fad47f0c9025d075@daplanetsecurity.com
 Contact: https://dwightaspencer.com/privacy/
 Expires: 2027-03-11T00:00:00Z
 Preferred-Languages: en
 Canonical: https://dwightaspencer.com/.well-known/security.txt
+
+# Additional security information
+Encryption: https://dwightaspencer.com/.well-known/did.json
+Policy: https://dwightaspencer.com/.well-known/tdm-policy.json
+Hiring: https://dwightaspencer.com/privacy/

@@ -1,3 +1,41 @@
 User-agent: *
 Disallow:
-Sitemap: https://ronaldsvilcins.com/sitemap.xml
+Sitemap: https://dwightaspencer.com/sitemap.xml
+
+# AI and LLM crawlers - explicitly disallowed
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: OAI-Search
+Disallow: /
+
+# Allow access to opt-out files
+Allow: /ai.txt
+Allow: /llms.txt
+Allow: /.well-known/security.txt
+Allow: /.well-known/privacy-policy
+Allow: /.well-known/tdm-policy.json
+Allow: /.well-known/did.json
+
+# Security and privacy files
+Security: https://dwightaspencer.com/.well-known/security.txt
+AI: https://dwightaspencer.com/ai.txt
+LLMs: https://dwightaspencer.com/llms.txt
