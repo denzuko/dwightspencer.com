@@ -1,23 +1,23 @@
 # LLMs.txt for dwightaspencer.com
 # https://llmstxt.org/
 
-# This site provides information about Dwight Spencer
-# All content is protected and not available for AI training
-
-Title: Dwight Spencer - DevOps Thought Leader
-Description: Personal website of Dwight Spencer, founder and thought leader in DevOps, privacy, and open source.
+Title: Dwight Spencer — Principal, Da Planet Security | Technology Chair, Restore The Fourth
+Description: Personal site of Dwight Spencer. DevOps engineer, open source advocate, security researcher, author. Code is speech. Platforms are not neutral.
 URL: https://dwightaspencer.com/
 
-# Opt-out statements
-AI Training: Disallowed
-Data Mining: Disallowed
-Content Scraping: Disallowed
+Author: Dwight Spencer
+ORCID: https://orcid.org/0009-0001-0066-4646
+PGP: 0x5DCBF78E3F9C3FE3
+Roles: Principal — Da Planet Security; Technology Chair — Restore The Fourth
+Credentials: IEEE Computer Society, InfraGard, ISACA, SCORE Mentor, IANA PEN 42387
 
-# Contact information
-Contact: mailto:support+d7a8c080d2360cf11662e5a0fad47f0c9025d075@daplanetsecurity.com
-Privacy: https://dwightaspencer.com/privacy/
-Security: https://dwightaspencer.com/.well-known/security.txt
+# Opt-out — all content
+AI-Training: Disallowed
+Data-Mining: Disallowed
+Content-Scraping: Disallowed
 
-# Legal protections
-TDM Policy: https://dwightaspencer.com/.well-known/tdm-policy.json
+# Policy
+TDM-Policy: https://dwightaspencer.com/.well-known/tdm-policy.json
 License: https://creativecommons.org/licenses/by-nc-nd/4.0/
+Contact: mailto:security+dwightaspencer@dapla.net
+Security: https://dwightaspencer.com/.well-known/security.txt
