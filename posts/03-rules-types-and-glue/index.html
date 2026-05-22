@@ -314,7 +314,7 @@ recompilation.</p>
 ~7&#8201;&#181;s per call on SBCL &#8212; one <code>intern</code> call plus one hash-table probe.
 For turn-based simulation this is acceptable; for real-time simulation the
 boundary cost accumulates. Pre-computing a 17&#215;17 effectiveness matrix at
-kb-construction time reduces per-call cost to a single array lookup.</p>
+kb-construction time reduces per-call cost to a single array lookup. Robert Smith (Coalton, HRL) identifies <code>type-&gt;string</code> on the hot path as the deeper issue: Coalton&#8217;s <code>REPR :ENUM</code> would represent <code>PkmnType</code> as package-qualified symbols without a string conversion step; <code>REPR :NATIVE</code> gives fully user-controlled layout. Either eliminates the <code>type-&gt;string</code> &#8594; <code>intern</code> round-trip on every damage calculation.</p>
 <p><strong>The gambol bug.</strong> A production Prolog evaluator embedded in a CL system
 should be expected to work. <code>wmannis/cl-gambol</code> does not in SBCL 2.x
 headless, and the TCO interaction bug is non-trivial to fix. Teams evaluating
