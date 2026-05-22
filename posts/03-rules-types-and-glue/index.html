@@ -330,11 +330,8 @@ computed <code>Integer</code> (from <code>floor</code>). Coalton caught this at 
 any reviewer immediately sees where the type system boundary is.</p>
 
 <h3 id="3-4-coalton-what-didnt">3.4 Coalton: What Didn&#8217;t</h3>
-<p><strong>Limited portability.</strong> The official Coalton README states: &#8220;While we try to be ANSI-conforming, Coalton is currently only tested on recent versions of SBCL, Allegro CL, and Clozure CL.&#8221; <a href="https://github.com/coalton-lang/coalton">[coalton-lang/coalton]</a> ECL is not in the tested set, and our tests confirmed it fails to load on ECL 21.2.1. The root cause is a readmacro that returns two values &#8212; SBCL permits this as an extension; ECL does not. Any architecture targeting ECL cannot use the Coalton version tested here, though CCL and Allegro CL users may have better results.</p>
-<p><strong>Codegen fragility at the <code>lisp</code> escape.</strong> Coalton&#8217;s code generator
-mangled variable names captured in <code>lisp</code> forms (<code>def-type</code> became
-<code>DEF-TYPE-45</code>), causing an &#8220;illegal function call&#8221; error. The fix required
-routing strings through the escape rather than PkmnType values.</p>
+<p><strong>Limited portability.</strong> The official Coalton README states: &#8220;While we try to be ANSI-conforming, Coalton is currently only tested on recent versions of SBCL, Allegro CL, and Clozure CL.&#8221; <a href="https://github.com/coalton-lang/coalton">[coalton-lang/coalton]</a> ECL is not in that tested set. Our tests confirmed it fails to load on ECL 21.2.1 &#8212; the root cause is a readmacro returning two values, which SBCL permits as an extension but ECL rejects. Robert Smith (HRL Laboratories, Coalton core contributor) notes that patches exist to make Coalton compile on ECL but compilation takes upwards of an hour versus under 60 seconds on SBCL, making it impractical for any workflow. ABCL lacks tail-call elimination and has required multiple compliance patches over the project&#8217;s history. This is a practical resource and testing constraint, not a philosophical design position.</p>
+<p><strong><code>lisp</code> escape capture requires care.</strong> During development, variable names captured in <code>lisp</code> forms produced unexpected internal names (<code>def-type</code> appearing as <code>DEF-TYPE-45</code> in the generated code), causing an &#8220;illegal function call&#8221; error. Our fix &#8212; routing type strings into the escape rather than <code>PkmnType</code> values directly &#8212; resolved it. Robert Smith (Coalton, HRL) notes that Coalton variables are intentionally renamed during compilation, the <code>lisp</code> form&#8217;s capture list is the correct mechanism for controlling what is visible inside the body, and the injected Lisp code is passed through as-is. On reflection this was likely a misuse of the capture syntax on our part rather than a Coalton deficiency; the workaround is valid but the root attribution in an earlier version of this article was incorrect.</p>
 
 <h2 id="4-performance">4. Performance</h2>
 <p>All benchmarks on SBCL 2.2.9 and ECL 21.2.1, x86-64. SBCL: native
@@ -427,6 +424,9 @@ Prolog + CL stack, but without backward-chaining.</p>
 Three ASDF systems: <code>pokemon-sim</code> (core), <code>pokemon-sim/test</code> (65 tests),
 <code>pokemon-sim/perf</code> (11 performance regression tests). Requires SBCL 2.x
 and Quicklisp.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Robert Smith (<a href="https://www.reddit.com/user/stylewarning">u/stylewarning</a>, HRL Laboratories) provided corrections to an earlier version of this article via the <a href="https://www.reddit.com/r/Common_Lisp/">r/Common_Lisp</a> community: the Coalton portability framing, the <code>lisp</code> capture semantics, and the <code>REPR</code> recommendation for the hot path. Those corrections are incorporated above. Errors that remain are the author&#8217;s own.</p>
 
 <h2 id="references">References</h2>
 <ol>
