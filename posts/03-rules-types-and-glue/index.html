@@ -330,10 +330,7 @@ computed <code>Integer</code> (from <code>floor</code>). Coalton caught this at 
 any reviewer immediately sees where the type system boundary is.</p>
 
 <h3 id="3-4-coalton-what-didnt">3.4 Coalton: What Didn&#8217;t</h3>
-<p><strong>SBCL-only.</strong> Coalton&#8217;s readmacro returns two values, which SBCL permits
-as an extension but the CL standard does not require. ECL rejects it at
-compile time. This is not a configuration problem; it is a deliberate design
-choice. Any architecture needing ECL, ABCL, or CCL cannot rely on Coalton.</p>
+<p><strong>Limited portability.</strong> The official Coalton README states: &#8220;While we try to be ANSI-conforming, Coalton is currently only tested on recent versions of SBCL, Allegro CL, and Clozure CL.&#8221; <a href="https://github.com/coalton-lang/coalton">[coalton-lang/coalton]</a> ECL is not in the tested set, and our tests confirmed it fails to load on ECL 21.2.1. The root cause is a readmacro that returns two values &#8212; SBCL permits this as an extension; ECL does not. Any architecture targeting ECL cannot use the Coalton version tested here, though CCL and Allegro CL users may have better results.</p>
 <p><strong>Codegen fragility at the <code>lisp</code> escape.</strong> Coalton&#8217;s code generator
 mangled variable names captured in <code>lisp</code> forms (<code>def-type</code> became
 <code>DEF-TYPE-45</code>), causing an &#8220;illegal function call&#8221; error. The fix required
@@ -355,7 +352,7 @@ compilation. ECL: C-compiled <code>.fas</code> files (Speed=3, Safety=2).</p>
 </tbody>
 </table>
 
-<h3 id="4-2-battle-computation-layer">4.2 Battle Computation Layer (Coalton, SBCL only)</h3>
+<h3 id="4-2-battle-computation-layer">4.2 Battle Computation Layer (Coalton, SBCL/CCL/Allegro)</h3>
 <table>
 <thead><tr><th>Operation</th><th>SBCL</th></tr></thead>
 <tbody>
@@ -420,8 +417,7 @@ SBCL-specific.</strong></p>
 shares the Prolog philosophy of declarative goal specification. Datalog-based
 query engines have appeared in several commercial engines precisely because
 backward-chaining is a natural fit for &#8220;is the player in state X?&#8221; queries.
-The Coalton project (HRL Laboratories) targets exactly the use case explored
-here. Languages like AngelScript and Squirrel are designed as embedded
+The Coalton project, developed at HRL Laboratories and maintained as open source at <a href="https://github.com/coalton-lang/coalton">github.com/coalton-lang/coalton</a>, targets exactly the use case explored here. Languages like AngelScript and Squirrel are designed as embedded
 scripting layers above a C engine &#8212; the same architectural position as the
 Prolog + CL stack, but without backward-chaining.</p>
 
@@ -437,7 +433,7 @@ and Quicklisp.</p>
 <li>Clocksin, W. F. and Mellish, C. S. <em>Programming in Prolog</em>. Springer, 1981.</li>
 <li>Norvig, P. <em>Paradigms of Artificial Intelligence Programming</em>. Morgan Kaufmann, 1992.</li>
 <li>Orkin, J. &#8220;Three States and a Plan: The AI of F.E.A.R.&#8221; <em>GDC Proceedings</em>, 2006.</li>
-<li>The Coalton Authors. <em>Coalton: ML-style Types for Common Lisp</em>. HRL Laboratories, 2021&#8211;2026. <a href="https://github.com/coalton-lang/coalton">github.com/coalton-lang/coalton</a></li>
+<li>The Coalton Authors. <em>Coalton: ML-style Types for Common Lisp</em>. HRL Laboratories / coalton-lang, 2021&#8211;present. README: &#8220;Coalton is currently only tested on recent versions of SBCL, Allegro CL, and Clozure CL.&#8221; <a href="https://github.com/coalton-lang/coalton">github.com/coalton-lang/coalton</a></li>
 <li>Milner, R., Tofte, M., and Harper, R. <em>The Definition of Standard ML</em>. MIT Press, 1990.</li>
 <li>Steele, G. L. <em>Common Lisp the Language</em>, 2nd ed. Digital Press, 1990.</li>
 <li>wmannis. <em>cl-gambol: A Gambol Prolog Interpreter for Common Lisp</em>. <a href="https://github.com/wmannis/cl-gambol">github.com/wmannis/cl-gambol</a>.</li>
