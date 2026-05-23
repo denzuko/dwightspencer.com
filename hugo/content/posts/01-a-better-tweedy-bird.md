@@ -5,7 +5,7 @@ draft       = false
 description = "Warrant canaries are statements that declare whether an organization has received government requests for information. Analysis of the standard, its limitations, and implications for privacy."
 slug        = "01-a-better-tweedy-bird"
 keywords    = ["warrant canary", "privacy", "security", "government surveillance", "Canarytail", "transparency"]
-tags        = []
+tags        = ["privacy", "surveillance", "open-source"]
 categories  = []
 schema_type = "BlogPosting"
 aeo_expertise = "Privacy, Security, Open Source, System Architecture"
@@ -14,12 +14,16 @@ og_image    = "/assets/og-posts.png"
 +++
 
 <h1 id="warrent-canaries">Warrent Canaries</h1>
+<p><em>Update, May 2026: The Canarytail organization and website are no longer online.
+<a href="/posts/09-after-the-canary/">Post 09</a> documents what happened and what
+resilient canary infrastructure looks like without third-party dependencies.</em></p>
 <p>A warrant canary is a statement that declares that an organization has
 not taken certain actions or received certain requests for information from
 government or law enforcement authorities. Many services use warrant canaries
 to let users know how private their data is. There are even attempts to
-formulize to a standard such as
-<a href="https://github.com/canarytail/standard">Canarytail</a>.</p>
+formalize this into a standard such as
+<a href="https://web.archive.org/web/2024*/https://github.com/canarytail/standard">Canarytail</a>
+(archived — the project is no longer active).</p>
 <p>Though the standard exposes a lot of meta data about the types of request of
 information and related nature of hush order issued doing the case which could
 potentially lead to legal issues.</p>
