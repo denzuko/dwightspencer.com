@@ -19,7 +19,7 @@
 
 (defun assert-post-facts (db)
   "Assert all post/tag/author facts into DB.
-   Generated from 8 posts."
+   Generated from 9 posts."
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 
     ;; The Watchers You Fed: Chapter Preview
@@ -31,6 +31,16 @@
 (pf 'tag "04-watchers-you-fed" :privacy)
 (pf 'tag "04-watchers-you-fed" :fourth-amendment)
 (pf 'author "04-watchers-you-fed" "0009-0001-0066-4646")
+
+    ;; The Shell Is Gone (For Now)
+    (pf 'post "08-the-shell-is-gone"
+        "The Shell Is Gone (For Now)"
+        "2026-05-23"
+        554)
+(pf 'tag "08-the-shell-is-gone" :infrastructure)
+(pf 'tag "08-the-shell-is-gone" :self-hosting)
+(pf 'tag "08-the-shell-is-gone" :write-ups)
+(pf 'author "08-the-shell-is-gone" "0009-0001-0066-4646")
 
     ;; Infrastructure Independence: Self-Hosting Without the Hype
     (pf 'post "05-infrastructure-independence"
@@ -96,7 +106,7 @@
     (pf 'post "00-hellowrld"
         "00 Hellowrld"
         "2025-01-07"
-        78)
+        114)
 (pf 'tag "00-hellowrld" :write-ups)
 (pf 'author "00-hellowrld" "0009-0001-0066-4646")
   )
