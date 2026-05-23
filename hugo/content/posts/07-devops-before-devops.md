@@ -9,6 +9,7 @@ tags        = ["devops", "history", "open-source"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "DevOps, System Architecture, Open Source, Technical History"
+aliases     = ["/devops-history/", "/07-devops-before-devops/"]
 og_image    = "/assets/og-posts.png"
 +++
 

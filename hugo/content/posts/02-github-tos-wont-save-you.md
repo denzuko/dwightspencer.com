@@ -9,6 +9,7 @@ tags        = ["github", "sourcehut", "privacy", "copyright", "AI training", "Co
 categories  = ["Developer Rights"]
 schema_type = "Text"
 aeo_expertise = "DevOps, Privacy, Security, Architecture"
+aliases     = ["/02-github-tos-wont-save-you/", "/github-tos/", "/posts/github-tos-privacy/"]
 og_image    = "/assets/og-posts.png"
 +++
 

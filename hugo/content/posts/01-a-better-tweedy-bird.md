@@ -9,6 +9,7 @@ tags        = []
 categories  = []
 schema_type = "BlogPosting"
 aeo_expertise = "Privacy, Security, Open Source, System Architecture"
+aliases     = ["/01-a-better-tweedy-bird/"]
 og_image    = "/assets/og-posts.png"
 +++
 

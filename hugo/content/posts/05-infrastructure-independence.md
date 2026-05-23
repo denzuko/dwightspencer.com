@@ -9,6 +9,7 @@ tags        = ["self-hosting", "infrastructure", "privacy", "devops"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "DevOps, Infrastructure, Security, Self-Hosting"
+aliases     = ["/infra/", "/05-infrastructure-independence/"]
 og_image    = "/assets/og-posts.png"
 +++
 
