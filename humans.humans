@@ -1,0 +1,27 @@
+# humanstxt.org
+
+/* TEAM */
+  Name: Dwight Spencer
+  Handle: @denzuko
+  PGP: 0x5DCBF78E3F9C3FE3
+  ORCID: 0009-0001-0066-4646
+  IANA PEN: 42387
+  Location: Albany, NY, USA
+
+/* SITE */
+  Last update: 2026-05-23
+  Language: English
+  Doctype: HTML5
+  Generator: Hugo 0.129.0
+  Posts: 8
+  Tags: 16
+  Standards: HTML5, CSS3, Microformats2, Schema.org, ActivityPub (webfinger)
+
+/* PHILOSOPHY */
+  Code is speech. Platforms are not neutral.
+  This site sets no tracking cookies and loads no advertising networks.
+  All content opts out of AI training. See /data-usage/
+
+/* CORPUS */
+  This site is also a Common Lisp system.
+  ;; (ql-dist:install-dist "https://dwightaspencer.com")
