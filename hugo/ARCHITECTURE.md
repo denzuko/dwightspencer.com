@@ -32,7 +32,7 @@ graph TD
        :prompt nil)"] --> L3
 
     L3["Layer 3: PostScript polyglot
-    DwightSpencerCom:render :ps
+    DwightASpencerCom:render :ps
     Valid PS + CL comments + git bundle
     PoC||GTFO tradition"] --> L4
 

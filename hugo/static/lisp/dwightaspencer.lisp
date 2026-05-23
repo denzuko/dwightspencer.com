@@ -7,10 +7,10 @@
 ;;;; Loading this system from your REPL:
 ;;;;
 ;;;;   (ql-dist:install-dist "http://dwightaspencer.com" :prompt nil)
-;;;;   (ql:quickload :DwightSpencerCom)
-;;;;   (DwightSpencerCom:finger)          ; same output as the homepage
-;;;;   (DwightSpencerCom:query '(tag ?s :privacy))  ; Prolog query
-;;;;   (DwightSpencerCom:render :ps *standard-output* kb) ; PostScript to stdout
+;;;;   (ql:quickload :DwightASpencerCom)
+;;;;   (DwightASpencerCom:finger)          ; same output as the homepage
+;;;;   (DwightASpencerCom:query '(tag ?s :privacy))  ; Prolog query
+;;;;   (DwightASpencerCom:render :ps *standard-output* kb) ; PostScript to stdout
 ;;;;
 ;;;; Architecture mirrors ml-prolog-pokemon (github.com/denzuko/ml-prolog-pokemon):
 ;;;;   logic-engine.lisp  — micro-Prolog (db-assert, db-prove-all, unification)
@@ -25,7 +25,7 @@
 ;;;; PGP:      0x5DCBF78E3F9C3FE3
 
 (named-readtables:in-readtable :standard)
-(in-package #:DwightSpencerCom)
+(in-package #:DwightASpencerCom)
 
 ;;;; ── The finger block, now callable from your REPL ──────────────────────────
 ;;; This is the same program as the homepage whoami block.
@@ -104,6 +104,6 @@
 ;;; This file is also the Quicklisp dist root.
 ;;; dist format: https://blog.quicklisp.org/2011/08/lisp-library-sites.html
 
-(defparameter +dist-name+    "DwightSpencerCom")
+(defparameter +dist-name+    "DwightASpencerCom")
 (defparameter +dist-version+ "2026-05-23")
 (defparameter +dist-root+    dsc/corpus:+dist-root+)

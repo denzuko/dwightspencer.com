@@ -50,8 +50,8 @@ Layer 2: HTML source comment — `;; (ql-dist:install-dist "http://dwightaspence
 Layer 3: PostScript polyglot output — PoC||GTFO tradition, PS+CL+git bundle
 
 Dist: `(ql-dist:install-dist "http://dwightaspencer.com" :prompt nil)`
-System: `(ql:quickload :DwightSpencerCom)`
-Entry: `(DwightSpencerCom:finger)` — same output as homepage
+System: `(ql:quickload :DwightASpencerCom)`
+Entry: `(DwightASpencerCom:finger)` — same output as homepage
 
 Architecture dogfoods `github.com/denzuko/ml-prolog-pokemon`:
 - Same micro-Prolog engine (logic-engine.lisp)

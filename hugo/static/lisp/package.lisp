@@ -53,7 +53,7 @@
 ;;; ── Top-level DwightSpencerCom package ───────────────────────────────────────
 ;;; This is the package the finger block declares on the homepage.
 ;;; Loading this system extends it with corpus + render capabilities.
-(defpackage #:DwightSpencerCom
+(defpackage #:DwightASpencerCom
   (:use #:cl #:dsc/logic #:dsc/corpus #:dsc/render)
   (:export
    ;; From the homepage finger block — still works
