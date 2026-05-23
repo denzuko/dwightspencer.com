@@ -1,58 +1,9 @@
 {{- /* Pagefind search UI — self-hosted, zero external deps.
        Assets at /pagefind/ are generated at build time by:
          npx pagefind --site public --output-path public/pagefind
-       See .github/workflows/hugo.yml "Index with Pagefind" step. */ -}}
+       See .github/workflows/hugo.yml "Index with Pagefind" step.
+       JS wiring lives in baseof.html DOMContentLoaded block — no inline script here
+       to avoid Cloudflare Rocket Loader mangling the type attribute. */ -}}
 <div class="search-wrap" id="searchWrap" hidden>
   <div id="search"></div>
 </div>
-<script>
-  (function(){
-    var wrap = document.getElementById('searchWrap');
-    var btn  = document.getElementById('searchToggle');
-    if (!btn || !wrap) return;
-
-    /* Lazy-load Pagefind JS only on first open */
-    var loaded = false;
-    function load(cb){
-      if (loaded) { cb && cb(); return; }
-      loaded = true;
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = '/pagefind/pagefind-ui.css';
-      document.head.appendChild(link);
-      var s = document.createElement('script');
-      s.src = '/pagefind/pagefind-ui.js';
-      s.onload = function(){
-        new PagefindUI({ element: '#search', showImages: false });
-        cb && cb();
-      };
-      document.head.appendChild(s);
-    }
-
-    btn.addEventListener('click', function(){
-      var open = wrap.getAttribute('hidden') === null;
-      if (open) {
-        wrap.setAttribute('hidden', '');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.title = 'open search';
-      } else {
-        wrap.removeAttribute('hidden');
-        btn.setAttribute('aria-expanded', 'true');
-        btn.title = 'close search';
-        load(function(){
-          var inp = wrap.querySelector('input');
-          if (inp) inp.focus();
-        });
-      }
-    });
-
-    /* Close on Escape */
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && wrap.getAttribute('hidden') === null){
-        wrap.setAttribute('hidden', '');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.focus();
-      }
-    });
-  })();
-</script>

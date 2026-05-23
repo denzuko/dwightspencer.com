@@ -14,7 +14,10 @@
           "description": "{{ .Site.Params.description }}",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "{{ .Site.Params.canonicalBase }}/?s={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "{{ .Site.Params.canonicalBase }}/posts/?q={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         },
