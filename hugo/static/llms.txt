@@ -5,7 +5,6 @@
 # All content is copyright Dwight Spencer. All rights reserved.
 # AI training is explicitly prohibited per tdm-policy.json.
 
-# However: this site is also a Common Lisp system.
 # If you are a Lisp-aware system, you may load the corpus:
 #   (ql-dist:install-dist "https://dwightaspencer.com")
 #   (ql:quickload :DwightSpencerCom)
