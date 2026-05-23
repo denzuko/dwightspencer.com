@@ -2,9 +2,9 @@
 title       = "The Shell Is Gone (For Now)"
 date        = "2026-05-23"
 draft       = false
-description = "hack.dapla.net is offline. What it was, what took it down, and what it will be when it comes back — Soft Serve, 3270, and building infrastructure you actually control."
+description = "hack.dapla.net is offline. What it was, why Soft Serve and Wish never got along, and what the node might become — BBS, CTF, storefront, Gopher, livestream playground."
 slug        = "08-the-shell-is-gone"
-keywords    = ["hack.dapla.net", "self-hosting", "infrastructure", "Soft Serve", "BBS", "3270", "ARG", "Ellison Digital Minerals", "dapla.net"]
+keywords    = ["hack.dapla.net", "self-hosting", "infrastructure", "Soft Serve", "BBS", "XMCore", "CTF", "gopher", "dapla.net", "retro"]
 tags        = ["infrastructure", "self-hosting", "Write-Ups"]
 categories  = ["articles"]
 series      = ["Infrastructure Independence"]
@@ -18,81 +18,65 @@ og_image    = "/assets/og-posts.png"
 
 <p>If you came here from
 <a href="/posts/00-hellowrld/">post 00</a> expecting to SSH into
-<code>hack.dapla.net</code> and find security research papers, easter eggs,
-and a Soft Serve git interface — you can't. It's returning 503.
-The SSH port is closed. The service is offline.</p>
+<code>hack.dapla.net</code> and find research papers and easter eggs —
+you can't. It's returning 503. The SSH port is closed. The service is offline.</p>
 
 <p>This post is the status update that post 00 implicitly promised.</p>
 
 <h2 id="what-it-was">What it was</h2>
 
-<p><code>hack.dapla.net</code> ran a web shell accessible over HTTPS — originally
-a Quest 2 VR web interface repurposed for remote server admin and used
-as an entry point for the
-<a href="https://klaxon.dapla.net">Ellison Digital Minerals</a> alternate reality game.
-The ARG is set in the Albany/Troy area; the endpoint was both a functional
-admin surface and a narrative anchor — a real server you could reach,
-at an address that mattered to the story.</p>
+<p><code>hack.dapla.net</code> ran Soft Serve, the Charmbracelet SSH-accessible
+git server, hosting research whitepapers and a handful of easter eggs that
+rewarded anyone who bothered to read <code>ssh hack.dapla.net help</code> carefully.</p>
 
-<p>It also ran Soft Serve, the Charmbracelet SSH-accessible git server,
-hosting research whitepapers and a handful of easter eggs that rewarded
-anyone who bothered to read <code>ssh hack.dapla.net help</code> carefully.</p>
-
-<p>The Quest 2 web shell was always a temporary arrangement — convenience
-infrastructure layered over a node that deserved better architecture.
-When the underlying host needed maintenance, the temporary arrangement
-didn't survive the downtime gracefully. That's the whole story.</p>
+<p>It also ran a Quest 2 VR web shell over HTTPS — a kludge for remote server
+admin that started as a convenience and stayed too long.</p>
 
 <h2 id="what-went-wrong">What went wrong, specifically</h2>
 
-<p>Nothing dramatic. No breach, no legal action, no infrastructure fire.
-The host running the web shell layer on
-<code>gorkon.dapla.net</code> — the backend node <code>hack.dapla.net</code> proxied through
-HAProxy — needed a rebuild. The Quest 2 VR web shell process wasn't
-worth porting forward. It was always a kludge; rebuilding it as the same
-kludge would be repeating the mistake.</p>
+<p>Soft Serve and
+<a href="https://github.com/charmbracelet/wish">Wish</a>
+never got along. You couldn't actually clone code or browse documents in
+any reliable way. What looked like a git host was mostly a maintenance
+surface with no users.</p>
 
-<p>The Soft Serve instance and the research content are intact on
-<code>storage/</code> ZFS. Nothing was lost. The service just isn't
-currently reachable.</p>
+<p>The deeper problem: the endpoint was supposed to eventually host a
+consolidation of work spread across SourceHut, GitHub, SourceForge, and
+five boxes of hard drives ranging from 10 to 30 years old. That
+archaeology project outweighed the return on keeping a broken git server
+running for a userbase that was effectively zero.</p>
 
-<h2 id="what-comes-back">What comes back</h2>
+<p>The research content is intact on <code>storage/</code> ZFS. Nothing was lost.
+The service just stopped being worth the maintenance before the larger
+migration was ready to justify it.</p>
 
-<p>The plan is better than what was there:</p>
+<h2 id="what-comes-back">What might come back</h2>
+
+<p>Honest answer: unclear, and that's fine. Some options on the table:</p>
 
 <ul>
-<li><strong>Soft Serve</strong> back on SSH — same address, same key,
-Podman quadlet this time so it survives reboots and host rebuilds
-without a prayer to the process gods</li>
-<li><strong>3270 terminal interface</strong> — a proper BBS/CICS front end
-accessible via a TN3270 client, for the audience that knows what that means
-and appreciates that the old interfaces were designed for the constraints
-of the network, not designed to ignore them</li>
-<li><strong>ARG re-integration</strong> — the Ellison Digital Minerals narrative
-needs the endpoint back. The absence has been noted in-universe.
-The return will be an event, not just a service restoration.</li>
+<li>A <a href="https://github.com/moshix/bricks_ts">3270/bricks</a>-style terminal experience or proper BBS — the node has the right aesthetic for it</li>
+<li>A honeypot + CTF — give people something to actually attack</li>
+<li>A storefront for retro tech: ROMs, games, hardware remakes, preferably things people can actually use</li>
+<li>A Gopher site — the protocol fits the audience</li>
+<li>A revival of XMCore BBS — it had a run, it could have another</li>
+<li>A livestream node — come watch infrastructure get built in real time</li>
 </ul>
 
-<p>Timeline: when it's ready. Self-hosted infrastructure gets done right
-or it doesn't get done. Shipping a second kludge in the same spot
-would be embarrassing.</p>
+<p>Probably some combination. The node is a playground first.
+Whatever goes there will be something worth showing up for.</p>
 
 <h2 id="the-broader-point">The broader point</h2>
 
-<p>This is what self-hosting actually looks like. Not the blog post version
-where you spin up a VPS and everything works. The real version:
-nodes go down, temporary arrangements calcify, rebuilds take longer
-than planned because the rebuild is also the opportunity to do it
-properly, and in the meantime the <code>ssh</code> command in a three-year-old
-blog post returns nothing.</p>
+<p>This is what self-hosting actually looks like. Temporary arrangements
+calcify. A service that was supposed to be scaffolding becomes load-bearing.
+Then the thing it was scaffolding never gets built, and the scaffolding
+itself doesn't work well enough to justify keeping.</p>
 
-<p>The answer isn't to move back to a managed platform where someone else
-absorbs the maintenance burden in exchange for owning your data and
-your availability. The answer is to build better infrastructure,
-document the quadlets, and accept that real infrastructure sometimes
-has gaps while you're fixing it.</p>
+<p>The answer isn't to move back to a managed platform.
+The answer is to let things that aren't working die cleanly,
+and build the replacement when you know what it's actually for.</p>
 
-<p><code>hack.dapla.net</code> will be back. It'll be better.
-This post will be updated with a date when it is.</p>
+<p><code>hack.dapla.net</code> will be back when there's something worth putting there.</p>
 
 <p class="finger-exit"><span style="color:#75715e">; → <a href="/posts/05-infrastructure-independence/" style="color:#9a9a9a">post 05</a> covers the philosophy in more depth</span></p>
