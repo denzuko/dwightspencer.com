@@ -1,102 +1,76 @@
-# Next session LLM prompt — dwightaspencer.com
+# Next session prompt — dwightaspencer.com
 
-Paste this as your opening message in a new conversation window.
+Paste this as your opening message in a new conversation.
 
 ---
 
 You are continuing development on `dwightaspencer.com`, the personal
-publishing platform of Dwight Spencer (@denzuko). This is a live Hugo
-site deployed via GitHub Actions to GitHub Pages behind Cloudflare.
+publishing platform of Dwight Spencer (@denzuko). Live Hugo site on
+GitHub Pages behind Cloudflare. Git-flow native — no web CMS.
 
-## First: read these files before touching anything
+## Read these files first, in order
 
 ```
-CLAUDE.md                  — full project context, conventions, known issues
-hugo/MIGRATION.md          — backlog (v2, v2.5, v3 items)
-hugo/ARCHITECTURE.md       — Mermaid diagrams of build pipeline and Lisp layers
+CLAUDE.md              — conventions, gotchas, entity separation rules
+hugo/MIGRATION.md      — full backlog (v2, v2.5, v3 stretch goals)
+hugo/ARCHITECTURE.md   — Mermaid diagrams: build pipeline, Lisp layers, CF interaction
 ```
 
-Clone the repo if not already present:
-  git clone https://github.com/denzuko/dwightspencer.com
-  cd dwightspencer.com
+Clone if not present:
+```
+git clone https://github.com/denzuko/dwightspencer.com
+cd dwightspencer.com
+```
 
-Install gh and prompt for the PAT; do not store this PAT in the environment.
-Use gh and git instead of python/node/etc.. scripts when interacting with github 
-to save tokens.
+Prompt for the GitHub PAT — do not store it. Set via:
+```
+export GH_TOKEN="..."
+git remote set-url origin "https://denzuko:${GH_TOKEN}@github.com/denzuko/dwightspencer.com.git"
+```
 
-Avoid node and python where possible.
+Use `gh` and `git` for all GitHub interaction. Avoid python/node scripts where possible.
 
-## Current state
+## Current state (as of 2026-05-23)
 
-Open PRs to review and merge in order:
-  #19  — post 02 rendering fix, all post audit, manifesto date clarification
-  #20  — Hugo policy pages (privacy/cookies/terms/copyright/data-usage)
-  #21  — root .well-known cleanup (stale duplicate)
-  #24  — author.yaml source of truth, auto-generated corpus.lisp,
-          layer 2 comment simplified, four Lisp bug fixes
+- 10 posts (00–09), all live
+- Taxonomies: tags, series, venue (field only)
+- Pages: /now, /projects, /uses (not in nav — URL + Pagefind only)
+- Nav: posts · tags · series · media · ⌕ (Pagefind) · ☀︎ (dark mode)
+- Build: Hugo → Pagefind → gh-pages → Cloudflare; all green
+- No open PRs, no stray branches
 
-After merging, verify live at https://dwightaspencer.com:
-  - HTML source contains: ;; (ql-dist:install-dist "http://dwightaspencer.com" :prompt nil)
-  - /corpus.lisp loads and parses in SBCL — package is :DwightASpencerCom
-  - Finger block ends with (DwightASpencerCom:finger) not (finger)
-  - Post 02 /posts/02-github-tos-wont-save-you/ renders correctly (no pre/code wrapping)
-  - Policy pages have dark mode toggle and /media/ nav link
+## Immediate backlog
 
-## Immediate next tasks
+See `hugo/MIGRATION.md` for full detail. Top items:
 
-1. Pagefind site search — self-hosted, zero external deps:
-   - Add to GH Actions: `npx pagefind --site hugo/public` after hugo build step
-   - Add search UI partial to baseof.html
-   - Update MIGRATION.md
-   - No Algolia — privacy positioning
+1. **post 05 corrections** — Bitwarden→KeePassDX, Nextcloud for media/docs,
+   step-ca + Let's Encrypt for CA, Podman with system account, sourcehut/cgit
+   over Forgejo, HAProxy paired with dns-sd/policyd/fastcgi+kcgi/keepalived
+2. **MIGRATION.md CMS entry removal** — "Hugo CMS integration (Decap/Forestry)"
+   is gone by design; remove the entry
+3. **Archive content recovery (v3 stretch)** — posts 10–12 from WordPress/CompuTEK
+   era pending Internet Archive backup retrieval
+4. **v2.5** — OSCAL/NIST/arXiv/DOI taxonomy (see MIGRATION.md)
 
-2. Post 00 hack.dapla.net reference — verify if SSH endpoint is live.
-   Currently: Quest 2 web shell for ARG/server admin. May return as
-   Soft Serve + 3270 BBS/cics. If down, update to past tense.
-   Each state change = editorial article opportunity.
+## Production pipeline (next major work)
 
-3. Post 01 Canarytail link — verify project still active.
+Order: whitepaper → technical brief/code audit → video short → HPR episode + Twitch livestream  
+Plausible analytics deferred until after this pipeline is established.
 
 ## Key conventions (do not deviate)
 
-Design:
-  - Background: #fffdfa explicit on BOTH html AND body
-  - Fonts: Bricolage Grotesque + Share Tech Mono (Google Fonts, roadmap: self-host)
-  - Dark mode: [data-theme="dark"] on html element, FOUC fix script in <head>
-  - Icons: self-hosted SVG sprite /assets/icons.svg — no external calls
-  - Social links: LinkedIn · GitHub · Keybase · Reddit · Resume (Calendly)
-
-Content:
-  - hugo/data/author.yaml is the SINGLE SOURCE OF TRUTH for author identity
-  - corpus.lisp is Hugo-generated — never edit hugo/static/lisp/corpus.lisp directly
-  - Entity separation: Da Planet Security branding NEVER on dwightaspencer.com
-  - RT4 content: "expert reviewed" not "peer reviewed"
-  - "Technology Chair, RT4" only — no chapter/national scope distinction in bylines
-
-Lisp system:
-  - Package: :DwightASpencerCom (matches dwightaspencer.com domain)
-  - Dist: (ql-dist:install-dist "http://dwightaspencer.com" :prompt nil)
-    Note: http:// required as argument; Quicklisp upgrades to https:// internally
-  - Layer 2 comment is ONE line only — no narration, no labels
-  - PostScript is the ONLY render target — intentional (Turing-complete, kin to Lisp)
-  - Layers 4-23 reserved — do not fill speculatively
-
-Workflow:
-  - Always: feature branch → PR → merge → next branch from master
-  - After merge: git log origin/master..HEAD to verify all commits landed
-  - Never commit to master directly
-  - HAProxy not Nginx — always verify before writing proxy config
-
-## v2.5 backlog (do after Pagefind)
-
-OSCAL components, NIST 800-53 taxonomy, arXiv integration, Crossref/DOI.
-Full spec in hugo/MIGRATION.md under "v2.5 — Research & Compliance Layer".
-OSCAL refs point to Da Planet Security infra only — entity separation applies.
+- `data-cfasync="false"` on the FOUC script — Cloudflare Rocket Loader deferral = flash bang
+- Layer 2 must be an HTML comment (`<!-- ;; ... -->`) — bare text node in `<head>` renders visibly
+- `len .Pages` not `.Count` in Hugo taxonomy term layouts
+- `&#35;` to escape `#` inside raw `<pre><code>` blocks when preceded by a blank line
+- finger.html: plain `<pre><code>` only — no monokai/highlight wrapper
+- HAProxy not Nginx — verify before writing any proxy config
+- Issues disabled on this repo — PR description serves as the issue
 
 ## Style guidance
 
-Soft questions (should/could): push back if misaligned with strategy
-Hard questions (I would): execute as directed
+Soft questions (should/could): push back if misaligned with strategy  
+Hard questions (I would): execute as directed  
 Gut checks appreciated — Den trusts direct disagreement over compliance
 
 73s
