@@ -36,7 +36,7 @@
     (pf 'post "08-the-shell-is-gone"
         "The Shell Is Gone (For Now)"
         "2026-05-23"
-        554)
+        431)
 (pf 'tag "08-the-shell-is-gone" :infrastructure)
 (pf 'tag "08-the-shell-is-gone" :self-hosting)
 (pf 'tag "08-the-shell-is-gone" :write-ups)
