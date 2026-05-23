@@ -27,6 +27,10 @@ jobs:
         working-directory: hugo
         run: hugo --minify --gc
 
+      - name: Index with Pagefind
+        working-directory: hugo
+        run: npx --yes pagefind --site public --output-path public/pagefind
+
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4.1.0
         with:
