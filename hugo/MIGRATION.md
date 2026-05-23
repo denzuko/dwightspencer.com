@@ -100,6 +100,33 @@ git push origin master
 
 ## Backlog
 
+### ✅ v1.5 — Pagefind site search (DONE 2026-05-23)
+Self-hosted, zero external deps, no Algolia. Privacy positioning intact.
+- GH Actions: `npx --yes pagefind --site public --output-path public/pagefind` after hugo build
+- Search UI: `hugo/layouts/partials/search.html` — lazy-loaded on toggle, Escape to close
+- Toggle button `⌕` in header nav (`header.html`)
+- CSS in `css.html` — dark mode aware, print hidden
+- `corpus.lisp` already references `/pagefind/pagefind.js` as `+search-index+` constant
+
+### ⚠️ hack.dapla.net status (verified 2026-05-23)
+`https://hack.dapla.net` returns HTTP 503. SSH port 22 unreachable.
+Post 00 (`00-hellowrld.md`) references it as present-tense: "Thanks to Soft Serve one can find..."
+**Action needed:** Update post 00 to past tense and note planned return as Soft Serve + 3270 BBS/CICS.
+Each state change is an editorial opportunity — draft a short status note post when the service returns.
+
+### ⚠️ Canarytail project status (verified 2026-05-23)
+`github.com/canarytail` org does not resolve — org appears deleted.
+`canarytail.org` returns no response.
+Post 01 (`01-a-better-tweedy-bird.md`) links to `https://github.com/canarytail/standard`.
+**Action needed:** Update post 01 to note the project as defunct/archived and link to
+the Wayback Machine snapshot or remove the link. Mention the standard's fate in the editorial voice.
+
+### ✅ Layer 2 comment — URL scheme (FIXED 2026-05-23)
+Was: `;; (ql-dist:install-dist "https://dwightaspencer.com")`
+Now: `;; (ql-dist:install-dist "http://dwightaspencer.com" :prompt nil)`
+Fixed in `hugo/layouts/partials/head.html` to match spec (CLAUDE.md) and corpus.lisp header.
+Quicklisp upgrades to https:// internally; the `http://` arg is canonical.
+
 ### v2 — Dynamic per-post OG images
 Currently all posts share `og-posts.png`. Per-post cards with the article
 title injected would significantly improve click-through for shared articles.
