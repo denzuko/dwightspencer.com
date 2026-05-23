@@ -1,0 +1,18 @@
+{{- define "bodyclass" }}{{ end -}}
+{{- define "main" }}
+  <h2 class="post">Tags</h2>
+  <p class="meta" style="margin-bottom:1.5rem">Opacity reflects publishing frequency — darker means more written on this topic.</p>
+  {{- $tags := .Data.Terms.ByCount -}}
+  {{- $max := 1 -}}
+  {{- range $tags }}{{- if gt .Count $max }}{{- $max = .Count }}{{- end }}{{- end -}}
+  <ul class="tag-index">
+    {{- range $tags }}
+    {{- $ratio := div (float .Count) (float $max) }}
+    {{- $opacity := add 0.3 (mul $ratio 0.7) }}
+    <li style="opacity:{{ printf "%.2f" $opacity }}">
+      <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a>
+      <span class="tag-count">{{ .Count }}</span>
+    </li>
+    {{- end }}
+  </ul>
+{{- end }}
