@@ -3,8 +3,8 @@
 ;;;; This site is a Common Lisp system. Load it from your REPL:
 ;;;;
 ;;;;   (ql-dist:install-dist "https://dwightaspencer.com")
-;;;;   (ql:quickload :DwightSpencerCom)
-;;;;   (DwightSpencerCom:finger)
+;;;;   (ql:quickload :DwightASpencerCom)
+;;;;   (DwightASpencerCom:finger)
 ;;;;
 ;;;; The system extends the DwightSpencerCom package introduced on the homepage.
 ;;;; Posts become queryable Prolog facts. The corpus renders to PostScript.
@@ -16,7 +16,7 @@
 ;;;;
 ;;;; IANA PEN: 42387  ORCID: 0009-0001-0066-4646
 
-(asdf:defsystem "DwightSpencerCom"
+(asdf:defsystem "DwightASpencerCom"
   :description "dwightaspencer.com as a Common Lisp system — corpus, Prolog queries, PostScript render"
   :version "1.0.0"
   :author "Dwight Spencer <https://keybase.io/Denzuko>"

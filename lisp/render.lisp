@@ -124,8 +124,8 @@
               (ps-escape slug))
       (format stream "0 598 moveto (Load the corpus for full text:) show~%")
       (format stream "/Courier findfont 9 scalefont setfont~%")
-      (format stream "0 580 moveto ((ql:quickload :DwightSpencerCom)) show~%")
-      (format stream "0 563 moveto ((DwightSpencerCom:find-post kb \\\"~A\\\")) show~%"
+      (format stream "0 580 moveto ((ql:quickload :DwightASpencerCom)) show~%")
+      (format stream "0 563 moveto ((DwightASpencerCom:find-post kb \\\"~A\\\")) show~%"
               (ps-escape slug)))
     (format stream "showpage~%~%")))
 
@@ -136,12 +136,12 @@
   ;; The polyglot hint — valid PS comment, valid CL comment
   (format stream "~%;;; This file is simultaneously:~%")
   (format stream ";;;   1. Valid PostScript (%%!PS-Adobe-3.0 above)~%")
-  (format stream ";;;   2. A Common Lisp corpus (load via ql:quickload :DwightSpencerCom)~%")
+  (format stream ";;;   2. A Common Lisp corpus (load via ql:quickload :DwightASpencerCom)~%")
   (format stream ";;;   3. Inspired by PoC||GTFO polyglot tradition~%")
   (format stream ";;; ~%")
   (format stream ";;; (ql-dist:install-dist \"https://dwightaspencer.com\")~%")
-  (format stream ";;; (ql:quickload :DwightSpencerCom)~%")
-  (format stream ";;; (DwightSpencerCom:finger)~%"))
+  (format stream ";;; (ql:quickload :DwightASpencerCom)~%")
+  (format stream ";;; (DwightASpencerCom:finger)~%"))
 
 ;;;; ── Public interface ────────────────────────────────────────────────────────
 
