@@ -1,0 +1,64 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://schema.org/"
+  ],
+  "id": "did:web:dwightaspencer.com",
+
+  "verificationMethod": [
+    {
+      "id": "did:web:dwightaspencer.com#pgp",
+      "type": "PgpVerificationKey2021",
+      "controller": "did:web:dwightaspencer.com",
+      "publicKeyUri": "https://keybase.io/Denzuko/pgp_keys.asc",
+      "description": "PGP public key — fingerprint 0x5DCBF78E3F9C3FE3"
+    },
+    {
+      "id": "did:web:dwightaspencer.com#git-hash",
+      "type": "DigestVerificationMethod2021",
+      "controller": "did:web:dwightaspencer.com",
+      "digestAlgorithm": "Sha256",
+      "digestValue": "4684d79bc97650e995238fc98f3317cdf9c4ab56"
+    }
+  ],
+
+  "assertionMethod": [
+    "did:web:dwightaspencer.com#pgp",
+    "did:web:dwightaspencer.com#git-hash"
+  ],
+
+  "sameAs": [
+    "https://github.com/denzuko",
+    "https://linkedin.com/in/denzuko",
+    "https://keybase.io/Denzuko",
+    "https://orcid.org/0009-0001-0066-4646",
+    "https://youtube.com/@daplanetsecurity"
+  ],
+
+  "service": [
+    {
+      "id": "did:web:dwightaspencer.com#git",
+      "type": "GitRepository",
+      "serviceEndpoint": "https://github.com/denzuko/dwightaspencer.com.git",
+      "description": "Canonical git repo"
+    },
+    {
+      "id": "did:web:dwightaspencer.com#pgp-keyserver",
+      "type": "PgpKeyServer",
+      "serviceEndpoint": "https://keybase.io/Denzuko/pgp_keys.asc",
+      "description": "PGP public key — 0x5DCBF78E3F9C3FE3"
+    },
+    {
+      "id": "did:web:dwightaspencer.com#orcid",
+      "type": "OrcidProfile",
+      "serviceEndpoint": "https://orcid.org/0009-0001-0066-4646",
+      "description": "ORCID researcher identifier"
+    },
+    {
+      "id": "did:web:dwightaspencer.com#youtube",
+      "type": "VideoChannel",
+      "serviceEndpoint": "https://youtube.com/@daplanetsecurity",
+      "description": "YouTube: Code is speech. Platforms are not neutral."
+    }
+  ]
+}

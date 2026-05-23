@@ -1,0 +1,26 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "CreativeWork",
+  "name": "Text and Data Mining Reservation Policy",
+  "description": "This work is protected under Article 4 of the EU CDSM Directive (2019/790). All rights are reserved for text and data mining purposes. No automated extraction, reproduction, or derivative works are permitted without explicit written consent from the rights holder.",
+  "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+  "creator": {
+    "@type": "Person",
+    "name": "Dwight Spencer",
+    "identifier": "https://orcid.org/0009-0001-0066-4646",
+    "sameAs": [
+      "https://github.com/denzuko",
+      "https://linkedin.com/in/denzuko",
+      "https://keybase.io/Denzuko"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "dwightaspencer.com",
+    "url": "https://dwightaspencer.com/"
+  },
+  "datePublished": "2026-03-11",
+  "tdm:reservation": "1",
+  "tdm:policy": "https://dwightaspencer.com/.well-known/tdm-policy.json",
+  "usageInfo": "Contact the rights holder for any text and data mining permissions."
+}
