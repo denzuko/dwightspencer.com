@@ -228,7 +228,7 @@ data using your GitHub token:</p>
 <pre><code>git bug bridge configure github \
 --repo youruser/yourrepo --token $GITHUB_TOKEN
 
-# fetch issues, comments, labels, and users
+&#35; fetch issues, comments, labels, and users
 GitHub bridge pulling…
 </code></pre>
 
