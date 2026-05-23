@@ -13,38 +13,7 @@ aliases     = ["/02-github-tos-wont-save-you/", "/github-tos/", "/posts/github-t
 og_image    = "/assets/og-posts.png"
 +++
 
-<article class="h-entry" itemscope itemtype="https://schema.org/BlogPosting"
-           vocab="https://schema.org/" typeof="BlogPosting">
-
-    <!-- Machine-readable permalink and author for Microformats2 -->
-    <a class="u-url" href="https://dwightaspencer.com/posts/github-tos-privacy/" style="display:none"></a>
-    <a class="p-author h-card" href="https://dwightaspencer.com/" style="display:none">Dwight Spencer</a>
-    <time class="dt-published" datetime="2026-03-11T00:00:00Z" style="display:none">2026-03-11</time>
-
-    <!-- Schema.org itemprop equivalents -->
-    <meta itemprop="datePublished" content="2026-03-11" />
-    <meta itemprop="dateModified" content="2026-03-11" />
-    <meta itemprop="inLanguage" content="en-US" />
-    <link itemprop="author" href="https://dwightaspencer.com/#author" />
-    <link itemprop="mainEntityOfPage" href="https://dwightaspencer.com/posts/github-tos-privacy/" />
-
-    <p class="post-h2 p-name" itemprop="headline">
-      GitHub's TOS Won't Save You: Why Your Code, Privacy &amp; Copyrights Are at Risk
-    </p>
-
-    <p class="meta">
-      <time class="dt-published time" datetime="2026-03-11">March 11, 2026</time>
-      &nbsp;&#x2219;&nbsp;
-      <span class="p-category">Developer Rights</span>
-      &nbsp;&#x2219;&nbsp;
-      <span class="p-category">Privacy</span>
-      &nbsp;&#x2219;&nbsp;
-      <span class="p-category">Copyright</span>
-    </p>
-
-    <div class="e-content" itemprop="articleBody">
-
-      <h2>The Illusion of Ownership</h2>
+<h2>The Illusion of Ownership</h2>
 
       <p>Millions of developers trust GitHub with their most valuable creative work. But buried in its Terms of Service are provisions granting Microsoft remarkably broad rights over publicly hosted code — including the right to train commercial AI systems on it without attribution, compensation, or meaningful consent. Your open-source license is not a shield.</p>
 
@@ -384,5 +353,3 @@ NoAITrain: true</code></pre>
         <a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">Issue #1024</a> — open feature request for SourceHut bridge<br>
         <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR #1499</a> — todo.sr.ht GraphQL sync work in progress
       </p>
-    </div>
-  </article>
