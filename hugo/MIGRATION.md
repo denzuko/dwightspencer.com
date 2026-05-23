@@ -151,32 +151,46 @@ prominently laid out for LinkedIn/professional context shares.
 `hugo.toml` (`params.ogVariant = "professional"`) to switch the home page
 meta tag.
 
-### v2 — /now page
-Standard "what I'm working on right now" page (nownownow.com convention).
-Fits the personal publishing positioning. Low maintenance — update quarterly
-alongside the warrant canary.
+### ✅ v2 — /now page (DONE 2026-05-23)
+`/now` — current work across writing, infra, OSS, advocacy, reading.
+Quarterly update cadence alongside warrant canary. Not in nav — reachable by URL and Pagefind.
 
-### v2 — /projects page
-Archive of active and historical projects with status indicators. Pulls from
-the Lisp block `:Projects` list and expands it. Gives the expert witness and
-MSP audience a structured view of technical work without requiring them to
-read the Lisp.
+### ✅ v2 — /projects page (DONE 2026-05-23)
+`/projects` — active and historical with status indicators. Entity-separation compliant.
+Not in nav — reachable by URL and Pagefind.
+
+### ✅ v2 — /uses page (DONE 2026-05-23)
+`/uses` — editor/terminal, languages, infra, hardware, radio, desk software, site stack.
+Not in nav — reachable by URL and Pagefind.
 
 ### v2 — Plausible Analytics A/B integration
+**Deferred** — implement after whitepaper, technical brief/code audit, video short,
+and HPR episode + Twitch livestream production pipeline is established.
 Privacy-respecting cookieless analytics (no consent banner required).
 Planned A/B test against Cloudflare aggregate analytics. When enabled:
 - Add `<script defer data-domain="dwightaspencer.com" src="https://plausible.io/js/script.js"></script>` to baseof.html
 - Update privacy/cookies policy pages accordingly
 - No other changes required
 
-### v2 — /uses page
-Tools, hardware, and infrastructure stack. Useful for HPR/aNONradio audience
-who asks "what do you run." Feeds the Infrastructure Independence series.
-
 ### v3 — Hugo CMS integration (Decap/Forestry successor)
 For non-code content updates (warrant canary renewal, media archive updates)
 without requiring a full git workflow. Low priority — current git workflow
 is acceptable for the volume.
+
+### v3 — Archive content recovery (stretch goal)
+Posts 10–12 from WordPress/CompuTEK era (denzuko.wordpress.com, computekindustries.com,
+denzuko.co.cc). Pending backup retrieval from Internet Archive team.
+Content mapped in session notes — three posts identified:
+
+- Post 10: *"What I Was Calling Developer Operations in 2007"* — expands post 07 with
+  original contemporaneous writing; IBM dispute full account; primary source authority.
+- Post 11: *"Before the Makerspace Was a Thing: SysOp to Founder"* — Software Systems
+  Online BBS (1996) anchor; hDc; CompuTEK founding; bridges posts 00 and 05.
+- Post 12: *"I Signed the Agile Manifesto in 2009. Here's What That Means Now."* —
+  CompuTEK Industries, May 2009; practitioner retrospective at 24+ years.
+
+All require editorial rewrite to current voice before publishing.
+Do not draft from memory — raw content must be retrieved from Wayback first.
 
 ---
 
