@@ -1,0 +1,63 @@
+{{- $url := .Permalink -}}
+{{- $author := .Site.Params.author -}}
+{{- $orcid := .Site.Params.orcid -}}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {{- if .IsHome }}
+        {
+          "@type": "WebSite",
+          "@id": "{{ .Site.Params.canonicalBase }}/#website",
+          "url": "{{ .Site.Params.canonicalBase }}/",
+          "name": "{{ .Site.Params.siteTitle }}",
+          "description": "{{ .Site.Params.description }}",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ .Site.Params.canonicalBase }}/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {{- else if .IsPage }}
+        {
+          "@type": "{{ with .Params.schema_type }}{{ . }}{{ else }}TechArticle{{ end }}",
+          "@id": "{{ $url }}#article",
+          "headline": "{{ .Title }}",
+          "description": "{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}",
+          "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+          "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+          "wordCount": {{ .WordCount }},
+          "inLanguage": "en-us",
+          "isFamilyFriendly": true,
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ $url }}"
+          },
+          "url": "{{ $url }}",
+          {{- with .Params.tags }}
+          "keywords": [{{ range $i, $t := . }}{{ if $i }}, {{ end }}"{{ $t }}"{{ end }}],
+          {{- end }}
+          "publisher": {
+            "@type": "Organization",
+            "name": "{{ .Site.Params.siteTitle }}",
+            "url": "{{ .Site.Params.canonicalBase }}/"
+          }
+        },
+        {{- end }}
+        {
+          "@type": "Person",
+          "@id": "{{ .Site.Params.canonicalBase }}/#author",
+          "name": "{{ $author }}",
+          "url": "{{ .Site.Params.canonicalBase }}",
+          "identifier": "https://orcid.org/{{ $orcid }}",
+          "sameAs": [
+            "{{ .Site.Params.github }}",
+            "{{ .Site.Params.linkedin }}",
+            "{{ .Site.Params.keybase }}",
+            "https://orcid.org/{{ $orcid }}",
+            "{{ .Site.Params.youtube }}"
+          ]
+        }
+      ]
+    }
+    </script>

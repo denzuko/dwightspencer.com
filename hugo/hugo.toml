@@ -1,0 +1,103 @@
+# hugo.toml — dwightaspencer.com
+# Hugo 0.129.0+extended
+
+baseURL       = "https://dwightaspencer.com/"
+languageCode  = "en"
+defaultContentLanguage = "en"
+title         = "Dwight Spencer - 0x5DCBF78E3F9C3FE3"
+# theme = ""  # no theme — fully custom templates
+copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training prohibited."
+
+# Output formats
+[outputs]
+  home    = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  page    = ["HTML"]
+  term    = ["HTML", "RSS"]
+
+# RSS / Atom — match existing atom.xml structure
+[outputFormats.RSS]
+  mediaType    = "application/rss+xml"
+  baseName     = "atom"
+  rel          = "alternate"
+  isPlainText  = false
+
+# JSON feed
+[outputFormats.JSON]
+  mediaType   = "application/json"
+  baseName    = "feed"
+  rel         = "alternate"
+  isPlainText = true
+
+# Taxonomies — match existing tag/category structure
+[taxonomies]
+  tag      = "tags"
+  category = "categories"
+
+# Permalinks — preserve existing URL structure exactly
+[permalinks]
+  posts = "/posts/:slug/"
+
+# Markup — goldmark with raw HTML passthrough for existing content
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true       # allow raw HTML in markdown content
+  [markup.highlight]
+    style              = "monokai"
+    noClasses          = false
+    lineNos            = false
+    tabWidth           = 4
+
+# Minify HTML output
+[minify]
+  minifyOutput = false    # keep readable for now; enable after validation
+
+# Privacy — no tracking, no GA, no disqus
+[privacy]
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.disqus]
+    disable = true
+  [privacy.twitter]
+    disable = false
+    enableDNT = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = true
+
+# Author / site params — used in templates
+[params]
+  author        = "Dwight Spencer"
+  authorHandle  = "@denzuko"
+  pgp           = "0x5DCBF78E3F9C3FE3"
+  orcid         = "0009-0001-0066-4646"
+  ianapen       = "42387"
+  description   = "Code is speech. Platforms are not neutral. Principal, Da Planet Security. Technology Chair, Restore The Fourth. DevOps engineer, security researcher, open source advocate, author."
+  siteTitle     = "Dwight Spencer - 0x5DCBF78E3F9C3FE3"
+  canonicalBase = "https://dwightaspencer.com"
+  tdmPolicy     = "https://dwightaspencer.com/.well-known/tdm-policy.json"
+
+  # Geo — Albany NY (ACP — no street address)
+  geoPosition  = "42.6526;-73.7562"
+  geoICBM      = "42.6526, -73.7562"
+  geoPlacename = "Albany, New York, United States"
+  geoRegion    = "US-NY"
+
+  # Social links
+  github    = "https://github.com/denzuko"
+  linkedin  = "https://linkedin.com/in/denzuko"
+  keybase   = "https://keybase.io/Denzuko"
+  youtube   = "https://youtube.com/@daplanetsecurity"
+  hpr       = "https://hackerpublicradio.org"
+  anonradio = "https://anonradio.net"
+  calendly  = "https://calendly.com/denzuko/virtual-coffee"
+  seProfile = "https://stackexchange.com/users/247706"
+  seFlair   = "https://stackexchange.com/users/flair/247706.png"
+
+  # Avatar
+  avatarURL = "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShaggyMullet&accessoriesType=Prescription02&hairColor=Black&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=CollarSweater&clotheColor=Blue03&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Twinkle&skinColor=Pale"
+
+  # Cloudflare
+  cf2faVerify = "a39e4b2b07da17e"

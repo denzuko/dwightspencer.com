@@ -1,0 +1,15 @@
+{{- define "bodyclass" }}h-feed{{ end -}}
+{{- define "main" }}
+  {{- if not .IsHome }}
+  <h2 class="post">{{ .Title }}</h2>
+  {{- end }}
+  <ul reversed class="list">
+    {{- range .Pages.ByDate.Reverse }}
+    <li>
+      <time class="g time index-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <hr class="hr-list" style="padding:0;margin:0;">
+      <a class="link" href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+  </ul>
+{{- end }}

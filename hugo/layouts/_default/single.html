@@ -1,0 +1,26 @@
+{{- define "bodyclass" }}h-entry{{ end -}}
+{{- define "main" }}
+<section>
+  <h2 class="post p-name">{{ .Title }}</h2>
+  {{- with .Params.description }}<p class="p-summary" style="color:#777;font-style:italic;">{{ . }}</p>{{ end }}
+  <div class="e-content">
+    {{ .Content }}
+  </div>
+  <div class="post-date">
+    <span class="g time">
+      <time class="dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    </span> &#8729;
+    <a class="p-author h-card" href="{{ .Site.Params.canonicalBase }}/" style="display:none;">{{ .Site.Params.author }}</a>
+    <span class="meta">{{ .WordCount }} words</span>
+    {{- with .Params.tags }}
+    <div class="tags">
+      <ul>
+        {{- range . }}
+        <li><a href="{{ $.Site.Params.canonicalBase }}/tags/{{ . | urlize }}/">#{{ . }}</a></li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
