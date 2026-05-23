@@ -1,41 +1,97 @@
-User-agent: *
-Disallow:
-Sitemap: https://dwightaspencer.com/sitemap.xml
+# robots.txt — dwightaspencer.com
+# https://www.robotstxt.org/robotstxt.html
+# TDM policy: https://dwightaspencer.com/.well-known/tdm-policy.json
 
-# AI and LLM crawlers - explicitly disallowed
+# ── SEARCH ENGINES ────────────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /assets/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /assets/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /assets/
+
+# ── AI / LLM CRAWLERS — explicitly blocked ────────────────────────────────────
+# OpenAI
 User-agent: GPTBot
 Disallow: /
 
 User-agent: ChatGPT-User
 Disallow: /
 
-User-agent: CCBot
+User-agent: OAI-SearchBot
 Disallow: /
 
+# Google AI
 User-agent: Google-Extended
 Disallow: /
 
+# Anthropic
 User-agent: anthropic-ai
 Disallow: /
 
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Common Crawl (primary LLM training corpus)
+User-agent: CCBot
+Disallow: /
+
+# Perplexity
 User-agent: PerplexityBot
 Disallow: /
 
+# Cohere
 User-agent: cohere-ai
 Disallow: /
 
-User-agent: OAI-Search
+# Meta
+User-agent: FacebookBot
 Disallow: /
 
-# Allow access to opt-out files
-Allow: /ai.txt
-Allow: /llms.txt
-Allow: /.well-known/security.txt
-Allow: /.well-known/privacy-policy
-Allow: /.well-known/tdm-policy.json
-Allow: /.well-known/did.json
+# Apple
+User-agent: Applebot-Extended
+Disallow: /
 
-# Security and privacy files
-Security: https://dwightaspencer.com/.well-known/security.txt
+# Diffbot (data extraction)
+User-agent: Diffbot
+Disallow: /
+
+# Bytedance
+User-agent: Bytespider
+Disallow: /
+
+# ImagesiftBot
+User-agent: ImagesiftBot
+Disallow: /
+
+# omgili / Webhose
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+# Scrapy generic
+User-agent: Scrapy
+Disallow: /
+
+# ── EVERYONE ELSE ─────────────────────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /assets/
+
+# ── POLICY REFERENCES ─────────────────────────────────────────────────────────
+# W3C TDM Reservation (Art. 4 CDSM Directive / EU AI Act)
+# https://www.w3.org/2022/tdmrep/
+
+Sitemap: https://dwightaspencer.com/sitemap.xml
 AI: https://dwightaspencer.com/ai.txt
-LLMs: https://dwightaspencer.com/llms.txt
+Security: https://dwightaspencer.com/.well-known/security.txt

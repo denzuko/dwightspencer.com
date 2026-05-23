@@ -1,0 +1,10 @@
+# PGP public key for Dwight Spencer — 0x5DCBF78E3F9C3FE3
+# To populate this file locally:
+#   gpg --armor --export 0x5DCBF78E3F9C3FE3 > .well-known/pgp-key.txt
+# Then commit and push.
+#
+# Key also available at:
+#   https://keybase.io/Denzuko/pgp_keys.asc
+#   https://keys.openpgp.org/search?q=0x5DCBF78E3F9C3FE3
+
+[ASCII-ARMORED PUBLIC KEY BLOCK — replace with gpg --armor --export output]
