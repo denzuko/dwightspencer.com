@@ -34,7 +34,7 @@ velocity. We didn't have a name for it. We called it "Developer Operations"
 in internal documentation and client proposals.</p>
 
 <p>I was presenting these concepts at local technical meetups and user groups
-in the Dallas/Fort Worth area. The Agile Manifesto had been signed in 2001 —
+in Colorado Springs — DFW came later. The Agile Manifesto had been signed in 2001 —
 I was a signatory, under CompuTEK Industries, in May 2009. The practices
 we were developing were extensions of Agile principles into the operational
 domain, years before the Agile Infrastructure framing became mainstream.</p>
