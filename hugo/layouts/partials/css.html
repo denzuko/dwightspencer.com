@@ -84,5 +84,36 @@
       :root:not([data-theme="light"]) .cta-line a:hover{color:#f0ede8}
       :root:not([data-theme="light"]) .finger-exit{color:#666}
     }
+
+    /* ── POLICY PAGES ── */
+    .policy-page{max-width:70ch;margin:0 auto}
+    .policy-title{font-size:1.6rem;font-weight:700;margin:1.5rem 0 .25rem}
+    .policy-meta{font-family:San Francisco Mono,Monaco,consolas,monospace;font-size:.8rem;color:#777;margin-bottom:2rem;padding-bottom:.75rem;border-bottom:1px dotted #ccc}
+    .policy-body h2{margin-top:2rem;margin-bottom:.4rem;font-size:1.1rem}
+    .policy-body h3{margin-top:1.5rem;margin-bottom:.25rem;font-size:1rem;font-weight:700}
+    .policy-body p{margin:.6rem 0}
+    .policy-body ul{margin:.4rem 0 .4rem 1.2rem}
+    .policy-body ul li{margin:.2rem 0}
+    .policy-body blockquote{margin:1rem 0;padding:.5rem 1rem;border-left:3px solid #000;font-style:italic}
+    .policy-body a{text-decoration:underline;text-underline-offset:2px}
+    .policy-nav{margin-top:3rem;padding-top:1rem;border-top:1px dotted #ccc;font-size:.85rem;color:#777}
+    .policy-nav a{margin-right:1.5rem;color:#555;text-decoration:none}
+    .policy-nav a:hover{color:#000;text-decoration:underline}
+    /* data usage highlight box */
+    .data-summary{background:#f5f5f3;border:1px solid #e0e0de;border-radius:2px;padding:1rem 1.25rem;margin:1.5rem 0}
+    .data-summary h3{margin-top:0;font-size:.95rem;letter-spacing:.03em}
+    .data-summary ul{margin:.25rem 0 0 1.1rem}
+    [data-theme="dark"] .policy-meta{color:#666;border-bottom-color:#333}
+    [data-theme="dark"] .policy-body blockquote{border-left-color:#f0ede8}
+    [data-theme="dark"] .policy-nav{border-top-color:#333;color:#666}
+    [data-theme="dark"] .policy-nav a{color:#aaa}
+    [data-theme="dark"] .policy-nav a:hover{color:#f0ede8}
+    [data-theme="dark"] .data-summary{background:#111;border-color:#333}
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme="light"]) .policy-meta{color:#666;border-bottom-color:#333}
+      :root:not([data-theme="light"]) .policy-nav{border-top-color:#333}
+      :root:not([data-theme="light"]) .policy-nav a{color:#aaa}
+      :root:not([data-theme="light"]) .data-summary{background:#111;border-color:#333}
+    }
     @media(prefers-reduced-motion:reduce){.animate-blink{animation:none;opacity:1}}
     @media print{.skip-link,header nav,.tags,.theme-toggle{display:none}body{background:#fff;color:#000;padding:0;font-size:11pt}a[href]::after{content:" (" attr(href) ")";font-size:9pt}pre,code{border:1px solid #ccc;page-break-inside:avoid}}</style>
