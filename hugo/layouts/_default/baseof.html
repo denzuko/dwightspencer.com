@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="{{ .Site.LanguageCode }}" vocab="https://schema.org/" prefix="og: https://ogp.me/ns# dc: https://purl.org/dc/terms/ geo: https://www.w3.org/2003/01/geo/wgs84_pos# aeo: https://data.nfld.nl/aeo/">
   {{- partial "head.html" . }}
-  <script>
+  <script data-cfasync="false">
     /* Theme detection runs in <head> before first paint — eliminates FOUC.
+       data-cfasync="false" prevents Cloudflare Rocket Loader from deferring
+       this script; deferral causes a flash on revisits for CF-cookied sessions.
        Sets data-theme on <html> immediately; no flash from dark→light. */
     (function(){
       var t = localStorage.getItem('theme');
