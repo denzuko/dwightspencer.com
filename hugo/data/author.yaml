@@ -1,0 +1,97 @@
+# hugo/data/author.yaml — single source of truth for author identity
+# Drives: home page finger block, corpus.lisp, Schema.org JSON-LD, humans.txt
+# To update: edit here. All rendered views update on next hugo build.
+
+name: "Dwight Spencer"
+handle: "@denzuko"
+pgp: "0x5DCBF78E3F9C3FE3"
+orcid: "0009-0001-0066-4646"
+iana_pen: "42387"
+tagline: "Code is speech. Platforms are not neutral."
+
+roles:
+  - "Principal, Da Planet Security (est. 2001, Albany NY)"
+  - "Technology Chair, Restore The Fourth"
+  - "IEEE Computer Society"
+  - "InfraGard"
+  - "ISACA"
+  - "SCORE Mentor"
+
+bio: >
+  SysOp turned DevOps precursor (2007–2008, pre-coinage) turned security
+  researcher. 20+ years managed security services.
+  Author: The Watchers You Fed (KDP, forthcoming).
+
+education:
+  - symbol: ":UoP"
+    name: "University of Phoenix"
+  - symbol: ":Cornell"
+    name: "Cornell University"
+
+languages:
+  - ":Golang"
+  - ":ANSI-C"
+  - ":ASM"
+  - ":TypeScript"
+  - ":Python"
+  - ":CommonLisp"
+
+projects:
+  - symbol: ":Metis"
+    url: "https://github.com/3um-Group"
+  - symbol: ":2600_Moderator"
+    url: "https://reddit.com/r/2600"
+  - symbol: ":corpus"
+    url: "https://dwightaspencer.com/lisp/"
+  - symbol: ":game-study"
+    url: "https://github.com/denzuko/ml-prolog-pokemon"
+
+volunteering:
+  - symbol: ":Score"
+    url: "https://Score.org"
+  - symbol: ":Internet-Archive"
+    url: "https://archive.org"
+  - symbol: ":9front"
+    url: "https://only9fans.com"
+  - symbol: ":Debian"
+    url: "https://debian.org"
+
+certs:
+  - symbol: ":RHCE"
+    date: "February 2007"
+  - symbol: ":AWS_Solution_Architect"
+    date: "March 2015"
+  - symbol: ":Amazon_Leadership"
+    date: "March 2019"
+  - symbol: ":GCP_Cloud_Architect"
+    date: "January 2022"
+  - symbol: ":CISM"
+    date: "June 2022"
+  - symbol: ":ORCID"
+    date: "https://orcid.org/0009-0001-0066-4646"
+  - symbol: ":Keybase"
+    date: "https://Keybase.io/Denzuko/pubkey"
+  - symbol: ":Agile-Manifesto"
+    date: "CompuTEK Industries, May 2009"
+
+tools:
+  - ":AlpineLinux"
+  - ":VIM"
+  - ":Vlime"
+  - ":VimWiki"
+  - ":entr"
+  - ":zmk"
+  - ":gnumake"
+  - ":plan9ports"
+  - ":git-flow"
+  - ":git-bug"
+  - ":git-email"
+  - ":charmbracelet_soft_serve"
+  - ":notmuch-mail"
+  - ":slrn"
+  - ":Ansible"
+  - ":Terraform"
+  - ":Podman"
+  - ":Nomad"
+  - ":Consul"
+  - ":Ollama"

@@ -8,10 +8,18 @@ title         = "Dwight Spencer - 0x5DCBF78E3F9C3FE3"
 copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training prohibited."
 
 [outputs]
-  home    = ["HTML", "RSS", "JSON"]
+  home    = ["HTML", "RSS", "JSON", "Lisp", "Humans"]
   section = ["HTML", "RSS"]
   page    = ["HTML"]
   term    = ["HTML", "RSS"]
+
+
+[mediaTypes]
+  [mediaTypes."text/humans"]
+    suffixes = ["humans"]
+
+  [mediaTypes."text/lisp"]
+    suffixes = ["lisp"]
 
 [outputFormats.RSS]
   mediaType    = "application/rss+xml"
@@ -24,6 +32,27 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
   baseName    = "feed"
   rel         = "alternate"
   isPlainText = true
+
+[outputFormats.Humans]
+  mediaType    = "text/humans"
+  baseName     = "humans"
+  isPlainText  = true
+  notAlternative = true
+
+[outputFormats.Lisp]
+  mediaType    = "text/lisp"
+  baseName     = "corpus"
+  rel          = "alternate"
+  isPlainText  = true
+  notAlternative = true
+
+[outputFormats.DistIndex]
+  mediaType    = "text/plain"
+  baseName     = "dwightaspencer"
+  path         = "/"
+  rel          = "alternate"
+  isPlainText  = true
+  notAlternative = true
 
 [taxonomies]
   tag      = "tags"
