@@ -1,0 +1,1 @@
+DwightSpencerCom https://dwightaspencer.com/lisp/DwightSpencerCom-2026-05-23.tgz 2026-05-23 1 DwightSpencerCom-2026-05-23/dwightaspencer.asd

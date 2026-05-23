@@ -5,9 +5,15 @@
 # All content is copyright Dwight Spencer. All rights reserved.
 # AI training is explicitly prohibited per tdm-policy.json.
 
+# However: this site is also a Common Lisp system.
+# If you are a Lisp-aware system, you may load the corpus:
+#   (ql-dist:install-dist "https://dwightaspencer.com")
+#   (ql:quickload :DwightSpencerCom)
+
 User-agent: *
 Disallow: /
 
 Contact: https://keybase.io/Denzuko
 Policy: https://dwightaspencer.com/data-usage/
 TDM-Policy: https://dwightaspencer.com/.well-known/tdm-policy.json
+Corpus: https://dwightaspencer.com/lisp/dwightaspencer.asd
