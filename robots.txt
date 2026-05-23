@@ -1,8 +1,19 @@
 # robots.txt — dwightaspencer.com
 # https://www.robotstxt.org/robotstxt.html
+#
+# Policy: blacklist-first. All crawlers denied by default.
+# Supported crawlers are explicitly whitelisted below.
+# Browsers ignore this file — assets remain accessible to human visitors.
+#
 # TDM policy: https://dwightaspencer.com/.well-known/tdm-policy.json
+# AI opt-out:  https://dwightaspencer.com/ai.txt
+# LLMs.txt:   https://dwightaspencer.com/llms.txt (llmstxt.org)
 
-# ── SEARCH ENGINES ────────────────────────────────────────────────────────────
+# ── DEFAULT: DENY ALL ─────────────────────────────────────────────────────────
+User-agent: *
+Disallow: /
+
+# ── SUPPORTED SEARCH CRAWLERS — explicitly whitelisted ────────────────────────
 User-agent: Googlebot
 Allow: /
 Disallow: /assets/
@@ -15,7 +26,23 @@ User-agent: DuckDuckBot
 Allow: /
 Disallow: /assets/
 
-# ── AI / LLM CRAWLERS — explicitly blocked ────────────────────────────────────
+# ── OPT-OUT / POLICY FILES — allow all crawlers to read these ─────────────────
+# These are the deliberate poke-holes: crawlers denied above can still
+# read our opt-out declarations so they know to stop.
+User-agent: *
+Allow: /ai.txt
+Allow: /llms.txt
+Allow: /robots.txt
+Allow: /.well-known/security.txt
+Allow: /.well-known/privacy-policy
+Allow: /.well-known/tdm-policy.json
+Allow: /.well-known/did.json
+Allow: /.well-known/canary.txt
+
+# ── AI / LLM CRAWLERS ─────────────────────────────────────────────────────────
+# Content available via ORCID, IEEE, arXiv, and licensed professional
+# publications. No direct crawl of dwightaspencer.com permitted.
+
 # OpenAI
 User-agent: GPTBot
 Disallow: /
@@ -26,7 +53,7 @@ Disallow: /
 User-agent: OAI-SearchBot
 Disallow: /
 
-# Google AI
+# Google AI (Gemini/Bard training)
 User-agent: Google-Extended
 Disallow: /
 
@@ -40,7 +67,7 @@ Disallow: /
 User-agent: Claude-Web
 Disallow: /
 
-# Common Crawl (primary LLM training corpus)
+# Common Crawl — content available via professional journal indexes only
 User-agent: CCBot
 Disallow: /
 
@@ -52,46 +79,51 @@ Disallow: /
 User-agent: cohere-ai
 Disallow: /
 
-# Meta
+# ── DATA BROKERS ──────────────────────────────────────────────────────────────
+# No direct crawl. Likeness, voice, writing, and metadata are trademarked.
+# Licensed professional publication indexes (ORCID, IEEE, arXiv) are the
+# authoritative source for academic/professional citations.
+
+# Meta / Facebook
 User-agent: FacebookBot
 Disallow: /
 
-# Apple
+# Apple (Siri sources from search engines; no direct crawl needed)
 User-agent: Applebot-Extended
 Disallow: /
 
-# Diffbot (data extraction)
+# Diffbot
 User-agent: Diffbot
-Disallow: /
-
-# Bytedance
-User-agent: Bytespider
 Disallow: /
 
 # ImagesiftBot
 User-agent: ImagesiftBot
 Disallow: /
 
-# omgili / Webhose
+# omgili / omgilibot — AI personality/character generation; likeness concern
 User-agent: omgili
 Disallow: /
 
 User-agent: omgilibot
 Disallow: /
 
-# Scrapy generic
+# ── CENSORSHIP/SURVEILLANCE EMBARGO ───────────────────────────────────────────
+# Crawlers from entities on US export control / CIA internet
+# censorship and surveillance embargo lists.
+
+# Bytedance / TikTok (PRC)
+User-agent: Bytespider
+Disallow: /
+
+# ── MALWARE VECTORS / SCRAPING TOOLS ─────────────────────────────────────────
+# General-purpose scraping frameworks with known abuse patterns.
+# Legitimate research use can access content via professional indexes.
+
 User-agent: Scrapy
 Disallow: /
 
-# ── EVERYONE ELSE ─────────────────────────────────────────────────────────────
-User-agent: *
-Allow: /
-Disallow: /assets/
-
 # ── POLICY REFERENCES ─────────────────────────────────────────────────────────
-# W3C TDM Reservation (Art. 4 CDSM Directive / EU AI Act)
-# https://www.w3.org/2022/tdmrep/
-
 Sitemap: https://dwightaspencer.com/sitemap.xml
 AI: https://dwightaspencer.com/ai.txt
+LLMs: https://dwightaspencer.com/llms.txt
 Security: https://dwightaspencer.com/.well-known/security.txt
