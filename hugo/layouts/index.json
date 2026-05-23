@@ -1,0 +1,25 @@
+{{- $pages := where .Site.RegularPages "Section" "posts" -}}
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": {{ .Site.Params.siteTitle | jsonify }},
+  "home_page_url": {{ .Site.Params.canonicalBase | jsonify }},
+  "feed_url": {{ (printf "%s/feed.json" .Site.Params.canonicalBase) | jsonify }},
+  "description": {{ .Site.Params.description | jsonify }},
+  "author": {
+    "name": {{ .Site.Params.author | jsonify }},
+    "url": {{ .Site.Params.canonicalBase | jsonify }}
+  },
+  "items": [
+    {{- range $i, $p := $pages.ByDate.Reverse }}
+    {{- if $i }},{{ end }}
+    {
+      "id": {{ $p.Permalink | jsonify }},
+      "url": {{ $p.Permalink | jsonify }},
+      "title": {{ $p.Title | jsonify }},
+      "summary": {{ $p.Description | jsonify }},
+      "date_published": {{ $p.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+      "date_modified": {{ $p.Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }}
+    }
+    {{- end }}
+  ]
+}

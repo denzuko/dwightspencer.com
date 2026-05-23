@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode }}" vocab="https://schema.org/" prefix="og: https://ogp.me/ns# dc: https://purl.org/dc/terms/ geo: https://www.w3.org/2003/01/geo/wgs84_pos# aeo: https://data.nfld.nl/aeo/">
+  {{- partial "head.html" . }}
+  <body lang="{{ .Site.LanguageCode }}" class="{{ block "bodyclass" . }}{{ end }}">
+    <a class="skip-link" href="#main">Skip to main</a>
+    <main id="main">
+      <div class="content">
+        {{- partial "header.html" . }}
+        {{- block "main" . }}{{ end }}
+        {{- partial "footer.html" . }}
+      </div>
+    </main>
+  </body>
+</html>
