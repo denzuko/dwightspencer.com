@@ -197,22 +197,20 @@ public-inbox-inject /srv/public-inbox/myproject &lt; issues.mbox</code></pre>
 
 <h3>Part 3b — Decentralized Project Management with git-bug</h3>
 
-<p><a href="https://github.com/src-d/git-bug" rel="noopener">git-bug</a> is a
+<p><a href="https://github.com/git-bug/git-bug" rel="noopener">git-bug</a> is a
 platform‑independent issue tracker that stores issues, comments, and
 metadata as native git objects inside your repository. There are no
 separate files or web UI; the entire project management history lives in
 the git database, pushes and pulls with any standard remote, and works
-offline. A bridge for GitHub exists today, and an open feature request
-for a <em>SourceHut</em> bridge can be found in
-<a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">issue
-#1024</a> (area/bridge · kind/feature · priority/important-longterm).  An
-active pull request, <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR
-#1499</a>, is adding native todo.sr.ht GraphQL synchronization; until that
-lands the GitHub bridge can still push SourceHut by mirroring your repo.</p>
+offline. A GitHub bridge exists today; SourceHut todo.sr.ht support is
+being added in
+<a href="https://github.com/git-bug/git-bug/pull/1499" rel="noopener">PR
+#1499</a>. Until that lands, the GitHub bridge can push SourceHut by
+mirroring your repo.</p>
 
 <p>Installation is simple:</p>
-<pre><code># Go
-GO111MODULE=on go install github.com/src-d/git-bug/cmd/git-bug@latest
+<pre><code>&#35; Go
+go install github.com/git-bug/git-bug/cmd/git-bug@latest
 </code></pre>
 
 <p>Basic usage:</p>
@@ -234,11 +232,9 @@ GitHub bridge pulling…
 
 <p>Because issues are stored in refs, pushing to SourceHut carries them
 automatically; a simple <code>git push srht --mirror</code> will include
-the <code>refs/git-bug/*</code> namespace.  The SourceHut bridge status
-remains open: see <a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">issue
-#1024</a> for the SourceHut-specific work and the linked
-<a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR
-#1499</a> for the todo.sr.ht sync.</p>
+the <code>refs/git-bug/*</code> namespace. The SourceHut bridge is in progress —
+see <a href="https://github.com/git-bug/git-bug/pull/1499" rel="noopener">PR
+#1499</a> for the todo.sr.ht sync work.</p>
 
 <h3>Part 4 — CI Pipelines on builds.sr.ht</h3>
 
@@ -349,8 +345,7 @@ NoAITrain: true</code></pre>
 <a href="https://sourcehut.org" rel="noopener">sourcehut.org</a> — official site, documentation, and subscription<br>
 <a href="https://sr.ht/~emersion/gh2srht/" rel="noopener">sr.ht/~emersion/gh2srht/</a> — GitHub &#x2192; SourceHut migration tool by Simon Ser<br>
 <a href="https://public-inbox.org" rel="noopener">public-inbox.org</a> — self-hosted mailing list archival and indexing<br>
-<a href="https://github.com/src-d/git-bug" rel="noopener">github.com/src-d/git-bug</a> — git-bug distributed issue tracker (see issue #1024 for SourceHut bridge)<br>
+<a href="https://github.com/git-bug/git-bug" rel="noopener">github.com/git-bug/git-bug</a> — git-bug distributed issue tracker<br>
 <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" rel="noopener">docs.github.com/site-policy</a> — GitHub ToS (read Section D.8)<br>
-<a href="https://github.com/src-d/git-bug/issues/1024" rel="noopener">Issue #1024</a> — open feature request for SourceHut bridge<br>
-<a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR #1499</a> — todo.sr.ht GraphQL sync work in progress
+<a href="https://github.com/git-bug/git-bug/pull/1499" rel="noopener">PR #1499</a> — todo.sr.ht GraphQL sync (SourceHut bridge, in progress)
 </p>
