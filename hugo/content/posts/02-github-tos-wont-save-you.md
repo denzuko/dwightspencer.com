@@ -208,7 +208,8 @@ metadata as native git objects inside your repository. There are no
 separate files or web UI; the entire project management history lives in
 the git database, pushes and pulls with any standard remote, and works
 offline. A GitHub bridge exists today; SourceHut todo.sr.ht support is
-being added in
+tracked in <a href="https://github.com/git-bug/git-bug/issues/1024" rel="noopener">issue
+#1024</a> and being implemented in
 <a href="https://github.com/git-bug/git-bug/pull/1499" rel="noopener">PR
 #1499</a>. Until that lands, the GitHub bridge can push SourceHut by
 mirroring your repo.</p>
@@ -238,9 +239,10 @@ GitHub bridge pulling…
 <p>Because issues are stored in refs, pushing to SourceHut carries them
 automatically; a simple <code>git push srht --mirror</code> will include
 the <code>refs/git-bug/*</code> namespace. The SourceHut bridge status
-remains open: see
+remains open: see <a href="https://github.com/git-bug/git-bug/issues/1024" rel="noopener">issue
+#1024</a> for the SourceHut-specific work and the linked
 <a href="https://github.com/git-bug/git-bug/pull/1499" rel="noopener">PR
-#1499</a> for the todo.sr.ht sync work.</p>
+#1499</a> for the todo.sr.ht sync.</p>
 
 <h3>Part 4 — CI Pipelines on builds.sr.ht</h3>
 
@@ -353,5 +355,6 @@ NoAITrain: true</code></pre>
 <a href="https://public-inbox.org" rel="noopener">public-inbox.org</a> — self-hosted mailing list archival and indexing<br>
 <a href="https://github.com/git-bug/git-bug" rel="noopener">github.com/git-bug/git-bug</a> — git-bug distributed issue tracker<br>
 <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" rel="noopener">docs.github.com/site-policy</a> — GitHub ToS (read Section D.8)<br>
+<a href="https://github.com/git-bug/git-bug/issues/1024" rel="noopener">Issue #1024</a> — open tracking issue for SourceHut bridge<br>
 <a href="https://github.com/git-bug/git-bug/pull/1499" rel="noopener">PR #1499</a> — todo.sr.ht GraphQL sync (SourceHut bridge, in progress)
 </p>
