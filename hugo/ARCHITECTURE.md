@@ -4,18 +4,34 @@
 
 ```mermaid
 graph LR
-    A[hugo/data/author.yaml] --> B[layouts/partials/finger.html]
-    A --> C[layouts/index.lisp]
-    A --> D[layouts/index.humans]
-    A --> E[layouts/partials/head.html Schema.org]
+    A[hugo/data/author.yaml] --> B[partials/finger.html]
+    A --> C[index.lisp]
+    A --> D[index.humans]
+    A --> E[partials/head.html]
     F[hugo/content/posts/*.md] --> C
-    F --> G[layouts/_default/single.html]
-    C --> H[/corpus.lisp auto-generated]
-    D --> I[/humans.txt auto-generated]
+    F --> G[_default/single.html]
+    C --> H[/corpus.lisp Hugo-generated]
+    D --> I[/humans.txt Hugo-generated]
     B --> J[index.html finger block]
     G --> K[/posts/NN-slug/]
-    L[hugo/layouts/taxonomy/tag.terms.html] --> M[/tags/ frequency-weighted]
-    N[hugo/static/lisp/*.lisp] --> O[Quicklisp dist at root]
+    L[taxonomy/tag.terms.html] --> M[/tags/ frequency-weighted]
+    N[taxonomy/series.terms.html] --> O[/series/ arc index]
+    P[hugo/static/lisp/*.lisp] --> Q[Quicklisp dist at root]
+    R[hugo build] --> S[npx pagefind]
+    S --> T[/pagefind/ search index]
+```
+
+## GH Actions deploy pipeline
+
+```mermaid
+graph LR
+    A[push to master] --> B[actions/checkout]
+    B --> C[hugo --minify --gc]
+    C --> D[npx pagefind --site public]
+    D --> E[peaceiris/actions-gh-pages]
+    E --> F[gh-pages branch]
+    F --> G[Cloudflare CDN]
+    G --> H[dwightaspencer.com]
 ```
 
 ## The Lisp system layers
@@ -23,20 +39,21 @@ graph LR
 ```mermaid
 graph TD
     L1["Layer 1: Homepage finger block
-    defpackage DwightSpencerCom
-    Real SBCL program"] --> L2
+    defpackage :DwightASpencerCom
+    Real SBCL program — plain pre/code"] --> L2
 
     L2["Layer 2: HTML source comment
-    ;; (ql-dist:install-dist
-       'http://dwightaspencer.com'
-       :prompt nil)"] --> L3
+    &lt;!-- ;; (ql-dist:install-dist
+    'http://dwightaspencer.com' :prompt nil) --&gt;
+    Must be HTML comment — bare text nodes in head
+    get foster-parented into body by HTML5 parser"] --> L3
 
     L3["Layer 3: PostScript polyglot
     DwightASpencerCom:render :ps
     Valid PS + CL comments + git bundle
-    PoC||GTFO tradition"] --> L4
+    PoC‖GTFO tradition"] --> L4
 
-    L4["Layers 4-23: Reserved"]
+    L4["Layers 4–23: Reserved"]
 
     subgraph CL System
         PKG[package.lisp] --> LE[logic-engine.lisp]
@@ -49,6 +66,20 @@ graph TD
         LE -. "same prolog-db struct" .-> MP[ml-prolog-pokemon/logic-engine]
         CO -. "same db-assert pattern" .-> CA[ml-prolog-pokemon/catalog]
     end
+```
+
+## Cloudflare interaction
+
+```mermaid
+graph TD
+    S["<script data-cfasync=false>
+    FOUC theme detection
+    Must run before first paint"] -- "CF leaves alone" --> P[paint with correct theme]
+    T["<script> no attribute
+    DOMContentLoaded wiring"] -- "CF Rocket Loader rewrites type=hash" --> D[deferred — OK after paint]
+    U["bare text node in head
+    Layer 2 without HTML comment"] -- "HTML5 foster-parenting" --> V[rendered visibly in body — BUG]
+    W["Layer 2 as HTML comment"] -- "browser ignores comment nodes" --> X[view-source only — correct]
 ```
 
 ## Entity separation
@@ -65,25 +96,33 @@ graph TD
     restorethe4th.com
     Civil liberties advocacy"]
 
-    DW -- "Technology Chair RT4 only" --> RT4
-    DW -- "Principal Da Planet only" --> DPS
+    DW -- "Technology Chair, RT4 only" --> RT4
+    DW -- "Principal, Da Planet Security only" --> DPS
     DPS -. "NEVER appears on" .-> DW
     RT4 -. "Chapter materials separate" .-> DW
 ```
 
-## Content taxonomy (current + v2.5)
+## Content taxonomy (live)
 
 ```mermaid
 graph LR
     P[posts] --> T[tags]
     P --> CA[categories]
-    P --> SE[series v2.5]
-    P --> NC[nist_controls v2.5]
-    P --> VE[venue v2.5]
-    NC --> NI[/nist/AC-3/ etc]
-    SE --> SI[Infrastructure Independence]
-    SE --> SW[The Watchers You Fed]
-    VE --> AR[arXiv]
-    VE --> KD[KDP]
-    VE --> HP[HPR episodes]
+    P --> SE[series]
+    P --> VE[venue field only]
+    T --> TI[/tags/ frequency-weighted]
+    SE --> SI[/series/infrastructure-independence]
+    SE --> SW[/series/the-watchers-you-fed]
+    VE --> KD[KDP front matter only]
+    VE --> HP[HPR front matter only]
+```
+
+## Pages (not in nav)
+
+```mermaid
+graph LR
+    N[/now/] -- "quarterly update" --> WC[warrant canary renewal]
+    PR[/projects/] -- "active + historical" --> ES[entity-separation compliant]
+    U[/uses/] -- "HPR/aNONradio audience" --> IS[infra stack]
+    PO[/posts/] -- "in nav" --> NAV[posts · tags · series · media]
 ```
