@@ -197,6 +197,11 @@ public-inbox-inject /srv/public-inbox/myproject &lt; issues.mbox</code></pre>
 
 <h3>Part 3b — Decentralized Project Management with git-bug</h3>
 
+<p><em>Update, May 2026: git-bug has moved from <code>src-d/git-bug</code> to
+<a href="https://github.com/git-bug/git-bug" rel="noopener">git-bug/git-bug</a>.
+The <code>src-d</code> org no longer exists. Links and install paths below reflect
+the canonical repository.</em></p>
+
 <p><a href="https://github.com/git-bug/git-bug" rel="noopener">git-bug</a> is a
 platform‑independent issue tracker that stores issues, comments, and
 metadata as native git objects inside your repository. There are no
@@ -232,8 +237,9 @@ GitHub bridge pulling…
 
 <p>Because issues are stored in refs, pushing to SourceHut carries them
 automatically; a simple <code>git push srht --mirror</code> will include
-the <code>refs/git-bug/*</code> namespace. The SourceHut bridge is in progress —
-see <a href="https://github.com/git-bug/git-bug/pull/1499" rel="noopener">PR
+the <code>refs/git-bug/*</code> namespace. The SourceHut bridge status
+remains open: see
+<a href="https://github.com/git-bug/git-bug/pull/1499" rel="noopener">PR
 #1499</a> for the todo.sr.ht sync work.</p>
 
 <h3>Part 4 — CI Pipelines on builds.sr.ht</h3>
