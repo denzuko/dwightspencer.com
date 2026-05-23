@@ -6,7 +6,7 @@
 ;;;;
 ;;;; Loading this system from your REPL:
 ;;;;
-;;;;   (ql-dist:install-dist "https://dwightaspencer.com")
+;;;;   (ql-dist:install-dist "http://dwightaspencer.com" :prompt nil)
 ;;;;   (ql:quickload :DwightSpencerCom)
 ;;;;   (DwightSpencerCom:finger)          ; same output as the homepage
 ;;;;   (DwightSpencerCom:query '(tag ?s :privacy))  ; Prolog query
