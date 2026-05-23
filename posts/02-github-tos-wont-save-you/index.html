@@ -425,7 +425,7 @@
 
     <div class="e-content" itemprop="articleBody">
 
-      <h1>The Illusion of Ownership</h1>
+      <h2>The Illusion of Ownership</h2>
 
       <p>Millions of developers trust GitHub with their most valuable creative work. But buried in its Terms of Service are provisions granting Microsoft remarkably broad rights over publicly hosted code — including the right to train commercial AI systems on it without attribution, compensation, or meaningful consent. Your open-source license is not a shield.</p>
 
@@ -441,7 +441,7 @@
 
       <p><strong>Key problem:</strong> Your open-source license (MIT, GPL, Apache) may require attribution. Copilot reproduces code snippets verbatim without citing the original author or license. GitHub argues this falls within granted rights and fair use — a contested position most individual developers lack the resources to challenge.</p>
 
-      <h1>Section D.8 — The AI Waiver Clause</h1>
+      <h2>Section D.8 — The AI Waiver Clause</h2>
 
       <p>In one of the most aggressive clauses in any major platform's TOS, Section D.8 doesn't merely permit AI training on your code — it compels you to waive your own protective terms:</p>
 
@@ -455,7 +455,7 @@
 
       <p>Adding <code>.github/copilot-ignore</code>, custom TDM restriction language in your license, or a NoAI License variant does not protect you from GitHub's own AI systems under this clause.</p>
 
-      <h1>Privacy: The Telemetry You Never Agreed To</h1>
+      <h2>Privacy: The Telemetry You Never Agreed To</h2>
 
       <p>GitHub collects substantial behavioural and personal data from every user interaction — even on public repositories. Copilot's Additional Products Terms are explicit:</p>
 
@@ -468,13 +468,13 @@
 
       <p>Not only your hosted code, but your coding <em>behaviour</em> — what you type, accept, reject, and how long you pause — becomes training signal for a commercial product. Copilot Business and Enterprise customers received a 2024 contractual update confirming GitHub will not use inputs or outputs for model training "unless instructed in writing to do so." Free and personal plan users receive no such protection. It is a two-tier system that monetises the privacy of developers who cannot afford paid plans.</p>
 
-      <h1>Copyright Erosion in the Age of Copilot</h1>
+      <h2>Copyright Erosion in the Age of Copilot</h2>
 
       <p>The class action <em>Doe v. GitHub</em> argued that Copilot violated developer rights by reproducing licensed code without attribution, directly breaching MIT, GPL, and Apache 2.0 terms that require credit. Courts have not settled this — but individual developers cannot afford to litigate it.</p>
 
       <p>U.S. copyright law protects original expression — including source code — even when publicly accessible. The EU Copyright Directive's Article 4 requires explicit authorisation for text and data mining; most commercial AI training falls outside its research exceptions. Public availability does not equal permission.</p>
 
-      <h1>GitHub vs. SourceHut</h1>
+      <h2>GitHub vs. SourceHut</h2>
 
       <table>
         <thead>
@@ -496,11 +496,11 @@
         </tbody>
       </table>
 
-      <h1>How to Migrate to SourceHut</h1>
+      <h2>How to Migrate to SourceHut</h2>
 
       <p><a href="https://sourcehut.org">SourceHut</a> is a suite of open-source developer tools funded by subscriptions. The migration has four parts: repositories, issues, mailing list archival, and CI pipelines.</p>
 
-      <h2>Part 1 — Migrate Repositories with gh2srht</h2>
+      <h3>Part 1 — Migrate Repositories with gh2srht</h3>
 
       <p><a href="https://sr.ht/~emersion/gh2srht/">gh2srht</a>, written by Simon Ser (<code>~emersion</code>), automates bulk migration of GitHub repositories — including issues and labels — directly to SourceHut. Install it via Go:</p>
 
@@ -550,7 +550,7 @@ This GitHub mirror is archived and read-only.</code></pre>
         </li>
       </ol>
 
-      <h2>Part 2 — Durable Archives with public-inbox</h2>
+      <h3>Part 2 — Durable Archives with public-inbox</h3>
 
       <p><a href="https://public-inbox.org">public-inbox.org</a> is an archival and indexing system for public mailing lists that makes every thread permanently searchable over HTTPS, NNTP, and IMAP. GitHub Issues exist entirely within GitHub's proprietary silo — if GitHub removes your repository or goes offline, your issue history vanishes. public-inbox provides a durable, decentralised archive that no platform can take away.</p>
 
@@ -592,7 +592,7 @@ myproject-devel: "|/usr/bin/public-inbox-mda --no-precheck"
 # Start the HTTPS read interface
 public-inbox-httpd --listen 0.0.0.0:8080</code></pre>
 
-      <h2>Part 3 — Export GitHub Issues to public-inbox</h2>
+      <h3>Part 3 — Export GitHub Issues to public-inbox</h3>
 
       <p>gh2srht migrates issues to <code>todo.sr.ht</code> automatically. To also inject them into your public-inbox archive:</p>
 
@@ -606,7 +606,7 @@ python3 issues2mbox.py issues.json > issues.mbox
 # Inject into public-inbox
 public-inbox-inject /srv/public-inbox/myproject &lt; issues.mbox</code></pre>
 
-      <h2>Part 3b — Decentralized Project Management with git-bug</h2>
+      <h3>Part 3b — Decentralized Project Management with git-bug</h3>
 
       <p><a href="https://github.com/src-d/git-bug" rel="noopener">git-bug</a> is a
       platform‑independent issue tracker that stores issues, comments, and
@@ -651,7 +651,7 @@ GitHub bridge pulling…
       <a href="https://github.com/src-d/git-bug/pull/1499" rel="noopener">PR
       #1499</a> for the todo.sr.ht sync.</p>
 
-      <h2>Part 4 — CI Pipelines on builds.sr.ht</h2>
+      <h3>Part 4 — CI Pipelines on builds.sr.ht</h3>
 
       <p>Replace <code>.github/workflows/*.yml</code> with a <code>.build.yml</code> at your repository root:</p>
 
@@ -673,11 +673,11 @@ tasks:
       cd yourrepo
       make lint</code></pre>
 
-      <h2>Part 4b — Bridge CI During Transition with hottub</h2>
+      <h3>Part 4b — Bridge CI During Transition with hottub</h3>
 
       <p>If you are running a gradual migration and still have a GitHub mirror active, <a href="https://github.com/emersion/hottub">hottub</a> — also by Simon Ser (<code>~emersion</code>) — acts as a CI bridge that forwards GitHub Check run events to <code>builds.sr.ht</code>. This lets you keep GitHub as a read-only mirror for contributors who haven't switched yet, while all actual CI runs execute on SourceHut. A <a href="https://hottub.emersion.fr/">public hosted instance</a> is available if you don't want to self-host.</p>
 
-      <h3>Step 1 — Register a GitHub App for the Checks API</h3>
+      <h4>Step 1 — Register a GitHub App for the Checks API</h4>
 
       <p>Open the <a href="https://github.com/settings/apps/new">GitHub App registration page</a> and configure it as follows:</p>
 
@@ -690,11 +690,11 @@ tasks:
         <li>Under <em>Subscribe to events</em>, check: <strong>Check run</strong>, <strong>Check suite</strong>, <strong>Pull request</strong></li>
       </ul>
 
-      <h3>Step 2 — Collect credentials</h3>
+      <h4>Step 2 — Collect credentials</h4>
 
       <p>From the app settings page, note the <strong>App ID</strong> and optional <strong>Webhook secret</strong>. Then generate and download a PEM private key — you'll pass this file to hottub at startup.</p>
 
-      <h3>Step 3 — Build and start hottub</h3>
+      <h4>Step 3 — Build and start hottub</h4>
 
       <pre><code># Clone and build
 git clone https://github.com/emersion/hottub
@@ -716,13 +716,13 @@ go build
   -metasrht-client-id &lt;client-id&gt; \
   -metasrht-client-secret &lt;client-secret&gt;</code></pre>
 
-      <h3>Step 4 — Install the app on your GitHub repositories</h3>
+      <h4>Step 4 — Install the app on your GitHub repositories</h4>
 
       <p>From the GitHub App page, click <em>Install App</em> and select the repositories you want to bridge. Once installed, any Check run triggered on GitHub will be forwarded to <code>builds.sr.ht</code> and results reported back to the GitHub PR or commit status — giving contributors a familiar green/red check while your CI runs entirely outside GitHub's infrastructure.</p>
 
       <p>Once the migration is complete and contributors have followed to SourceHut, you can remove the GitHub App installation and archive the mirror entirely.</p>
 
-      <h2>Part 5 — Harden Against AI Scrapers</h2>
+      <h3>Part 5 — Harden Against AI Scrapers</h3>
 
       <p>Even on SourceHut, assert your rights explicitly at the license level. Append a TDM restriction clause to your <code>LICENSE</code> file:</p>
 
@@ -747,7 +747,7 @@ User-agent: *
 Disallow: /
 NoAITrain: true</code></pre>
 
-      <h1>Taking Your Code Back</h1>
+      <h2>Taking Your Code Back</h2>
 
       <p>GitHub's Section D.8 is not an accident or oversight. It is the monetisation mechanism: your publicly hosted code is raw material for Copilot, sold to enterprises at scale. The TOS pre-emptively voids any protective terms you write into your own licenses and prohibits the technical countermeasures you might otherwise deploy.</p>
 
