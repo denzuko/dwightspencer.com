@@ -1,16 +1,27 @@
 {{- define "bodyclass" }}{{ end -}}
 {{- define "main" }}
   <h2 class="post">Media</h2>
-  <p class="meta">Podcast episodes, radio shows, live streams, conference talks, and interviews.
+  <p class="meta">Live streams, podcast episodes, radio shows, conference talks, and interviews.
   If you found this site from one of these — welcome.</p>
 
   <hr class="m">
 
-  <h3>Live streams — Twitch</h3>
-  <p><a href="https://twitch.tv/zekodun" rel="noopener">twitch.tv/zekodun</a> —
+  <h3>
+    <svg aria-hidden="true" class="icon"><use href="/assets/icons.svg#icon-twitch"/></svg>
+    Live streams — Twitch
+  </h3>
+  <p><a href="{{ .Site.Params.twitch }}" rel="noopener">twitch.tv/zekodun</a> —
   Charity fundraising streams, devlog sessions, and AMA/outreach episodes.
   Topics: open source infrastructure, privacy tooling, security research, and
   whatever is on the workbench. Schedule posted to the channel.</p>
+
+  <h3>
+    <svg aria-hidden="true" class="icon"><use href="/assets/icons.svg#icon-youtube"/></svg>
+    Da Planet Security — YouTube
+  </h3>
+  <p><a href="{{ .Site.Params.youtube }}" rel="noopener">@daplanetsecurity</a> —
+  Video content covering DevOps, security research, infrastructure independence,
+  and open source tooling. Channel home for MILO series and recorded talks.</p>
 
   <h3>Da Planet Radio</h3>
   <p>Live stream at <a href="https://klaxon.dapla.net" rel="noopener">klaxon.dapla.net</a> —

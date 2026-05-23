@@ -11,8 +11,6 @@
       </div>
     </main>
     <script>
-      /* Dark mode: honour prefers-color-scheme, persist toggle to localStorage.
-         Runs before paint — no flash. */
       (function(){
         var stored = localStorage.getItem('theme');
         var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
