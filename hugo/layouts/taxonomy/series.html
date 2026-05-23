@@ -1,7 +1,8 @@
 {{- define "bodyclass" }}{{ end -}}
 {{- define "main" }}
+  {{- $count := len .Pages }}
   <h2 class="post">Series: {{ .Title }}</h2>
-  <p class="meta" style="margin-bottom:1.5rem">{{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }} in this series, in order.</p>
+  <p class="meta" style="margin-bottom:1.5rem">{{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }} in this series, in order.</p>
   <ul class="list">
     {{- range .Pages.ByDate }}
     <li>
