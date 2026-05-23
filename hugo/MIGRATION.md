@@ -97,3 +97,56 @@ git add .well-known/canary.txt
 git commit -S -m "chore: renew warrant canary (YYYY-QN)"
 git push origin master
 ```
+
+## Backlog
+
+### v2 — Dynamic per-post OG images
+Currently all posts share `og-posts.png`. Per-post cards with the article
+title injected would significantly improve click-through for shared articles.
+
+**Approach:**
+- Add a Hugo layout `layouts/partials/og-image.html` that renders an HTML
+  card with `{{ .Title }}`, `{{ .Params.description }}`, and the tag line
+- GitHub Actions step: Playwright screenshots each post's OG template during
+  build, outputs to `public/assets/og/{{ .Slug }}.png`
+- `head.html` updated: `og:image` points to post-specific PNG if it exists,
+  falls back to `/assets/og-posts.png`
+
+**Priority:** High — implement after post volume justifies the CI build time
+(suggest trigger at 10+ posts)
+
+### v2 — Professional OG variant
+`og-default.png` (fingerprint card) is optimized for hacker/researcher
+audience. Add `og-professional.png` with name + credential string more
+prominently laid out for LinkedIn/professional context shares.
+
+**Approach:** Second HTML template, same Playwright pipeline. One param in
+`hugo.toml` (`params.ogVariant = "professional"`) to switch the home page
+meta tag.
+
+### v2 — /now page
+Standard "what I'm working on right now" page (nownownow.com convention).
+Fits the personal publishing positioning. Low maintenance — update quarterly
+alongside the warrant canary.
+
+### v2 — /projects page
+Archive of active and historical projects with status indicators. Pulls from
+the Lisp block `:Projects` list and expands it. Gives the expert witness and
+MSP audience a structured view of technical work without requiring them to
+read the Lisp.
+
+### v2 — Plausible Analytics A/B integration
+Privacy-respecting cookieless analytics (no consent banner required).
+Planned A/B test against Cloudflare aggregate analytics. When enabled:
+- Add `<script defer data-domain="dwightaspencer.com" src="https://plausible.io/js/script.js"></script>` to baseof.html
+- Update privacy/cookies policy pages accordingly
+- No other changes required
+
+### v2 — /uses page
+Tools, hardware, and infrastructure stack. Useful for HPR/aNONradio audience
+who asks "what do you run." Feeds the Infrastructure Independence series.
+
+### v3 — Hugo CMS integration (Decap/Forestry successor)
+For non-code content updates (warrant canary renewal, media archive updates)
+without requiring a full git workflow. Low priority — current git workflow
+is acceptable for the volume.
