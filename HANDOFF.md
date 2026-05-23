@@ -20,6 +20,12 @@ Clone the repo if not already present:
   git clone https://github.com/denzuko/dwightspencer.com
   cd dwightspencer.com
 
+Install gh and prompt for the PAT; do not store this PAT in the environment.
+Use gh and git instead of python/node/etc.. scripts when interacting with github 
+to save tokens.
+
+Avoid node and python where possible.
+
 ## Current state
 
 Open PRs to review and merge in order:
@@ -46,7 +52,7 @@ After merging, verify live at https://dwightaspencer.com:
 
 2. Post 00 hack.dapla.net reference — verify if SSH endpoint is live.
    Currently: Quest 2 web shell for ARG/server admin. May return as
-   Soft Serve + 3270 BBS. If down, update to past tense.
+   Soft Serve + 3270 BBS/cics. If down, update to past tense.
    Each state change = editorial article opportunity.
 
 3. Post 01 Canarytail link — verify project still active.
