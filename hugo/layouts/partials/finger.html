@@ -1,32 +1,32 @@
 {{- $a := .Site.Data.author -}}
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;tab-size:4;"><code class="language-lisp" data-lang="lisp">{{- /* finger.html — generated from hugo/data/author.yaml */ -}}
-<span style="color:#75715e">#!/usr/bin/env sh</span>
-<span style="color:#e6db74">"true"</span> <span style="color:#75715e">; exec /usr/bin/env sbcl --noinform --script "$0" "$@"</span>
+<pre><code>{{- /* finger.html — rendered from hugo/data/author.yaml */ -}}
+#!/usr/bin/env sh
+"true" ; exec /usr/bin/env sbcl --noinform --script "$0" "$@"
 
-<span style="color:#f92672">(</span><span style="color:#66d9ef">defpackage</span> <span style="color:#e6db74">:DwightASpencerCom</span>
-  <span style="color:#f92672">(</span><span style="color:#e6db74">:use</span> <span style="color:#e6db74">#:cl</span><span style="color:#f92672">)</span>
-  <span style="color:#f92672">(</span><span style="color:#e6db74">:export</span> <span style="color:#e6db74">#:finger</span> <span style="color:#e6db74">#:Self</span><span style="color:#f92672">))</span>
-<span style="color:#f92672">(</span><span style="color:#a6e22e">use-package</span> <span style="color:#e6db74">:cl-user</span><span style="color:#f92672">)</span>
+(defpackage :DwightASpencerCom
+  (:use #:cl)
+  (:export #:finger #:Self))
+(use-package :cl-user)
 
-<span style="color:#f92672">(</span><span style="color:#66d9ef">defclass</span> Self <span style="color:#f92672">()</span> <span style="color:#f92672">())</span>
-<span style="color:#f92672">(</span><span style="color:#66d9ef">defmethod</span> AboutMe <span style="color:#f92672">((</span>object Self<span style="color:#f92672">))</span>
-  <span style="color:#e6db74">"{{ $a.bio | htmlEscape }}"</span>
-  <span style="color:#f92672">'(</span><span style="color:#e6db74">:Resume</span>
-      <span style="color:#f92672">'(</span><span style="color:#e6db74">:Education</span>   <span style="color:#f92672">(</span><span style="color:#a6e22e">list</span>{{ range $a.education }} <span style="color:#e6db74">{{ .symbol }}</span>{{ end }}<span style="color:#f92672">))</span>
-      <span style="color:#f92672">'(</span><span style="color:#e6db74">:Languages</span>   <span style="color:#f92672">(</span><span style="color:#a6e22e">list</span>{{ range $a.languages }}
-                        <span style="color:#e6db74">{{ . }}</span>{{ end }}<span style="color:#f92672">))</span>
-      <span style="color:#f92672">'(</span><span style="color:#e6db74">:Projects</span>    <span style="color:#f92672">(</span><span style="color:#a6e22e">list</span>{{ range $a.projects }}
-                        <span style="color:#f92672">'(</span><span style="color:#e6db74">{{ .symbol }}</span> <span style="color:#e6db74">"{{ .url }}"</span><span style="color:#f92672">)</span>{{ end }}<span style="color:#f92672">))</span>
-      <span style="color:#f92672">'(</span><span style="color:#e6db74">:Volunteering</span> <span style="color:#f92672">(</span><span style="color:#a6e22e">list</span>{{ range $a.volunteering }}
-                        <span style="color:#f92672">'(</span><span style="color:#e6db74">{{ .symbol }}</span> <span style="color:#e6db74">"{{ .url }}"</span><span style="color:#f92672">)</span>{{ end }}<span style="color:#f92672">))</span>
-      <span style="color:#f92672">'(</span><span style="color:#e6db74">:Certs</span>       <span style="color:#f92672">(</span><span style="color:#a6e22e">list</span>{{ range $a.certs }}
-                        <span style="color:#f92672">'(</span><span style="color:#e6db74">{{ .symbol }}</span> <span style="color:#e6db74">"{{ .date }}"</span><span style="color:#f92672">)</span>{{ end }}<span style="color:#f92672">))</span>
-      <span style="color:#f92672">'(</span><span style="color:#e6db74">:Tools</span>       <span style="color:#f92672">(</span><span style="color:#a6e22e">list</span>{{ range $a.tools }}
-                        <span style="color:#e6db74">{{ . }}</span>{{ end }}<span style="color:#f92672">))))</span>
+(defclass Self () ())
+(defmethod AboutMe ((object Self))
+  "{{ $a.bio | htmlEscape }}"
+  '(:Resume
+      '(:Education   (list{{ range $a.education }} {{ .symbol }}{{ end }}))
+      '(:Languages   (list{{ range $a.languages }}
+                        {{ . }}{{ end }}))
+      '(:Projects    (list{{ range $a.projects }}
+                        '({{ .symbol }} "{{ .url }}"){{ end }}))
+      '(:Volunteering (list{{ range $a.volunteering }}
+                        '({{ .symbol }} "{{ .url }}"){{ end }}))
+      '(:Certs       (list{{ range $a.certs }}
+                        '({{ .symbol }} "{{ .date }}"){{ end }}))
+      '(:Tools       (list{{ range $a.tools }}
+                        {{ . }}{{ end }}))))
 
-<span style="color:#f92672">(</span><span style="color:#66d9ef">defun</span> finger <span style="color:#f92672">()</span>
-  <span style="color:#f92672">(</span><span style="color:#66d9ef">let</span> <span style="color:#f92672">((</span>DwightSpencer <span style="color:#f92672">(</span><span style="color:#a6e22e">make-instance</span> <span style="color:#e6db74">'Self</span><span style="color:#f92672">)))</span>
-    <span style="color:#f92672">(</span><span style="color:#a6e22e">format</span> <span style="color:#66d9ef">t</span> <span style="color:#e6db74">"~a~&amp;"</span> <span style="color:#f92672">(</span>AboutMe DwightSpencer<span style="color:#f92672">))))</span>
+(defun finger ()
+  (let ((DwightSpencer (make-instance 'Self)))
+    (format t "~a~&" (AboutMe DwightSpencer))))
 
-<span style="color:#f92672">(</span><span style="color:#e6db74">DwightASpencerCom</span><span style="color:#f92672">:</span>finger<span style="color:#f92672">)</span>
-</code></pre></div>
+(DwightASpencerCom:finger)
+</code></pre>
