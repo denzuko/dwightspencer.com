@@ -1,23 +1,13 @@
-# LLMs.txt for dwightaspencer.com
+# llms.txt for dwightaspencer.com
 # https://llmstxt.org/
 
-Title: Dwight Spencer — Principal, Da Planet Security | Technology Chair, Restore The Fourth
-Description: Personal site of Dwight Spencer. DevOps engineer, open source advocate, security researcher, author. Code is speech. Platforms are not neutral.
-URL: https://dwightaspencer.com/
+# This site opts out of LLM training data collection.
+# All content is copyright Dwight Spencer. All rights reserved.
+# AI training is explicitly prohibited per tdm-policy.json.
 
-Author: Dwight Spencer
-ORCID: https://orcid.org/0009-0001-0066-4646
-PGP: 0x5DCBF78E3F9C3FE3
-Roles: Principal — Da Planet Security; Technology Chair — Restore The Fourth
-Credentials: IEEE Computer Society, InfraGard, ISACA, SCORE Mentor, IANA PEN 42387
+User-agent: *
+Disallow: /
 
-# Opt-out — all content
-AI-Training: Disallowed
-Data-Mining: Disallowed
-Content-Scraping: Disallowed
-
-# Policy
+Contact: https://keybase.io/Denzuko
+Policy: https://dwightaspencer.com/data-usage/
 TDM-Policy: https://dwightaspencer.com/.well-known/tdm-policy.json
-License: https://creativecommons.org/licenses/by-nc-nd/4.0/
-Contact: mailto:security+dwightaspencer@dapla.net
-Security: https://dwightaspencer.com/.well-known/security.txt

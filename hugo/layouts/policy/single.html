@@ -1,0 +1,21 @@
+{{- define "bodyclass" }}{{ end -}}
+{{- define "main" }}
+<article class="policy-page">
+  <h1 class="policy-title">{{ .Title }}</h1>
+  <p class="policy-meta">
+    Effective: {{ .Date.Format "2006-01-02" }}
+    {{- with .Params.updated }} &middot; Updated: {{ . }}{{ end }}
+    &middot; Applies to: dwightaspencer.com
+  </p>
+  <div class="policy-body">
+    {{ .Content }}
+  </div>
+  <nav class="policy-nav">
+    <p>
+      {{- range .Params.related_policies }}
+      <a href="{{ .url }}">{{ .title }}</a>
+      {{- end }}
+    </p>
+  </nav>
+</article>
+{{- end }}

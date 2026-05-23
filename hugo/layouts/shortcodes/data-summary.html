@@ -1,0 +1,4 @@
+<div class="data-summary data-summary--{{ .Get "type" }}">
+  <h3>{{ .Get "heading" }}</h3>
+  {{ .Inner | markdownify }}
+</div>
