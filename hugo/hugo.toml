@@ -12,6 +12,7 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
   section = ["HTML", "RSS"]
   page    = ["HTML"]
   term    = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
 
 
 [mediaTypes]
@@ -57,6 +58,8 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
 [taxonomies]
   tag      = "tags"
   category = "categories"
+  series   = "series"
+  venue    = "venue"
 
 [permalinks]
   posts = "/posts/:slug/"

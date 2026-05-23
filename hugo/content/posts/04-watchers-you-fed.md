@@ -10,6 +10,8 @@ categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "Privacy, Surveillance, Civil Liberties, Security"
 aliases     = ["/watchers/", "/04-watchers-you-fed/"]
+series   = ["The Watchers You Fed"]
+venue   = ["KDP"]
 og_image    = "/assets/og-posts.png"
 +++
 

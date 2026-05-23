@@ -10,6 +10,7 @@ categories  = []
 schema_type = "BlogPosting"
 aeo_expertise = "DevOps, Open Source, Privacy, Security, Architecture"
 aliases     = ["/00-hellowrld/"]
+series   = ["Infrastructure Independence"]
 og_image    = "/assets/og-posts.png"
 +++
 

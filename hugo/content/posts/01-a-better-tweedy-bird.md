@@ -10,6 +10,7 @@ categories  = []
 schema_type = "BlogPosting"
 aeo_expertise = "Privacy, Security, Open Source, System Architecture"
 aliases     = ["/01-a-better-tweedy-bird/"]
+series   = ["The Watchers You Fed"]
 og_image    = "/assets/og-posts.png"
 +++
 

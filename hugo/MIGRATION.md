@@ -229,9 +229,13 @@ in post footer, machine-readable in corpus Prolog facts as
 
 ### Hugo Taxonomies to add
 Current: tags, categories
-Add:
-- `nist_controls` — NIST 800-53 control IDs
-- `series` — post series grouping (Infrastructure Independence,
-  GRID_BREAK_518, The Watchers You Fed chapters)
-- `venue` — arXiv, KDP, HPR episode, conference
-- `cmmc_level` — for Da Planet Security commercial posts only
+✅ Added 2026-05-23:
+- `series` — post series grouping (Infrastructure Independence, The Watchers You Fed)
+  - Layouts: `taxonomy/series.terms.html`, `taxonomy/series.html`
+  - Nav: header includes `/series/` link
+  - Front matter applied to posts 00–09
+- `venue` — arXiv, KDP, HPR episode, conference (field added, no term pages yet — too few tagged posts)
+
+Remaining v2.5:
+- `nist_controls` — NIST 800-53 control IDs (see v2.5 section)
+- `cmmc_level` — for Da Planet Security commercial posts only (see v2.5 section)
