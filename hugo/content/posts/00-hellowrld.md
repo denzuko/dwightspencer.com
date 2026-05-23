@@ -22,29 +22,9 @@ We can get down to the real fun.</p>
 <h3 id="-ssh-hackdaplanet-help">$ ssh hack.dapla.net help</h3>
 <p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   <picture>
-  <img class="img-fluid" src="https://camo.githubusercontent.com/65c52abf102dad2e108dcb85797fad6ee98ae7a7d77b76e1c1b542fbf503136d/68747470733a2f2f692e70696e696d672e636f6d2f6f726967696e616c732f66662f62652f36312f66666265363165316330313164313537353532393534333937623961333666352e676966" alt="shell" loading="lazy" />
+  <img src="https://camo.githubusercontent.com/65c52abf102dad2e108dcb85797fad6ee98ae7a7d77b76e1c1b542fbf503136d/68747470733a2f2f692e70696e696d672e636f6d2f6f726967696e616c732f66662f62652f36312f66666265363165316330313164313537353532393534333937623961333666352e676966" alt="shell" loading="lazy" />
 </picture>
 </p>
 <p>Thanks to Soft Serve one can find security research whitepapers, talks and presentations, and a few easter eggs on my self hosted git repos.</p>
-
-      
-      <div class="post-date">
-        <span class="g time">January 7, 2025 </span> &#8729;
-         <a href="https://dwightaspencer.com/tags/write-ups/">write-ups</a> &#183; <a href="https://orcid.org/0009-0001-0066-4646">Dwight Spencer</a> &#183; Principal, Da Planet Security | Technology Chair, Restore The Fourth
-      </div>

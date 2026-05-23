@@ -107,8 +107,3 @@ Propergation.</p>
 <p>Adding the records is simple. The certificate SAN is updated with the Canary
 sub domain then the fingerprint of the certrtificate is added to the DNS
 domain as a TXT record.</p>
-
-      
-      <div class="post-date">
-        <span class="g time">January 20, 2025 </span> &#8729; &#183; <a href="https://orcid.org/0009-0001-0066-4646">Dwight Spencer</a> &#183; Principal, Da Planet Security | Technology Chair, Restore The Fourth
-      </div>

@@ -283,8 +283,3 @@ and Quicklisp.</p>
 <li>wmannis. <em>cl-gambol: A Gambol Prolog Interpreter for Common Lisp</em>. <a href="https://github.com/wmannis/cl-gambol">github.com/wmannis/cl-gambol</a>.</li>
 <li>ECL Team. <em>Embeddable Common Lisp 21.2.1</em>. <a href="https://ecl.common-lisp.dev">ecl.common-lisp.dev</a>, 2021.</li>
 </ol>
-
-      <div class="post-date">
-        <span class="g time">May 22, 2026 </span> &#8729;
-        <a href="https://orcid.org/0009-0001-0066-4646">Dwight Spencer</a> &#183; Principal, Da Planet Security | Technology Chair, Restore The Fourth
-      </div>
