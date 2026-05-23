@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #fffdfa;
+    font-family: 'Bricolage Grotesque', sans-serif;
+  }
+  .card {
+    width: 1200px;
+    height: 630px;
+    background: #fffdfa;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+  }
+  /* structural rules */
+  .rule-top    { position: absolute; top: 60px; left: 60px; right: 60px; height: 2px; background: #000; }
+  .rule-bottom { position: absolute; bottom: 62px; left: 60px; right: 60px; height: 2px; background: #000; }
+  .rule-left   { position: absolute; top: 60px; left: 60px; width: 2px; bottom: 62px; background: #000; }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: -20px;
+  }
+  .fingerprint {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 58px;
+    letter-spacing: 4px;
+    color: #000;
+    line-height: 1;
+  }
+  .divider {
+    width: 800px;
+    height: 1px;
+    background: #ccc;
+    margin: 4px 0;
+  }
+  .name {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1;
+  }
+  .creds {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 17px;
+    color: #555;
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .footer {
+    position: absolute;
+    bottom: 30px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-url {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 17px;
+    color: #000;
+  }
+  .footer-tag {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 15px;
+    color: #777;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="rule-top"></div>
+  <div class="rule-bottom"></div>
+  <div class="rule-left"></div>
+
+  <div class="center">
+    <div class="fingerprint">0x5DCBF78E3F9C3FE3</div>
+    <div class="divider"></div>
+    <div class="name">Dwight Spencer</div>
+    <div class="creds">
+      Principal, Da Planet Security &nbsp;·&nbsp; Technology Chair, Restore The Fourth<br>
+      IANA PEN 42387 &nbsp;·&nbsp; ORCID 0009-0001-0066-4646 &nbsp;·&nbsp; Agile Manifesto signatory
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-url">▮ dwightaspencer.com</span>
+    <span class="footer-tag">Code is speech. Platforms are not neutral.</span>
+  </div>
+</div>
+</body>
+</html>
