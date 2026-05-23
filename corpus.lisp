@@ -96,7 +96,7 @@
     (pf 'post "02-github-tos-wont-save-you"
         "GitHub's TOS Won't Save You: Why Your Code, Privacy & Copyrights Are at Risk"
         "2026-03-11"
-        2189)
+        2188)
 (pf 'tag "02-github-tos-wont-save-you" :github)
 (pf 'tag "02-github-tos-wont-save-you" :sourcehut)
 (pf 'tag "02-github-tos-wont-save-you" :privacy)
