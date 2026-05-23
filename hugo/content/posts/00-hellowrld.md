@@ -9,6 +9,7 @@ tags        = ["Write-Ups"]
 categories  = []
 schema_type = "BlogPosting"
 aeo_expertise = "DevOps, Open Source, Privacy, Security, Architecture"
+aliases     = ["/00-hellowrld/"]
 og_image    = "/assets/og-posts.png"
 +++
 

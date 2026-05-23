@@ -9,6 +9,7 @@ tags        = ["surveillance", "privacy", "fourth-amendment"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "Privacy, Surveillance, Civil Liberties, Security"
+aliases     = ["/watchers/", "/04-watchers-you-fed/"]
 og_image    = "/assets/og-posts.png"
 +++
 

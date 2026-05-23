@@ -9,6 +9,7 @@ tags        = []
 categories  = []
 schema_type = "TechArticle"
 aeo_expertise = "Security, Open Source, System Architecture, Common Lisp, Prolog, Game Engine Design"
+aliases     = ["/03-rules-types-and-glue/"]
 og_image    = "/assets/og-posts.png"
 +++
 

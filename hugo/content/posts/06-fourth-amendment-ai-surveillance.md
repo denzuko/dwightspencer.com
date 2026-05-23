@@ -9,6 +9,7 @@ tags        = ["fourth-amendment", "surveillance", "privacy", "civil-liberties"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "Privacy, Civil Liberties, Surveillance Technology, Fourth Amendment"
+aliases     = ["/4a/", "/06-fourth-amendment-ai-surveillance/"]
 og_image    = "/assets/og-posts.png"
 +++
 

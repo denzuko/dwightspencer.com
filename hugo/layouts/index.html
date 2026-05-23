@@ -7,25 +7,19 @@
          width="120" height="120">
 
     <h2>$ whoami</h2>
-    <p>Code is speech. Platforms are not neutral.</p>
+    <p class="p-note identity-line">Code is speech. Platforms are not neutral.</p>
 
-    <p>Principal, <a href="https://dapla.net">Da Planet Security</a> (est.&nbsp;2001, Albany&nbsp;NY) &#183;
-    Technology Chair, <a href="https://restorethe4th.com">Restore The Fourth</a> &#183;
-    IEEE Computer Society &#183; InfraGard &#183; ISACA &#183; SCORE Mentor</p>
-
-    <p>SysOp turned DevOps precursor (2007&#8211;2008, pre-coinage) turned security researcher.
-    20&#43; years managed security services. Author: <em>The Watchers You Fed</em> (KDP, forthcoming).
-    IANA PEN&nbsp;{{ .Site.Params.ianapen }} &#183; <a href="https://orcid.org/{{ .Site.Params.orcid }}">ORCID&nbsp;{{ .Site.Params.orcid }}</a></p>
-
-    <div class="creds">
-      <a href="{{ .Site.Params.seProfile }}" rel="_self">
-        <img class="se-badge"
-             src="{{ .Site.Params.seFlair }}"
-             width="208" height="58"
-             alt="profile for {{ .Site.Params.author }} on Stack Exchange"
-             title="Stack Exchange — 15+ years community support">
-      </a>
-    </div>
+    <p class="cred-line">
+      Principal, <a href="https://dapla.net">Da Planet Security</a> (est.&nbsp;2001) &#183;
+      Technology Chair, <a href="https://restorethe4th.com">Restore The Fourth</a> &#183;
+      IEEE&nbsp;CS &#183; InfraGard &#183; ISACA &#183; SCORE
+    </p>
+    <p class="cred-line">
+      SysOp&nbsp;&#8594;&nbsp;DevOps precursor (2007&#8211;08, pre-coinage)&nbsp;&#8594;&nbsp;security researcher &#183;
+      20&#43;&nbsp;yr MSSP &#183;
+      IANA&nbsp;PEN&nbsp;{{ .Site.Params.ianapen }} &#183;
+      <a href="https://orcid.org/{{ .Site.Params.orcid }}">ORCID&nbsp;{{ .Site.Params.orcid }}</a>
+    </p>
 
     <ul class="social-links">
       <li><a href="{{ .Site.Params.linkedin }}" rel="_self"><svg aria-hidden="true" fill="currentColor" height="18px" viewBox="0 0 448 512" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg> /in/denzuko</a></li>
@@ -36,18 +30,15 @@
       <li><a href="{{ .Site.Params.hpr }}" rel="_self">&#127925; HPR</a></li>
       <li><a href="{{ .Site.Params.anonradio }}" rel="_self">&#128251; aNONradio</a></li>
     </ul>
-
-    <p>
-      <a rel="payment" title="Buy me a Beer" href="https://buymeacoffee.com/denzuko">
-        <img src="https://images.squarespace-cdn.com/content/v1/5cf6ec742e677c000119beb3/1559871045027-2XSVXYWSZD9POBO0QOVD/buy-me-a-coffee-button.png" width="100" alt="Buy me a coffee" loading="lazy">
-      </a>
-    </p>
-  </div>
+  </div><!-- /whoami-block -->
 
   <div class="finger-section">
+    <p class="cta-line">
+      <a href="{{ .Site.Params.cta.url }}" rel="payment">{{ .Site.Params.cta.text }} &#8594;</a>
+    </p>
     <h3>&#128072; $ finger denzuko@dwightspencer.com _</h3>
     {{ .Content }}
-    <p style="color:#9a9a9a;font-size:.85rem;margin-top:.5rem"><span style="color:#75715e">; &#8594; <a href="/posts/" style="color:#9a9a9a">/posts</a> if you prefer prose</span></p>
+    <p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/" style="color:#9a9a9a">/posts</a> if you prefer prose</span></p>
   </div>
 
   <div class="latest-posts">
