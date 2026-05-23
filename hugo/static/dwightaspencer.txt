@@ -1,4 +1,4 @@
-name: DwightSpencerCom
+name: DwightASpencerCom
 version: 2026-05-23
 system-index-url: https://dwightaspencer.com/lisp/systems.txt
 release-index-url: https://dwightaspencer.com/lisp/releases.txt

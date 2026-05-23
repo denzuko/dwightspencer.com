@@ -3,10 +3,10 @@
 <span style="color:#75715e">#!/usr/bin/env sh</span>
 <span style="color:#e6db74">"true"</span> <span style="color:#75715e">; exec /usr/bin/env sbcl --noinform --script "$0" "$@"</span>
 
-<span style="color:#f92672">(</span><span style="color:#66d9ef">defpackage</span> <span style="color:#e6db74">:DwightSpencerCom</span>
+<span style="color:#f92672">(</span><span style="color:#66d9ef">defpackage</span> <span style="color:#e6db74">:DwightASpencerCom</span>
   <span style="color:#f92672">(</span><span style="color:#e6db74">:use</span> <span style="color:#e6db74">#:cl</span><span style="color:#f92672">)</span>
   <span style="color:#f92672">(</span><span style="color:#e6db74">:export</span> <span style="color:#e6db74">#:finger</span> <span style="color:#e6db74">#:Self</span><span style="color:#f92672">))</span>
-<span style="color:#f92672">(</span><span style="color:#a6e22e">use-package</span> <span style="color:#e6db74">:DwightSpencerCom</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">(</span><span style="color:#a6e22e">use-package</span> <span style="color:#e6db74">:cl-user</span><span style="color:#f92672">)</span>
 
 <span style="color:#f92672">(</span><span style="color:#66d9ef">defclass</span> Self <span style="color:#f92672">()</span> <span style="color:#f92672">())</span>
 <span style="color:#f92672">(</span><span style="color:#66d9ef">defmethod</span> AboutMe <span style="color:#f92672">((</span>object Self<span style="color:#f92672">))</span>
@@ -28,5 +28,5 @@
   <span style="color:#f92672">(</span><span style="color:#66d9ef">let</span> <span style="color:#f92672">((</span>DwightSpencer <span style="color:#f92672">(</span><span style="color:#a6e22e">make-instance</span> <span style="color:#e6db74">'Self</span><span style="color:#f92672">)))</span>
     <span style="color:#f92672">(</span><span style="color:#a6e22e">format</span> <span style="color:#66d9ef">t</span> <span style="color:#e6db74">"~a~&amp;"</span> <span style="color:#f92672">(</span>AboutMe DwightSpencer<span style="color:#f92672">))))</span>
 
-<span style="color:#f92672">(</span>finger<span style="color:#f92672">)</span>
+<span style="color:#f92672">(</span><span style="color:#e6db74">DwightASpencerCom</span><span style="color:#f92672">:</span>finger<span style="color:#f92672">)</span>
 </code></pre></div>
