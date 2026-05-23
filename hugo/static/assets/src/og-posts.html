@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #fffdfa;
+  }
+  .card {
+    width: 1200px;
+    height: 630px;
+    background: #fffdfa;
+    position: relative;
+    padding: 0;
+  }
+  /* left accent bar */
+  .accent { position: absolute; top: 0; left: 0; width: 8px; height: 630px; background: #000; }
+
+  .inner {
+    position: absolute;
+    top: 0; left: 8px; right: 0; bottom: 0;
+    padding: 50px 60px 40px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid #000;
+    padding-bottom: 14px;
+  }
+  .site-id {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #777;
+    text-transform: uppercase;
+  }
+  .pgp {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #777;
+  }
+  .headline-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    padding: 20px 0 10px;
+  }
+  .headline {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 76px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1.0;
+  }
+  .dash-rule {
+    width: 100%;
+    border: none;
+    border-top: 1px dashed #ccc;
+    margin: 18px 0 14px;
+  }
+  .byline {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 17px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .bottom-bar {
+    border-top: 2px solid #000;
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .footer-url {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 18px;
+    color: #000;
+  }
+  .footer-creds {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: #777;
+  }
+  .topics {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="accent"></div>
+  <div class="inner">
+
+    <div class="top-bar">
+      <span class="site-id">DWIGHTASPENCER.COM</span>
+      <span class="pgp">0x5DCBF78E3F9C3FE3</span>
+    </div>
+
+    <div class="headline-block">
+      <div class="headline">Code is speech.<br>Platforms are<br>not neutral.</div>
+      <hr class="dash-rule">
+      <div class="byline">
+        Dwight Spencer &nbsp;·&nbsp; Principal, Da Planet Security<br>
+        Technology Chair, Restore The Fourth
+      </div>
+    </div>
+
+    <div>
+      <div class="bottom-bar">
+        <span class="footer-url">▮ dwightaspencer.com/posts</span>
+        <span class="footer-creds">IANA PEN 42387 &nbsp;·&nbsp; ORCID 0009-0001-0066-4646</span>
+      </div>
+      <div class="topics">DevOps &nbsp;·&nbsp; Privacy &nbsp;·&nbsp; Security &nbsp;·&nbsp; Civil Liberties &nbsp;·&nbsp; Infrastructure</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
