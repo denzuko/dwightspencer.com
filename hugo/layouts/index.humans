@@ -1,0 +1,27 @@
+# humanstxt.org
+
+/* TEAM */
+  Name: {{ .Site.Data.author.name }}
+  Handle: {{ .Site.Data.author.handle }}
+  PGP: {{ .Site.Data.author.pgp }}
+  ORCID: {{ .Site.Data.author.orcid }}
+  IANA PEN: {{ .Site.Data.author.iana_pen }}
+  Location: Albany, NY, USA
+
+/* SITE */
+  Last update: {{ now.Format "2006-01-02" }}
+  Language: English
+  Doctype: HTML5
+  Generator: Hugo {{ hugo.Version }}
+  Posts: {{ len (where .Site.RegularPages "Section" "posts") }}
+  Tags: {{ len .Site.Taxonomies.tags }}
+  Standards: HTML5, CSS3, Microformats2, Schema.org, ActivityPub (webfinger)
+
+/* PHILOSOPHY */
+  Code is speech. Platforms are not neutral.
+  This site sets no tracking cookies and loads no advertising networks.
+  All content opts out of AI training. See /data-usage/
+
+/* CORPUS */
+  This site is also a Common Lisp system.
+  ;; (ql-dist:install-dist "https://dwightaspencer.com")

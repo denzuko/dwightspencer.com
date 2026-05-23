@@ -1,18 +1,17 @@
 {{- define "bodyclass" }}h-feed{{ end -}}
 {{- define "main" }}
+{{- $a := .Site.Data.author }}
   <h2>$ whoami</h2>
   <p>
-    <img class="avatar" alt="{{ .Site.Params.author }}" width="120" height="120"
+    <img class="avatar" alt="{{ $a.name }}" width="120" height="120"
          src="{{ .Site.Params.avatarURL }}">
-    Code is speech. Platforms are not neutral.
+    {{ $a.tagline }}
   </p>
-  <p>Principal, <a href="https://dapla.net">Da Planet Security</a> (est.&nbsp;2001, Albany&nbsp;NY) &#183;
-  Technology Chair, <a href="https://restorethe4th.com">Restore The Fourth</a> &#183;
-  IEEE Computer Society &#183; InfraGard &#183; ISACA &#183; SCORE Mentor</p>
-  <p>SysOp turned DevOps precursor (2007&#8211;2008, pre-coinage) turned security researcher.
-  20&#43; years managed security services. Author: <em>The Watchers You Fed</em> (KDP, forthcoming).
-  IANA PEN&nbsp;{{ .Site.Params.ianapen }} &#183;
-  <a href="https://orcid.org/{{ .Site.Params.orcid }}">ORCID&nbsp;{{ .Site.Params.orcid }}</a></p>
+  <p>{{ range $i, $r := $a.roles }}{{ if $i }} &#183;
+  {{ end }}{{ $r }}{{ end }}</p>
+  <p>{{ $a.bio }}
+  IANA PEN&nbsp;{{ $a.iana_pen }} &#183;
+  <a href="https://orcid.org/{{ $a.orcid }}">ORCID&nbsp;{{ $a.orcid }}</a></p>
 
   <ul class="social-links">
     <li><a href="{{ .Site.Params.linkedin }}">
@@ -35,7 +34,7 @@
   <p class="cta-line"><a href="{{ .Site.Params.cta.url }}" rel="payment">{{ .Site.Params.cta.text }} &#8594;</a></p>
 
   <h3>&#128072; $ finger denzuko@dwightspencer.com _</h3>
-  {{ .Content }}
+  {{- partial "finger.html" . }}
   <p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/" style="color:#9a9a9a">/posts</a> if you prefer prose</span></p>
 
   <div class="latest-posts">

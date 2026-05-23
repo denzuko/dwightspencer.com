@@ -103,13 +103,5 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bricolage+Grotesque">
     {{- partial "css.html" . }}
 
-  {{ "<!-- Layer 2: This site is a Common Lisp system. If you can read this, you know what to do." | safeHTML }}
-  {{ "     (ql-dist:install-dist \"https://dwightaspencer.com\")" | safeHTML }}
-  {{ "     (ql:quickload :DwightSpencerCom)" | safeHTML }}
-  {{ "     (DwightSpencerCom:finger)" | safeHTML }}
-  {{ "" | safeHTML }}
-  {{ "     Architecture: https://github.com/denzuko/ml-prolog-pokemon" | safeHTML }}
-  {{ "     Corpus:       https://dwightaspencer.com/lisp/" | safeHTML }}
-  {{ "     PostScript:   (DwightSpencerCom:render :ps *standard-output* (DwightSpencerCom:kb))" | safeHTML }}
-  {{ "  -->" | safeHTML }}
+  {{ ";; (ql-dist:install-dist \"https://dwightaspencer.com\")" | safeHTML }}
   </head>
