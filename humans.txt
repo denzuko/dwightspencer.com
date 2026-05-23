@@ -1,0 +1,31 @@
+/* TEAM */
+Name: Dwight Spencer
+Role: Principal, Da Planet Security; Technology Chair, Restore The Fourth
+Contact: denzuko [at] dapla.net
+PGP: 0x5DCBF78E3F9C3FE3
+ORCID: 0009-0001-0066-4646
+Location: Albany, New York, US (ACP protected)
+From: Dallas, TX; now Albany, NY
+
+/* CREDENTIALS */
+IEEE Computer Society Member
+InfraGard Member
+ISACA Member
+SCORE Mentor
+IANA PEN 42387
+SAM.gov SIN 54151S
+NAICS 541513
+D&B DUNS 039-271-257
+Agile Manifesto Signatory (CompuTEK Industries, May 2009)
+
+/* AUTHORSHIP */
+Author: The Watchers You Fed (KDP, forthcoming)
+Contributor: Hacker Public Radio (HPR)
+Broadcaster: aNONradio / Da Planet Radio (klaxon.dapla.net)
+Publisher: dwightaspencer.com
+
+/* SITE */
+Language: English
+Doctype: HTML5
+IDE: VIM / Vlime
+Build: Hand-crafted raw HTML, no Hugo, no Jekyll
