@@ -1,0 +1,14 @@
+{{- define "bodyclass" }}{{ end -}}
+{{- define "main" }}
+  <h2 class="post">Series: {{ .Title }}</h2>
+  <p class="meta" style="margin-bottom:1.5rem">{{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }} in this series, in order.</p>
+  <ul class="list">
+    {{- range .Pages.ByDate }}
+    <li>
+      <time class="index-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <span class="hr-list"></span>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+  </ul>
+{{- end }}

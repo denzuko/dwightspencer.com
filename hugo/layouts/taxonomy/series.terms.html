@@ -1,0 +1,13 @@
+{{- define "bodyclass" }}{{ end -}}
+{{- define "main" }}
+  <h2 class="post">Series</h2>
+  <p class="meta" style="margin-bottom:1.5rem">Long-form threads across multiple posts. Follow a series to read the arc in order.</p>
+  <ul class="tag-index">
+    {{- range .Data.Terms.ByCount }}
+    <li>
+      <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+      <span class="tag-count">{{ .Count }}</span>
+    </li>
+    {{- end }}
+  </ul>
+{{- end }}

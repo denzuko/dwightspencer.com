@@ -10,6 +10,7 @@ categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "DevOps, Privacy, Security, Open Source"
 aliases     = ["/02-github-tos-wont-save-you/", "/github-tos/", "/posts/github-tos-privacy/"]
+series   = ["The Watchers You Fed"]
 og_image    = "/assets/og-posts.png"
 +++
 

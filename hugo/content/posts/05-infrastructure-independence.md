@@ -10,6 +10,7 @@ categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "DevOps, Infrastructure, Security, Self-Hosting"
 aliases     = ["/infra/", "/05-infrastructure-independence/"]
+series   = ["Infrastructure Independence"]
 og_image    = "/assets/og-posts.png"
 +++
 
