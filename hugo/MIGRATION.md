@@ -150,3 +150,61 @@ who asks "what do you run." Feeds the Infrastructure Independence series.
 For non-code content updates (warrant canary renewal, media archive updates)
 without requiring a full git workflow. Low priority — current git workflow
 is acceptable for the volume.
+
+---
+
+## v2.5 — Research & Compliance Layer
+
+### OSCAL Components
+Yes — worth doing for Da Planet Security commercial positioning. Each post
+that documents a security control, telemetry loop, or audit capability maps
+to an OSCAL component. The component JSON lives in the Da Planet Security
+git instance; dwightaspencer.com posts link to it via front matter:
+
+```toml
+oscal_component = "https://git.daplanetsecurity.com/oscal/components/telemetry-loop.json"
+commercial_asset = "Da Planet Security Managed Core (Telemetry Engine)"
+```
+
+Hugo shortcode renders a "compliance context" block on qualifying posts.
+Entity separation maintained: OSCAL refs point to Da Planet Security infra,
+never appear in RT4 content.
+
+### NIST 800-53 / CMMC / FedRAMP taxonomy
+Technical posts mapped directly to controls via front matter:
+
+```toml
+nist_controls  = ["AC-3", "AU-10", "SI-4"]
+cmmc_level     = "Level 3"
+fedramp_impact = "Moderate"
+```
+
+Hugo taxonomy: `nist_controls` as a multi-value taxonomy generates
+`/nist/AC-3/`, `/nist/AU-10/` etc. — machine-readable control coverage
+map. Valuable for federal contracting pipeline (SAM.gov SIN 54151S,
+NAICS 541513). The corpus Prolog facts gain a `(control slug nist-id)`
+fact schema — query all posts covering a given control family.
+
+### arXiv
+Yes — add ORCID-linked arXiv author page to social links and webfinger
+`aliases`. Posts that have a corresponding preprint get `arxiv_id` front
+matter. Hugo generates `<link rel="canonical">` and Schema.org
+`sameAs` pointing to the arXiv abstract. Feeds the expert witness and
+academic citation positioning.
+
+### Crossref / DOI
+Yes for the book and any formal publications. DOI registration via
+Crossref for *The Watchers You Fed* chapters published as preprints.
+`doi` front matter field → Schema.org `identifier`, citation block
+in post footer, machine-readable in corpus Prolog facts as
+`(publication slug doi)`. The `/lisp/corpus.lisp` query API gains
+`find-by-doi`.
+
+### Hugo Taxonomies to add
+Current: tags, categories
+Add:
+- `nist_controls` — NIST 800-53 control IDs
+- `series` — post series grouping (Infrastructure Independence,
+  GRID_BREAK_518, The Watchers You Fed chapters)
+- `venue` — arXiv, KDP, HPR episode, conference
+- `cmmc_level` — for Da Planet Security commercial posts only
