@@ -19,7 +19,7 @@
 
 (defun assert-post-facts (db)
   "Assert all post/tag/author facts into DB.
-   Generated from 9 posts."
+   Generated from 10 posts."
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 
     ;; The Watchers You Fed: Chapter Preview
@@ -74,6 +74,17 @@
 (pf 'tag "07-devops-before-devops" :open-source)
 (pf 'author "07-devops-before-devops" "0009-0001-0066-4646")
 
+    ;; After the Canary: What Happened to the Warrant Canary Standard
+    (pf 'post "09-after-the-canary"
+        "After the Canary: What Happened to the Warrant Canary Standard"
+        "2026-05-23"
+        789)
+(pf 'tag "09-after-the-canary" :privacy)
+(pf 'tag "09-after-the-canary" :surveillance)
+(pf 'tag "09-after-the-canary" :open-source)
+(pf 'tag "09-after-the-canary" :infrastructure)
+(pf 'author "09-after-the-canary" "0009-0001-0066-4646")
+
     ;; Rules, Types, and Glue: A Multi-Paradigm Architecture for Game Simulation
     (pf 'post "03-rules-types-and-glue"
         "Rules, Types, and Glue: A Multi-Paradigm Architecture for Game Simulation"
@@ -99,7 +110,10 @@
     (pf 'post "01-a-better-tweedy-bird"
         "Privacy Canaries: A Better Tweedy Bird"
         "2025-01-20"
-        803)
+        839)
+(pf 'tag "01-a-better-tweedy-bird" :privacy)
+(pf 'tag "01-a-better-tweedy-bird" :surveillance)
+(pf 'tag "01-a-better-tweedy-bird" :open-source)
 (pf 'author "01-a-better-tweedy-bird" "0009-0001-0066-4646")
 
     ;; 00 Hellowrld
