@@ -21,17 +21,65 @@
       </div>
     </main>
     <script>
-      /* Toggle button wiring — runs after DOM ready */
+      /* All post-DOM wiring in one block — avoids CF Rocket Loader type mangling
+         that causes inline scripts between content elements to render as visible text. */
       document.addEventListener('DOMContentLoaded', function(){
+        /* Theme toggle */
         var btn = document.getElementById('themeToggle');
-        if (!btn) return;
-        btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☾' : '☀︎';
-        btn.addEventListener('click', function(){
-          var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem('theme', next);
-          btn.textContent = next === 'dark' ? '☾' : '☀︎';
-        });
+        if (btn) {
+          btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☾' : '☀︎';
+          btn.addEventListener('click', function(){
+            var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            btn.textContent = next === 'dark' ? '☾' : '☀︎';
+          });
+        }
+
+        /* Pagefind search — lazy-load on first toggle, Escape to close */
+        var wrap = document.getElementById('searchWrap');
+        var sbtn = document.getElementById('searchToggle');
+        if (wrap && sbtn) {
+          var loaded = false;
+          function loadPagefind(cb) {
+            if (loaded) { if (cb) cb(); return; }
+            loaded = true;
+            var lnk = document.createElement('link');
+            lnk.rel = 'stylesheet';
+            lnk.href = '/pagefind/pagefind-ui.css';
+            document.head.appendChild(lnk);
+            var s = document.createElement('script');
+            s.src = '/pagefind/pagefind-ui.js';
+            s.onload = function() {
+              new PagefindUI({ element: '#search', showImages: false });
+              if (cb) cb();
+            };
+            document.head.appendChild(s);
+          }
+          sbtn.addEventListener('click', function() {
+            var open = wrap.getAttribute('hidden') === null;
+            if (open) {
+              wrap.setAttribute('hidden', '');
+              sbtn.setAttribute('aria-expanded', 'false');
+              sbtn.title = 'open search';
+            } else {
+              wrap.removeAttribute('hidden');
+              sbtn.setAttribute('aria-expanded', 'true');
+              sbtn.title = 'close search';
+              loadPagefind(function() {
+                var inp = wrap.querySelector('input');
+                if (inp) inp.focus();
+              });
+            }
+          });
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && wrap.getAttribute('hidden') === null) {
+              wrap.setAttribute('hidden', '');
+              sbtn.setAttribute('aria-expanded', 'false');
+              sbtn.focus();
+            }
+          });
+        }
       });
     </script>
   </body>
