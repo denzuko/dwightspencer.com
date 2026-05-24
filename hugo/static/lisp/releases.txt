@@ -1,2 +1,1 @@
-# project url size file-md5 content-sha256 prefix asd-files
-DwightASpencerCom http://dwightaspencer.com/lisp/DwightASpencerCom-2026-05-23.tgz 6836 17068d893bd248820038931876a5e6c1 e89f420bd6dcfbe9710d7bba3848a64a55715fe3758915aac9d0a87ea48ef921 DwightASpencerCom-2026-05-23 DwightASpencerCom-2026-05-23/dwightaspencer.asd
+DwightASpencerCom http://dwightaspencer.com/lisp/DwightASpencerCom-2026-05-23.tgz 6836 17068d893bd248820038931876a5e6c1 d447afd3c6f513e242e1e5ef87030308b98a1a97 DwightASpencerCom-2026-05-23 DwightASpencerCom-2026-05-23/dwightaspencer.asd
