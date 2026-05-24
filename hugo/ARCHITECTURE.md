@@ -10,13 +10,13 @@ graph LR
     A --> E[partials/head.html]
     F[hugo/content/posts/*.md] --> C
     F --> G[_default/single.html]
-    C --> H[/corpus.lisp Hugo-generated]
+    C --> H[/corpus.lisp Hugo-generated — at site root]
     D --> I[/humans.txt Hugo-generated]
     B --> J[index.html finger block]
     G --> K[/posts/NN-slug/]
     L[taxonomy/tag.terms.html] --> M[/tags/ frequency-weighted]
     N[taxonomy/series.terms.html] --> O[/series/ arc index]
-    P[hugo/static/lisp/*.lisp] --> Q[Quicklisp dist at root]
+    P[hugo/static/lisp/*.lisp] --> Q[Quicklisp dist: /distinfo.txt at root, /lisp/ for tgz+indexes]
     R[hugo build] --> S[npx pagefind]
     S --> T[/pagefind/ search index]
 ```
@@ -42,11 +42,10 @@ graph TD
     defpackage :DwightASpencerCom
     Real SBCL program — plain pre/code"] --> L2
 
-    L2["Layer 2: HTML source comment
-    &lt;!-- ;; (ql-dist:install-dist
-    'http://dwightaspencer.com' :prompt nil) --&gt;
-    Must be HTML comment — bare text nodes in head
-    get foster-parented into body by HTML5 parser"] --> L3
+    L2["Layer 2: &lt;link rel=alternate type=application/vnd.quicklisp-dist&gt;
+    href=http://dwightaspencer.com/distinfo.txt
+    Survives Hugo --minify. Visible in view-source.
+    HTML comments are stripped by minifier — link tag is the correct surface"] --> L3
 
     L3["Layer 3: PostScript polyglot
     DwightASpencerCom:render :ps
@@ -78,8 +77,8 @@ graph TD
     T["<script> no attribute
     DOMContentLoaded wiring"] -- "CF Rocket Loader rewrites type=hash" --> D[deferred — OK after paint]
     U["bare text node in head
-    Layer 2 without HTML comment"] -- "HTML5 foster-parenting" --> V[rendered visibly in body — BUG]
-    W["Layer 2 as HTML comment"] -- "browser ignores comment nodes" --> X[view-source only — correct]
+    (historical bug — now fixed)"] -- "HTML5 foster-parenting" --> V[rendered visibly in body — was BUG, now resolved]
+    W["Layer 2 as &lt;link rel=alternate&gt; in &lt;head&gt;"] -- "preserved by Hugo minifier" --> X[view-source readable — correct]
 ```
 
 ## Entity separation
