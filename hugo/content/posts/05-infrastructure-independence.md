@@ -4,7 +4,7 @@ date        = "2026-05-23"
 draft       = false
 description = "A practical, no-nonsense guide to self-hosting your critical services. Companion piece to Hacker Public Radio episode — covers what to host, what not to host, and how to avoid the traps."
 slug        = "05-infrastructure-independence"
-keywords    = ["self-hosting", "infrastructure", "privacy", "podman", "haproxy", "zfs", "homelab", "devops", "step-ca", "keepalived", "cgit", "node_exporter", "cAdvisor", "snmp_exporter"]
+keywords    = ["self-hosting", "infrastructure", "privacy", "podman", "haproxy", "zfs", "homelab", "devops", "step-ca", "keepalived", "cgit", "node_exporter", "cAdvisor", "snmp_exporter", "promtail", "loki"]
 tags        = ["self-hosting", "infrastructure", "privacy", "devops"]
 categories  = ["articles"]
 schema_type = "TechArticle"
@@ -204,7 +204,7 @@ backend nextcloud_back
 
 <h3 id="3-4-monitoring">3.4 Monitoring</h3>
 
-<p>Six layers, no complexity tax:</p>
+<p>Seven layers, no complexity tax:</p>
 
 <ul>
 <li><strong>systemd_exporter</strong> — exposes unit state and resource usage to
@@ -218,6 +218,11 @@ with the specific service causing it.</li>
 <li><strong>snmp_exporter</strong> — network device metrics from switches, APs, and
 anything else that speaks SNMP. Essential once you care about what is
 happening at the network layer, not just the host layer.</li>
+<li><strong>Promtail</strong> — log shipper to Loki. Tails journald and container logs,
+attaches labels (service name, node, quadlet unit), forwards to a
+central Loki instance. Gives you log correlation alongside your
+Prometheus metrics in Grafana without shipping everything to an
+external SIEM.</li>
 <li><strong>HAProxy native stats</strong> — HAProxy exports Prometheus metrics on its
 stats socket natively since 2.0. No separate exporter needed;
 point Prometheus at the stats endpoint.</li>

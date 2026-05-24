@@ -172,6 +172,32 @@ Planned A/B test against Cloudflare aggregate analytics. When enabled:
 - Update privacy/cookies policy pages accordingly
 - No other changes required
 
+### v2 — Observability stack: lab + whitepaper + HPR episode
+Full dapla.net observability stack as a standalone production:
+
+Stack to document:
+- node_exporter — host metrics, ZFS pool health
+- cAdvisor — per-container Podman metrics
+- snmp_exporter — network device metrics
+- systemd_exporter — quadlet unit state and resources
+- Promtail + Loki — log shipping from journald and containers
+- HAProxy native Prometheus stats endpoint
+- keepalived + blackbox_exporter — HA and reachability probes
+- Grafana — dashboards correlating metrics + logs
+
+Deliverables (in order):
+1. **Lab writeup** — post on dwightaspencer.com, full setup walkthrough
+   with quadlet configs, Promtail pipeline config, Loki retention policy
+2. **Whitepaper** — formal document for Da Planet Security, NIST 800-55
+   alignment, observability as a compliance posture (entity separation applies)
+3. **HPR episode script** — conversational, audience = sysadmin/homelab,
+   focus on the Promtail→Loki→Grafana pipeline as the connective tissue
+   that makes the other exporters useful
+4. **Twitch livestream** — live build of the stack on a fresh node,
+   audience participates in troubleshooting
+
+venue = HPR on the episode post; venue = KDP or arXiv on the whitepaper
+
 ### v3 — Hugo CMS integration (Decap/Forestry successor)
 For non-code content updates (warrant canary renewal, media archive updates)
 without requiring a full git workflow. Low priority — current git workflow
