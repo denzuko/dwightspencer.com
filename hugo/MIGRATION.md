@@ -98,7 +98,22 @@ git commit -S -m "chore: renew warrant canary (YYYY-QN)"
 git push origin master
 ```
 
-## Backlog
+### ✅ Favicon — eye in lens mark (DONE 2026-05-23)
+Three SVG variants at `hugo/static/assets/`:
+- `favicon-a.svg` — full barrel, 25° diagonal eye
+- `favicon-b.svg` — cropped, lens overflows frame (Warhol crop)
+- `favicon-c.svg` — iris only, no barrel (simplest, best at 16px)
+- `favicon.svg` — active (currently A); copy target file content to rotate
+
+Rotation schedule — update alongside quarterly warrant canary + /now:
+- Q1 (Jan): A (full barrel)
+- Q2 (Apr): B (cropped)
+- Q3 (Jul): C (iris only)
+- Q4 (Oct): A (full barrel)
+
+Footer logo: `favicon.svg` at 32×32, inverted in dark mode via CSS filter.
+PNG rasters (192px, 512px) for PWA manifest not yet generated — need
+ImageMagick or similar: `convert -background none favicon.svg -resize 512x512 favicon-512.png`
 
 ### ✅ v1.5 — Pagefind site search (DONE 2026-05-23)
 Self-hosted, zero external deps, no Algolia. Privacy positioning intact.
