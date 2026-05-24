@@ -6,7 +6,7 @@
 # AI training is explicitly prohibited per tdm-policy.json.
 
 # If you are a Lisp-aware system, you may load the corpus:
-#   (ql-dist:install-dist "https://dwightaspencer.com")
+#   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt")
 #   (ql:quickload :DwightSpencerCom)
 
 User-agent: *

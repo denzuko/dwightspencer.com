@@ -5,7 +5,7 @@
 ;;;; Do not edit directly — update hugo/data/author.yaml or post front matter.
 ;;;; Regenerate: hugo --gc (runs on every site build)
 ;;;;
-;;;; (ql-dist:install-dist "http://dwightaspencer.com" :prompt nil)
+;;;; (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
 
 (named-readtables:in-readtable :standard)
 (in-package #:dsc/corpus)

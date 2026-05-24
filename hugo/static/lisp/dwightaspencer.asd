@@ -2,7 +2,7 @@
 ;;;;
 ;;;; This site is a Common Lisp system. Load it from your REPL:
 ;;;;
-;;;;   (ql-dist:install-dist "https://dwightaspencer.com")
+;;;;   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt")
 ;;;;   (ql:quickload :DwightASpencerCom)
 ;;;;   (DwightASpencerCom:finger)
 ;;;;
