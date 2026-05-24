@@ -109,43 +109,62 @@ only valid answer. It is an answer that has survived production use.</p>
 
 <h3 id="3-1-compute">3.1 Compute</h3>
 
-<p><strong>Podman quadlets as system services, running as a dedicated system account.</strong>
-The unit lives in <code>/etc/containers/systemd/</code> and is managed by the system's
-PID 1 — not a user lingering session. A non-login system account (e.g.
-<code>nextcloud</code>, created with <code>useradd -r</code>) owns the ZFS dataset and the
-container process. The <code>User=</code> directive in <code>[Service]</code> drops privileges
-after systemd starts the unit. Inside the container, Podman maps UIDs
-through that account's subordinate UID map (<code>/etc/subuid</code>) — the container
-is rootless relative to the host even though the unit is a system service.
-This gives you proper cgroup v2 accounting, clean log attribution in
-journald, and ZFS dataset ownership aligned to the service account UID —
-none of which you get cleanly from a rootless user lingering service.</p>
+<p><strong>Podman quadlets as rootless user services with linger.</strong>
+Each service gets a dedicated system account with its own ZFS datasets
+and its own systemd user instance kept alive by <code>loginctl enable-linger</code>.
+The quadlet lives in the account's home under
+<code>~service/.config/containers/systemd/</code> — managed by that user's
+systemd instance, not PID 1. No root daemon. No privileged socket.
+The container is rootless inside that account's subordinate UID map
+(<code>/etc/subuid</code>). This is the same pattern used for klaxon and the
+other dapla.net services.</p>
 
-<pre><code>&#35; /etc/containers/systemd/nextcloud.container
-[Unit]
+<p>Setup for a new service:</p>
+
+<pre><code>&#35; ZFS datasets — storage and service account home
+zfs create /srv/nextcloud       &#35; config, data, etc.
+zfs create /var/lib/nextcloud   &#35; service account home
+
+&#35; Dedicated system account, home on ZFS
+useradd -r --system -d /var/lib/nextcloud nextcloud
+
+&#35; Quadlet directory + linger so the user instance survives without login
+mkdir -p ~nextcloud/.config/containers/systemd/
+loginctl enable-linger nextcloud
+</code></pre>
+
+<p>Then the quadlet at
+<code>~nextcloud/.config/containers/systemd/nextcloud.container</code>:</p>
+
+<pre><code>[Unit]
 Description=Nextcloud
 After=network-online.target
 
 [Container]
 Image=docker.io/nextcloud:stable
 AutoUpdate=registry
-Volume=storage/nextcloud:/var/www/html:Z
-EnvironmentFile=/etc/nextcloud.env
+Volume=/srv/nextcloud:/var/www/html:Z
+EnvironmentFile=%h/nextcloud.env
 Label=net.matrix.owner=FC13F74B@matrix.net
-UserNS=keep-id
 
 [Service]
 Restart=always
-User=nextcloud
 
 [Install]
-WantedBy=multi-user.target default.target
+WantedBy=default.target
 </code></pre>
 
-<p>The ZFS dataset <code>storage/containers/nextcloud</code> is owned by the
-<code>nextcloud</code> system account UID. The <code>UserNS=keep-id</code> directive preserves
-that mapping inside the container so filesystem permissions stay coherent
-across the ZFS/Podman boundary.</p>
+<p>Start it as the service account:</p>
+
+<pre><code>machinectl shell nextcloud@ /bin/systemctl --user daemon-reload
+machinectl shell nextcloud@ /bin/systemctl --user enable --now nextcloud
+</code></pre>
+
+<p>The ZFS dataset <code>/srv/nextcloud</code> is owned by the <code>nextcloud</code> UID.
+The container sees it through Podman's rootless UID mapping — no
+<code>:z</code> relabeling quirks, no chown gymnastics. Snapshots via
+<code>zfs-auto-snapshot</code> run against <code>/srv/nextcloud</code> independently of
+the container lifecycle.</p>
 
 <h3 id="3-2-storage">3.2 Storage</h3>
 
