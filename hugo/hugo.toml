@@ -124,21 +124,3 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
   [params.cta]
     text = "Support this research"
     url  = "https://buymeacoffee.com/denzuko"
-
-# Brand submodule — mount brand.css and favicon assets from stream-assets
-[module]
-  [[module.mounts]]
-    source = "content"
-    target = "content"
-  [[module.mounts]]
-    source = "static"
-    target = "static"
-  [[module.mounts]]
-    source = "../brand/static/css/brand.css"
-    target = "static/css/brand.css"
-  [[module.mounts]]
-    source = "../brand/static/assets"
-    target = "static/assets/brand"
-  [[module.mounts]]
-    source = "../brand/data/brand.yaml"
-    target = "data/brand.yaml"

@@ -26,6 +26,13 @@ jobs:
           hugo-version: '0.129.0'
           extended: true
 
+      - name: Copy brand assets from submodule
+        run: |
+          cp brand/static/css/brand.css hugo/static/css/brand.css
+          cp -r brand/static/assets/. hugo/static/assets/brand/
+          cp brand/data/brand.yaml hugo/data/brand.yaml
+          mkdir -p hugo/static/css hugo/static/assets/brand hugo/data
+
       - name: Build
         working-directory: hugo
         run: hugo --minify --gc
