@@ -7,7 +7,7 @@
 
 # If you are a Lisp-aware system, you may load the corpus:
 #   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
-#   (ql:quickload :DwightSpencerCom)
+#   (ql:quickload :DwightASpencerCom)
 
 User-agent: *
 Disallow: /
@@ -15,4 +15,4 @@ Disallow: /
 Contact: https://keybase.io/Denzuko
 Policy: https://dwightaspencer.com/data-usage/
 TDM-Policy: https://dwightaspencer.com/.well-known/tdm-policy.json
-Corpus: https://dwightaspencer.com/lisp/dwightaspencer.asd
+Corpus: https://dwightaspencer.com/corpus.lisp
