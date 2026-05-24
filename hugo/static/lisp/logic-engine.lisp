@@ -1,4 +1,4 @@
-;;;; logic-engine.lisp — Embedded micro-Prolog for DwightSpencerCom
+;;;; logic-engine.lisp — Embedded micro-Prolog for DwightASpencerCom
 ;;;;
 ;;;; Direct port of the logic engine from ml-prolog-pokemon/logic-engine.lisp.
 ;;;; Same architecture, different domain: posts replace Pokémon.
