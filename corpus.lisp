@@ -46,7 +46,7 @@
     (pf 'post "05-infrastructure-independence"
         "Infrastructure Independence: Self-Hosting Without the Hype"
         "2026-05-23"
-        869)
+        1196)
 (pf 'tag "05-infrastructure-independence" :self-hosting)
 (pf 'tag "05-infrastructure-independence" :infrastructure)
 (pf 'tag "05-infrastructure-independence" :privacy)
