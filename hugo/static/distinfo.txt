@@ -2,5 +2,5 @@ name DwightASpencerCom
 version 2026-05-23
 system-index-url http://dwightaspencer.com/lisp/systems.txt
 release-index-url http://dwightaspencer.com/lisp/releases.txt
-canonical-distinfo-url http://dwightaspencer.com/lisp/distinfo.txt
-distinfo-subscription-url http://dwightaspencer.com/lisp/distinfo.txt
+canonical-distinfo-url http://dwightaspencer.com/distinfo.txt
+distinfo-subscription-url http://dwightaspencer.com/distinfo.txt

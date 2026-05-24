@@ -70,11 +70,11 @@ See **[CLAUDE.md](CLAUDE.md)** for the full convention set. Short version:
 The site is a self-documenting Lisp program across three layers:
 
 - **Layer 1** — homepage finger block: real SBCL-runnable `defpackage :DwightASpencerCom`
-- **Layer 2** — HTML source comment: `<!-- ;; (ql-dist:install-dist "http://dwightaspencer.com/lisp" :prompt nil) -->`
+- **Layer 2** — HTML source comment: `<!-- ;; (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil) -->`
 - **Layer 3** — PostScript polyglot at `/lisp/` — PoC‖GTFO tradition
 
 ```lisp
-(ql-dist:install-dist "http://dwightaspencer.com/lisp" :prompt nil)
+(ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
 (ql:quickload :DwightASpencerCom)
 (DwightASpencerCom:finger)   ; same output as the homepage
 ```

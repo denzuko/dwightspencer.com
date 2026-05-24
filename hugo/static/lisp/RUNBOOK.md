@@ -14,7 +14,7 @@ curl -s https://dwightaspencer.com/ | grep 'ql-dist'
 
 Expected output:
 ```
-<!-- ;; (ql-dist:install-dist "http://dwightaspencer.com/lisp" :prompt nil) -->
+<!-- ;; (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil) -->
 ```
 
 ---
@@ -52,7 +52,7 @@ Open an issue — do not proceed.
 In SBCL (standalone or via Vlime):
 
 ```lisp
-(ql-dist:install-dist "http://dwightaspencer.com/lisp" :prompt nil)
+(ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
 ```
 
 Expected output:
@@ -135,7 +135,7 @@ With Vlime in Vim, the full session looks like:
 Then in the REPL buffer (`,e` to evaluate expressions):
 
 ```lisp
-(ql-dist:install-dist "http://dwightaspencer.com/lisp" :prompt nil)
+(ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
 (ql:quickload :DwightASpencerCom)
 (DwightASpencerCom:finger)
 (DwightASpencerCom:all-posts)

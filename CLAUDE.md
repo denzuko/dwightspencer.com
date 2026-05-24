@@ -52,7 +52,7 @@ hugo/ARCHITECTURE.md           Mermaid diagrams — build pipeline, Lisp layers
 
 ## The Lisp system (layers 1–3)
 - **Layer 1**: Finger block — real SBCL program, `defpackage :DwightASpencerCom`
-- **Layer 2**: HTML comment — `<!-- ;; (ql-dist:install-dist "http://dwightaspencer.com/lisp" :prompt nil) -->`
+- **Layer 2**: HTML comment — `<!-- ;; (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil) -->`
   - Must be an HTML comment — bare text nodes in `<head>` after `</style>` get
     foster-parented into `<body>` by HTML5 error recovery and rendered visibly
 - **Layer 3**: PostScript polyglot — PoC‖GTFO tradition, PS+CL+git bundle

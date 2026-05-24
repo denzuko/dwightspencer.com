@@ -24,4 +24,4 @@
 
 /* CORPUS */
   This site is also a Common Lisp system.
-  ;; (ql-dist:install-dist "http://dwightaspencer.com/lisp")
+  ;; (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt")
