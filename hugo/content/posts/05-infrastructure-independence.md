@@ -4,7 +4,7 @@ date        = "2026-05-23"
 draft       = false
 description = "A practical, no-nonsense guide to self-hosting your critical services. Companion piece to Hacker Public Radio episode — covers what to host, what not to host, and how to avoid the traps."
 slug        = "05-infrastructure-independence"
-keywords    = ["self-hosting", "infrastructure", "privacy", "podman", "haproxy", "zfs", "homelab", "devops"]
+keywords    = ["self-hosting", "infrastructure", "privacy", "podman", "haproxy", "zfs", "homelab", "devops", "step-ca", "keepalived", "cgit"]
 tags        = ["self-hosting", "infrastructure", "privacy", "devops"]
 categories  = ["articles"]
 schema_type = "TechArticle"
@@ -56,21 +56,32 @@ your email domain means losing everything tied to it. The operational cost
 is real — deliverability, spam filtering, key management — but the control
 is worth it for anyone with a genuine privacy practice.</p>
 
-<p><strong>Git.</strong> Your code, your commits, your history. SourceHut, Forgejo,
-or a bare <code>git</code> server over SSH. The case was made in
+<p><strong>Git.</strong> Your code, your commits, your history. SourceHut, or a bare
+<code>git</code> server with <a href="https://jfr.im/blog/2026/01/selfhosting-git-cgit-and-git-http-backend/">cgit and git-http-backend</a>
+for read-only HTTP pulls. Add <code>git send-email</code> for patch submission,
+<a href="https://github.com/git-bug/git-bug">git-bug</a> for issue tracking inside
+the repository, and git-flow for branching discipline. Gitolite works
+well in this mix for access control, provided you are comfortable with
+the GPG-signed email patch workflow and HTTP read-only pulls over an
+airgap. The case for moving off GitHub was made in
 <a href="/posts/02-github-tos-wont-save-you/">post 02</a>.</p>
 
-<p><strong>Password manager.</strong> Vaultwarden (Bitwarden-compatible) on hardware
-you control. Encrypted at rest, accessible over Tailscale or WireGuard.
-Not on a public IP. Not behind a cloud provider's identity system.</p>
+<p><strong>Password manager.</strong>
+<a href="https://keepassdx.com">KeePassDX</a> is the recommendation here — solid,
+audited, no server component required, database lives on storage you
+control. If you need shared team access, a KeePass-format database on
+your own Nextcloud instance keeps it self-contained. Avoid server-side
+password managers on public IPs.</p>
 
 <p><strong>DNS resolver.</strong> Unbound or a Pi-hole equivalent. Blocks known
 tracking and malware domains at the network layer. Does not replace
 per-application controls but is a meaningful layer.</p>
 
-<p><strong>Media and documents.</strong> Immich for photos. Paperless-ngx for
-documents. These are high-value, low-threat targets — no reason to pay
-a platform for the privilege of training their AI on your family photos.</p>
+<p><strong>Media and documents.</strong>
+<a href="https://nextcloud.com">Nextcloud</a> covers both well — photo sync,
+document storage, calendar, and contacts in one self-hosted stack.
+High-value, low-threat targets: no reason to pay a platform for the
+privilege of training their models on your files.</p>
 
 <h3 id="2-2-do-not-host-this">2.2 Do not host this</h3>
 
@@ -83,37 +94,42 @@ Security patches do not take weekends off. If you cannot commit to
 patching within 48 hours of a critical CVE, do not run a public-facing
 service.</p>
 
-<p><strong>Certificate authority infrastructure.</strong> Use Let's Encrypt.
-Running your own CA for anything other than internal services is an
-operational and security liability that almost nobody needs.</p>
+<p><strong>A standalone internal CA — use step-ca instead.</strong>
+<a href="https://smallstep.com/docs/step-ca/">step-ca</a> paired with Let's Encrypt
+is the right answer for certificate management: ACME protocol for
+automation, short-lived certs that fail safely, and the option to run
+your own intermediate for internal services without rolling a full CA
+from scratch. Running a bare internal CA without automation is an
+operational liability that bites you during incidents.</p>
 
 <h2 id="3-the-stack">3. The Stack That Actually Works</h2>
 
-<p>This is what I run on <code>dapla.net</code> infrastructure. It is not the
+<p>This is what runs on <code>dapla.net</code> infrastructure. It is not the
 only valid answer. It is an answer that has survived production use.</p>
 
 <h3 id="3-1-compute">3.1 Compute</h3>
 
-<p><strong>Podman quadlets</strong> over Docker Compose. Rootless systemd-managed
-containers. No daemon running as root. Quadlet files live in
-<code>/etc/containers/systemd/</code>, managed by systemd, monitored by
-<code>journald</code>. Restarts on failure. Survives reboots.</p>
+<p><strong>Podman quadlets with a system account</strong> — not rootless user units.
+A dedicated system account per service, managed by systemd, gives you
+proper cgroup accounting, clean log attribution in journald, and
+service isolation without running a daemon as root. Quadlet files live
+in <code>/etc/containers/systemd/</code>. Restarts on failure. Survives reboots.</p>
 
-<pre><code># Example quadlet: /etc/containers/systemd/vaultwarden.container
+<pre><code>&#35; Example quadlet: /etc/containers/systemd/nextcloud.container
 [Unit]
-Description=Vaultwarden password manager
+Description=Nextcloud
 After=network-online.target
 
 [Container]
-Image=docker.io/vaultwarden/server:latest
+Image=docker.io/nextcloud:stable
 AutoUpdate=registry
-Volume=storage/vaultwarden:/data:Z
-Environment=DOMAIN=https://vault.dapla.net
-Environment=SIGNUPS_ALLOWED=false
+Volume=storage/nextcloud:/var/www/html:Z
+EnvironmentFile=/etc/nextcloud.env
 Label=net.matrix.owner=FC13F74B@matrix.net
 
 [Service]
 Restart=always
+User=nextcloud
 
 [Install]
 WantedBy=multi-user.target default.target
@@ -122,8 +138,8 @@ WantedBy=multi-user.target default.target
 <h3 id="3-2-storage">3.2 Storage</h3>
 
 <p><strong>ZFS</strong> on everything that matters. <code>storage/</code> pool.
-Dataset per service: <code>storage/containers/vaultwarden</code> mountpoint at
-<code>/srv/vaultwarden</code>. Snapshots automated via <code>zfs-auto-snapshot</code>.
+Dataset per service: <code>storage/containers/nextcloud</code> mountpoint at
+<code>/srv/nextcloud</code>. Snapshots automated via <code>zfs-auto-snapshot</code>.
 Off-site replication via <code>zfs send | ssh</code>.</p>
 
 <p>The ZFS snapshot is your first line of recovery. It costs nothing to
@@ -131,27 +147,48 @@ enable. Not having it costs everything when you need it.</p>
 
 <h3 id="3-3-networking">3.3 Networking and reverse proxy</h3>
 
-<p><strong>HAProxy</strong>, not Nginx. HAProxy's ACL system, health check
-granularity, and connection handling under load are meaningfully better
-for a service mesh where you control the full stack. Configuration is
-more verbose. That verbosity is documentation.</p>
+<p><strong>HAProxy</strong> as the edge, paired with:</p>
+
+<ul>
+<li><strong>DNS-SD</strong> for service discovery — backends register themselves,
+HAProxy picks them up without a config reload</li>
+<li><strong>policyd (WAF)</strong> in front for request filtering — blocks known bad
+patterns before they reach application code</li>
+<li><strong>FastCGI via kcgi</strong> for lightweight CGI services — no interpreter
+overhead, correct privilege separation</li>
+<li><strong>keepalived</strong> for HA failover between nodes — VRRP virtual IP,
+automatic failover, built-in Prometheus integration via
+<code>blackbox_exporter</code> scripts and the keepalived health check hooks</li>
+</ul>
 
 <pre><code>frontend https_in
     bind *:443 ssl crt /etc/haproxy/certs/
-    default_backend vaultwarden_back
-    acl is_vault hdr(host) -i vault.dapla.net
-    use_backend vaultwarden_back if is_vault
+    default_backend nextcloud_back
+    acl is_cloud hdr(host) -i cloud.dapla.net
+    use_backend nextcloud_back if is_cloud
 
-backend vaultwarden_back
-    server vaultwarden 127.0.0.1:8080 check
+backend nextcloud_back
+    server nextcloud 127.0.0.1:8080 check
 </code></pre>
 
-<h3 id="3-4-monitoring">3.4 Monitoring without the complexity tax</h3>
+<h3 id="3-4-monitoring">3.4 Monitoring</h3>
 
-<p>Two things. <code>systemd</code> status and <code>journald</code> for service health.
-Uptime Kuma behind Tailscale for external reachability checks and
-alerts. That is it. Prometheus/Grafana is correct at scale. At one to
-five nodes it is operational overhead with no return.</p>
+<p>Three layers, no complexity tax:</p>
+
+<ul>
+<li><strong>systemd_exporter</strong> — exposes unit state and resource usage to
+Prometheus. One binary, covers every quadlet service automatically.</li>
+<li><strong>HAProxy native stats</strong> — HAProxy exports Prometheus metrics on its
+stats socket natively since 2.0. No separate exporter needed;
+point Prometheus at the stats endpoint.</li>
+<li><strong>keepalived + blackbox_exporter</strong> — keepalived health check scripts
+integrate with blackbox_exporter for external reachability probes.
+VRRP state changes surface as metrics.</li>
+</ul>
+
+<p>Prometheus/Grafana is correct at scale. At one to five nodes it is
+operational overhead with no return unless you already have the muscle
+memory for it.</p>
 
 <h2 id="4-the-survivability-question">4. The Survivability Question</h2>
 
