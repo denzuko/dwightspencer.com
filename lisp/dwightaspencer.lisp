@@ -1,8 +1,7 @@
 ;;;; dwightaspencer.lisp — DwightASpencerCom top-level entry points
 ;;;;
-;;;; This file extends the DwightASpencerCom package first declared on the
-;;;; homepage at https://dwightaspencer.com. The finger block there is Layer 1;
-;;;; this is Layer 2.
+;;;; This file extends the DwightASpencerCom package declared on the
+;;;; homepage at https://dwightaspencer.com.
 ;;;;
 ;;;; Loading this system from your REPL:
 ;;;;
