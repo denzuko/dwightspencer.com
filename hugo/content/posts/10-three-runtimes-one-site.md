@@ -203,9 +203,10 @@ artifacts. It is worth recovering.</p>
 in the <a href="https://github.com/denzuko/dwightspencer.com">site repository</a>.
 The corpus template is <code>hugo/layouts/index.lisp</code>.</p>
 
-<p>Once loaded, the corpus reflects the live site — <code>make-site-kb</code> fetches
-the current <code>corpus.lisp</code> at runtime via dexador and asserts its facts
-into a fresh <code>prolog-db</code>. The knowledge base is not a snapshot bundled
-at install time.</p>
+<p>Once loaded, the corpus reflects the site at build time — <code>make-site-kb</code>
+calls <code>assert-post-facts</code> on a fresh <code>prolog-db</code>, populating it from
+the facts compiled into the system when Hugo generated <code>corpus.lisp</code>.
+The knowledge base is current as of the last site build, which is
+the correct guarantee: a static site's facts are facts at deploy time.</p>
 
 <p class="finger-exit"><span style="color:#75715e">; &#8594; source at <a href="https://github.com/denzuko/dwightspencer.com/tree/master/hugo/static/lisp" style="color:#9a9a9a">github.com/denzuko/dwightspencer.com</a></span></p>
