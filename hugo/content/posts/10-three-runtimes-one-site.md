@@ -26,20 +26,23 @@ the distinction between the running program and the documentation of
 that program — not as a metaphor, but as an implementation choice.
 You could ask the system what it was and it would answer, from itself.</p>
 
-<p>This tradition has a name: self-documenting systems. The ideal,
-articulated at Xerox PARC and developed further at MIT and through the
-evolution of the Lisp machine lineage, is a system where the
-documentation and the program are the same artifact. Running the system
+<p>This tradition has a name: self-documenting systems. The defining
+characteristic, developed at Xerox PARC and refined through the Lisp
+machine lineage at MIT and beyond, is that the documentation and the
+program are the same artifact. Running the system
 <em>is</em> reading the documentation. Querying it <em>is</em> exploring its
 structure.</p>
 
 <p>The web broke this. The dominant architecture — a build pipeline that
 transforms content into static artifacts — is deeply passive. The site
 does not know what it contains. It cannot be asked. It cannot reason
-over itself. It is a directory tree that happens to have an HTTP server
-pointed at it.</p>
+over itself. It is a directory tree with an HTTP server pointed at it.
+This extends to the DOM and the surrounding toolchain: the structure,
+discovery, and reasoning that web applications layer on top arrive
+through JavaScript, XPath, CSS selectors, and external search indexes —
+none of it intrinsic to the content, all of it bolted on.</p>
 
-<p>This is a design choice, not a constraint. And it is worth revisiting.</p>
+<p>This is a design choice, not a constraint.</p>
 
 <h2 id="what-violates-this">The limits of the pipeline model</h2>
 
@@ -88,7 +91,7 @@ and unification the native query interface:</p>
 (db-prove-all kb '(post ?slug ?title "2026-05-24" ?wc))
 </code></pre>
 
-<p>The logic engine need not be full Prolog. The query surface that matters
+<p>A minimal Prolog implementation suffices. The query surface that matters
 for a text corpus is selection and projection — backward chaining over
 ground facts, unification for pattern matching, no cut, no arithmetic.
 The engine is sized to the problem.</p>
@@ -97,12 +100,12 @@ The engine is sized to the problem.</p>
 and extended with the same tools used to write any other program in
 the same language. The documentation and the data are unified.</p>
 
-<h2 id="the-build-system-as-codegen">The build system as code generator</h2>
+<h2 id="the-build-system-as-codegen">The build system as compiler</h2>
 
 <p>If content is data in a program, the build system's job changes. It is
-no longer transforming content into HTML. It is generating source code
-— specifically, the fact assertions — from the content metadata, then
-also rendering one output format (HTML) from that program.</p>
+no longer transforming content into HTML. It is compiling source —
+specifically, the content metadata — into fact assertions, then also
+rendering one output format (HTML) from the resulting program.</p>
 
 <p>This is the same pattern as any schema-driven code generator: the
 schema (post front matter) is authoritative, the generated code
@@ -143,27 +146,32 @@ graph TD
 
 <p>PostScript is worth dwelling on as a render target, not because it is
 practical but because it is instructive. It is a Turing-complete stack
-language — not a markup format, not a template language, but a
-general-purpose programming language that happens to also describe pages.
-A PostScript file is a program that renders a document. That makes it
-a natural target for a system where the content is already a program.</p>
+language — a general-purpose programming language whose output happens
+to be pages. A PostScript file is a program. That makes it a natural
+target for a system where the content is already a program.</p>
 
 <p>More interestingly: PostScript's comment syntax is valid in several
 other languages. A file that is simultaneously valid PostScript and
-valid Common Lisp comments is not a curiosity — it is a demonstration
-that the boundary between document and program is a convention, not
-a law. The steganographic and polyglot file traditions explore this
-boundary seriously; the Turing completeness of PostScript makes it
-one of the more interesting places to do so.</p>
+valid Common Lisp — where the PS renders a document and the Lisp
+executes as a program — demonstrates that the boundary between document
+and program is a convention. Researchers working in binary analysis,
+steganography, and format parsing have explored this boundary
+systematically; the Turing completeness of PostScript makes it
+one of the more productive surfaces for that work.</p>
+
+<p>The same reasoning applies to the relationship between Lisp source and
+documentation. A Lisp form is already a data structure — a tree — the
+same structure that document systems use to represent content.
+The correspondence is not coincidental.</p>
 
 <h2 id="the-finger-block">The finger block as executable documentation</h2>
 
-<p>Lisp has a long history in document systems. RFCs have used
-pseudo-Lisp for algorithm descriptions since the 1970s. SGML and early
-XML tooling leaned on Lisp for transformation. The reason is structural:
-Lisp syntax is already a tree, the same data structure documents
-naturally inhabit. Code that looks like pseudocode — and pseudocode
-that looks like code — is not an accident in Lisp; it is the design.</p>
+<p>Lisp has a long history in document systems precisely because of this
+correspondence. RFCs used pseudo-Lisp for algorithm descriptions from
+the 1970s onward. SGML and early XML tooling leaned on Lisp for
+transformation. Code that reads as pseudocode — and pseudocode that
+compiles as code — is not an accident in Lisp; it follows from
+the syntax being a data structure.</p>
 
 <p>A finger block rendered as a <code>defpackage</code> form with a shebang line
 takes this literally. The block on the homepage is valid pseudocode
