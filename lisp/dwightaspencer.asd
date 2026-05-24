@@ -6,7 +6,7 @@
 ;;;;   (ql:quickload :DwightASpencerCom)
 ;;;;   (DwightASpencerCom:finger)
 ;;;;
-;;;; The system extends the DwightSpencerCom package introduced on the homepage.
+;;;; The system extends the DwightASpencerCom package introduced on the homepage.
 ;;;; Posts become queryable Prolog facts. The corpus renders to PostScript.
 ;;;;
 ;;;; Architecture mirrors github.com/denzuko/ml-prolog-pokemon:

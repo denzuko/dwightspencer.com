@@ -1,10 +1,10 @@
-;;;; render.lisp — PostScript output for DwightSpencerCom
+;;;; render.lisp — PostScript output for DwightASpencerCom
 ;;;;
 ;;;; PostScript is the natural render target:
 ;;;;   - Turing-complete stack language (computational kin to Lisp)
 ;;;;   - The polyglot tradition: PoC||GTFO demonstrated PS+PDF, we go further
 ;;;;   - dwightaspencer.ps is simultaneously valid PostScript, a git bundle,
-;;;;     and the DwightSpencerCom Lisp system — one file, three runtimes
+;;;;     and the DwightASpencerCom Lisp system — one file, three runtimes
 ;;;;
 ;;;; "PostScript + Git Repository" polyglot structure:
 ;;;;   %!PS-Adobe-3.0                     ; PS magic bytes (also valid CL comment)
@@ -50,7 +50,7 @@
   "PostScript DSC header — also valid Common Lisp comment block."
   (format stream "%!PS-Adobe-3.0~%")
   (format stream "%%Title: dwightaspencer.com corpus~%")
-  (format stream "%%Creator: DwightSpencerCom Common Lisp system~%")
+  (format stream "%%Creator: DwightASpencerCom Common Lisp system~%")
   (format stream "%%CreationDate: ~A~%" (local-time:now))
   (format stream "%%DocumentFonts: Courier Helvetica Helvetica-Bold~%")
   (format stream "%%Pages: (atend)~%")

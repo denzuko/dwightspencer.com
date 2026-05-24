@@ -1,6 +1,6 @@
-;;;; package.lisp — package definitions for DwightSpencerCom system
+;;;; package.lisp — package definitions for DwightASpencerCom system
 ;;;;
-;;;; The DwightSpencerCom package was first introduced on the homepage at
+;;;; The DwightASpencerCom package was first introduced on the homepage at
 ;;;; https://dwightaspencer.com — the finger/whoami block is the canonical
 ;;;; package definition. This file is the machine-readable extension of that
 ;;;; same program.
@@ -50,7 +50,7 @@
   (:export
    #:render))
 
-;;; ── Top-level DwightSpencerCom package ───────────────────────────────────────
+;;; ── Top-level DwightASpencerCom package ───────────────────────────────────────
 ;;; This is the package the finger block declares on the homepage.
 ;;; Loading this system extends it with corpus + render capabilities.
 (defpackage #:DwightASpencerCom
