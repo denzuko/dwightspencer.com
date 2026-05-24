@@ -1,13 +1,13 @@
-<footer style="margin-top:3rem;padding-top:1rem;border-top:1px dotted #ccc;font-size:.85rem;color:#9a9a9a;">
-  <p style="margin-bottom:.75rem;line-height:0">
-    <a href="{{ .Site.Params.canonicalBase }}/" aria-label="Home" style="display:inline-block;opacity:.7;transition:opacity .15s">
+<footer style="margin-top:3rem;padding-top:2rem;border-top:1px dotted #ccc;font-size:.85rem;color:#9a9a9a;text-align:center;">
+  <p style="margin:0 0 1.25rem;">
+    <a href="{{ .Site.Params.canonicalBase }}/" aria-label="Home" style="display:inline-block;opacity:.35;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='.35'">
       <img src="{{ .Site.Params.canonicalBase }}/assets/favicon.svg"
-           alt="dwightaspencer.com mark"
-           width="32" height="32"
+           alt=""
+           width="48" height="48"
            style="display:block;filter:var(--logo-filter,none)">
     </a>
   </p>
-  <p>
+  <p style="margin:0 0 .5rem;">
     <a href="{{ .Site.Params.canonicalBase }}/privacy/">Privacy</a> &middot;
     <a href="{{ .Site.Params.canonicalBase }}/data-usage/">Data Usage</a> &middot;
     <a href="{{ .Site.Params.canonicalBase }}/cookies/">Cookies</a> &middot;
@@ -15,5 +15,5 @@
     <a href="{{ .Site.Params.canonicalBase }}/copyright/">Copyright</a> &middot;
     <a href="{{ .Site.Params.canonicalBase }}/.well-known/security.txt">Security</a>
   </p>
-  <p>{{ .Site.Copyright }} &middot; <a href="{{ .Site.Params.canonicalBase }}/.well-known/pgp-key.txt">{{ .Site.Params.pgp }}</a></p>
+  <p style="margin:0">{{ .Site.Copyright }} &middot; <a href="{{ .Site.Params.canonicalBase }}/.well-known/pgp-key.txt">{{ .Site.Params.pgp }}</a></p>
 </footer>
