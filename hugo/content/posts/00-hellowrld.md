@@ -27,7 +27,7 @@ We can get down to the real fun.</p>
 
   
   <picture>
-  <img src="https://camo.githubusercontent.com/65c52abf102dad2e108dcb85797fad6ee98ae7a7d77b76e1c1b542fbf503136d/68747470733a2f2f692e70696e696d672e636f6d2f6f726967696e616c732f66662f62652f36312f66666265363165316330313164313537353532393534333937623961333666352e676966" alt="shell" loading="lazy" />
+  <img src="/assets/shell-anim.gif" alt="shell" loading="lazy" width="498" height="280" />
 </picture>
 </p>
 <p>Soft Serve used to host security research whitepapers, talks and presentations, and a few easter eggs from my self-hosted git repos. The service will return — rebuilt on Podman quadlets with a proper 3270 interface. See <a href="/posts/08-the-shell-is-gone/">the status post</a> for the full story.</p>
