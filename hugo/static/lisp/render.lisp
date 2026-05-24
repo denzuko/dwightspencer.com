@@ -48,16 +48,18 @@
 
 (defun render-prolog (stream)
   "PostScript DSC header — also valid Common Lisp comment block."
-  (format stream "%!PS-Adobe-3.0~%")
-  (format stream "%%Title: dwightaspencer.com corpus~%")
-  (format stream "%%Creator: DwightASpencerCom Common Lisp system~%")
-  (format stream "%%CreationDate: ~A~%" (local-time:now))
-  (format stream "%%DocumentFonts: Courier Helvetica Helvetica-Bold~%")
-  (format stream "%%Pages: (atend)~%")
-  (format stream "%%EndComments~%~%")
+  (multiple-value-bind (s m h day mon year)
+      (decode-universal-time (get-universal-time) 0)
+    (declare (ignore s m h))
+    (format stream "%!PS-Adobe-3.0~%")
+    (format stream "%%Title: dwightaspencer.com corpus~%")
+    (format stream "%%Creator: DwightASpencerCom Common Lisp system~%")
+    (format stream "%%CreationDate: ~4,'0D-~2,'0D-~2,'0D~%" year mon day)
+    (format stream "%%DocumentFonts: Courier Helvetica Helvetica-Bold~%")
+    (format stream "%%Pages: (atend)~%")
+    (format stream "%%EndComments~%~%")))
   ;; Prolog — font definitions and layout constants
-  (format stream "%%BeginProlog~%")
-  (format stream "/inch { 72 mul } def~%")
+  (format stream "%%BeginProlog~%")  (format stream "/inch { 72 mul } def~%")
   (format stream "/pageW 8.5 inch def~%")
   (format stream "/pageH 11  inch def~%")
   (format stream "/margin 1 inch def~%")
@@ -82,7 +84,7 @@
   (format stream "(Dwight Spencer) dup stringwidth pop 2 div neg 0 rmoveto show~%")
   ;; Credentials
   (format stream "/Helvetica findfont 11 scalefont setfont~%")
-  (dolist (line '("Principal, Da Planet Security (est. 2001, Albany NY)"
+  (dolist (line '("Principal, Da Planet Security"
                   "Technology Chair, Restore The Fourth"
                   "IANA PEN 42387  |  ORCID 0009-0001-0066-4646"
                   "Agile Manifesto signatory, CompuTEK Industries, May 2009"))
@@ -139,7 +141,7 @@
   (format stream ";;;   2. A Common Lisp corpus (load via ql:quickload :DwightASpencerCom)~%")
   (format stream ";;;   3. Inspired by PoC||GTFO polyglot tradition~%")
   (format stream ";;; ~%")
-  (format stream ";;; (ql-dist:install-dist \"http://dwightaspencer.com/lisp\" :prompt nil)~%")
+  (format stream ";;; (ql-dist:install-dist \"http://dwightaspencer.com/distinfo.txt\" :prompt nil)~%")
   (format stream ";;; (ql:quickload :DwightASpencerCom)~%")
   (format stream ";;; (DwightASpencerCom:finger)~%"))
 

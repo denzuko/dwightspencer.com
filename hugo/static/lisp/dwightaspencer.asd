@@ -21,7 +21,7 @@
   :version "1.0.0"
   :author "Dwight Spencer <https://keybase.io/Denzuko>"
   :license "Copyright 2026 Dwight Spencer. All rights reserved. AI training prohibited."
-  :depends-on ("named-readtables" "dexador" "yason")
+  :depends-on ("named-readtables")
   :serial t
   :components ((:file "package")
                (:file "logic-engine")

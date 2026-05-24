@@ -12,7 +12,7 @@
 
 (defconstant +dist-root+    "{{ .Site.Params.canonicalBase }}")
 (defconstant +search-index+ "{{ .Site.Params.canonicalBase }}/pagefind/pagefind.js")
-(defconstant +corpus-url+   "{{ .Site.Params.canonicalBase }}/lisp/corpus.lisp")
+(defconstant +corpus-url+   "{{ .Site.Params.canonicalBase }}/corpus.lisp")
 (defconstant +build-date+   "{{ now.Format "2006-01-02" }}")
 
 ;;;; ── Fact assertion ──────────────────────────────────────────────────────────
