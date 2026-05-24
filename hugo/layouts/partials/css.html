@@ -127,5 +127,7 @@
       :root:not([data-theme="light"]) .search-wrap{border-bottom-color:#333}
       :root:not([data-theme="light"]) .search-wrap input{border-color:#444;background:#1a1a18;color:#f0ede8}
     }
+    [data-theme="dark"] footer img{filter:invert(1)}
+    @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) footer img{filter:invert(1)}}
     @media(prefers-reduced-motion:reduce){.animate-blink{animation:none;opacity:1}}
     @media print{.skip-link,header nav,.tags,.theme-toggle,.search-toggle,.search-wrap{display:none}body{background:#fff;color:#000;padding:0;font-size:11pt}a[href]::after{content:" (" attr(href) ")";font-size:9pt}pre,code{border:1px solid #ccc;page-break-inside:avoid}}</style>
