@@ -109,13 +109,19 @@ only valid answer. It is an answer that has survived production use.</p>
 
 <h3 id="3-1-compute">3.1 Compute</h3>
 
-<p><strong>Podman quadlets with a system account</strong> — not rootless user units.
-A dedicated system account per service, managed by systemd, gives you
-proper cgroup accounting, clean log attribution in journald, and
-service isolation without running a daemon as root. Quadlet files live
-in <code>/etc/containers/systemd/</code>. Restarts on failure. Survives reboots.</p>
+<p><strong>Podman quadlets as system services, running as a dedicated system account.</strong>
+The unit lives in <code>/etc/containers/systemd/</code> and is managed by the system's
+PID 1 — not a user lingering session. A non-login system account (e.g.
+<code>nextcloud</code>, created with <code>useradd -r</code>) owns the ZFS dataset and the
+container process. The <code>User=</code> directive in <code>[Service]</code> drops privileges
+after systemd starts the unit. Inside the container, Podman maps UIDs
+through that account's subordinate UID map (<code>/etc/subuid</code>) — the container
+is rootless relative to the host even though the unit is a system service.
+This gives you proper cgroup v2 accounting, clean log attribution in
+journald, and ZFS dataset ownership aligned to the service account UID —
+none of which you get cleanly from a rootless user lingering service.</p>
 
-<pre><code>&#35; Example quadlet: /etc/containers/systemd/nextcloud.container
+<pre><code>&#35; /etc/containers/systemd/nextcloud.container
 [Unit]
 Description=Nextcloud
 After=network-online.target
@@ -126,6 +132,7 @@ AutoUpdate=registry
 Volume=storage/nextcloud:/var/www/html:Z
 EnvironmentFile=/etc/nextcloud.env
 Label=net.matrix.owner=FC13F74B@matrix.net
+UserNS=keep-id
 
 [Service]
 Restart=always
@@ -134,6 +141,11 @@ User=nextcloud
 [Install]
 WantedBy=multi-user.target default.target
 </code></pre>
+
+<p>The ZFS dataset <code>storage/containers/nextcloud</code> is owned by the
+<code>nextcloud</code> system account UID. The <code>UserNS=keep-id</code> directive preserves
+that mapping inside the container so filesystem permissions stay coherent
+across the ZFS/Podman boundary.</p>
 
 <h3 id="3-2-storage">3.2 Storage</h3>
 
