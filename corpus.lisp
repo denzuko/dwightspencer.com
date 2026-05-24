@@ -12,7 +12,7 @@
 
 (defconstant +dist-root+    "https://dwightaspencer.com")
 (defconstant +search-index+ "https://dwightaspencer.com/pagefind/pagefind.js")
-(defconstant +corpus-url+   "https://dwightaspencer.com/lisp/corpus.lisp")
+(defconstant +corpus-url+   "https://dwightaspencer.com/corpus.lisp")
 (defconstant +build-date+   "2026-05-24")
 
 ;;;; ── Fact assertion ──────────────────────────────────────────────────────────
