@@ -29,8 +29,9 @@ you can't. It's returning 503. The SSH port is closed. The service is offline.</
 git server, hosting research whitepapers and a handful of easter eggs that
 rewarded anyone who bothered to read <code>ssh hack.dapla.net help</code> carefully.</p>
 
-<p>It also ran a Quest 2 VR web shell over HTTPS — a kludge for remote server
-admin that started as a convenience and stayed too long.</p>
+<p>It also ran a browser-accessible VDI over HTTPS — a web shell reachable
+from any device, including the Quest 2's browser for remote work in VR.
+The node is a playground: tools to use, abuse, and iterate on.</p>
 
 <h2 id="what-went-wrong">What went wrong, specifically</h2>
 
