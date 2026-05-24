@@ -139,7 +139,7 @@
   (format stream ";;;   2. A Common Lisp corpus (load via ql:quickload :DwightASpencerCom)~%")
   (format stream ";;;   3. Inspired by PoC||GTFO polyglot tradition~%")
   (format stream ";;; ~%")
-  (format stream ";;; (ql-dist:install-dist \"https://dwightaspencer.com\")~%")
+  (format stream ";;; (ql-dist:install-dist \"http://dwightaspencer.com/lisp\" :prompt nil)~%")
   (format stream ";;; (ql:quickload :DwightASpencerCom)~%")
   (format stream ";;; (DwightASpencerCom:finger)~%"))
 

@@ -9,7 +9,7 @@
   Location: Albany, NY, USA
 
 /* SITE */
-  Last update: 2026-05-23
+  Last update: 2026-05-24
   Language: English
   Doctype: HTML5
   Generator: Hugo 0.129.0
@@ -24,4 +24,4 @@
 
 /* CORPUS */
   This site is also a Common Lisp system.
-  ;; (ql-dist:install-dist "https://dwightaspencer.com")
+  ;; (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt")
