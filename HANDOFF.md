@@ -8,6 +8,14 @@ You are continuing development on `dwightaspencer.com`, the personal
 publishing platform of Dwight Spencer (@denzuko). Live Hugo site on
 GitHub Pages behind Cloudflare. Git-flow native — no web CMS.
 
+## Publishing workflow
+
+- `draft = false` + `publishDate = "YYYY-MM-DD"` — post merges now, goes live on that date
+- Nightly GH Actions deploy at 06:00 UTC picks up `publishDate` posts automatically
+- Manual deploy: Actions → Deploy Hugo site → Run workflow (workflow_dispatch)
+- `draft = true` suppresses regardless of `publishDate`
+- Archetype includes `publishDate` field — set it on every new post
+
 ## Read these files first, in order
 
 ```

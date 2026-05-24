@@ -1,7 +1,8 @@
 +++
 title       = "Three Runtimes, One Site: A Case for Self-Documenting Infrastructure"
 date        = "2026-05-24"
-draft       = true
+publishDate = "2026-06-01"
+draft       = false
 description = "On treating a website as a running program — content as queryable facts, build systems as code generators, and output formats as policy. A case for self-documenting infrastructure drawn from systems design principles."
 slug        = "10-three-runtimes-one-site"
 keywords    = ["common lisp", "self-documenting systems", "prolog", "postscript", "asdf", "static site", "architecture", "systems design", "sbcl", "knowledge base", "polyglot"]
