@@ -18,7 +18,6 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
-          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3.2.1
@@ -28,10 +27,10 @@ jobs:
 
       - name: Copy brand assets from submodule
         run: |
+          mkdir -p hugo/static/css hugo/static/assets/brand hugo/data
           cp brand/static/css/brand.css hugo/static/css/brand.css
           cp -r brand/static/assets/. hugo/static/assets/brand/
           cp brand/data/brand.yaml hugo/data/brand.yaml
-          mkdir -p hugo/static/css hugo/static/assets/brand hugo/data
 
       - name: Build
         working-directory: hugo
