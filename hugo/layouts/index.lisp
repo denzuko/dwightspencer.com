@@ -41,11 +41,11 @@
   "Create and populate the site knowledge base."
   (let ((db (assert-post-facts (logic:make-post-kb))))
     ;; Easter egg artifacts — discoverable via corpus query
-    (logic:db-assert db '(artifact "file_id.diz" :bbs-descriptor "/file_id.diz"))
-    (logic:db-assert db '(artifact "xmcore.ans"  :ansi-splash    "/xmcore.ans"))
+    ;; /.well-known/file_id.diz : raw ANSI splash, SAUCE header intact
+    ;; It is well known. In more ways than one.
+    (logic:db-assert db '(artifact "file_id.diz" :bbs-descriptor "/.well-known/file_id.diz"))
     (logic:db-assert db '(tag "file_id.diz" :bbs))
-    (logic:db-assert db '(tag "xmcore.ans"  :bbs))
-    (logic:db-assert db '(tag "xmcore.ans"  :ansi-art))
+    (logic:db-assert db '(tag "file_id.diz" :ansi-art))
     db))
 
 (defun find-post (kb slug)
