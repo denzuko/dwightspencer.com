@@ -36,6 +36,29 @@ jobs:
         working-directory: hugo
         run: hugo --minify --gc
 
+      - name: Snapshot corpus into Quicklisp dist tgz
+        working-directory: hugo
+        run: |
+          # Option B: bundle current corpus.lisp into the tgz at build time
+          # The dist version is a versioned snapshot — accurate as of this deploy
+          DIST_DIR="static/lisp"
+          TGZ=$(ls ${DIST_DIR}/DwightASpencerCom-*.tgz | head -1)
+          RELEASE=$(basename "$TGZ" .tgz)
+          if [ -f "public/corpus.lisp" ] && [ -f "$TGZ" ]; then
+            mkdir -p /tmp/corpus-snap
+            tar xzf "$TGZ" -C /tmp/corpus-snap
+            cp public/corpus.lisp /tmp/corpus-snap/${RELEASE}/corpus.lisp
+            tar czf "$TGZ" -C /tmp/corpus-snap "${RELEASE}/"
+            SIZE=$(wc -c < "$TGZ")
+            MD5=$(md5sum "$TGZ" | cut -d' ' -f1)
+            SHA1=$(tar -xOf "$TGZ" | sha1sum | cut -d' ' -f1)
+            echo "DwightASpencerCom http://dwightaspencer.com/lisp/$(basename $TGZ) $SIZE $MD5 $SHA1 ${RELEASE} ${RELEASE}/dwightaspencer.asd" \
+              > "${DIST_DIR}/releases.txt"
+            cp "$TGZ" "public/lisp/$(basename $TGZ)"
+            cp "${DIST_DIR}/releases.txt" "public/lisp/releases.txt"
+            echo "Corpus snapshotted into dist: $SIZE bytes"
+          fi
+
       - name: Generate per-post OG images
         working-directory: hugo
         run: |
