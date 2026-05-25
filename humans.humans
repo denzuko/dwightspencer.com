@@ -2,7 +2,7 @@
 
 /* TEAM */
   Name: Dwight Spencer
-  Handle: @denzuko
+  Handle: <no value>
   PGP: 0x5DCBF78E3F9C3FE3
   ORCID: 0009-0001-0066-4646
   IANA PEN: 42387
@@ -14,7 +14,7 @@
   Doctype: HTML5
   Generator: Hugo 0.129.0
   Posts: 10
-  Tags: 16
+  Tags: 19
   Standards: HTML5, CSS3, Microformats2, Schema.org, ActivityPub (webfinger)
 
 /* PHILOSOPHY */
@@ -25,3 +25,7 @@
 /* CORPUS */
   This site is also a Common Lisp system.
   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
+
+/* BBS */
+  Former SysOp. It is well known.
+  /.well-known/file_id.diz
