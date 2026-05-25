@@ -1,0 +1,34 @@
+{{- define "bodyclass" }}{{ end -}}
+{{- define "main" }}
+  {{- $count := len .Pages }}
+  {{- $isBBS := eq (.Title | lower) "bbs" }}
+
+  <h2 class="post">#{{ .Title }}</h2>
+  <p class="meta" style="margin-bottom:1.5rem">
+    {{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }} tagged {{ .Title | lower }}.
+  </p>
+
+  {{- if $isBBS }}
+  <div class="note" style="margin-bottom:2rem;font-family:'Share Tech Mono',monospace;font-size:13px;line-height:1.9;border-left:2px solid #ccc;padding-left:1rem;color:#555;">
+    Former SysOp. XM Core BBS — bbs.dapla.net — Dallas TX 2016.<br>
+    FidoNET 1:124/5017 · AgoraNET 46:124/9999 · 249,668 messages.<br>
+    <span style="opacity:.4">It is well known. <a href="/.well-known/file_id.diz" style="color:inherit">/.well-known/file_id.diz</a></span>
+  </div>
+  {{- end }}
+
+  <ul class="list">
+    {{- range .Pages.ByDate.Reverse }}
+    <li>
+      <time class="index-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <span class="hr-list"></span>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+  </ul>
+
+  {{- if $isBBS }}
+  <p class="finger-exit" style="margin-top:2rem">
+    <span style="color:#75715e">; → corpus: <code>(query '(tag ?s :bbs))</code></span>
+  </p>
+  {{- end }}
+{{- end }}

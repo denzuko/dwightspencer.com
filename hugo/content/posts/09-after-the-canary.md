@@ -5,7 +5,7 @@ draft       = false
 description = "The Canarytail organization is gone. Its GitHub org was deleted, its website is dark. This is what that means for implementations that depended on it — and what a resilient warrant canary infrastructure actually looks like."
 slug        = "09-after-the-canary"
 keywords    = ["warrant canary", "Canarytail", "privacy", "security", "open standard", "dead projects", "self-hosted", "PGP", "infrastructure"]
-tags        = ["privacy", "surveillance", "open-source", "infrastructure"]
+tags        = ["privacy", "surveillance", "open-source", "infrastructure", "bbs"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "Privacy, Security, Open Source, System Architecture"
@@ -139,3 +139,5 @@ If the answer is "our canary becomes unverifiable," that's a
 design problem to fix before it's forced on you.</p>
 
 <p class="finger-exit"><span style="color:#75715e">; → <a href="/posts/01-a-better-tweedy-bird/" style="color:#9a9a9a">post 01</a> has the original canary architecture argument</span></p>
+
+<p class="finger-exit"><span style="color:#75715e">; → <a href="/posts/10-canary-in-the-infrastructure/" style="color:#9a9a9a">post 10</a> — rebuttal: the canary should live in the infrastructure, not just the file</span></p>

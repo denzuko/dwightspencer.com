@@ -280,6 +280,22 @@ venue = HPR on the episode post; venue = KDP or arXiv on the whitepaper
 ### ~~v3 — Hugo CMS integration~~ (REMOVED — not needed)
 Git-native workflow is correct for this site. No CMS layer required.
 
+### v3 — Cloudflare R2 asset migration (issue #61)
+GitHub/Microsoft owns what is hosted on GitHub Pages. Copyright is retained
+but the platform can shut down the site without compensation. R2 provides
+ownership-neutral CDN hosting under the existing Cloudflare account.
+
+Plan:
+- R2 bucket → `assets.cdn.dwightaspencer.com` (site assets, fonts, OG images)
+- R2 bucket → `stream-assets.cdn.dwightaspencer.com` (already configured)
+- GH Actions: upload build artifacts to R2 on deploy
+- Site HTML continues from GitHub Pages initially, then migrates to Cloudflare Pages
+
+### v3 — Plausible CE at analytics.dapla.net (issue #62)
+Self-hosted privacy-respecting analytics via Podman quadlet on Da Planet Security
+infrastructure. Deploy after v2 content milestone (10+ posts live).
+See issue #62 for full quadlet spec.
+
 ### v3 — Archive content recovery (stretch goal)
 Posts 10–12 from WordPress/CompuTEK era (denzuko.wordpress.com, computekindustries.com,
 denzuko.co.cc). Pending backup retrieval from Internet Archive team.
