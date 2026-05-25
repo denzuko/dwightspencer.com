@@ -5,12 +5,14 @@ draft       = false
 description = "A technical evaluation of Prolog, ML-style types (Coalton DSL), and Common Lisp as a layered architecture for game simulation engines. Benchmarks across SBCL and ECL, portability findings, and architectural conclusions about where each paradigm earns its place."
 slug        = "03-rules-types-and-glue"
 keywords    = ["Prolog", "Common Lisp", "Coalton", "game engine", "simulation", "multi-paradigm", "knowledge representation", "SBCL", "ECL", "architecture"]
-tags        = []
-categories  = []
+tags        = ["architecture", "common-lisp", "prolog", "open-source"]
+categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "Security, Open Source, System Architecture, Common Lisp, Prolog, Game Engine Design"
 aliases     = ["/03-rules-types-and-glue/"]
 og_image    = "/assets/og-posts.png"
+venue       = "arXiv"
+arxiv_submit = true
 +++
 
 <h2 id="abstract">Abstract</h2>

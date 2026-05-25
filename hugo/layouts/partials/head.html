@@ -3,7 +3,12 @@
 {{- $url   := .Permalink -}}
 {{- $dcType := cond (isset .Params "schema_type") .Params.schema_type "WebPage" -}}
 {{- $ogType := cond .IsPage "article" "website" -}}
-{{- $ogImage := cond (isset .Params "og_image") .Params.og_image "/assets/og-posts.png" -}}
+{{- $ogDefault := cond (isset .Params "og_image") .Params.og_image "/assets/og-posts.png" -}}
+{{- $ogPerPost := printf "/assets/og/%s.png" .Params.slug -}}
+{{- $ogImage := $ogDefault -}}
+{{- if and .Params.slug (fileExists (printf "static%s" $ogPerPost)) -}}
+  {{- $ogImage = $ogPerPost -}}
+{{- end -}}
   <head>
     <meta name="generator" content="Hugo {{ hugo.Version }}">
     <meta charset="utf-8">
@@ -89,6 +94,7 @@
     <link rel="me" href="{{ .Site.Params.linkedin }}">
     <link rel="me" href="{{ .Site.Params.keybase }}">
     <link rel="me" href="https://orcid.org/{{ .Site.Params.orcid }}">
+    <link rel="me" href="{{ .Site.Params.arxiv }}">
 
     {{- /* ── SCHEMA.ORG JSON-LD ── */}}
     {{- partial "schema.html" . }}
@@ -104,6 +110,7 @@
     <meta name="theme-color" content="#fffdfa" media="(prefers-color-scheme: light)">
     <link rel="alternate" type="application/rss+xml" title="{{ .Site.Params.siteTitle }}" href="{{ .Site.Params.canonicalBase }}/atom.xml" />
     <link rel="alternate" type="application/json" title="{{ .Site.Params.siteTitle }}" href="{{ .Site.Params.canonicalBase }}/feed.json" />
+    <link rel="alternate" type="application/atom+xml" title="Dwight Spencer — arXiv papers" href="https://arxiv.org/a/0009-0001-0066-4646.atom2" />
     <link rel="alternate" type="application/vnd.quicklisp-dist" title="DwightASpencerCom Quicklisp dist" href="http://dwightaspencer.com/distinfo.txt" />
     <link rel="stylesheet" href="{{ .Site.Params.canonicalBase }}/fonts/fonts.css">
     <link rel="stylesheet" href="{{ .Site.Params.canonicalBase }}/css/brand.css">

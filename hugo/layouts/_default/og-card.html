@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200,height=630">
+<style>
+  @font-face {
+    font-family: 'Share Tech Mono';
+    src: url('/fonts/share-tech-mono-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Bricolage Grotesque';
+    src: url('/fonts/bricolage-grotesque-latin.woff2') format('woff2');
+    font-weight: 200 800;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #fffdfa;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 64px;
+    border: 1px solid #ccc;
+  }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .site {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 18px;
+    color: #111;
+    opacity: .4;
+    letter-spacing: .06em;
+  }
+  .mark { opacity: .08; }
+  .title {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 500;
+    color: #111;
+    line-height: 1.15;
+    max-width: 900px;
+    margin: auto 0;
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px dotted #ccc;
+    padding-top: 24px;
+  }
+  .desc {
+    font-size: 20px;
+    color: #111;
+    opacity: .5;
+    max-width: 800px;
+    line-height: 1.5;
+  }
+  .meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: #111;
+    opacity: .25;
+    text-align: right;
+    line-height: 1.9;
+    flex-shrink: 0;
+    margin-left: 32px;
+  }
+</style>
+</head>
+<body>
+  <div class="top">
+    <span class="site">dwightaspencer.com</span>
+    <svg class="mark" width="56" height="56" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="80" cy="80" r="78" fill="none" stroke="#111" stroke-width="2"/>
+      <circle cx="80" cy="80" r="62" fill="#fffdfa"/>
+      <circle cx="80" cy="80" r="54" fill="#111"/>
+      <ellipse cx="80" cy="80" rx="48" ry="28" fill="#fffdfa" transform="rotate(-25 80 80)"/>
+      <circle cx="80" cy="80" r="22" fill="#111"/>
+      <circle cx="80" cy="80" r="11" fill="#fffdfa"/>
+      <circle cx="80" cy="80" r="4" fill="#111"/>
+    </svg>
+  </div>
+  <div class="title">{{ .Title }}</div>
+  <div class="bottom">
+    <div class="desc">{{ .Params.description | truncate 140 }}</div>
+    <div class="meta">
+      {{ .Date.Format "2006-01-02" }}<br>
+      {{ with .Params.series }}{{ index . 0 }}{{ end }}
+    </div>
+  </div>
+</body>
+</html>

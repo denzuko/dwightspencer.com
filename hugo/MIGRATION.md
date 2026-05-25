@@ -243,10 +243,8 @@ Deliverables (in order):
 
 venue = HPR on the episode post; venue = KDP or arXiv on the whitepaper
 
-### v3 — Hugo CMS integration (Decap/Forestry successor)
-For non-code content updates (warrant canary renewal, media archive updates)
-without requiring a full git workflow. Low priority — current git workflow
-is acceptable for the volume.
+### ~~v3 — Hugo CMS integration~~ (REMOVED — not needed)
+Git-native workflow is correct for this site. No CMS layer required.
 
 ### v3 — Archive content recovery (stretch goal)
 Posts 10–12 from WordPress/CompuTEK era (denzuko.wordpress.com, computekindustries.com,
