@@ -123,7 +123,7 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
   # CTA — swap text/url when Patreon/book/MSP pipelines go live
   # e.g. "Buy the book" / "https://..." or "Hire Da Planet Security" / "https://dapla.net"
   [params.cta]
-    text = "Support this work"
+    text = "One less dependency"
     url  = "https://buymeacoffee.com/denzuko"
 
 [outputFormats.OGCard]

@@ -39,7 +39,7 @@
     <meta name="DC.creator" content="{{ .Site.Params.author }}">
     <meta name="DC.creator.orcid" content="https://orcid.org/{{ .Site.Params.orcid }}">
     <meta name="orcid" content="{{ .Site.Params.orcid }}">
-    <meta name="DC.subject" content="{{ with .Params.keywords }}{{ delimit . "; " }}{{ else }}{{ .Site.Params.author }}; Portfolio; Blog; DevOps; Security{{ end }}">
+    <meta name="DC.subject" content="{{ with .Params.keywords }}{{ delimit . "; " }}{{ else }}{{ .Site.Params.author }}; Systems Design; Infrastructure Sovereignty; Digital Civil Liberties; Privacy{{ end }}">
     <meta name="DC.description" content="{{ $desc }}">
     <meta name="DC.publisher" content="dwightaspencer.com">
     <meta name="DC.date" content="{{ .Date.Format "2006-01-02" }}">
@@ -58,7 +58,7 @@
 
     {{- /* ── AEO ── */}}
     <meta name="aeo:author" content="{{ .Site.Params.author }}">
-    <meta name="aeo:expertise" content="{{ with .Params.aeo_expertise }}{{ . }}{{ else }}DevOps, Privacy, Security, Architecture{{ end }}">
+    <meta name="aeo:expertise" content="{{ with .Params.aeo_expertise }}{{ . }}{{ else }}Systems Design, Infrastructure Sovereignty, Digital Civil Liberties, Privacy, Security{{ end }}">
     <meta name="aeo:years_experience" content="25">
 
     {{- /* ── OPEN GRAPH ── */}}
