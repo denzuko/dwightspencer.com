@@ -1,26 +1,72 @@
 # hugo/data/author.yaml — single source of truth for author identity
-# Drives: home page finger block, corpus.lisp, Schema.org JSON-LD, humans.txt
+# Drives: home page finger block, corpus.lisp, Schema.org JSON-LD, humans.txt,
+#         stream-assets dashboard, all platform bios
 # To update: edit here. All rendered views update on next hugo build.
 
 name: "Dwight Spencer"
-handle: "@denzuko"
+handle_community: "denzuko"
+handle_commercial: "zekodun"
 pgp: "0x5DCBF78E3F9C3FE3"
 orcid: "0009-0001-0066-4646"
 iana_pen: "42387"
+duns: "039-271-257"
+sam_sin: "54151S"
+naics: "541513"
 tagline: "Code is speech. Platforms are not neutral."
+
+bio_short: "Principal @ Da Planet Security (est. 2003) · RT4 Technology Chair · Internet Archive contributor. Systems design, infrastructure sovereignty, digital civil liberties. Writing at dwightaspencer.com · HPR contributor · InfraGard · HOPE. PGP 0x5DCBF78E3F9C3FE3"
+
+bio_github: "Principal @ Da Planet Security · RT4 Technology Chair · Internet Archive. Infrastructure sovereignty · DevSecOps · Common Lisp · POSIX sh. IANA PEN 42387 · SAM.gov SIN 54151S · ORCID 0009-0001-0066-4646. dwightaspencer.com"
+
+bio_oneliner: "Principal @ Da Planet Security (est. 2003) · RT4 Tech Chair · dwightaspencer.com · PGP 0x5DCBF78E3F9C3FE3"
+
+bio_long: |
+  Dwight Spencer is the principal of Da Planet Security, a managed security
+  and infrastructure practice founded in 2003 as CompuTEK Industries and
+  operating continuously since. In 2005, before the term existed, he was
+  presenting what would later be coined DevOps to channel partners including
+  IBM and PuppetLabs — a lineage documented in the Agile Manifesto (signatory,
+  CompuTEK Industries, May 2009) and DFW 2600 presentation archive.
+
+  Da Planet Security (SAM.gov SIN 54151S · DUNS 039-271-257 · IANA PEN 42387)
+  delivers high-availability infrastructure, secure service delivery, and
+  DevSecOps transformation for enterprise, nonprofit, and public sector clients.
+
+  Technology Chair, Restore The Fourth — the national organization advancing
+  Fourth Amendment protections against AI-powered surveillance infrastructure.
+  Developer and Archivist Team Member at the Internet Archive. InfraGard
+  member. HOPE Conference volunteer.
+
+  Research and writing at dwightaspencer.com addresses systems design,
+  infrastructure sovereignty, and the legal and technical dimensions of
+  surveillance accountability. Author of The Watchers You Fed (forthcoming).
+
+bio_expert_witness: |
+  Dwight Spencer is the principal of Da Planet Security, a managed security
+  and infrastructure practice with operations dating to 2003. He has delivered
+  security architecture, identity management, and DevSecOps transformation for
+  enterprise clients including Capital One and AirBNB, and for public sector
+  and nonprofit organizations. A signatory of the Agile Manifesto (2009), he
+  has contributed to infrastructure and security methodology development over
+  two decades. He is registered on SAM.gov (SIN 54151S) and holds IANA Private
+  Enterprise Number 42387. He is a member of InfraGard and a Developer and
+  Archivist Team Member at the Internet Archive. His research on surveillance
+  infrastructure and systems design is published at dwightaspencer.com.
+  ORCID 0009-0001-0066-4646.
+
+site_description: "Systems design, infrastructure sovereignty, and digital civil liberties. Principal, Da Planet Security (est. 2003). Technology Chair, Restore The Fourth."
+
+# Legacy bio for finger block
+bio: "Principal, Da Planet Security (est. 2003, formerly CompuTEK Industries). RT4 Technology Chair. Internet Archive contributor. InfraGard. HOPE. Author: The Watchers You Fed (forthcoming)."
 
 roles:
   - "Principal, Da Planet Security"
   - "Technology Chair, Restore The Fourth"
-  - "IEEE Computer Society"
+  - "Developer & Archivist, Internet Archive"
   - "InfraGard"
+  - "IEEE Computer Society"
   - "ISACA"
   - "SCORE Mentor"
-
-bio: >
-  SysOp turned DevOps precursor (2007–2008, pre-coinage) turned security
-  researcher. 20+ years managed security services.
-  Author: The Watchers You Fed (KDP, forthcoming).
 
 education:
   - symbol: ":UoP"
