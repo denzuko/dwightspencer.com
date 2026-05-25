@@ -71,12 +71,13 @@ tar xzf /path/to/hugo/static/lisp/DwightASpencerCom-YYYY-MM-DD.tgz
 # copy updated files in
 tar czf DwightASpencerCom-YYYY-MM-DD.tgz DwightASpencerCom-YYYY-MM-DD/
 
-# 3. Get checksums
-wc -c < DwightASpencerCom-YYYY-MM-DD.tgz    # size
-md5sum DwightASpencerCom-YYYY-MM-DD.tgz      # md5
-sha256sum DwightASpencerCom-YYYY-MM-DD.tgz   # sha256
+# 3. Get checksums — NOTE: releases.txt uses SHA1 of extracted content stream
+#    not SHA256 of the tgz file itself
+wc -c < DwightASpencerCom-YYYY-MM-DD.tgz          # size
+md5sum DwightASpencerCom-YYYY-MM-DD.tgz            # file-md5
+tar -xOf DwightASpencerCom-YYYY-MM-DD.tgz | sha1sum  # content-sha1
 
-# 4. Update releases.txt with new size/md5/sha256
+# 4. Update releases.txt — format: name url size file-md5 content-sha1 prefix asd
 # 5. Update distinfo.txt version field if cutting a new release date
 ```
 
@@ -86,5 +87,5 @@ sha256sum DwightASpencerCom-YYYY-MM-DD.tgz   # sha256
 |---|---|---|
 | DESTRUCTURING-BIND error with `<!doctype` | URL is wrong, returns HTML | Use `http://dwightaspencer.com/distinfo.txt` |
 | `System "DwightASpencerCom" not found` | Dist not installed or cache stale | `(ql:update-all-dists)` then retry |
-| Checksum mismatch | tgz updated without rebuilding releases.txt | Rebuild index per above |
+| Checksum mismatch | tgz updated without rebuilding releases.txt | Rebuild index per above — use `tar -xOf | sha1sum` for content-sha1 |
 | `corpus.lisp` 404 | Hugo not generating it or wrong URL | Check `hugo/layouts/index.lisp` output format |
