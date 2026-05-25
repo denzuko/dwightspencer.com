@@ -39,7 +39,14 @@
 
 (defun make-site-kb ()
   "Create and populate the site knowledge base."
-  (assert-post-facts (logic:make-post-kb)))
+  (let ((db (assert-post-facts (logic:make-post-kb))))
+    ;; Easter egg artifacts — discoverable via corpus query
+    (logic:db-assert db '(artifact "file_id.diz" :bbs-descriptor "/file_id.diz"))
+    (logic:db-assert db '(artifact "xmcore.ans"  :ansi-splash    "/xmcore.ans"))
+    (logic:db-assert db '(tag "file_id.diz" :bbs))
+    (logic:db-assert db '(tag "xmcore.ans"  :bbs))
+    (logic:db-assert db '(tag "xmcore.ans"  :ansi-art))
+    db))
 
 (defun find-post (kb slug)
   "Return post plist for SLUG or NIL."
