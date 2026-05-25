@@ -36,27 +36,74 @@ jobs:
         working-directory: hugo
         run: hugo --minify --gc
 
-      - name: Snapshot corpus into Quicklisp dist tgz
+      - name: Package Quicklisp dist via quickdist
         working-directory: hugo
         run: |
-          # Option B: bundle current corpus.lisp into the tgz at build time
-          # The dist version is a versioned snapshot — accurate as of this deploy
-          DIST_DIR="static/lisp"
-          TGZ=$(ls ${DIST_DIR}/DwightASpencerCom-*.tgz | head -1)
-          RELEASE=$(basename "$TGZ" .tgz)
-          if [ -f "public/corpus.lisp" ] && [ -f "$TGZ" ]; then
-            mkdir -p /tmp/corpus-snap
-            tar xzf "$TGZ" -C /tmp/corpus-snap
-            cp public/corpus.lisp /tmp/corpus-snap/${RELEASE}/corpus.lisp
-            tar czf "$TGZ" -C /tmp/corpus-snap "${RELEASE}/"
-            SIZE=$(wc -c < "$TGZ")
-            MD5=$(md5sum "$TGZ" | cut -d' ' -f1)
-            SHA1=$(tar -xOf "$TGZ" | sha1sum | cut -d' ' -f1)
-            echo "DwightASpencerCom http://dwightaspencer.com/lisp/$(basename $TGZ) $SIZE $MD5 $SHA1 ${RELEASE} ${RELEASE}/dwightaspencer.asd" \
-              > "${DIST_DIR}/releases.txt"
-            cp "$TGZ" "public/lisp/$(basename $TGZ)"
-            cp "${DIST_DIR}/releases.txt" "public/lisp/releases.txt"
-            echo "Corpus snapshotted into dist: $SIZE bytes"
+          # Hugo is the compiler — corpus.lisp is a build artifact
+          # quickdist is the packager — generates spec-correct dist indexes
+          # No hand-rolled checksums, no runtime HTTP dependencies
+
+          if [ ! -f "public/corpus.lisp" ]; then
+            echo "corpus.lisp not found in build output — skipping dist packaging"
+            exit 0
+          fi
+
+          # Install quickdist via Roswell or SBCL
+          SBCL_BIN=$(which sbcl 2>/dev/null)
+          if [ -z "$SBCL_BIN" ]; then
+            sudo apt-get install -y sbcl 2>/dev/null
+          fi
+
+          # Set up the source directory for quickdist
+          VERSION=$(date +%Y-%m-%d)
+          RELEASE="DwightASpencerCom-${VERSION}"
+          mkdir -p /tmp/quickdist-src/DwightASpencerCom
+
+          # Copy all lisp sources + the freshly compiled corpus
+          cp static/lisp/*.lisp static/lisp/*.asd \
+             /tmp/quickdist-src/DwightASpencerCom/
+          cp public/corpus.lisp \
+             /tmp/quickdist-src/DwightASpencerCom/corpus.lisp
+
+          # Run quickdist
+          mkdir -p /tmp/quickdist-out
+          sbcl --non-interactive \
+            --eval "(require :asdf)" \
+            --eval "(ql:quickload :quickdist)" \
+            --eval "(quickdist:make-dist
+                       \"DwightASpencerCom\"
+                       :base-url \"http://dwightaspencer.com/lisp\"
+                       :source-dir \"/tmp/quickdist-src/\"
+                       :dist-dir \"/tmp/quickdist-out/\")" \
+            --eval "(quit)" 2>&1 || {
+              echo "quickdist not available — falling back to manual packaging"
+              # Fallback: manual but correct per spec
+              DIST_DIR="static/lisp"
+              TGZ="${DIST_DIR}/${RELEASE}.tgz"
+              mkdir -p /tmp/corpus-snap/${RELEASE}
+              cp static/lisp/*.lisp static/lisp/*.asd \
+                 /tmp/corpus-snap/${RELEASE}/
+              cp public/corpus.lisp /tmp/corpus-snap/${RELEASE}/corpus.lisp
+              tar czf "$TGZ" -C /tmp/corpus-snap "${RELEASE}/"
+              SIZE=$(wc -c < "$TGZ")
+              MD5=$(md5sum "$TGZ" | cut -d' ' -f1)
+              SHA1=$(tar -xOf "$TGZ" | sha1sum | cut -d' ' -f1)
+              echo "DwightASpencerCom http://dwightaspencer.com/lisp/$(basename $TGZ) $SIZE $MD5 $SHA1 ${RELEASE} ${RELEASE}/dwightaspencer.asd" \
+                > "${DIST_DIR}/releases.txt"
+              # Update distinfo.txt version
+              sed -i "s/^version .*/version ${VERSION}/" "${DIST_DIR}/../distinfo.txt"
+              cp "$TGZ" "public/lisp/$(basename $TGZ)"
+              cp "${DIST_DIR}/releases.txt" "public/lisp/releases.txt"
+              cp "${DIST_DIR}/../distinfo.txt" "public/distinfo.txt"
+              echo "Dist packaged (fallback): $SIZE bytes, sha1=$SHA1"
+            }
+
+          # If quickdist succeeded, copy its output
+          if [ -d "/tmp/quickdist-out" ] && [ "$(ls /tmp/quickdist-out 2>/dev/null)" ]; then
+            cp /tmp/quickdist-out/*.tgz public/lisp/ 2>/dev/null || true
+            cp /tmp/quickdist-out/releases.txt public/lisp/ 2>/dev/null || true
+            cp /tmp/quickdist-out/systems.txt public/lisp/ 2>/dev/null || true
+            echo "quickdist output deployed"
           fi
 
       - name: Generate per-post OG images
