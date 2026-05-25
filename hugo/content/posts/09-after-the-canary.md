@@ -155,7 +155,7 @@ domain whether you want it to or not:</p>
 <li><strong>Certificate Transparency logs</strong> — every TLS certificate issued for your domain
 is in an append-only public audit log. A certificate issued under government
 compulsion is detectable at <a href="https://crt.sh">crt.sh</a>.</li>
-<li><strong>DNSSEC TXT records</strong> at <code>_canary.dwightaspencer.com</code> — signed by your zone key,
+<li><strong>DNSSEC TXT records</strong> at <code>_canary.dapla.net</code> — signed by your zone key,
 verifiable without fetching a file, suppressing it requires suppressing your
 entire domain's DNS responses.</li>
 <li><strong>DKIM key rotation</strong> — abrupt cessation of normal rotation is a detectable

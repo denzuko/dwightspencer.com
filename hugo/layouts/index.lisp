@@ -38,7 +38,9 @@
 ;;;; ── Query API ───────────────────────────────────────────────────────────────
 
 (defun make-site-kb ()
-  "Create and populate the site knowledge base."
+  "Create and populate the site knowledge base.
+   Called from DwightASpencerCom package. logic: is the local nickname
+   for dsc/logic within dsc/corpus — see package.lisp (:local-nicknames)."
   (let ((db (assert-post-facts (logic:make-post-kb))))
     ;; Easter egg artifacts — discoverable via corpus query
     ;; /.well-known/file_id.diz : raw ANSI splash, SAUCE header intact
