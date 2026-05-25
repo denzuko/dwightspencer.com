@@ -5,7 +5,7 @@ draft       = false
 description = "The Canarytail organization is gone. Its GitHub org was deleted, its website is dark. This is what that means for implementations that depended on it — and what a resilient warrant canary infrastructure actually looks like."
 slug        = "09-after-the-canary"
 keywords    = ["warrant canary", "Canarytail", "privacy", "security", "open standard", "dead projects", "self-hosted", "PGP", "infrastructure"]
-tags        = ["privacy", "surveillance", "open-source", "infrastructure", "bbs"]
+tags        = ["privacy", "surveillance", "open-source", "infrastructure"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "Privacy, Security, Open Source, System Architecture"
@@ -138,6 +138,33 @@ any other single point of failure: what happens when this is gone?
 If the answer is "our canary becomes unverifiable," that's a
 design problem to fix before it's forced on you.</p>
 
+
+<h2 id="update-the-canary-should-live-in-the-infrastructure">Update: the canary should live in the infrastructure</h2>
+
+<p>The argument above is correct as far as it goes. A standalone file with zero
+external dependencies is better than a Canarytail-dependent file. But it still
+treats the canary as a document — a file you publish, a file whose absence is
+the signal.</p>
+
+<p>A file can be suppressed without suppressing the domain. The right architecture
+uses the cryptographic infrastructure the domain already relies on — the
+infrastructure that is independently monitored by every party depending on your
+domain whether you want it to or not:</p>
+
+<ul>
+<li><strong>Certificate Transparency logs</strong> — every TLS certificate issued for your domain
+is in an append-only public audit log. A certificate issued under government
+compulsion is detectable at <a href="https://crt.sh">crt.sh</a>.</li>
+<li><strong>DNSSEC TXT records</strong> at <code>_canary.dwightaspencer.com</code> — signed by your zone key,
+verifiable without fetching a file, suppressing it requires suppressing your
+entire domain's DNS responses.</li>
+<li><strong>DKIM key rotation</strong> — abrupt cessation of normal rotation is a detectable
+behavioral change for anyone monitoring your mail infrastructure.</li>
+</ul>
+
+<p>The <code>/.well-known/canary.txt</code> file is the human-readable layer.
+The cryptographic infrastructure is the machine-verifiable layer.
+They are different audiences for the same signal, not competing standards.</p>
+
 <p class="finger-exit"><span style="color:#75715e">; → <a href="/posts/01-a-better-tweedy-bird/" style="color:#9a9a9a">post 01</a> has the original canary architecture argument</span></p>
 
-<p class="finger-exit"><span style="color:#75715e">; → <a href="/posts/10-canary-in-the-infrastructure/" style="color:#9a9a9a">post 10</a> — rebuttal: the canary should live in the infrastructure, not just the file</span></p>
