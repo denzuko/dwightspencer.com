@@ -56,8 +56,9 @@ bio_expert_witness: |
 
 site_description: "Systems design, infrastructure sovereignty, and digital civil liberties. Principal, Da Planet Security (est. 2003). Technology Chair, Restore The Fourth."
 
-# Legacy bio for finger block
-bio: "Principal, Da Planet Security (est. 2003, formerly CompuTEK Industries). RT4 Technology Chair. Internet Archive contributor. InfraGard. HOPE. Author: The Watchers You Fed (forthcoming)."
+# bio: inline blurb for whoami block and finger.html — keep concise
+# Long-form bios are in bio_long, bio_expert_witness etc.
+bio: "Principal, Da Planet Security (est. 2003). RT4 Technology Chair. Author: The Watchers You Fed (forthcoming)."
 
 roles:
   - "Principal, Da Planet Security"
