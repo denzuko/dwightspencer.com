@@ -59,6 +59,38 @@ Regenerates on every `hugo --gc`.
 The `+corpus-url+` constant in the corpus template must point to:
 `https://dwightaspencer.com/corpus.lisp`
 
+### Package architecture
+
+```
+dsc/logic          — micro-Prolog engine (db-assert, db-prove-all, unification)
+dsc/corpus         — post/tag/author facts; uses logic: local nickname
+dsc/render         — PostScript output; uses corpus: local nickname
+DwightASpencerCom  — top-level ql:quickload target; (:use all three)
+```
+
+Public API (all callable after ql:quickload):
+```lisp
+(DwightASpencerCom:finger)                    ; homepage whoami block
+(DwightASpencerCom:query '(tag ?s :privacy))  ; Prolog query
+(DwightASpencerCom:find-post "03-rules-types-and-glue")
+(DwightASpencerCom:find-by-tag :bbs)
+(DwightASpencerCom:all-posts)
+```
+
+### Bundled stub vs CI snapshot
+
+The tgz in `hugo/static/lisp/` contains `corpus-stub.lisp` which provides
+a minimal `make-site-kb` stub. The CI build pipeline (GH Actions) replaces it
+with the Hugo-generated `corpus.lisp` before packaging — so the deployed tgz
+always contains the live post facts snapshotted at build time.
+
+The stub's `fboundp` guard handles the case where CI didn't run the snapshot
+step: if `assert-post-facts` is already defined (real corpus was bundled),
+it skips the HTTP fetch. If not, it fetches the live corpus at load time.
+
+`releases.txt` checksums change on every build because the bundled corpus
+changes. This is by design — each dist version is a snapshot.
+
 ## Updating the release
 
 When changing any `.lisp` or `.asd` source file:
