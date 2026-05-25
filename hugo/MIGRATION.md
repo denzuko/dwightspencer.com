@@ -124,6 +124,40 @@ from one canonical file shared across the persona ecosystem.
 Brand guide live at `denzuko.github.io/stream-assets/brand/`.
 
 ### ✅ Self-hosted fonts (DONE 2026-05-25)
+### ✅ BMAC profile updated (DONE 2026-05-25)
+Header image, bio copy, and avatar (Image 4 flat vector portrait) updated.
+Title: "Infrastructure writing, open source, and HPR episodes"
+
+**Next session — BMAC monetization strategy:**
+- Membership tiers (R&D fund, charitable fundraising, community building)
+- Shop (gear toward the research/practitioner audience)
+- Monetization strategy aligned with: book pre-orders, HPR archive access,
+  expert witness referrals, Da Planet Security pipeline (entity separation applies)
+- Copy for each tier — not "exclusive content" framing, more "sustaining the work"
+
+### ✅ stream-assets custom domain (DONE 2026-05-25)
+CNAME file added: `stream-assets.dwightaspencer.com`
+**Action needed in Cloudflare DNS:**
+```
+stream-assets    CNAME    denzuko.github.io    (DNS only, not proxied)
+```
+Once DNS propagates, all /assets/, /css/, /js/ paths resolve correctly.
+OBS browser source URLs: `stream-assets.dwightaspencer.com/scene-intro/` etc.
+
+### arXiv submission — post 03 (pending)
+Post 03 ("Rules, Types, and Glue") tagged `venue = arXiv`, `arxiv_submit = true`.
+
+**Submission steps:**
+1. Log in at https://arxiv.org with ORCID `0009-0001-0066-4646`
+2. New submission → cs.PL (Programming Languages) or cs.AI
+3. Paste post content as LaTeX or upload PDF — post 03 is already
+   written to paper standards (abstract, sections, benchmarks)
+4. Authors: Dwight Spencer, ORCID 0009-0001-0066-4646
+5. Once accepted, add `arxiv_id = "XXXX.XXXXX"` to post 03 front matter
+6. head.html will render Schema.org `sameAs` and `<link rel="canonical">`
+   pointing to the arXiv abstract page
+
+
 Google Fonts removed. No external font requests, no tracking, no GDPR exposure.
 Fonts served from `/fonts/` via `fonts.css`:
 - `bricolage-grotesque-latin.woff2` — primary latin subset (variable, 200–800)
@@ -243,10 +277,8 @@ Deliverables (in order):
 
 venue = HPR on the episode post; venue = KDP or arXiv on the whitepaper
 
-### v3 — Hugo CMS integration (Decap/Forestry successor)
-For non-code content updates (warrant canary renewal, media archive updates)
-without requiring a full git workflow. Low priority — current git workflow
-is acceptable for the volume.
+### ~~v3 — Hugo CMS integration~~ (REMOVED — not needed)
+Git-native workflow is correct for this site. No CMS layer required.
 
 ### v3 — Archive content recovery (stretch goal)
 Posts 10–12 from WordPress/CompuTEK era (denzuko.wordpress.com, computekindustries.com,

@@ -10,7 +10,7 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
 [outputs]
   home    = ["HTML", "RSS", "JSON", "Lisp", "Humans"]
   section = ["HTML", "RSS"]
-  page    = ["HTML"]
+  page    = ["HTML", "OGCard"]
   term    = ["HTML", "RSS"]
   taxonomy = ["HTML"]
 
@@ -95,6 +95,7 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
   authorHandle  = "@denzuko"
   pgp           = "0x5DCBF78E3F9C3FE3"
   orcid         = "0009-0001-0066-4646"
+  arxiv         = "https://arxiv.org/a/0009-0001-0066-4646"
   ianapen       = "42387"
   description   = "Code is speech. Platforms are not neutral. Principal, Da Planet Security. Technology Chair, Restore The Fourth. DevOps engineer, security researcher, open source advocate, author."
   siteTitle     = "Dwight Spencer - 0x5DCBF78E3F9C3FE3"
@@ -124,3 +125,10 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
   [params.cta]
     text = "Support this research"
     url  = "https://buymeacoffee.com/denzuko"
+
+[outputFormats.OGCard]
+  mediaType    = "text/html"
+  baseName     = "og-card"
+  rel          = "alternate"
+  isPlainText  = false
+  notAlternative = true
