@@ -104,6 +104,8 @@ Three SVG variants at `hugo/static/assets/`:
 - `favicon-b.svg` — cropped, lens overflows frame (Warhol crop)
 - `favicon-c.svg` — iris only, no barrel (simplest, best at 16px)
 - `favicon.svg` — active (currently A); copy target file content to rotate
+- `favicon-192.png` — PWA manifest 192px raster ✅
+- `favicon-512.png` — PWA manifest 512px raster ✅
 
 Rotation schedule — update alongside quarterly warrant canary + /now:
 - Q1 (Jan): A (full barrel)
@@ -112,8 +114,14 @@ Rotation schedule — update alongside quarterly warrant canary + /now:
 - Q4 (Oct): A (full barrel)
 
 Footer logo: `favicon.svg` at 32×32, inverted in dark mode via CSS filter.
-PNG rasters (192px, 512px) for PWA manifest not yet generated — need
-ImageMagick or similar: `convert -background none favicon.svg -resize 512x512 favicon-512.png`
+
+### ✅ Brand submodule — stream-assets (DONE 2026-05-24)
+`denzuko/stream-assets` added as git submodule at `brand/`.
+GH Actions copies `brand/static/css/brand.css` → `hugo/static/css/brand.css`
+and `brand/data/brand.yaml` → `hugo/data/brand.yaml` before each build.
+`brand.css` imported in `head.html` — all CSS custom properties sourced
+from one canonical file shared across the persona ecosystem.
+Brand guide live at `denzuko.github.io/stream-assets/brand/`.
 
 ### ✅ v1.5 — Pagefind site search (DONE 2026-05-23)
 Self-hosted, zero external deps, no Algolia. Privacy positioning intact.
@@ -136,11 +144,24 @@ Post 01 (`01-a-better-tweedy-bird.md`) links to `https://github.com/canarytail/s
 **Action needed:** Update post 01 to note the project as defunct/archived and link to
 the Wayback Machine snapshot or remove the link. Mention the standard's fate in the editorial voice.
 
-### ✅ Layer 2 comment — URL scheme (FIXED 2026-05-23)
-Was: `;; (ql-dist:install-dist "https://dwightaspencer.com")`
-Now: `;; (ql-dist:install-dist "http://dwightaspencer.com" :prompt nil)`
-Fixed in `hugo/layouts/partials/head.html` to match spec (CLAUDE.md) and corpus.lisp header.
-Quicklisp upgrades to https:// internally; the `http://` arg is canonical.
+### ✅ Layer 2 — Quicklisp dist (FULLY RESOLVED 2026-05-24)
+**Mechanism:** `<link rel="alternate" type="application/vnd.quicklisp-dist">` in `<head>`.
+Survives `hugo --minify`. Visible in view-source. HTML comments do not survive minification.
+
+**Correct REPL session:**
+```lisp
+(ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
+(ql:quickload :DwightASpencerCom)
+(DwightASpencerCom:finger)
+```
+
+**Live endpoints verified 2026-05-24:**
+- `http://dwightaspencer.com/distinfo.txt` — dist entry point
+- `http://dwightaspencer.com/lisp/systems.txt` — col 2 = asd basename (`dwightaspencer`)
+- `http://dwightaspencer.com/lisp/releases.txt` — content-sha1, no comment header
+- `https://dwightaspencer.com/corpus.lisp` — Hugo-generated at site root
+
+**Runbook:** `docs/RUNBOOK-lisp.md` (not publicly served)
 
 ### v2 — Dynamic per-post OG images
 Currently all posts share `og-posts.png`. Per-post cards with the article
