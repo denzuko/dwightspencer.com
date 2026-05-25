@@ -25,3 +25,7 @@
 /* CORPUS */
   This site is also a Common Lisp system.
   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
+
+/* BBS */
+  Former SysOp. It is well known.
+  /.well-known/file_id.diz

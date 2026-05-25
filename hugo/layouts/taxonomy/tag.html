@@ -1,0 +1,25 @@
+{{- define "bodyclass" }}{{ end -}}
+{{- define "main" }}
+  {{- $count := len .Pages }}
+
+  <h2 class="post">#{{ .Title }}</h2>
+  <p class="meta" style="margin-bottom:1.5rem">
+    {{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }} tagged {{ .Title | lower }}.
+  </p>
+
+  {{- with .Content }}
+  <div class="note" style="margin-bottom:2rem;font-family:'Share Tech Mono',monospace;font-size:13px;line-height:1.9;border-left:2px solid #ccc;padding-left:1rem;color:#555;">
+    {{ . }}
+  </div>
+  {{- end }}
+
+  <ul class="list">
+    {{- range .Pages.ByDate.Reverse }}
+    <li>
+      <time class="index-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <span class="hr-list"></span>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+  </ul>
+{{- end }}

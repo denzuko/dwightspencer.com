@@ -5,7 +5,19 @@
 ;;;; Do not edit directly — update hugo/data/author.yaml or post front matter.
 ;;;; Regenerate: hugo --gc (runs on every site build)
 ;;;;
-;;;; (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
+;;;; This file implements the dsc/corpus package (see package.lisp).
+;;;; It is loaded as part of the DwightASpencerCom ASDF system:
+;;;;
+;;;;   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
+;;;;   (ql:quickload :DwightASpencerCom)
+;;;;
+;;;; Public entry points are in dwightaspencer.lisp (DwightASpencerCom package):
+;;;;   (DwightASpencerCom:query '(tag ?s :privacy))
+;;;;   (DwightASpencerCom:find-post "03-rules-types-and-glue")
+;;;;   (DwightASpencerCom:all-posts)
+;;;;
+;;;; Within dsc/corpus, dsc/logic is available as the local nickname 'logic'
+;;;; per (:local-nicknames (#:logic #:dsc/logic)) in package.lisp.
 
 (named-readtables:in-readtable :standard)
 (in-package #:dsc/corpus)
@@ -16,10 +28,18 @@
 (defconstant +build-date+   "{{ now.Format "2006-01-02" }}")
 
 ;;;; ── Fact assertion ──────────────────────────────────────────────────────────
+;;;; Fact schemas (mirrors ml-prolog-pokemon catalog approach):
+;;;;   (post   slug title date word-count)
+;;;;   (tag    slug keyword)
+;;;;   (author slug orcid)
+;;;;   (artifact name descriptor path)   ; Easter egg / metadata artifacts
 
 (defun assert-post-facts (db)
-  "Assert all post/tag/author facts into DB.
+  "Assert all post, tag, author, and artifact facts into DB.
+   DB must be a prolog-db created by logic:make-post-kb.
+   Returns DB.
    Generated from {{ len (where .Site.RegularPages "Section" "posts") }} posts."
+  ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse -}}
 {{- $slug := .Slug }}
@@ -35,14 +55,34 @@
 {{ end }}  )
   db)
 
-;;;; ── Query API ───────────────────────────────────────────────────────────────
+;;;; ── Knowledge base construction ────────────────────────────────────────────
 
 (defun make-site-kb ()
-  "Create and populate the site knowledge base."
-  (assert-post-facts (logic:make-post-kb)))
+  "Construct and return the site knowledge base.
+   Asserts all post/tag/author facts plus static artifact facts.
+   Called by DwightASpencerCom:make-kb in dwightaspencer.lisp —
+   use that for the public API rather than calling this directly.
+   Returns the populated prolog-db."
+  (let ((db (assert-post-facts (logic:make-post-kb))))
+    ;; ── Static artifact facts ────────────────────────────────────────────────
+    ;; These are not generated from post front matter — they are manually
+    ;; asserted here. Discoverable via: (DwightASpencerCom:query '(tag ?s :bbs))
+    ;;
+    ;; /.well-known/file_id.diz — raw ANSI splash from XM Core BBS
+    ;; SAUCE header intact. IBM VGA. 20160503. dz tag. It is well known.
+    (logic:db-assert db '(artifact "file_id.diz" :bbs-descriptor "/.well-known/file_id.diz"))
+    (logic:db-assert db '(tag "file_id.diz" :bbs))
+    (logic:db-assert db '(tag "file_id.diz" :ansi-art))
+    db))
+
+;;;; ── Corpus query functions ──────────────────────────────────────────────────
+;;;; These take an explicit KB argument — they are the corpus layer's API.
+;;;; The DwightASpencerCom package wraps these with a *kb* cache and
+;;;; single-argument convenience functions (see dwightaspencer.lisp).
 
 (defun find-post (kb slug)
-  "Return post plist for SLUG or NIL."
+  "Return a plist for post SLUG in KB, or NIL if not found.
+   Plist keys: :slug :title :date :words"
   (let ((env (logic:db-prove-first kb `(post ,slug ?title ?date ?wc))))
     (when env
       (list :slug  slug
@@ -51,15 +91,16 @@
             :words (cdr (assoc '?wc    env))))))
 
 (defun find-by-tag (kb tag)
-  "Return all post slugs with TAG."
+  "Return a list of post slugs tagged with TAG in KB.
+   TAG should be a keyword, e.g. :privacy, :bbs, :ansi-art"
   (logic:db-var-all kb `(tag ?slug ,tag) '?slug))
 
 (defun all-posts (kb)
-  "Return all post slugs."
+  "Return a list of all post slugs in KB."
   (logic:db-var-all kb '(post ?slug ?title ?date ?wc) '?slug))
 
 (defun all-tags (kb)
-  "Return all unique tags."
+  "Return a deduplicated list of all tag keywords in KB."
   (remove-duplicates
    (logic:db-var-all kb '(tag ?slug ?tag) '?tag)
    :test #'equal))
