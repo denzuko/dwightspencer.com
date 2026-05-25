@@ -123,6 +123,15 @@ and `brand/data/brand.yaml` → `hugo/data/brand.yaml` before each build.
 from one canonical file shared across the persona ecosystem.
 Brand guide live at `denzuko.github.io/stream-assets/brand/`.
 
+### ✅ Self-hosted fonts (DONE 2026-05-25)
+Google Fonts removed. No external font requests, no tracking, no GDPR exposure.
+Fonts served from `/fonts/` via `fonts.css`:
+- `bricolage-grotesque-latin.woff2` — primary latin subset (variable, 200–800)
+- `bricolage-grotesque-latin-ext.woff2` — extended latin
+- `bricolage-grotesque-vietnamese.woff2` — vietnamese subset
+- `share-tech-mono-400.woff2` — Share Tech Mono 400
+Same font files also in `denzuko/stream-assets` — both repos now fully offline-capable.
+
 ### ✅ v1.5 — Pagefind site search (DONE 2026-05-23)
 Self-hosted, zero external deps, no Algolia. Privacy positioning intact.
 - GH Actions: `npx --yes pagefind --site public --output-path public/pagefind` after hugo build

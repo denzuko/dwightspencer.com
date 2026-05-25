@@ -105,7 +105,7 @@
     <link rel="alternate" type="application/rss+xml" title="{{ .Site.Params.siteTitle }}" href="{{ .Site.Params.canonicalBase }}/atom.xml" />
     <link rel="alternate" type="application/json" title="{{ .Site.Params.siteTitle }}" href="{{ .Site.Params.canonicalBase }}/feed.json" />
     <link rel="alternate" type="application/vnd.quicklisp-dist" title="DwightASpencerCom Quicklisp dist" href="http://dwightaspencer.com/distinfo.txt" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Share+Tech+Mono&display=swap">
+    <link rel="stylesheet" href="{{ .Site.Params.canonicalBase }}/fonts/fonts.css">
     <link rel="stylesheet" href="{{ .Site.Params.canonicalBase }}/css/brand.css">
     {{- partial "css.html" . }}
 
