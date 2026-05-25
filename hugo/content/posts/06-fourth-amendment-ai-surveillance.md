@@ -2,7 +2,7 @@
 title       = "Fourth Amendment in the Age of AI Surveillance"
 date        = "2026-05-23"
 draft       = false
-description = "A technical and legal brief on how AI-powered surveillance infrastructure is outpacing Fourth Amendment doctrine, and what RT4 and technologists can do about it."
+description = "How AI-powered surveillance infrastructure — ALPR networks, federated camera systems, behavioral analytics — is technically outpacing the legal frameworks designed to constrain it. A systems analysis of the gap between what the technology does and what the doctrine assumes."
 slug        = "06-fourth-amendment-ai-surveillance"
 keywords    = ["fourth amendment", "surveillance", "AI", "Flock Safety", "Fusus", "license plate readers", "ALPR", "civil liberties", "Carpenter", "third party doctrine"]
 tags        = ["fourth-amendment", "surveillance", "privacy", "civil-liberties"]
