@@ -378,3 +378,45 @@ Current: tags, categories
 Remaining v2.5:
 - `nist_controls` — NIST 800-53 control IDs (see v2.5 section)
 - `cmmc_level` — for Da Planet Security commercial posts only (see v2.5 section)
+
+### Article: The Ghost Constraints
+
+Design decisions that outlived their hardware, and why that's not an accident.
+
+**Angle:** Not a tech implementation article — a psychology/mental economy piece.
+Historical constraints as cognitive anchors. Why humans preserve affordances
+that no longer do anything. The scroll lock key as an artefact. IBM CUA and
+why cut/paste lives on F2/F3/F4 in some contexts and Ctrl+X/C/V in others.
+Why 80 columns. Why 79ch on this site specifically.
+
+**Through-line:** Bioinformatics framing — constraint propagation in biological
+systems mirrors constraint propagation in design systems. Vestigial structures
+that remain because the cost of removal exceeds the cost of tolerance. The
+mental economy of familiarity. Why "good enough and familiar" defeats "better
+and foreign" in human systems almost every time.
+
+**Touches:**
+- Scroll Lock — designed for mainframe terminal scrolling, meaningless since
+  ~1985, present on every keyboard manufactured since
+- IBM CUA (1987) — the attempt to standardize cut/paste/undo before Microsoft
+  absorbed it into muscle memory with a different mapping; why both survive
+- 80 columns — IBM 026 punch card, 1928. Still the default in most editors.
+  79ch on this site is a conscious nod, not cargo cult
+- Terminal line width as reading constraint adopted as reading preference —
+  the constraint became the aesthetic became the standard
+- PGP fingerprints in headers — identity signal borrowed from a pre-web
+  infrastructure that most users have never interacted with
+
+**Register:** High-level. Psychology and mental economy first, tech as
+illustration not subject. Audience: practitioners who will recognize the
+references; general readers who will find the framing interesting without
+needing the context.
+
+**Series:** Standalone or as part of The Watchers You Fed extended universe —
+the same thesis about systems that persist beyond their original purpose
+applies to surveillance infrastructure as much as keyboard layout.
+
+**Format:** dwightaspencer.com post → HPR episode → possible RT4 framing
+around design lock-in as a civil liberties vector (standards bodies, legacy
+protocols, why CALEA still shapes modern wiretap law).
+
