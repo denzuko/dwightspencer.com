@@ -521,3 +521,59 @@ data minimization or retention).
 and federal contracting positioning. "What does compliance actually mean"
 is the question that precedes "hire someone who knows the answer."
 
+
+---
+
+## Publishing strategy: reader calibration and literary universe seeding
+
+**Reference frame:** Illuminatus! trilogy (Shea/Wilson) — fiction and intellectual
+content indistinguishable, ideas that reward deep reading without requiring it,
+a coherent thesis that operates at multiple levels simultaneously. Serious in
+nature, not a puzzle or ARG.
+
+**What the site is doing (intentionally or not):**
+
+The Easter eggs, the corpus, the finger block, the 79ch, the FidoNET node in
+file_id.diz — none of these are breadcrumbs to a payload. They are reader
+selection mechanisms. They establish that the author operates at a certain
+level of historical and technical seriousness before the reader ever opens
+the book.
+
+This is the correct function. Don't design them as puzzles. Design them as
+signals to the right reader that this is for them.
+
+**The Dead Reckoning series as universe seed:**
+
+Each article plants the same thesis at a different layer — hardware, law,
+compliance, surveillance infrastructure, civil liberties. The casual reader
+gets interesting history. The careful reader gets a coherent theory of how
+power preserves itself through obsolete infrastructure. The very careful
+reader arrives at the Fourth Amendment in the age of AI surveillance —
+which is *The Watchers You Fed*.
+
+The series is pre-loading the intellectual framework the book requires.
+By the time a reader reaches the book they've already been calibrated.
+
+**Scope and entity separation:**
+
+- dwightaspencer.com / Dead Reckoning series → real-identity intellectual surface
+- *The Watchers You Fed* and future books → the primary vehicle
+- EDM ARG → ended, never connected, never will be
+- file_id.diz → standalone dead-end Easter egg, no connection to any of the above
+- Lisp corpus → its own branch, not narrative infrastructure
+
+**Future books:**
+
+The universe implied by *The Watchers You Fed* is large enough to support
+sequels and companion volumes. The intellectual framework (ghost constraints,
+dead reckoning, vestigial infrastructure as power preservation) applies to
+domains beyond surveillance: monetary systems, credentialing, standards bodies,
+language itself. Each is a book. The site plants the seeds without naming them.
+
+**What not to do:**
+
+- Don't connect the Easter eggs to each other narratively
+- Don't design puzzles — design depth
+- Don't signal the thesis directly in the articles; let it accumulate
+- Don't tie the fiction layer to the real-identity layer
+
