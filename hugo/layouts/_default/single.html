@@ -2,7 +2,7 @@
 {{- define "main" }}
 <section>
   <h2 class="post p-name">{{ .Title }}</h2>
-  {{- with .Params.description }}<p class="p-summary" style="color:#777;font-style:italic;">{{ . }}</p>{{ end }}
+  {{- with .Params.description }}<p class="p-summary">{{ . }}</p>{{ end }}
   <div class="e-content">
     {{ .Content }}
   </div>
