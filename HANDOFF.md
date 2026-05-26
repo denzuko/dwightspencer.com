@@ -4,81 +4,115 @@ Paste this as your opening message in a new conversation.
 
 ---
 
-You are continuing development on `dwightaspencer.com`, the personal
-publishing platform of Dwight Spencer (@denzuko). Live Hugo site on
-GitHub Pages behind Cloudflare. Git-flow native — no web CMS.
+You are continuing development on `dwightaspencer.com` and the broader
+Dwight Spencer / denzuko / zekodun media infrastructure. Read the files
+below before touching anything.
 
-## Publishing workflow
+## Repositories in scope
 
-- `draft = false` + `publishDate = "YYYY-MM-DD"` — post merges now, goes live on that date
-- Nightly GH Actions deploy at 06:00 UTC picks up `publishDate` posts automatically
-- Manual deploy: Actions → Deploy Hugo site → Run workflow (workflow_dispatch)
-- `draft = true` suppresses regardless of `publishDate`
-- Archetype includes `publishDate` field — set it on every new post
+| Repo | Purpose | State |
+|---|---|---|
+| `denzuko/dwightspencer.com` | Hugo site, GitHub Pages, Cloudflare | active |
+| `denzuko/stream-assets` | OBS overlays, brand dashboard CDN | active |
+| `denzuko/cloudflared-quadlet-setup` | Cloudflare Zero Trust tunnel quadlet | active v1.0.1 |
+| `denzuko/plausible-quadlet-setup` | Plausible CE quadlet | **ARCHIVED** — wrong stack |
 
 ## Read these files first, in order
 
 ```
-CLAUDE.md              — conventions, gotchas, entity separation rules
-hugo/MIGRATION.md      — full backlog (v2, v2.5, v3 stretch goals)
-hugo/ARCHITECTURE.md   — Mermaid diagrams: build pipeline, Lisp layers, CF interaction
+CLAUDE.md                           — conventions, entity separation, gotchas
+hugo/MIGRATION.md                   — full backlog (v2, v3 stretch goals)
+hugo/ARCHITECTURE.md                — build pipeline, Lisp layers, CF interaction
+/home/claude/stream-assets/CLAUDE.md — stream-assets conventions
 ```
 
 Clone if not present:
-```
+```sh
 git clone https://github.com/denzuko/dwightspencer.com
-cd dwightspencer.com
+git clone https://github.com/denzuko/stream-assets
 ```
 
-Prompt for the GitHub PAT — do not store it. Set via:
-```
+PAT — prompt for it, do not store. Set via:
+```sh
 export GH_TOKEN="..."
 git remote set-url origin "https://denzuko:${GH_TOKEN}@github.com/denzuko/dwightspencer.com.git"
 ```
 
-Use `gh` and `git` for all GitHub interaction. Avoid python/node scripts where possible.
+## Current state (as of 2026-05-25)
 
-## Current state (as of 2026-05-23)
+### dwightaspencer.com
+- **11 posts** (00–10), all live
+- **Build:** Hugo → Pagefind → gh-pages → Cloudflare — green
+- **Open PRs:** none (all merged or pending cleanup)
+- **Stale branches to clean:** `chore/remove-plausible-migration`,
+  `feat/bio-update`, `fix/whoami-bio-cta` — merge or delete
+- **Avatar:** self-hosted at `stream-assets.cdn.dwightaspencer.com/assets/avatar.jpg`
+- **Fonts:** self-hosted woff2 in `hugo/static/fonts/` — no Google Fonts
+- **CTA:** "One less dependency" → buymeacoffee.com/denzuko
+- **Corpus:** `(ql:quickload :DwightASpencerCom)` — dsc/logic → dsc/corpus →
+  DwightASpencerCom package hierarchy. See `docs/RUNBOOK-lisp.md`.
+- **Easter egg:** `/.well-known/file_id.diz` — XM Core BBS ANSI splash,
+  SAUCE header intact. Discoverable via corpus `(query '(tag ?s :bbs))`,
+  `humans.txt`, `llms.txt`.
 
-- 10 posts (00–09), all live
-- Taxonomies: tags, series, venue (field only)
-- Pages: /now, /projects, /uses (not in nav — URL + Pagefind only)
-- Nav: posts · tags · series · media · ⌕ (Pagefind) · ☀︎ (dark mode)
-- Build: Hugo → Pagefind → gh-pages → Cloudflare; all green
-- No open PRs, no stray branches
+### stream-assets
+- **Live at:** `stream-assets.cdn.dwightaspencer.com` (Cloudflare CNAME → GitHub Pages)
+- **Dashboard tabs:** Scenes · Fragments · Panels · Bios · Brand · Docs
+- **Data files** (edit these, push, all surfaces update in ~45s):
+  - `data/now-building.yaml` — current work, drives Fragments/now-building
+  - `data/charity.yaml` — monthly cause, goal, raised
+  - `data/panels.yaml` — Twitch panel copy (static panels; Now Building is HTMX)
+  - `data/author.yaml` — all bio variants for all platforms
+  - `data/stream.yaml` — handle, links, ticker
+- **HTMX fragments** at `/fragments/{now-building,charity-goal,stream-status,ticker}/`
+  Pull into any surface: `hx-get="https://stream-assets.cdn.dwightaspencer.com/fragments/now-building/"`
+- **brand.css:** tokens + utility classes ONLY — never body/reset rules
+- **Absolute paths:** use `relURL` for CSS/JS links, `absURL` for card/hx-get URLs
 
-## Immediate backlog
+### cloudflared-quadlet-setup
+- **v1.0.1** — Cloudflare Zero Trust tunnel, rootless Podman quadlet
+- Token in `%h/.config/containers/systemd/cloudflared.env` — never in Exec=
+- `Network=host` by design — OS-level tunnel
 
-See `hugo/MIGRATION.md` for full detail. Top items:
+### plausible-quadlet-setup — ARCHIVED
+ClickHouse requires 1GB+ RAM baseline, JS server-side.
+Stack wrong for target environment. Repo archived for quadlet pattern reference.
+Analytics direction: Prometheus + log scraping + PII stripping pipeline —
+whitepaper + Da Planet Security product. No consent banners by architecture.
 
-1. **post 05 corrections** — Bitwarden→KeePassDX, Nextcloud for media/docs,
-   step-ca + Let's Encrypt for CA, Podman with system account, sourcehut/cgit
-   over Forgejo, HAProxy paired with dns-sd/policyd/fastcgi+kcgi/keepalived
-2. **MIGRATION.md CMS entry removal** — "Hugo CMS integration (Decap/Forestry)"
-   is gone by design; remove the entry
-3. **Archive content recovery (v3 stretch)** — posts 10–12 from WordPress/CompuTEK
-   era pending Internet Archive backup retrieval
-4. **v2.5** — OSCAL/NIST/arXiv/DOI taxonomy (see MIGRATION.md)
+## Open backlog (MIGRATION.md)
 
-## Production pipeline (next major work)
+| Item | Priority | Notes |
+|---|---|---|
+| Dynamic per-post OG images | v2 | og-card.html template done, needs Playwright CI step |
+| Observability stack | v2 | node_exporter/cAdvisor/Loki/Grafana — lab → HPR → whitepaper |
+| R2 asset migration | v3 | issue #61 — assets.cdn.dwightaspencer.com |
+| Archive content recovery | v3 stretch | Posts 10–12 from WordPress/CompuTEK era |
+| arXiv post 03 | blocked | Needs endorsement or Cornell email |
+| BMAC membership tiers | next session | R&D fund, charitable fundraising, community building |
 
-Order: whitepaper → technical brief/code audit → video short → HPR episode + Twitch livestream  
-Plausible analytics deferred until after this pipeline is established.
+## Production content pipeline
+
+Order: whitepaper → technical brief → video short → HPR episode → Twitch  
+Analytics whitepaper (DPS product): Prometheus + log scraping + PII stripping,
+GDPR/CCPA/PECR compliant by architecture. No cookies, no consent, no vendor in path.
 
 ## Key conventions (do not deviate)
 
-- `data-cfasync="false"` on the FOUC script — Cloudflare Rocket Loader deferral = flash bang
-- Layer 2 must be an HTML comment (`<!-- ;; ... -->`) — bare text node in `<head>` renders visibly
-- `len .Pages` not `.Count` in Hugo taxonomy term layouts
-- `&#35;` to escape `#` inside raw `<pre><code>` blocks when preceded by a blank line
-- finger.html: plain `<pre><code>` only — no monokai/highlight wrapper
+- `data-cfasync="false"` on FOUC script — Cloudflare Rocket Loader deferral
+- Layer 2 must be HTML comment `<!-- ;; ... -->` — bare text in `<head>` renders
+- `len .Pages` not `.Count` in Hugo taxonomy layouts
 - HAProxy not Nginx — verify before writing any proxy config
-- Issues disabled on this repo — PR description serves as the issue
+- `machinectl shell user@ /bin/sh -c 'cmd'` — not `-- cmd` (path error on 5.x)
+- Podman quadlet `DropCapability=ALL` is lowercased by 5.4.x generator — known bug
+- OCI digest pinning: use platform manifest digest not index digest
+- BDD workflow on all C projects: policy gate → test → code → changelog → tag
+- Semver: MAJOR=API break only; PATCH freely exceeds 100
 
 ## Style guidance
 
-Soft questions (should/could): push back if misaligned with strategy  
-Hard questions (I would): execute as directed  
-Gut checks appreciated — Den trusts direct disagreement over compliance
+Soft questions (should/could): push back if misaligned with strategy
+Hard questions (I would like): execute as directed
+Gut checks appreciated — direct disagreement over compliance
 
 73s
