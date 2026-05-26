@@ -420,3 +420,104 @@ applies to surveillance infrastructure as much as keyboard layout.
 around design lock-in as a civil liberties vector (standards bodies, legacy
 protocols, why CALEA still shapes modern wiretap law).
 
+
+### Article: CALEA's Ghost
+
+Lawful intercept architecture designed for circuit-switched telephony,
+preserved in statute through every generation of packet-switched infrastructure.
+
+**Angle:** The 1994 Communications Assistance for Law Enforcement Act was written
+for a world of copper wire, central offices, and a single carrier per call.
+Every major network transition since — VoIP, HTTPS, E2E encryption, mesh
+networks, federated protocols — has had to contort itself around a legal
+framework that assumes a wiretap point exists and is reachable by court order.
+
+**Through-line:** Ghost Constraints companion piece. CALEA as the legal
+equivalent of scroll lock — a design decision frozen in statute long after
+the hardware it described stopped existing. The cost of legislative removal
+exceeds the cost of tolerance, so the industry builds workarounds (CALEA
+compliance boxes, SNI inspection, metadata retention) that preserve the
+letter while hollowing out the intent. The workarounds become infrastructure.
+The infrastructure becomes the new constraint.
+
+**Touches:**
+- CALEA 1994 — circuit-switched assumptions baked into statute
+- The VOIP CALEA extension (2006) — first attempt to retrofit
+- Why E2E encryption is treated as CALEA non-compliance by some interpretations
+- FBI's "going dark" problem as a symptom of ghost constraint collision —
+  two incompatible design eras trying to occupy the same legal space
+- How the RT4 Fourth Amendment argument intersects: CALEA compliance
+  infrastructure is the physical layer that makes mass surveillance tractable
+
+**Register:** Policy-accessible. Not a lawyer article, not a tech article —
+a systems thinking article about what happens when legal architecture ages
+out of sync with technical architecture. Same audience as Ghost Constraints.
+
+**Series:** Natural companion to Ghost Constraints. Could be a two-part or
+three-part series: hardware constraints, legal constraints, then the synthesis
+(how both propagate into civil liberties infrastructure).
+
+**RT4 angle:** CALEA compliance as surveillance mesh enabler. The same
+infrastructure built for lawful intercept is the infrastructure that makes
+Flock/Fusus/Raven tractable at scale. The constraint didn't go away —
+it metastasized.
+
+---
+
+### Article: SOC 2 Is a Mainframe Compliance Framework
+
+Why the certification IT marketing sells as "cloud security" was designed
+for data closets, dumb terminals, and the NIST Rainbow Books.
+
+**Angle:** SOC 2 (and its predecessor SAS 70) emerged from an audit framework
+designed for the era when "computing environment" meant a raised-floor data
+center, physical access logs, and a finite list of authorized operators at
+dumb terminals. The NIST Rainbow Books (1983–1988) — the Trusted Computer
+System Evaluation Criteria and its siblings — defined the threat model.
+Perimeter defense. Physical separation. Controlled access to a fixed location.
+
+That world ended. SOC 2 didn't.
+
+**Through-line:** Ghost Constraints applied to compliance. The controls
+in SOC 2 Type II — change management, logical access, availability monitoring —
+map cleanly onto a 1985 IBM mainframe installation. They map poorly onto
+a distributed microservices deployment with ephemeral containers, federated
+identity, and infrastructure-as-code. The audit framework asks "do you have
+a change management process?" and accepts "yes we have a Jira board" because
+the underlying question was "do you have a change control log for the operators
+with physical access to the machine room?"
+
+The certification became a marketing signal. The marketing signal became
+a procurement requirement. The procurement requirement became industry
+infrastructure. The original threat model is vestigial.
+
+**Touches:**
+- NIST Rainbow Books (1983–1988) — the actual foundation
+- SAS 70 (1992) → SSAE 16 → SOC 1/2/3 — the lineage
+- What SOC 2 Type II actually audits vs what it's sold as
+- The five Trust Service Criteria (Security, Availability, Processing
+  Integrity, Confidentiality, Privacy) — designed for batch processing
+  environments, retrofitted onto API-first architectures
+- Why a company can be SOC 2 certified and still have catastrophic
+  security failures — the certification measures process adherence,
+  not security outcomes
+- The Da Planet Security angle: what a meaningful security attestation
+  looks like for modern infrastructure (OSCAL, continuous control
+  monitoring, actual threat modeling)
+
+**Register:** Practitioner-accessible but written for the non-technical
+buyer who has been sold SOC 2 as a security guarantee. Deflate the
+marketing claim, explain the historical context, propose what the
+question should actually be.
+
+**Series:** Standalone Da Planet Security authority piece. Strong candidate
+for a whitepaper format with an executive summary — the audience is
+procurement officers and CTOs who need a reason to ask better questions.
+Also strong for RT4: compliance theater as a surveillance enabler (SOC 2
+certified vendors still sell data, the certification says nothing about
+data minimization or retention).
+
+**BHAG connection:** Direct pipeline to Da Planet Security expert witness
+and federal contracting positioning. "What does compliance actually mean"
+is the question that precedes "hire someone who knows the answer."
+
