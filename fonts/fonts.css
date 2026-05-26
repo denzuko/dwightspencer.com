@@ -36,6 +36,19 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+
+/* Share Tech Mono fallback — size-adjust prevents repaint on font swap.
+ * Courier New metrics adjusted to approximate Share Tech Mono so the
+ * layout doesn't shift when the web font loads. */
+@font-face {
+  font-family: 'Share Tech Mono Fallback';
+  size-adjust: 97%;
+  ascent-override: 90%;
+  descent-override: 20%;
+  line-gap-override: normal;
+  src: local('Courier New');
+}
+
 /* Share Tech Mono — latin */
 @font-face {
   font-family: 'Share Tech Mono';
