@@ -9,8 +9,7 @@
   </p>
   <p>{{ range $i, $r := $a.roles }}{{ if $i }} &#183;
   {{ end }}{{ $r }}{{ end }}</p>
-  <p>{{ $a.bio }}
-  IANA PEN&nbsp;{{ $a.iana_pen }} &#183;
+  <p>IANA PEN&nbsp;{{ $a.iana_pen }} &#183;
   <a href="https://orcid.org/{{ $a.orcid }}">ORCID&nbsp;{{ $a.orcid }}</a></p>
 
   <ul class="social-links">
