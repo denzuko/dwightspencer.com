@@ -1,5 +1,25 @@
 # Hugo Migration Guide — dwightaspencer.com
 
+## Layout architecture note
+
+The `70ch` max-width on `.content` came from the Hugo theme adopted during
+the static HTML → Hugo migration. It was never a deliberate design decision
+for this site — it was the theme author's opinion about readable line length.
+
+Correct application:
+- **Post pages** — `70ch` is appropriate for long-form prose body text
+- **Home page** — profile/card layout, not a reading surface; `70ch` is wrong
+
+Current state (post-fix): header lives in `.site-header` outside `.content`,
+so it is no longer constrained by `70ch`. The reading column stays `70ch`
+for posts. The home page landing layout is a separate concern — it should
+eventually get its own layout without the `70ch` constraint.
+
+The original static HTML predating Hugo had its own layout which did not
+impose a reading-width constraint globally.
+
+---
+
 ## Structure
 
 ```
