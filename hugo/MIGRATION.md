@@ -242,15 +242,6 @@ Not in nav — reachable by URL and Pagefind.
 `/uses` — editor/terminal, languages, infra, hardware, radio, desk software, site stack.
 Not in nav — reachable by URL and Pagefind.
 
-### v2 — Plausible Analytics A/B integration
-**Deferred** — implement after whitepaper, technical brief/code audit, video short,
-and HPR episode + Twitch livestream production pipeline is established.
-Privacy-respecting cookieless analytics (no consent banner required).
-Planned A/B test against Cloudflare aggregate analytics. When enabled:
-- Add `<script defer data-domain="dwightaspencer.com" src="https://plausible.io/js/script.js"></script>` to baseof.html
-- Update privacy/cookies policy pages accordingly
-- No other changes required
-
 ### v2 — Observability stack: lab + whitepaper + HPR episode
 Full dapla.net observability stack as a standalone production:
 
@@ -290,11 +281,6 @@ Plan:
 - R2 bucket → `stream-assets.cdn.dwightaspencer.com` (already configured)
 - GH Actions: upload build artifacts to R2 on deploy
 - Site HTML continues from GitHub Pages initially, then migrates to Cloudflare Pages
-
-### v3 — Plausible CE at analytics.dapla.net (issue #62)
-Self-hosted privacy-respecting analytics via Podman quadlet on Da Planet Security
-infrastructure. Deploy after v2 content milestone (10+ posts live).
-See issue #62 for full quadlet spec.
 
 ### v3 — Archive content recovery (stretch goal)
 Posts 10–12 from WordPress/CompuTEK era (denzuko.wordpress.com, computekindustries.com,
