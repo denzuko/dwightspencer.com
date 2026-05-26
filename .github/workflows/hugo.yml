@@ -32,7 +32,29 @@ jobs:
           cp -r brand/static/assets/. hugo/static/assets/brand/
           cp brand/data/brand.yaml hugo/data/brand.yaml
 
-      - name: Build
+      - name: Build (first pass — generates og-card.html per post)
+        working-directory: hugo
+        run: hugo --minify --gc
+
+      - name: Generate per-post OG images
+        # Playwright screenshots og-card.html → static/assets/og/{slug}.png
+        # Must run after first build (og-card.html exists) and before second
+        # build so Hugo's fileExists() picks up the images.
+        working-directory: hugo
+        run: |
+          npx --yes playwright install --with-deps chromium 2>/dev/null
+          mkdir -p static/assets/og
+          for card in $(find public/posts -name 'og-card.html' 2>/dev/null); do
+            slug=$(echo "$card" | sed 's|public/posts/||;s|/og-card.html||')
+            npx playwright screenshot \
+              --browser chromium \
+              --viewport-size "1200,630" \
+              "file://$(pwd)/$card" \
+              "static/assets/og/${slug}.png" 2>/dev/null || true
+          done
+          echo "OG images generated: $(ls static/assets/og/*.png 2>/dev/null | wc -l)"
+
+      - name: Build (second pass — picks up OG images via fileExists)
         working-directory: hugo
         run: hugo --minify --gc
 
@@ -72,21 +94,6 @@ jobs:
           cp ${DIST_DIR}/systems.txt public/lisp/systems.txt 2>/dev/null || true
 
           echo "Dist packaged: ${SIZE} bytes sha1=${SHA1}"
-
-      - name: Generate per-post OG images
-        working-directory: hugo
-        run: |
-          npx --yes playwright install --with-deps chromium 2>/dev/null
-          mkdir -p public/assets/og
-          for card in $(find public/posts -name 'og-card.html' 2>/dev/null); do
-            slug=$(echo "$card" | sed 's|public/posts/||;s|/og-card.html||')
-            npx playwright screenshot \
-              --browser chromium \
-              --viewport-size "1200,630" \
-              "file://$(pwd)/$card" \
-              "public/assets/og/${slug}.png" 2>/dev/null || true
-          done
-          echo "OG images generated: $(ls public/assets/og/*.png 2>/dev/null | wc -l)"
 
       - name: Index with Pagefind
         working-directory: hugo
