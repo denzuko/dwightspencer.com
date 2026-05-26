@@ -378,3 +378,202 @@ Current: tags, categories
 Remaining v2.5:
 - `nist_controls` — NIST 800-53 control IDs (see v2.5 section)
 - `cmmc_level` — for Da Planet Security commercial posts only (see v2.5 section)
+
+### Article: The Ghost Constraints
+
+Design decisions that outlived their hardware, and why that's not an accident.
+
+**Angle:** Not a tech implementation article — a psychology/mental economy piece.
+Historical constraints as cognitive anchors. Why humans preserve affordances
+that no longer do anything. The scroll lock key as an artefact. IBM CUA and
+why cut/paste lives on F2/F3/F4 in some contexts and Ctrl+X/C/V in others.
+Why 80 columns. Why 79ch on this site specifically.
+
+**Through-line:** Bioinformatics framing — constraint propagation in biological
+systems mirrors constraint propagation in design systems. Vestigial structures
+that remain because the cost of removal exceeds the cost of tolerance. The
+mental economy of familiarity. Why "good enough and familiar" defeats "better
+and foreign" in human systems almost every time.
+
+**Touches:**
+- Scroll Lock — designed for mainframe terminal scrolling, meaningless since
+  ~1985, present on every keyboard manufactured since
+- IBM CUA (1987) — the attempt to standardize cut/paste/undo before Microsoft
+  absorbed it into muscle memory with a different mapping; why both survive
+- 80 columns — IBM 026 punch card, 1928. Still the default in most editors.
+  79ch on this site is a conscious nod, not cargo cult
+- Terminal line width as reading constraint adopted as reading preference —
+  the constraint became the aesthetic became the standard
+- PGP fingerprints in headers — identity signal borrowed from a pre-web
+  infrastructure that most users have never interacted with
+
+**Register:** High-level. Psychology and mental economy first, tech as
+illustration not subject. Audience: practitioners who will recognize the
+references; general readers who will find the framing interesting without
+needing the context.
+
+**Series:** Standalone or as part of The Watchers You Fed extended universe —
+the same thesis about systems that persist beyond their original purpose
+applies to surveillance infrastructure as much as keyboard layout.
+
+**Format:** dwightaspencer.com post → HPR episode → possible RT4 framing
+around design lock-in as a civil liberties vector (standards bodies, legacy
+protocols, why CALEA still shapes modern wiretap law).
+
+
+### Article: CALEA's Ghost
+
+Lawful intercept architecture designed for circuit-switched telephony,
+preserved in statute through every generation of packet-switched infrastructure.
+
+**Angle:** The 1994 Communications Assistance for Law Enforcement Act was written
+for a world of copper wire, central offices, and a single carrier per call.
+Every major network transition since — VoIP, HTTPS, E2E encryption, mesh
+networks, federated protocols — has had to contort itself around a legal
+framework that assumes a wiretap point exists and is reachable by court order.
+
+**Through-line:** Ghost Constraints companion piece. CALEA as the legal
+equivalent of scroll lock — a design decision frozen in statute long after
+the hardware it described stopped existing. The cost of legislative removal
+exceeds the cost of tolerance, so the industry builds workarounds (CALEA
+compliance boxes, SNI inspection, metadata retention) that preserve the
+letter while hollowing out the intent. The workarounds become infrastructure.
+The infrastructure becomes the new constraint.
+
+**Touches:**
+- CALEA 1994 — circuit-switched assumptions baked into statute
+- The VOIP CALEA extension (2006) — first attempt to retrofit
+- Why E2E encryption is treated as CALEA non-compliance by some interpretations
+- FBI's "going dark" problem as a symptom of ghost constraint collision —
+  two incompatible design eras trying to occupy the same legal space
+- How the RT4 Fourth Amendment argument intersects: CALEA compliance
+  infrastructure is the physical layer that makes mass surveillance tractable
+
+**Register:** Policy-accessible. Not a lawyer article, not a tech article —
+a systems thinking article about what happens when legal architecture ages
+out of sync with technical architecture. Same audience as Ghost Constraints.
+
+**Series:** Natural companion to Ghost Constraints. Could be a two-part or
+three-part series: hardware constraints, legal constraints, then the synthesis
+(how both propagate into civil liberties infrastructure).
+
+**RT4 angle:** CALEA compliance as surveillance mesh enabler. The same
+infrastructure built for lawful intercept is the infrastructure that makes
+Flock/Fusus/Raven tractable at scale. The constraint didn't go away —
+it metastasized.
+
+---
+
+### Article: SOC 2 Is a Mainframe Compliance Framework
+
+Why the certification IT marketing sells as "cloud security" was designed
+for data closets, dumb terminals, and the NIST Rainbow Books.
+
+**Angle:** SOC 2 (and its predecessor SAS 70) emerged from an audit framework
+designed for the era when "computing environment" meant a raised-floor data
+center, physical access logs, and a finite list of authorized operators at
+dumb terminals. The NIST Rainbow Books (1983–1988) — the Trusted Computer
+System Evaluation Criteria and its siblings — defined the threat model.
+Perimeter defense. Physical separation. Controlled access to a fixed location.
+
+That world ended. SOC 2 didn't.
+
+**Through-line:** Ghost Constraints applied to compliance. The controls
+in SOC 2 Type II — change management, logical access, availability monitoring —
+map cleanly onto a 1985 IBM mainframe installation. They map poorly onto
+a distributed microservices deployment with ephemeral containers, federated
+identity, and infrastructure-as-code. The audit framework asks "do you have
+a change management process?" and accepts "yes we have a Jira board" because
+the underlying question was "do you have a change control log for the operators
+with physical access to the machine room?"
+
+The certification became a marketing signal. The marketing signal became
+a procurement requirement. The procurement requirement became industry
+infrastructure. The original threat model is vestigial.
+
+**Touches:**
+- NIST Rainbow Books (1983–1988) — the actual foundation
+- SAS 70 (1992) → SSAE 16 → SOC 1/2/3 — the lineage
+- What SOC 2 Type II actually audits vs what it's sold as
+- The five Trust Service Criteria (Security, Availability, Processing
+  Integrity, Confidentiality, Privacy) — designed for batch processing
+  environments, retrofitted onto API-first architectures
+- Why a company can be SOC 2 certified and still have catastrophic
+  security failures — the certification measures process adherence,
+  not security outcomes
+- The Da Planet Security angle: what a meaningful security attestation
+  looks like for modern infrastructure (OSCAL, continuous control
+  monitoring, actual threat modeling)
+
+**Register:** Practitioner-accessible but written for the non-technical
+buyer who has been sold SOC 2 as a security guarantee. Deflate the
+marketing claim, explain the historical context, propose what the
+question should actually be.
+
+**Series:** Standalone Da Planet Security authority piece. Strong candidate
+for a whitepaper format with an executive summary — the audience is
+procurement officers and CTOs who need a reason to ask better questions.
+Also strong for RT4: compliance theater as a surveillance enabler (SOC 2
+certified vendors still sell data, the certification says nothing about
+data minimization or retention).
+
+**BHAG connection:** Direct pipeline to Da Planet Security expert witness
+and federal contracting positioning. "What does compliance actually mean"
+is the question that precedes "hire someone who knows the answer."
+
+
+---
+
+## Publishing strategy: reader calibration and literary universe seeding
+
+**Reference frame:** Illuminatus! trilogy (Shea/Wilson) — fiction and intellectual
+content indistinguishable, ideas that reward deep reading without requiring it,
+a coherent thesis that operates at multiple levels simultaneously. Serious in
+nature, not a puzzle or ARG.
+
+**What the site is doing (intentionally or not):**
+
+The Easter eggs, the corpus, the finger block, the 79ch, the FidoNET node in
+file_id.diz — none of these are breadcrumbs to a payload. They are reader
+selection mechanisms. They establish that the author operates at a certain
+level of historical and technical seriousness before the reader ever opens
+the book.
+
+This is the correct function. Don't design them as puzzles. Design them as
+signals to the right reader that this is for them.
+
+**The Dead Reckoning series as universe seed:**
+
+Each article plants the same thesis at a different layer — hardware, law,
+compliance, surveillance infrastructure, civil liberties. The casual reader
+gets interesting history. The careful reader gets a coherent theory of how
+power preserves itself through obsolete infrastructure. The very careful
+reader arrives at the Fourth Amendment in the age of AI surveillance —
+which is *The Watchers You Fed*.
+
+The series is pre-loading the intellectual framework the book requires.
+By the time a reader reaches the book they've already been calibrated.
+
+**Scope and entity separation:**
+
+- dwightaspencer.com / Dead Reckoning series → real-identity intellectual surface
+- *The Watchers You Fed* and future books → the primary vehicle
+- EDM ARG → ended, never connected, never will be
+- file_id.diz → standalone dead-end Easter egg, no connection to any of the above
+- Lisp corpus → its own branch, not narrative infrastructure
+
+**Future books:**
+
+The universe implied by *The Watchers You Fed* is large enough to support
+sequels and companion volumes. The intellectual framework (ghost constraints,
+dead reckoning, vestigial infrastructure as power preservation) applies to
+domains beyond surveillance: monetary systems, credentialing, standards bodies,
+language itself. Each is a book. The site plants the seeds without naming them.
+
+**What not to do:**
+
+- Don't connect the Easter eggs to each other narratively
+- Don't design puzzles — design depth
+- Don't signal the thesis directly in the articles; let it accumulate
+- Don't tie the fiction layer to the real-identity layer
+
