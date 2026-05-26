@@ -80,16 +80,21 @@ Stack wrong for target environment. Repo archived for quadlet pattern reference.
 Analytics direction: Prometheus + log scraping + PII stripping pipeline —
 whitepaper + Da Planet Security product. No consent banners by architecture.
 
-## Open backlog (MIGRATION.md)
+## Open backlog
+
+See `hugo/MIGRATION.md` — source of authority for all backlog items.
+Summary of top items only:
 
 | Item | Priority | Notes |
 |---|---|---|
-| Dynamic per-post OG images | v2 | og-card.html template done, needs Playwright CI step |
+| Dynamic per-post OG images | v2 | og-card.html done, needs Playwright CI step |
 | Observability stack | v2 | node_exporter/cAdvisor/Loki/Grafana — lab → HPR → whitepaper |
 | R2 asset migration | v3 | issue #61 — assets.cdn.dwightaspencer.com |
 | Archive content recovery | v3 stretch | Posts 10–12 from WordPress/CompuTEK era |
 | arXiv post 03 | blocked | Needs endorsement or Cornell email |
 | BMAC membership tiers | next session | R&D fund, charitable fundraising, community building |
+
+If HANDOFF.md and MIGRATION.md conflict on any item — MIGRATION.md wins.
 
 ## Production content pipeline
 
