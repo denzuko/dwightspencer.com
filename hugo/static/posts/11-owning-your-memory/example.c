@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Style: tsoding (arena.h zero-init, sv.h, Yoda conditions), single-exit
- *        BAIL macro, C99 only, no system()/popen()/exec*().
+ *        do{}while(0)+break, C99 only, no system()/popen()/exec*().
  *
  * Standards: ISO C99, NASA Rule subset (bounded loops, assertion density,
  *            single-exit functions, no dynamic allocation).
@@ -60,17 +60,6 @@ typedef struct {
 
 /* Static allocation (no malloc, Rule-compliant) */
 static ArenaSlot g_arena[ARENA_SLOTS];
-
-/* ========================================================================= */
-/* SINGLE-EXIT ERROR HANDLING                                                 */
-/* ========================================================================= */
-
-/*
- * BAIL(label) — jump to cleanup label on error (do-while(0) safe).
- * All functions that can fail use a single `cleanup:` label at the end
- * so every exit path is explicit and auditable.
- */
-#define BAIL(label) do { goto label; } while (0)
 
 /* ========================================================================= */
 /* HARDENED ASSERTION (NASA Rule 5 — high assertion density)                 */
@@ -241,7 +230,7 @@ int channel_recv(object_handle_t chan_h, object_handle_t *const out_h)
 /* ========================================================================= */
 
 typedef struct {
-    char message[32];
+    char message[40];
 } Printer;
 
 object_handle_t printer_create(const char *const init_msg)
@@ -286,36 +275,40 @@ int main(void)
     /* 1. Initialise arena slots to a known-clean state */
     (void)memset(g_arena, 0, sizeof(g_arena));
 
-    /* 2. Create pipeline components */
-    h_chan         = channel_create();
-    h_printer_sent = printer_create("Hello, Pure ANSI C99 World via BSD!");
+    /* Single-exit pipeline — do{}while(0) with break on error.
+     * All handle releases happen in the cleanup block below regardless
+     * of which path exits the loop. No goto required. */
+    do {
+        /* 2. Create pipeline components */
+        h_chan         = channel_create();
+        h_printer_sent = printer_create("Hello, Pure ANSI C99 World via BSD!");
 
-    /* 3. Dispatch object into channel */
-    send_ok = channel_send(h_chan, h_printer_sent);
-    if (1 != send_ok) {
-        BAIL(cleanup);
-    }
+        /* 3. Dispatch object into channel */
+        send_ok = channel_send(h_chan, h_printer_sent);
+        if (1 != send_ok) {
+            break;
+        }
 
-    /* 4. Current scope releases sender reference */
-    object_release(h_printer_sent);
-    h_printer_sent = INVALID_HANDLE;
+        /* 4. Current scope releases sender reference */
+        object_release(h_printer_sent);
+        h_printer_sent = INVALID_HANDLE;
 
-    /* 5. Consumer receives from channel */
-    recv_ok = channel_recv(h_chan, &h_printer_rcvd);
-    if (1 != recv_ok) {
-        BAIL(cleanup);
-    }
+        /* 5. Consumer receives from channel */
+        recv_ok = channel_recv(h_chan, &h_printer_rcvd);
+        if (1 != recv_ok) {
+            break;
+        }
 
-    H_ASSERT(INVALID_HANDLE != h_printer_rcvd);
+        H_ASSERT(INVALID_HANDLE != h_printer_rcvd);
 
-    printer_say_hello(h_printer_rcvd);
-    object_release(h_printer_rcvd);
-    h_printer_rcvd = INVALID_HANDLE;
+        printer_say_hello(h_printer_rcvd);
+        object_release(h_printer_rcvd);
+        h_printer_rcvd = INVALID_HANDLE;
 
-    rc = 0; /* success */
+        rc = 0; /* success */
+    } while (0);
 
-cleanup:
-    /* Tear-down: release any handles still live */
+    /* 6. Release any handles still live — runs on every exit path */
     if (INVALID_HANDLE != h_printer_sent) {
         object_release(h_printer_sent);
     }

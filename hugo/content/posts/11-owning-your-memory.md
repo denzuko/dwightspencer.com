@@ -15,7 +15,7 @@ og_image    = "/assets/og-posts.png"
 
 [[diagrams]]
   title   = "Architecture overview: coding standards, arena, object lifecycle, channel, assert, single-exit"
-  alt     = "Flowchart showing six layers: ISO C99, NASA Power of Ten Rules 2 3 5 7 9, Tsoding Style with Yoda conditions and arena zero-init, and project rules including no system calls, BDD-first, BAIL macro, and block comments feed into a static arena of eight slots. Object lifecycle shows arena_alloc O(n) free-slot scan, object_retain incrementing ref_count guarded below UINT16_MAX, and object_release decrementing with memset and FREE on zero. INVALID_HANDLE is UINT16_MAX not ARENA_SLOTS. Channel is a ring buffer in slot zero with channel_send retaining and enqueuing at tail and channel_recv dequeuing from head. Hardened assert uses H_ASSERT calling hardened_assert which calls __builtin_trap producing SIGILL on x86 via ud2 with core dump and no spin loop. Single-exit pattern uses BAIL macro expanding to do goto label while zero feeding a cleanup block that releases live handles and returns rc."
+  alt     = "Flowchart showing six layers: ISO C99, NASA Power of Ten all ten rules, Tsoding Style with Yoda conditions and arena zero-init, and project rules including no system calls, no goto in C, BDD-first, and block comments feed into a static arena of eight slots. Object lifecycle shows arena_alloc O(n) free-slot scan, object_retain incrementing ref_count guarded below UINT16_MAX, and object_release decrementing with memset and FREE on zero. INVALID_HANDLE is UINT16_MAX not ARENA_SLOTS. Channel is a ring buffer in slot zero with channel_send retaining and enqueuing at tail and channel_recv dequeuing from head. Hardened assert uses H_ASSERT calling hardened_assert which calls __builtin_trap producing SIGILL on x86 via ud2 with core dump and no spin loop. Single-exit pattern uses do while zero with break on error paths feeding a cleanup block that releases live handles and returns rc."
   caption = "Post 11 architecture: standards layer → arena → object lifecycle → channel → hardened assert → single-exit cleanup"
 +++
 
@@ -32,15 +32,13 @@ you have not audited. The CVEs will stop. The exploits will dry up.</p>
 
 <p>They do not. They move. The attack surface migrates from your allocator into
 your build toolchain, your package registry, your compiler plugin ecosystem,
-your language runtime&#8217;s own memory model. You traded a known adversary for
-three unknown ones and called it progress.</p>
+your language runtime&#8217;s own memory model. The adversary changes shape.</p>
 
-<p>This post takes the opposite position: use what already works, follows
-ratified standards, and can be audited without a PhD in type theory. The
-toolchain is a 1989 standard that has outlasted every hype cycle since. The
-patterns here are deployed in avionics, hypervisors, and the kernels running
-under the clouds everyone else depends on. They are not exotic. They are just
-unfashionable &#8212; which is a different thing.</p>
+<p>This post covers what already works: a documented standard, zero external
+dependencies, and patterns deployed in avionics, hypervisors, and the kernels
+modern infrastructure runs on. The toolchain is ISO C99 &#8212; a 1989
+standard ratified in 1999 that is still the lingua franca of safety-critical
+and embedded systems work.</p>
 
 <h2 id="supply-chain">The supply chain you are not thinking about</h2>
 
@@ -68,37 +66,44 @@ you generated and never read.</p>
 <h2 id="coding-standards">Coding standards in force</h2>
 
 <p>The code in this post applies a documented, layered set of standards.
-Understanding them is prerequisite to reading the implementation.</p>
+Each layer is enforceable &#8212; via OPA/Rego AST gates, LSP diagnostics,
+or CI policy checks &#8212; before a line of implementation code is written
+or merged. Understanding them is prerequisite to reading the implementation.</p>
 
 <p><strong>ISO C99 (ISO/IEC 9899:1999)</strong> &#8212; the base language standard. No GNU
 extensions, no <code>__attribute__</code>, no C11 atomics. Every construct is valid
 under <code>-std=c99 -Wall -Wextra -Wpedantic</code> with zero warnings on GCC and Clang.</p>
 
 <p><strong>NASA Power of Ten</strong> (Gerard Holzmann, JPL, 2006) &#8212; ten rules for
-safety-critical C. The rules applied in this codebase:</p>
+safety-critical C. All ten are in force; the codebase addresses each:</p>
 
 <ul>
+<li><em>Rule 1</em>: No complex flow constructs &#8212; no <code>setjmp</code>, no recursion.
+Single-exit is achieved via <code>do&#x7B;&#x7D;while(0)</code> with <code>break</code> on error paths,
+not <code>goto</code>. The C code contains no <code>goto</code> statements.</li>
 <li><em>Rule 2</em>: All loops have a fixed, explicit upper bound. Every <code>for</code> loop
 iterates over <code>ARENA_SLOTS</code> or <code>CHAN_CAPACITY</code> &#8212; compile-time constants.
 No unbounded <code>while</code> anywhere.</li>
 <li><em>Rule 3</em>: No dynamic memory allocation after initialisation.
 <code>malloc()</code>, <code>calloc()</code>, <code>realloc()</code> do not appear anywhere.</li>
+<li><em>Rule 4</em>: No function longer than 60 lines. Every function in
+<code>example.c</code> fits comfortably within this limit and does one thing.</li>
 <li><em>Rule 5</em>: Assertion density &#8805; 2 per function on average. Every public
 function opens with <code>H_ASSERT</code> guards on every parameter.</li>
+<li><em>Rule 6</em>: Minimal variable scope. Variables are declared at the top of
+their enclosing block; no variable outlives its owning scope.</li>
 <li><em>Rule 7</em>: Check the return value of every non-void function.
 <code>channel_send()</code> and <code>channel_recv()</code> both return <code>int</code>; <code>main()</code>
-checks both with explicit <code>BAIL</code> on failure.</li>
+checks both with explicit <code>break</code> on failure.</li>
+<li><em>Rule 8</em>: Preprocessor use limited to includes and simple macros.
+<code>H_ASSERT</code> is the only non-trivial macro; no conditional compilation,
+no token-pasting, no variadic macros.</li>
 <li><em>Rule 9</em>: Pointer dereference limited to one level per expression.
 <code>arena_get_ptr()</code> returns a flat pointer; callers cast once at the
 call-site and do not chain arrow operators.</li>
+<li><em>Rule 10</em>: All code compiles with all warnings enabled.
+<code>-std=c99 -Wall -Wextra -Wpedantic</code> produces zero warnings on GCC and Clang.</li>
 </ul>
-
-<p>One deliberate tradeoff: <code>BAIL</code> uses <code>goto</code>, and NASA Rule 1 bans <code>goto</code>
-as a complex flow construct. The project makes an explicit choice here &#8212;
-single-exit resource safety (one <code>cleanup:</code> label, all release paths
-auditable in one place) is a stronger correctness guarantee for this
-codebase than strict Rule 1 compliance. The tradeoff is documented, not
-accidental.</p>
 
 <p><strong>Tsoding style conventions</strong> &#8212; drawn from Alexey Kutepov&#8217;s public codebase
 practice: arena allocators initialised as <code>= {0}</code>, Yoda conditions
@@ -106,16 +111,25 @@ throughout (<code>0 == condition</code>, <code>INVALID_HANDLE != found</code>), 
 zero-dependency library philosophy, <code>sv.h</code> string views where string
 handling is needed.</p>
 
-<p><strong>Project-specific rules</strong> (codified in <code>CLAUDE.md</code> v1.1.1):</p>
+<p><strong>Project-specific rules</strong> (enforced via OPA/Rego AST gates, CycloneDX SBOM
+generation, and LSP diagnostics &#8212; the same checks run whether triggered by
+a developer, an LLM agent, or CI/CD):</p>
 
 <ul>
-<li>No <code>system()</code>, <code>popen()</code>, or <code>exec*()</code> family calls &#8212; enforced by OPA
-Rego AST gate in CI before any code review</li>
+<li>No <code>system()</code>, <code>popen()</code>, or <code>exec*()</code> family calls &#8212; caught by Rego
+AST gate before the BDD test cycle starts</li>
+<li>No <code>goto</code> in C code. Single-exit is <code>do&#x7B;&#x7D;while(0)</code> + <code>break</code>;
+<code>goto</code> is reserved for shell scripts (tcsh) where it is idiomatic</li>
 <li>BDD-first: Rego policy gate &#8594; xUnit test &#8594; code &#8594; changelog &#8594; merge &#8594; tag.
-No code before the gate and tests pass.</li>
+No code before the gate and tests pass. This applies equally to human
+and automated contributors.</li>
+<li>Sandbox where the target OS supports it: OpenBSD <code>pledge</code>/unveil,
+FreeBSD Capsicum, Linux seccomp &#8212; selected at compile time via
+<code>#ifdef HAS_SANDBOX</code></li>
 <li><code>/* */</code> block comments throughout; no <code>//</code> C++ line comments</li>
-<li><code>BAIL(label)</code> single-exit pattern for all error paths</li>
 <li><code>INVALID_HANDLE</code> is <code>UINT16_MAX</code>, never the arena capacity</li>
+<li>CycloneDX SBOM generated on every build; dependency graph stays
+at three entries: <code>stdio.h</code>, <code>stdint.h</code>, <code>string.h</code></li>
 </ul>
 
 <h2 id="architecture">Architecture at a glance</h2>
@@ -128,7 +142,7 @@ flowchart TD
         C99["ISO C99\n-std=c99 -Wall -Wextra -Wpedantic"]
         NASA["NASA Power of Ten\nRules 2·3·5·7·9"]
         TSODING["Tsoding Style\nYoda · arena={0} · sv.h"]
-        PROJ["Project Rules\nno system() · BDD-first · BAIL · block comments"]
+        PROJ["Project Rules\nno system() · no goto · BDD-first · block comments"]
     end
 
     subgraph Arena["Static Arena — g_arena[8]"]
@@ -158,8 +172,8 @@ flowchart TD
     end
 
     subgraph Exit["Single-Exit Pattern"]
-        BAIL_M["BAIL(label)\n= do{goto label}while(0)"]
-        CLEANUP["cleanup:\nrelease live handles\nreturn rc"]
+        BAIL_M["do{}while(0)+break\nno goto · no labels"]
+        CLEANUP["cleanup block\nrelease live handles\nreturn rc"]
     end
 
     C99 & NASA & TSODING & PROJ --> Arena
@@ -299,29 +313,23 @@ through three call frames. One comparison per call. No writable function
 pointer anywhere in the data structure. NASA Rule 9 compliance: one
 subscript dereference to reach the payload, nothing chained past it.</p>
 
-<h2 id="single-exit">Single-exit functions and the BAIL pattern</h2>
+<h2 id="single-exit">Single-exit functions</h2>
 
-<p>Every function has exactly one <code>return</code> statement. Error paths jump to a
-<code>cleanup:</code> label via the <code>BAIL</code> macro:</p>
-
-<pre><code>#define BAIL(label) do { goto label; } while (0)
-</code></pre>
-
-<p>The <code>do { } while (0)</code> wrapper makes the macro safe inside unbraced
-<code>if</code> bodies &#8212; it expands to a single statement. The result is a cleanup
-block at the bottom of every function where every resource release is
-visible in one place. Static analysis tools prove resource safety more
-easily on single-exit code. Human auditors do too.</p>
+<p>Every function has exactly one <code>return</code> statement. Error paths use
+<code>do&#x7B;&#x7D;while(0)</code> with <code>break</code> &#8212; no <code>goto</code>, no labels, no macros required.
+The cleanup block at the bottom of the loop runs on every exit path:</p>
 
 <pre><code>int main(void)
 {
     /* all handles initialised to INVALID_HANDLE */
+    do {
+        send_ok = channel_send(h_chan, h_printer_sent);
+        if (1 != send_ok) { break; }
+        /* ... */
+        rc = 0;
+    } while (0);
 
-    if (1 != send_ok) { BAIL(cleanup); }
-    /* ... */
-    rc = 0;
-
-cleanup:
+    /* cleanup — always runs */
     if (INVALID_HANDLE != h_printer_sent) { object_release(h_printer_sent); }
     if (INVALID_HANDLE != h_printer_rcvd) { object_release(h_printer_rcvd); }
     if (INVALID_HANDLE != h_chan)          { object_release(h_chan); }
@@ -329,48 +337,33 @@ cleanup:
 }
 </code></pre>
 
-<p>Whether control reaches <code>cleanup:</code> through the happy path or through a
-<code>BAIL</code>, the same release logic runs. No resource leak on any path.</p>
+<p>The handles are initialised to <code>INVALID_HANDLE</code> at declaration. The cleanup
+block checks before releasing. Whether <code>break</code> fires on the first step or
+control reaches the end of the loop normally, the same release logic runs.
+No resource leak on any path. Static analysis tools and auditors both find
+this easier to verify than scattered early returns.</p>
 
 <h2 id="download">Download and build</h2>
 
-<p>The complete source compiles clean with no warnings:</p>
-
 <pre><code>cc -std=c99 -Wall -Wextra -Wpedantic -o example example.c
 ./example
-# Hello, Pure ANSI C99 World via BSD!
 </code></pre>
 
-<p>No external dependencies. No build system required for the example.
-Download: <a href="/posts/11-owning-your-memory/example.c">example.c</a></p>
+<p><a href="/posts/11-owning-your-memory/example.c">example.c</a> &#8212; BSD-2-Clause, no external dependencies.</p>
 
 <h2 id="why-it-matters">Why this matters beyond C</h2>
 
-<p>This is not a post about C. It is a post about threat models.</p>
+<p>Every language that moves complexity into a runtime, a borrow checker,
+or a garbage collector shifts the attack surface rather than removing it.
+The Rust toolchain has CVEs. The Go runtime has had memory safety bugs.
+The npm ecosystem has been a persistent supply chain vector. This is in
+the NVD; it is not a theoretical concern.</p>
 
-<p>Every language that claims to solve memory safety by moving the complexity
-into a runtime, a borrow checker, or a garbage collector is trading one
-attack surface for another. The Rust toolchain has CVEs. The Go runtime has
-had memory safety bugs. The npm ecosystem that ships half the world&#8217;s
-JavaScript has been a persistent supply chain attack vector for years. None
-of this is hypothetical &#8212; it is in the NVD.</p>
-
-<p>The question is not &#8220;which language is theoretically safer.&#8221; The question
-is: <em>what is the actual, auditable surface you are defending?</em></p>
-
-<p>C99 with zero external dependencies gives you an answer you can state in
-one sentence: the language standard and the system libc. That answer has
-been audited by every major OS vendor, every avionics certification body,
-and every hypervisor team that cannot afford to be wrong. The nginx,
-OpenSSH, and Linux kernel codebases that form the floor of modern
-infrastructure are written in it.</p>
-
-<p>The patterns in this post are not a workaround for C&#8217;s limitations. They
-are the baseline that serious systems work has always used &#8212; static
-allocation, explicit ownership, bounded operations, assertion-dense code.
-The &#8220;safe languages&#8221; are largely reimplementing these patterns with extra
-syntax and a marketing budget.</p>
-
-<p>Know your stack. Own your allocator. Build accordingly.</p>
+<p>C99 with zero external dependencies keeps the answer to one sentence:
+the language standard and the system libc. The nginx, OpenSSH, and Linux
+kernel codebases &#8212; the actual floor of modern infrastructure &#8212; are
+written in it. The patterns here are what that work has always used:
+static allocation, explicit ownership, bounded operations, dense assertions,
+and policy-enforced build discipline.</p>
 
 <p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/09-after-the-canary/" style="color:#9a9a9a">post 09</a> covers warrant canary infrastructure and what happens when the standards body disappears</span></p>
