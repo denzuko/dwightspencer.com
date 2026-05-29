@@ -2,7 +2,7 @@
 title       = "Owning Your Memory: Hardened Arenas, Channels, and Structural OOP in Pure C99"
 date        = "2026-05-29"
 draft       = false
-description = "The security industry keeps chasing new languages while shipping new supply chain attack surfaces. Here is how to build a reference-counted arena, a non-blocking channel, and structural OOP dispatch in 100% standard C99 — auditable in one sitting, zero dependencies, zero heap."
+description = "Reference-counted arena, non-blocking channel, and structural OOP dispatch in ISO C99. Zero external dependencies, zero heap, all ten NASA Power of Ten rules applied. Companion source included."
 slug        = "11-owning-your-memory"
 keywords    = ["c99", "arena allocator", "memory safety", "supply chain", "nasa power of ten", "systems programming", "devops", "infosec", "open source", "sovereignty"]
 tags        = ["c99", "systems", "devops", "infosec", "architecture", "open-source", "privacy", "sovereignty"]
@@ -23,45 +23,37 @@ og_image    = "/assets/og-posts.png"
 explicit memory ownership, and an interest in what happens when you take
 the phrase &#8220;auditable in one sitting&#8221; literally.</em></p>
 
-<h2 id="the-wrong-question">The industry keeps asking the wrong question</h2>
+<p>Language migrations do not eliminate memory-safety problems; they move
+them. The CVEs follow the toolchain: the allocator, the package registry,
+the compiler plugin ecosystem, the language runtime. Each new dependency
+chain is a new attack surface with a different owner and a different
+disclosure timeline.</p>
 
-<p>The security industry has a recurring fantasy: that the right <em>new</em> language
-will solve memory safety. Write it in Rust. Rewrite it in Go. Transpile it
-through a supply chain of npm packages blessed by a foundation whose funding
-you have not audited. The CVEs will stop. The exploits will dry up.</p>
+<p>This post documents the implementation of a reference-counted arena,
+a non-blocking channel, and structural OOP dispatch in ISO C99 with
+zero external dependencies. The same patterns appear in avionics runtimes,
+hypervisors, and the systems software that production infrastructure
+runs on.</p>
 
-<p>They do not. They move. The attack surface migrates from your allocator into
-your build toolchain, your package registry, your compiler plugin ecosystem,
-your language runtime&#8217;s own memory model. The adversary changes shape.</p>
-
-<p>This post covers what already works: a documented standard, zero external
-dependencies, and patterns deployed in avionics, hypervisors, and the kernels
-modern infrastructure runs on. The toolchain is ISO C99 &#8212; a 1989
-standard ratified in 1999 that is still the lingua franca of safety-critical
-and embedded systems work.</p>
-
-<h2 id="supply-chain">The supply chain you are not thinking about</h2>
+<h2 id="supply-chain">Dependency graph as attack surface</h2>
 
 <p>Before the code: a threat model.</p>
 
-<p>Every dependency you pull is a trust decision. A Rust crate, a Go module, a
-Node package &#8212; each one is an executable that runs with your process&#8217;s
-privileges at build time or runtime. The registries that serve them have been
-compromised before and will be again. The maintainers are often one
-burned-out volunteer whose GPG key management you have never audited.</p>
+<p>Every dependency is a trust boundary. A Rust crate, a Go module, a
+Node package &#8212; each runs with the process&#8217;s privileges at build time or
+runtime. Package registries have been compromised; maintainer accounts have
+been taken over; malicious versions have shipped to production. The NVD
+has the receipts.</p>
 
-<p>C99 with zero external dependencies is not a limitation. It is a security
-posture. The complete dependency graph for <code>example.c</code> is:</p>
+<p>The complete dependency graph for <code>example.c</code>:</p>
 
 <pre><code>&lt;stdio.h&gt;   — your libc
 &lt;stdint.h&gt;  — your libc
 &lt;string.h&gt;  — your libc
 </code></pre>
 
-<p>That is the entire supply chain. You can read all of it. Your auditor can
-read all of it. The provenance is the C standard published in 1999 and the
-POSIX libc your OS ships. No registry. No lockfile. No SBOM with 847 entries
-you generated and never read.</p>
+<p>That is the entire supply chain. Provenance is the C standard and the
+POSIX libc the OS ships. No registry, no lockfile, no package manifest.</p>
 
 <h2 id="coding-standards">Coding standards in force</h2>
 
@@ -351,19 +343,17 @@ this easier to verify than scattered early returns.</p>
 
 <p><a href="/posts/11-owning-your-memory/example.c">example.c</a> &#8212; BSD-2-Clause, no external dependencies.</p>
 
-<h2 id="why-it-matters">Why this matters beyond C</h2>
+<h2 id="threat-model">Threat model</h2>
 
-<p>Every language that moves complexity into a runtime, a borrow checker,
-or a garbage collector shifts the attack surface rather than removing it.
-The Rust toolchain has CVEs. The Go runtime has had memory safety bugs.
-The npm ecosystem has been a persistent supply chain vector. This is in
-the NVD; it is not a theoretical concern.</p>
+<p>Moving memory management into a runtime, a borrow checker, or a GC
+shifts the attack surface; it does not reduce it. The Rust toolchain,
+the Go runtime, and the npm registry each have CVEs and supply chain
+incidents on record.</p>
 
-<p>C99 with zero external dependencies keeps the answer to one sentence:
-the language standard and the system libc. The nginx, OpenSSH, and Linux
-kernel codebases &#8212; the actual floor of modern infrastructure &#8212; are
-written in it. The patterns here are what that work has always used:
-static allocation, explicit ownership, bounded operations, dense assertions,
-and policy-enforced build discipline.</p>
+<p>C99 with zero external dependencies scopes the attack surface to the
+language standard and the system libc. The nginx, OpenSSH, and Linux
+kernel codebases are written in it. The patterns in this post &#8212;
+static allocation, explicit ownership, bounded loops, dense assertions,
+policy-enforced build gates &#8212; are what that work uses.</p>
 
 <p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/09-after-the-canary/" style="color:#9a9a9a">post 09</a> covers warrant canary infrastructure and what happens when the standards body disappears</span></p>
