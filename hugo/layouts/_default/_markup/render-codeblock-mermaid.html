@@ -1,4 +1,17 @@
-<div class="mermaid">
-  {{- .Inner | htmlEscape | safeHTML -}}
-</div>
-{{ .Page.Store.Set "hasMermaid" true }}
+{{- /* Count how many mermaid blocks have been rendered on this page so far.
+       Used to match diagram blocks to their front matter descriptions. */ -}}
+{{- $idx := .Page.Store.Get "diagramCount" | default 0 -}}
+{{- $diagrams := .Page.Params.diagrams -}}
+{{- $meta := index $diagrams $idx -}}
+<figure class="mermaid-figure">
+  <div class="mermaid" data-pagefind-ignore aria-hidden="true">
+    {{- .Inner | htmlEscape | safeHTML -}}
+  </div>
+  {{- with $meta -}}
+  {{- with .title }}<p class="mermaid-title sr-only" data-pagefind-body>Diagram: {{ . }}</p>{{- end -}}
+  {{- with .alt }}<p class="mermaid-alt sr-only" data-pagefind-body>{{ . }}</p>{{- end -}}
+  {{- with .caption }}<figcaption class="mermaid-caption" data-pagefind-body>{{ . }}</figcaption>{{- end -}}
+  {{- end }}
+</figure>
+{{- .Page.Store.Set "hasMermaid" true -}}
+{{- .Page.Store.Set "diagramCount" (add $idx 1) -}}

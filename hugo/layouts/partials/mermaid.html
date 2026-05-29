@@ -13,19 +13,38 @@ document.addEventListener('DOMContentLoaded', function () {
       fontSize: '13px'
     }
   });
-  /* Re-run if user toggles light/dark after load */
   var btn = document.getElementById('themeToggle');
   if (btn) {
     btn.addEventListener('click', function () {
-      /* mermaid v11 doesn't support live re-theme without full re-init;
-         reload the page to apply the new theme to diagrams */
       window.location.reload();
     });
   }
 });
 </script>
 <style>
-.mermaid { text-align: center; margin: 2rem 0; overflow-x: auto; }
+.mermaid-figure { margin: 2rem 0; }
+.mermaid { text-align: center; overflow-x: auto; }
 .mermaid svg { max-width: 100%; height: auto; }
+.mermaid-caption {
+  text-align: center;
+  font-size: .82rem;
+  color: #777;
+  margin-top: .5rem;
+  font-family: share tech mono, monospace;
+}
+/* Visually hidden but readable by Pagefind and screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+[data-theme="dark"] .mermaid-caption { color: #666; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .mermaid-caption { color: #666; }
+}
 </style>
 {{- end -}}

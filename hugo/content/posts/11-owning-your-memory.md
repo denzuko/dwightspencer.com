@@ -12,6 +12,11 @@ schema_type = "TechArticle"
 aeo_expertise = "DevOps, Security, Open Source, Systems Programming, C99"
 aliases     = ["/11-owning-your-memory/"]
 og_image    = "/assets/og-posts.png"
+
+[[diagrams]]
+  title   = "Architecture overview: coding standards, arena, object lifecycle, channel, assert, single-exit"
+  alt     = "Flowchart showing six layers: ISO C99, NASA Power of Ten Rules 2 3 5 7 9, Tsoding Style with Yoda conditions and arena zero-init, and project rules including no system calls, BDD-first, BAIL macro, and block comments feed into a static arena of eight slots. Object lifecycle shows arena_alloc O(n) free-slot scan, object_retain incrementing ref_count guarded below UINT16_MAX, and object_release decrementing with memset and FREE on zero. INVALID_HANDLE is UINT16_MAX not ARENA_SLOTS. Channel is a ring buffer in slot zero with channel_send retaining and enqueuing at tail and channel_recv dequeuing from head. Hardened assert uses H_ASSERT calling hardened_assert which calls __builtin_trap producing SIGILL on x86 via ud2 with core dump and no spin loop. Single-exit pattern uses BAIL macro expanding to do goto label while zero feeding a cleanup block that releases live handles and returns rc."
+  caption = "Post 11 architecture: standards layer → arena → object lifecycle → channel → hardened assert → single-exit cleanup"
 +++
 
 <p class="meta"><em>Assumes working familiarity with C, a basic tolerance for
