@@ -1,0 +1,31 @@
+{{- if .Store.Get "hasMermaid" -}}
+<script src="{{ "/js/mermaid.min.js" | relURL }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var darkNow = document.documentElement.getAttribute('data-theme') === 'dark' ||
+    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'strict',
+    theme: darkNow ? 'dark' : 'neutral',
+    themeVariables: {
+      fontFamily: 'share tech mono, monospace',
+      fontSize: '13px'
+    }
+  });
+  /* Re-run if user toggles light/dark after load */
+  var btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      /* mermaid v11 doesn't support live re-theme without full re-init;
+         reload the page to apply the new theme to diagrams */
+      window.location.reload();
+    });
+  }
+});
+</script>
+<style>
+.mermaid { text-align: center; margin: 2rem 0; overflow-x: auto; }
+.mermaid svg { max-width: 100%; height: auto; }
+</style>
+{{- end -}}
