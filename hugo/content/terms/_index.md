@@ -6,8 +6,11 @@ layout      = "single"
 type        = "policy"
 aliases     = ["/terms/"]
 related_policies = [
-  {title = "Privacy Policy", url = "/privacy/"},
-  {title = "Copyright & IP", url = "/copyright/"},
+  {title = "Privacy Policy",    url = "/privacy/"},
+  {title = "Copyright & IP",    url = "/copyright/"},
+  {title = "DMCA Policy",       url = "/dmca/"},
+  {title = "Trademark Policy",  url = "/trademark/"},
+  {title = "Stream Asset Policy", url = "/stream-policy/"},
   {title = "Data Usage Policy", url = "/data-usage/"}
 ]
 +++
@@ -68,7 +71,8 @@ Contact via [Keybase](https://keybase.io/Denzuko) or
 ## 7. Intellectual property
 
 All original content is copyright © Dwight Spencer, all rights reserved.
-See the [Copyright & IP Notice](/copyright/).
+See the [Copyright & IP Notice](/copyright/), [DMCA Policy](/dmca/),
+[Trademark Policy](/trademark/), and [Stream Asset Policy](/stream-policy/).
 
 ## 8. Disclaimer
 
