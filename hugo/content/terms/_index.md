@@ -48,7 +48,7 @@ Without explicit written permission you may not:
   retrieval-augmented generation corpora, or similar machine learning
   purposes — this prohibition applies globally and is reserved under the
   EU CDSM Directive Art. 4 and by contractual reservation elsewhere
-- Attribute content to anyone other than Dwight Spencer
+- Attribute content to anyone other than Dwight Spencer (@denzuko / @zekodun)
 - Use my name, likeness, voice, writing style, or personal data to train
   or prompt AI systems to simulate or impersonate me
 - Frame or embed this site within another application

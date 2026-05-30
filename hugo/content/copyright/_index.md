@@ -29,7 +29,7 @@ copyright © Dwight Spencer, all rights reserved.
 ## 2. Trademark
 
 See the dedicated [Trademark Policy](/trademark/) for the full statement
-covering personal marks (Dwight Spencer, @denzuko), entity marks
+covering personal marks (Dwight Spencer, @denzuko, @zekodun), entity marks
 (Da Planet Security, Da Planet Radio), permitted nominative fair use,
 prohibited uses including AI-generated synthetic identity content,
 and enforcement procedures.
