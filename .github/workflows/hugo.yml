@@ -85,14 +85,17 @@ jobs:
           SHA1=$(sha1sum ${DIST_DIR}/${RELEASE}.tgz | cut -d' ' -f1)
 
           # releases.txt: first line MUST start with # (Quicklisp cdb.lisp requirement)
-          printf "# project-name url size md5 sha1 prefix system-files\n"             > ${DIST_DIR}/releases.txt
-          printf "%s http://dwightaspencer.com/lisp/%s.tgz %s %s %s %s %s/dwightaspencercom.asd
-"             "${RELEASE}" "${RELEASE}" "${SIZE}" "${MD5}" "${SHA1}" "${RELEASE}" "${RELEASE}"             >> ${DIST_DIR}/releases.txt
+          {
+            echo "# project-name url size md5 sha1 prefix system-files"
+            echo "${RELEASE} http://dwightaspencer.com/lisp/${RELEASE}.tgz ${SIZE} ${MD5} ${SHA1} ${RELEASE} ${RELEASE}/dwightaspencercom.asd"
+          } > ${DIST_DIR}/releases.txt
 
           # systems.txt: first line MUST start with # (Quicklisp cdb.lisp requirement)
-          # system-file must be the path within the tarball without .asd extension
-          printf "# project system-file system-name deps\n"             > ${DIST_DIR}/systems.txt
-          printf "DwightASpencerCom dwightaspencercom dwightaspencercom named-readtables\n"             >> ${DIST_DIR}/systems.txt
+          # system-file-name (col 1) must be basename only — no release prefix
+          {
+            echo "# project system-file system-name deps"
+            echo "DwightASpencerCom dwightaspencercom dwightaspencercom named-readtables"
+          } > ${DIST_DIR}/systems.txt
 
           sed -i "s/^version .*/version ${VERSION}/" static/distinfo.txt 2>/dev/null || true
 
