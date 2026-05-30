@@ -30,7 +30,7 @@
     .cta-line{font-size:.85rem;margin:.5rem 0 1.5rem;color:#777}
     .cta-line a{color:#666;text-decoration:none}
     .cta-line a:hover{color:#000;text-decoration:underline;text-underline-offset:2px}
-    .e-content{margin-top:1.5rem}.finger-exit{color:#9a9a9a;font-size:.85rem;margin-top:.5rem}
+    .e-content{margin-top:1.5rem}.e-content h2{font-size:1rem;font-weight:600;margin:2rem 0 .4rem;color:inherit}.e-content h3{font-size:1rem;font-weight:600;margin:1.5rem 0 .25rem;color:inherit}.finger-exit{color:#9a9a9a;font-size:.85rem;margin-top:.5rem}
     /* latest posts */
     .latest-posts{margin-top:3rem;padding-top:1rem;border-top:1px dotted #ccc}
     .latest-posts h2{font-size:.8rem;font-weight:normal;letter-spacing:.08em;text-transform:uppercase;color:#9a9a9a;margin-bottom:.5rem}
@@ -60,7 +60,7 @@
     [data-theme="dark"] .cta-line{color:#888}
     [data-theme="dark"] .cta-line a{color:#bbb}
     [data-theme="dark"] .cta-line a:hover{color:#f0ede8}
-    [data-theme="dark"] .finger-exit{color:#666}
+    [data-theme="dark"] .e-content h2,[data-theme="dark"] .e-content h3{color:#f0ede8}[data-theme="dark"] .finger-exit{color:#666}
     /* ── DARK MODE — system preference, no JS ── */
     @media(prefers-color-scheme:dark){
       :root:not([data-theme="light"]){background:#0d0d0b;color:#f0ede8}
@@ -82,7 +82,7 @@
       :root:not([data-theme="light"]) .cta-line{color:#888}
       :root:not([data-theme="light"]) .cta-line a{color:#bbb}
       :root:not([data-theme="light"]) .cta-line a:hover{color:#f0ede8}
-      :root:not([data-theme="light"]) .finger-exit{color:#666}
+      :root:not([data-theme="light"]) .e-content h2,:root:not([data-theme="light"]) .e-content h3{color:#f0ede8}:root:not([data-theme="light"]) .finger-exit{color:#666}
     }
 
     /* ── POLICY PAGES ── */
@@ -131,3 +131,4 @@
     @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) footer img{filter:invert(1)}}
     @media(prefers-reduced-motion:reduce){.animate-blink{animation:none;opacity:1}}
     @media print{.skip-link,header nav,.tags,.theme-toggle,.search-toggle,.search-wrap{display:none}body{background:#fff;color:#000;padding:0;font-size:11pt}a[href]::after{content:" (" attr(href) ")";font-size:9pt}pre,code{border:1px solid #ccc;page-break-inside:avoid}}</style>
+
