@@ -1,1 +1,1 @@
-DwightASpencerCom-2026-05-30 http://dwightaspencer.com/lisp/DwightASpencerCom-2026-05-30.tgz 10228 8ac9e74596401ca3a536556f2e6468a4 d24bf22c26d99b9d0addaf273fdd29ad54a745e6 DwightASpencerCom-2026-05-30 DwightASpencerCom-2026-05-30/dwightaspencer.asd
+DwightASpencerCom-2026-05-30 http://dwightaspencer.com/lisp/DwightASpencerCom-2026-05-30.tgz 10229 b57836e64154d61d4243e4bd402887ee d24bf22c26d99b9d0addaf273fdd29ad54a745e6 DwightASpencerCom-2026-05-30 DwightASpencerCom-2026-05-30/dwightaspencer.asd
