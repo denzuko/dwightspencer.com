@@ -30,7 +30,7 @@ copyright © Dwight Spencer, all rights reserved.
 
 See the dedicated [Trademark Policy](/trademark/) for the full statement
 covering personal marks (Dwight Spencer, @denzuko, @zekodun), entity marks
-(Da Planet Security, Da Planet Radio), permitted nominative fair use,
+(Da Planet Security), permitted nominative fair use,
 prohibited uses including AI-generated synthetic identity content,
 and enforcement procedures.
 
@@ -83,5 +83,4 @@ contact via [Keybase](https://keybase.io/Denzuko) with a detailed notice.
 
 See the dedicated [DMCA Policy](/dmca/) for the full takedown and
 counter-notice procedures, repeat infringer policy, misrepresentation
-liability under 17 U.S.C. § 512(f), and stream-specific provisions for
-Da Planet Radio.
+liability under 17 U.S.C. § 512(f), and repeat infringer procedures.
