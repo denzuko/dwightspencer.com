@@ -33,14 +33,33 @@
 ;;;;   (tag    slug keyword)
 ;;;;   (author slug orcid)
 ;;;;   (artifact name descriptor path)   ; Easter egg / metadata artifacts
+;;;;   (diagram slug index title alt-text) ; Mermaid diagrams embedded in post
 
 (defun assert-post-facts (db)
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 10 posts."
+   Generated from 11 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
+
+    ;; Owning Your Memory: Hardened Arenas, Channels, and Structural OOP in Pure C99
+    (pf 'post "11-owning-your-memory"
+        "Owning Your Memory: Hardened Arenas, Channels, and Structural OOP in Pure C99"
+        "2026-05-29"
+        2081)
+(pf 'tag "11-owning-your-memory" :c99)
+(pf 'tag "11-owning-your-memory" :systems)
+(pf 'tag "11-owning-your-memory" :devops)
+(pf 'tag "11-owning-your-memory" :infosec)
+(pf 'tag "11-owning-your-memory" :architecture)
+(pf 'tag "11-owning-your-memory" :open-source)
+(pf 'tag "11-owning-your-memory" :privacy)
+(pf 'tag "11-owning-your-memory" :sovereignty)
+(pf 'author "11-owning-your-memory" "0009-0001-0066-4646")
+(pf 'diagram "11-owning-your-memory" 0
+        "Architecture overview: coding standards, arena, object lifecycle, channel, assert, single-exit"
+        "Architecture flowchart for example.c. Four standards layers feed into the implementation: ISO C99, all ten NASA Power of Ten rules, tsoding conventions (Yoda conditions, zero-init arenas), and project rules (no system calls, no goto in C, BDD-first workflow). The static arena holds eight typed slots. Objects are allocated by scanning for a free slot, retained by incrementing a ref_count, and released by decrementing it — zeroing the payload and freeing the slot when the count reaches zero. INVALID_HANDLE is UINT16_MAX. The channel is a ring buffer living in slot zero; send retains and enqueues, recv dequeues and transfers ownership to the caller. Assertions trap via __builtin_trap, which emits ud2 on x86 and raises SIGILL. Single-exit is a do-while-zero loop with break on error; cleanup releases any live handles unconditionally.")
 
     ;; The Watchers You Fed: Chapter Preview
     (pf 'post "04-watchers-you-fed"
@@ -199,3 +218,23 @@
   (remove-duplicates
    (logic:db-var-all kb '(tag ?slug ?tag) '?tag)
    :test #'equal))
+
+(defun post-diagrams (kb slug)
+  "Return a list of diagram plists for post SLUG in KB.
+   Each plist has keys: :index :title :alt
+   Returns NIL if the post has no diagrams."
+  (mapcar (lambda (env)
+            (list :index (cdr (assoc '?i   env))
+                  :title (cdr (assoc '?t   env))
+                  :alt   (cdr (assoc '?alt env))))
+          (logic:db-prove-all kb `(diagram ,slug ?i ?t ?alt))))
+
+(defun all-diagrams (kb)
+  "Return a list of all diagram facts in KB as plists.
+   Keys: :slug :index :title :alt"
+  (mapcar (lambda (env)
+            (list :slug  (cdr (assoc '?slug env))
+                  :index (cdr (assoc '?i    env))
+                  :title (cdr (assoc '?t    env))
+                  :alt   (cdr (assoc '?alt  env))))
+          (logic:db-prove-all kb '(diagram ?slug ?i ?t ?alt))))
