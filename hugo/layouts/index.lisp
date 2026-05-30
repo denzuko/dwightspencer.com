@@ -35,6 +35,7 @@
 ;;;;   (artifact name descriptor path)   ; Easter egg / metadata artifacts
 ;;;;   (diagram slug index title alt-text) ; Mermaid diagrams embedded in post
 ;;;;   (related  slug target label)          ; related_post front matter cross-reference
+;;;;   (page     slug title section date)    ; all non-post pages (policy, now, uses, etc.)
 
 (defun assert-post-facts (db)
   "Assert all post, tag, author, and artifact facts into DB.
@@ -64,7 +65,19 @@
         {{ printf "%q" .slug }}
         {{ printf "%q" .label }})
 {{ end -}}
-{{ end }}  )
+{{ end }}
+
+{{/* Non-post pages: policy, now, uses, projects, media, series, taxonomy */}}
+{{ range (where .Site.RegularPages "Section" "!=" "posts") -}}
+  {{- $slug    := .Params.slug | default .File.BaseFileName -}}
+  {{- $section := .Section | default "root" -}}
+  {{- $date    := .Date.Format "2006-01-02" -}}
+  (pf 'page {{ printf "%q" $slug }}
+      {{ printf "%q" .Title }}
+      {{ printf "%q" $section }}
+      {{ printf "%q" $date }})
+{{ end }}
+  )
   db)
 
 ;;;; ── Knowledge base construction ────────────────────────────────────────────
@@ -160,3 +173,21 @@
                   :target (cdr (assoc '?target env))
                   :label  (cdr (assoc '?label  env))))
           (logic:db-prove-all kb '(related ?slug ?target ?label))))
+
+(defun all-pages (kb)
+  "Return all non-post pages in KB as plists. Keys: :slug :title :section :date"
+  (mapcar (lambda (env)
+            (list :slug    (cdr (assoc '?slug    env))
+                  :title   (cdr (assoc '?title   env))
+                  :section (cdr (assoc '?section env))
+                  :date    (cdr (assoc '?date    env))))
+          (logic:db-prove-all kb '(page ?slug ?title ?section ?date))))
+
+(defun find-page (kb slug)
+  "Find a non-post page by slug. Returns plist or NIL."
+  (let ((env (logic:db-prove-first kb `(page ,slug ?title ?section ?date))))
+    (when env
+      (list :slug    slug
+            :title   (cdr (assoc '?title   env))
+            :section (cdr (assoc '?section env))
+            :date    (cdr (assoc '?date    env))))))
