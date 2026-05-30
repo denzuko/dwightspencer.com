@@ -49,6 +49,10 @@
     <meta name="DC.language" content="{{ .Site.LanguageCode }}">
     <meta name="DC.rights" content="{{ .Site.Copyright }}">
     <meta name="DC.coverage" content="Global">
+    {{- with .Params.related_post }}
+    <meta name="DC.relation" content="{{ $.Site.Params.canonicalBase }}/posts/{{ .slug }}/">
+    <meta name="DC.references" content="{{ $.Site.Params.canonicalBase }}/posts/{{ .slug }}/">
+    {{- end }}
 
     {{- /* ── GEO ── */}}
     <meta name="geo.position" content="{{ .Site.Params.geoPosition }}">

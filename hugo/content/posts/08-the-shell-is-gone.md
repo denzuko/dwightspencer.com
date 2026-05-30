@@ -12,6 +12,10 @@ schema_type = "BlogPosting"
 aeo_expertise = "DevOps, Open Source, Privacy, Security, Architecture"
 aliases     = ["/08-the-shell-is-gone/"]
 og_image    = "/assets/og-posts.png"
+
+[related_post]
+  slug  = "05-infrastructure-independence"
+  label = "post 05 covers the philosophy in more depth"
 +++
 
 <h2 id="the-endpoint-is-down">The endpoint is down.</h2>
@@ -80,4 +84,3 @@ and build the replacement when you know what it's actually for.</p>
 
 <p><code>hack.dapla.net</code> will be back when there's something worth putting there.</p>
 
-<p class="finger-exit"><span style="color:#75715e">; → <a href="/posts/05-infrastructure-independence/" style="color:#9a9a9a">post 05</a> covers the philosophy in more depth</span></p>

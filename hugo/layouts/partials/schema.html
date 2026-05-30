@@ -40,6 +40,10 @@
           {{- with .Params.tags }}
           "keywords": [{{ range $i, $t := . }}{{ if $i }}, {{ end }}"{{ $t }}"{{ end }}],
           {{- end }}
+          {{- with .Params.related_post }}
+          "relatedLink": "{{ $.Site.Params.canonicalBase }}/posts/{{ .slug }}/",
+          "mentions": { "@type": "WebPage", "url": "{{ $.Site.Params.canonicalBase }}/posts/{{ .slug }}/" },
+          {{- end }}
           "publisher": {
             "@type": "Organization",
             "name": "{{ .Site.Params.siteTitle }}",
