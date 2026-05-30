@@ -23,48 +23,26 @@ og_image    = "/assets/og-posts.png"
   label = "post 09 covers warrant canary infrastructure and what happens when the standards body disappears"
 +++
 
-<p class="meta"><em>Assumes working familiarity with C, a basic tolerance for
-explicit memory ownership, and an interest in what happens when you take
-the phrase &#8220;auditable in one sitting&#8221; literally.</em></p>
+<p><code>example.c</code> is 330 lines. It compiles to a single binary with no external
+dependencies. It implements a reference-counted memory arena, a non-blocking
+channel, and structural OOP dispatch — all in ISO C99, all ten NASA Power of
+Ten rules applied throughout.</p>
 
-<p>Language migrations do not eliminate memory-safety problems; they move
-them. The CVEs follow the toolchain: the allocator, the package registry,
-the compiler plugin ecosystem, the language runtime. Each new dependency
-chain is a new attack surface with a different owner and a different
-disclosure timeline.</p>
+<h2 id="supply-chain">Dependencies</h2>
 
-<p>This post documents the implementation of a reference-counted arena,
-a non-blocking channel, and structural OOP dispatch in ISO C99 with
-zero external dependencies. The same patterns appear in avionics runtimes,
-hypervisors, and the systems software that production infrastructure
-runs on.</p>
-
-<h2 id="supply-chain">Dependency graph as attack surface</h2>
-
-<p>Before the code: a threat model.</p>
-
-<p>Every dependency is a trust boundary. A Rust crate, a Go module, a
-Node package &#8212; each runs with the process&#8217;s privileges at build time or
-runtime. Package registries have been compromised; maintainer accounts have
-been taken over; malicious versions have shipped to production. The NVD
-has the receipts.</p>
-
-<p>The complete dependency graph for <code>example.c</code>:</p>
-
-<pre><code>&lt;stdio.h&gt;   — your libc
-&lt;stdint.h&gt;  — your libc
-&lt;string.h&gt;  — your libc
+<pre><code>&lt;stdio.h&gt;   — libc
+&lt;stdint.h&gt;  — libc
+&lt;string.h&gt;  — libc
 </code></pre>
 
-<p>That is the entire supply chain. Provenance is the C standard and the
-POSIX libc the OS ships. No registry, no lockfile, no package manifest.</p>
+<p>The complete dependency graph. Provenance is the C standard and the
+POSIX libc the OS ships.</p>
 
 <h2 id="coding-standards">Coding standards in force</h2>
 
-<p>The code in this post applies a documented, layered set of standards.
-Each layer is enforceable &#8212; via OPA/Rego AST gates, LSP diagnostics,
-or CI policy checks &#8212; before a line of implementation code is written
-or merged. Understanding them is prerequisite to reading the implementation.</p>
+<p>The codebase applies a layered set of standards, each enforceable via
+OPA/Rego AST gates, LSP diagnostics, and CI policy checks before
+implementation code is written or merged.</p>
 
 <p><strong>ISO C99 (ISO/IEC 9899:1999)</strong> &#8212; the base language standard. No GNU
 extensions, no <code>__attribute__</code>, no C11 atomics. Every construct is valid
@@ -130,7 +108,6 @@ at three entries: <code>stdio.h</code>, <code>stdint.h</code>, <code>string.h</c
 
 <h2 id="architecture">Architecture at a glance</h2>
 
-<p>The full ownership and data flow across the pipeline:</p>
 
 ```mermaid
 flowchart TD
@@ -339,24 +316,25 @@ control reaches the end of the loop normally, the same release logic runs.
 No resource leak on any path. Static analysis tools and auditors both find
 this easier to verify than scattered early returns.</p>
 
-<h2 id="download">Download and build</h2>
+<h2 id="build">Build</h2>
 
 <pre><code>cc -std=c99 -Wall -Wextra -Wpedantic -o example example.c
 ./example
+# Hello, Pure ANSI C99 World via BSD!
 </code></pre>
 
-<p><a href="/posts/11-owning-your-memory/example.c">example.c</a> &#8212; BSD-2-Clause, no external dependencies.</p>
+<p><a href="/posts/11-owning-your-memory/example.c">example.c</a> &#8212; BSD-2-Clause.</p>
 
-<h2 id="threat-model">Threat model</h2>
+<h2 id="context">Context</h2>
 
-<p>Moving memory management into a runtime, a borrow checker, or a GC
-shifts the attack surface; it does not reduce it. The Rust toolchain,
-the Go runtime, and the npm registry each have CVEs and supply chain
-incidents on record.</p>
+<p>Package registries have shipped malicious versions. Maintainer accounts
+have been taken over. The Rust toolchain, the Go runtime, and npm each
+have CVEs in the NVD. Moving memory management into a new runtime shifts
+the attack surface; it does not remove it.</p>
 
-<p>C99 with zero external dependencies scopes the attack surface to the
-language standard and the system libc. The nginx, OpenSSH, and Linux
-kernel codebases are written in it. The patterns in this post &#8212;
-static allocation, explicit ownership, bounded loops, dense assertions,
-policy-enforced build gates &#8212; are what that work uses.</p>
+<p>Three libc headers is a different kind of answer to that problem.
+The nginx, OpenSSH, and Linux kernel codebases give the same answer.</p>
+
+<p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/09-after-the-canary/" style="color:#9a9a9a">post 09</a> covers warrant canary infrastructure and what happens when the standards body disappears</span></p>
+
 
