@@ -11,6 +11,10 @@ schema_type = "TechArticle"
 aeo_expertise = "Privacy, Security, Open Source, System Architecture"
 aliases     = ["/09-after-the-canary/"]
 og_image    = "/assets/og-posts.png"
+
+[related_post]
+  slug  = "01-a-better-tweedy-bird"
+  label = "post 01 has the original canary architecture argument"
 +++
 
 <h2 id="canarytail-is-gone">Canarytail is gone.</h2>
@@ -166,5 +170,4 @@ behavioral change for anyone monitoring your mail infrastructure.</li>
 The cryptographic infrastructure is the machine-verifiable layer.
 They are different audiences for the same signal, not competing standards.</p>
 
-<p class="finger-exit"><span style="color:#75715e">; → <a href="/posts/01-a-better-tweedy-bird/" style="color:#9a9a9a">post 01</a> has the original canary architecture argument</span></p>
 

@@ -17,6 +17,10 @@ og_image    = "/assets/og-posts.png"
   title   = "Architecture overview: coding standards, arena, object lifecycle, channel, assert, single-exit"
   alt     = "Architecture flowchart for example.c. Four standards layers feed into the implementation: ISO C99, all ten NASA Power of Ten rules, tsoding conventions (Yoda conditions, zero-init arenas), and project rules (no system calls, no goto in C, BDD-first workflow). The static arena holds eight typed slots. Objects are allocated by scanning for a free slot, retained by incrementing a ref_count, and released by decrementing it — zeroing the payload and freeing the slot when the count reaches zero. INVALID_HANDLE is UINT16_MAX. The channel is a ring buffer living in slot zero; send retains and enqueues, recv dequeues and transfers ownership to the caller. Assertions trap via __builtin_trap, which emits ud2 on x86 and raises SIGILL. Single-exit is a do-while-zero loop with break on error; cleanup releases any live handles unconditionally."
   caption = "Post 11 architecture: standards layer → arena → object lifecycle → channel → hardened assert → single-exit cleanup"
+
+[related_post]
+  slug  = "09-after-the-canary"
+  label = "post 09 covers warrant canary infrastructure and what happens when the standards body disappears"
 +++
 
 <p class="meta"><em>Assumes working familiarity with C, a basic tolerance for
@@ -356,4 +360,3 @@ kernel codebases are written in it. The patterns in this post &#8212;
 static allocation, explicit ownership, bounded loops, dense assertions,
 policy-enforced build gates &#8212; are what that work uses.</p>
 
-<p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/09-after-the-canary/" style="color:#9a9a9a">post 09</a> covers warrant canary infrastructure and what happens when the standards body disappears</span></p>

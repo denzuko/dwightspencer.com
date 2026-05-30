@@ -46,6 +46,30 @@ hugo/ARCHITECTURE.md           Mermaid diagrams — build pipeline, Lisp layers
 - Voice: terminal/BBS/SysOp, adversarial toward platform overreach
 - Tone: "expert reviewed" not "peer reviewed"
 
+## Post closing convention
+
+Posts close in one of two ways depending on type:
+
+**`related_post` front matter** (rendered by `single.html` as `; → post NN ...`):
+Use for posts in a running series or with a direct predecessor. The terminal-register
+closer is a reader signal, not boilerplate. Set `slug` and `label` in front matter;
+never author the `<p class="finger-exit">` paragraph manually in post body.
+
+```toml
+[related_post]
+  slug  = "05-infrastructure-independence"
+  label = "post 05 covers the philosophy in more depth"
+```
+
+**Contextual closer** (authored directly in post body):
+Use for standalone reference posts (resource lists, references sections) and
+historical/personal accounts (credentials block, series teaser). Posts 02–07
+demonstrate the pattern. Do not add `related_post` to these.
+
+The `finger-exit` class and `; →` register is reserved for the two template
+contexts: `index.html` (homepage finger block exit) and `single.html`
+(via `related_post` front matter). It does not appear anywhere else.
+
 ## Entity separation (strict)
 - dwightaspencer.com = personal publishing platform only
 - Da Planet Security commercial branding NEVER appears on this site
