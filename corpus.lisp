@@ -34,6 +34,7 @@
 ;;;;   (author slug orcid)
 ;;;;   (artifact name descriptor path)   ; Easter egg / metadata artifacts
 ;;;;   (diagram slug index title alt-text) ; Mermaid diagrams embedded in post
+;;;;   (related  slug target label)          ; related_post front matter cross-reference
 
 (defun assert-post-facts (db)
   "Assert all post, tag, author, and artifact facts into DB.
@@ -47,7 +48,7 @@
     (pf 'post "11-owning-your-memory"
         "Owning Your Memory: Hardened Arenas, Channels, and Structural OOP in Pure C99"
         "2026-05-29"
-        2081)
+        2065)
 (pf 'tag "11-owning-your-memory" :c99)
 (pf 'tag "11-owning-your-memory" :systems)
 (pf 'tag "11-owning-your-memory" :devops)
@@ -60,6 +61,9 @@
 (pf 'diagram "11-owning-your-memory" 0
         "Architecture overview: coding standards, arena, object lifecycle, channel, assert, single-exit"
         "Architecture flowchart for example.c. Four standards layers feed into the implementation: ISO C99, all ten NASA Power of Ten rules, tsoding conventions (Yoda conditions, zero-init arenas), and project rules (no system calls, no goto in C, BDD-first workflow). The static arena holds eight typed slots. Objects are allocated by scanning for a free slot, retained by incrementing a ref_count, and released by decrementing it — zeroing the payload and freeing the slot when the count reaches zero. INVALID_HANDLE is UINT16_MAX. The channel is a ring buffer living in slot zero; send retains and enqueues, recv dequeues and transfers ownership to the caller. Assertions trap via __builtin_trap, which emits ud2 on x86 and raises SIGILL. Single-exit is a do-while-zero loop with break on error; cleanup releases any live handles unconditionally.")
+(pf 'related "11-owning-your-memory"
+        "09-after-the-canary"
+        "post 09 covers warrant canary infrastructure and what happens when the standards body disappears")
 
     ;; The Watchers You Fed: Chapter Preview
     (pf 'post "04-watchers-you-fed"
@@ -75,11 +79,14 @@
     (pf 'post "08-the-shell-is-gone"
         "The Shell Is Gone (For Now)"
         "2026-05-23"
-        442)
+        432)
 (pf 'tag "08-the-shell-is-gone" :infrastructure)
 (pf 'tag "08-the-shell-is-gone" :self-hosting)
 (pf 'tag "08-the-shell-is-gone" :write-ups)
 (pf 'author "08-the-shell-is-gone" "0009-0001-0066-4646")
+(pf 'related "08-the-shell-is-gone"
+        "05-infrastructure-independence"
+        "post 05 covers the philosophy in more depth")
 
     ;; Infrastructure Independence: Self-Hosting Without the Hype
     (pf 'post "05-infrastructure-independence"
@@ -117,12 +124,15 @@
     (pf 'post "09-after-the-canary"
         "After the Canary: What Happened to the Warrant Canary Standard"
         "2026-05-23"
-        981)
+        971)
 (pf 'tag "09-after-the-canary" :privacy)
 (pf 'tag "09-after-the-canary" :surveillance)
 (pf 'tag "09-after-the-canary" :open-source)
 (pf 'tag "09-after-the-canary" :infrastructure)
 (pf 'author "09-after-the-canary" "0009-0001-0066-4646")
+(pf 'related "09-after-the-canary"
+        "01-a-better-tweedy-bird"
+        "post 01 has the original canary architecture argument")
 
     ;; Rules, Types, and Glue: A Multi-Paradigm Architecture for Game Simulation
     (pf 'post "03-rules-types-and-glue"
@@ -238,3 +248,27 @@
                   :title (cdr (assoc '?t    env))
                   :alt   (cdr (assoc '?alt  env))))
           (logic:db-prove-all kb '(diagram ?slug ?i ?t ?alt))))
+
+(defun post-related (kb slug)
+  "Return a plist for the related post of SLUG in KB, or NIL.
+   Plist keys: :target :label
+   Only returns a value if SLUG has a related_post front matter entry."
+  (let ((env (logic:db-prove-first kb `(related ,slug ?target ?label))))
+    (when env
+      (list :target (cdr (assoc '?target env))
+            :label  (cdr (assoc '?label  env))))))
+
+(defun posts-related-to (kb target-slug)
+  "Return a list of slugs whose related_post points at TARGET-SLUG.
+   Enables reverse traversal: find all posts that cite a given post."
+  (logic:db-var-all kb `(related ?slug ,target-slug ?label) '?slug))
+
+(defun all-related (kb)
+  "Return all (related slug target label) facts as plists.
+   Keys: :slug :target :label
+   Enables full graph traversal of the post relationship network."
+  (mapcar (lambda (env)
+            (list :slug   (cdr (assoc '?slug   env))
+                  :target (cdr (assoc '?target env))
+                  :label  (cdr (assoc '?label  env))))
+          (logic:db-prove-all kb '(related ?slug ?target ?label))))
