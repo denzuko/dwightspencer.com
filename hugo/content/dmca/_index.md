@@ -1,7 +1,7 @@
 +++
 title       = "DMCA Policy"
 date        = "2026-05-29"
-description = "DMCA takedown and counter-notice procedures for dwightaspencer.com and Da Planet Radio (klaxon.dapla.net)."
+description = "DMCA takedown and counter-notice procedures for dwightaspencer.com and the @zekodun streaming persona."
 layout      = "single"
 type        = "policy"
 aliases     = ["/dmca/"]
@@ -9,12 +9,11 @@ related_policies = [
   {title = "Copyright & IP Notice", url = "/copyright/"},
   {title = "Trademark Policy",      url = "/trademark/"},
   {title = "Terms of Use",          url = "/terms/"},
-  {title = "Stream Asset Policy",   url = "/stream-policy/"}
-]
+  ]
 +++
 
-This policy covers **dwightaspencer.com** and **Da Planet Radio**
-(klaxon.dapla.net), operated by Dwight Spencer and Da Planet Security LLC.
+This policy covers **dwightaspencer.com** and the **@zekodun** streaming
+persona (twitch.tv/zekodun), operated by Dwight Spencer.
 
 ---
 
@@ -44,7 +43,7 @@ A valid takedown notice must include all of the following:
    registration number, or equivalent).
 
 2. **Identification of the infringing material.** The specific URL(s) on
-   dwightaspencer.com or the stream asset identifier on klaxon.dapla.net
+   dwightaspencer.com
    where the allegedly infringing material appears.
 
 3. **Contact information.** Your legal name, mailing address, telephone
@@ -79,7 +78,6 @@ Upon receipt of a complete, facially valid notice:
 - Full response including disposition will be provided within
   **14 calendar days** of receipt of a complete notice.
 
-For stream assets (Da Planet Radio): playlist entries, scheduled content,
 or audio files identified as infringing will be removed from rotation
 pending resolution. Icecast metadata and archive logs will be preserved
 for the duration of any dispute.
@@ -143,20 +141,6 @@ Notice](/copyright/) and, if unresolved, to the courts of Albany County,
 New York.
 
 ---
-
-## 8. Stream-specific provisions
-
-Da Planet Radio (klaxon.dapla.net) operates under an **ASCAP, BMI, and
-SESAC blanket license** for scheduled broadcast of licensed music. If you
-believe a specific stream asset infringes your rights outside the scope of
-those blanket licenses, identify the asset by:
-
-- Broadcast timestamp (UTC) and stream URL
-- Track title, artist, and rights holder
-- Evidence that the work is not covered by the applicable blanket license
-
-See the [Stream Asset Policy](/stream-policy/) for the full content
-licensing framework and asset submission guidelines.
 
 ---
 

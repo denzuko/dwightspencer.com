@@ -13,9 +13,7 @@ related_policies = [
 ]
 +++
 
-This page answers the question directly: what data does this site touch, and
-what happens to it? No legal maze. Cross-references to the full
-[Privacy Policy](/privacy/) where you need the detail.
+This page answers the question directly: what data does **dwightaspencer.com** touch, and what happens to it? No legal maze. This site is operated by Dwight Spencer (@denzuko). Cross-references to the full [Privacy Policy](/privacy/) where you need the detail.
 
 ---
 
