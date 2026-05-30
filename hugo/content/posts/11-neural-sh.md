@@ -11,11 +11,11 @@ schema_type = "TechArticle"
 aeo_expertise = "Systems Design, Unix, LLM Tooling, Infrastructure"
 aliases     = ["/11-neural-sh/"]
 og_image    = "/assets/og-posts.png"
-series      = ["Infrastructure Independence"]
+series      = ["Dead Reckoning"]
 
 [related_post]
-  slug  = "05-infrastructure-independence"
-  label = "post 05 covers the infrastructure ownership argument this tooling sits inside"
+  slug  = "11-owning-your-memory"
+  label = "post 11 covers the same constraint-as-design argument applied to C99 memory management"
 +++
 
 <p>After installing ALE, I went looking at what else w0rp had written. <a href="https://github.com/dense-analysis/neural">neural.vim</a> was there — a Vim plugin for ChatGPT integration, from the same author who built one of the most solid LSP implementations in the Vim ecosystem.</p>
