@@ -76,9 +76,8 @@ The following are not broadcast without a separately executed license:
 ## 3. Spoken word and produced content
 
 Original programming produced by Dwight Spencer for Da Planet Radio —
-including the **Ellison Digital Minerals ARG** audio content, commentary
-segments, and technical briefings — is copyright © Dwight Spencer / Da Planet
-Security LLC, all rights reserved.
+including original commentary segments and technical briefings — is
+copyright © Dwight Spencer / Da Planet Security LLC, all rights reserved.
 
 Produced content may not be:
 - Rebroadcast or redistributed without written permission
@@ -160,15 +159,13 @@ is prohibited.
 
 ---
 
-## 8. ARG and interactive content
+## 8. Interactive and produced content
 
-The **Ellison Digital Minerals ARG** broadcast via Da Planet Radio involves
-diegetic fictional content. Characters, organizations, and events in the ARG
-are fictional. Any resemblance to real persons, companies, or events is
-coincidental. The ARG cipher and puzzle elements are copyright © Da Planet
-Security LLC. Solving and discussing puzzles is encouraged; publishing
-complete solutions or spoilers publicly is discouraged for the benefit of
-other participants.
+Da Planet Radio broadcasts original produced programming. Characters,
+organisations, and events in produced audio content are fictional unless
+otherwise stated. Any resemblance to real persons, companies, or events is
+coincidental. Original audio productions are copyright © Da Planet Security
+LLC and may not be redistributed without written permission.
 
 ---
 

@@ -15,6 +15,8 @@ related_policies = [
 
 This policy covers **dwightaspencer.com** and **Da Planet Radio**
 (klaxon.dapla.net), operated by Dwight Spencer and Da Planet Security LLC.
+It also covers the **@zekodun** streaming persona (twitch.tv/zekodun) with
+respect to content published or associated with these properties.
 
 ---
 

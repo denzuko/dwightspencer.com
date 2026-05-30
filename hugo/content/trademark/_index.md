@@ -30,6 +30,7 @@ The following are personal trademarks and identity markers of Dwight Spencer:
 | **Dwight Spencer** | Technology, security, privacy, and civil liberties services and publishing |
 | **@denzuko** | Online handle across technical and professional platforms |
 | **denzuko** | Code repositories, technical authorship, and open source contributions |
+| **@zekodun** | Live streaming and gaming persona (Twitch, twitch.tv/zekodun) |
 | PGP fingerprint **0x5DCBF78E3F9C3FE3** | Cryptographic identity marker |
 | ORCID **0009-0001-0066-4646** | Academic and professional publication identity |
 | Writing style, voice, and analytical framework | As expressed across dwightaspencer.com, Hacker Public Radio, and aNONradio |
@@ -85,9 +86,9 @@ Without prior written permission, you may not:
 
 - Use any mark to impersonate, simulate, or create the impression that content
   originates from or is endorsed by Dwight Spencer or Da Planet Security
-- Use any mark as input to an AI language model, image generator, or voice
-  synthesis system to produce synthetic content attributed to or simulating
-  these identities
+- Use any mark — including @zekodun for streaming contexts — as input to an
+  AI language model, image generator, or voice synthesis system to produce
+  synthetic content attributed to or simulating these identities
 - Register domain names, usernames, or social media handles that incorporate
   any mark in a way likely to cause confusion
 
