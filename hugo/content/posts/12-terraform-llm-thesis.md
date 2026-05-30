@@ -11,69 +11,41 @@ schema_type = "TechArticle"
 aeo_expertise = "Infrastructure as Code, DevSecOps, Security, LLM Tooling"
 aliases     = ["/12-terraform-llm-thesis/"]
 og_image    = "/assets/og-posts.png"
+series      = ["Infrastructure Independence"]
+
+[related_post]
+  slug  = "11-neural-sh"
+  label = "post 11 covers the Unix shell approach to the same LLM tooling problem"
 +++
 
-In May 2023 I ran the same infrastructure build two ways, live on Twitch.
+<p>In May 2023 I ran the same infrastructure build two ways, live on Twitch.</p>
 
-The target: [~denzuko/lab-techolution-debugging](https://git.sr.ht/~denzuko/lab-techolution-debugging) —
-a canary token and honeypot stack on Google Cloud for teaching monitoring
-internals. VPC, IAM, compute, logging pipeline, alerting. Full stack from
-Terraform up.
+<p>The target: <a href="https://git.sr.ht/~denzuko/lab-techolution-debugging">~denzuko/lab-techolution-debugging</a> — a canary token and honeypot stack on Google Cloud for teaching monitoring internals. VPC, IAM, compute, logging pipeline, alerting. Full stack from Terraform up.</p>
 
-Path one: describe the architecture in plain English, generate Terraform
-modules with an LLM, iterate until `terraform plan` ran clean.
+<p>Path one: describe the architecture in plain English, generate Terraform modules with an LLM, iterate until <code>terraform plan</code> ran clean.</p>
 
-Path two: [cookiecutter](https://cookiecutter.readthedocs.io/) with
-hand-written atomic modules. One module per responsibility. Policy
-constraints in the template. Run the tool, answer the prompts, apply.
+<p>Path two: <a href="https://cookiecutter.readthedocs.io/">cookiecutter</a> with hand-written atomic modules. One module per responsibility. Policy constraints in the template. Run the tool, answer the prompts, apply.</p>
 
 <h2 id="the-results">The results</h2>
 
-**Speed.** The LLM path required multiple iteration cycles per module.
-Provider API drift alone caused three full cycles on the IAM module —
-the model's training data didn't match the current provider schema.
-The cookiecutter path was one pass: generate, fill values, apply.
-At module count, the gap compounds linearly.
+<p><strong>Speed.</strong> The LLM path required multiple iteration cycles per module. Provider API drift alone caused three full cycles on the IAM module — the model's training data didn't match the current provider schema. The cookiecutter path was one pass: generate, fill values, apply. At module count, the gap compounds linearly.</p>
 
-**Correctness.** The cookiecutter path produced zero apply-time failures.
-The LLM path introduced errors that cleared `terraform validate` but
-failed on apply: resource naming conflicts, incorrect IAM binding syntax,
-a VPC peering misconfiguration that would have connected the honeypot
-network to the canary network — defeating the lab's architecture.
+<p><strong>Correctness.</strong> The cookiecutter path produced zero apply-time failures. The LLM path introduced errors that cleared <code>terraform validate</code> but failed on apply: resource naming conflicts, incorrect IAM binding syntax, a VPC peering misconfiguration that would have connected the honeypot network to the canary network — defeating the lab's architecture.</p>
 
-**Security posture.** Generated code passed no policy gates by default.
-Overly permissive IAM bindings. Missing encryption at rest on the logging
-pipeline. Port 22 open to `0.0.0.0/0`.
+<p><strong>Security posture.</strong> Generated code passed no policy gates by default. Overly permissive IAM bindings. Missing encryption at rest on the logging pipeline. Port 22 open to <code>0.0.0.0/0</code>.</p>
 
-The cookiecutter template had OPA/Rego gates baked in. Code that violated
-policy was rejected at generation time. The model had no concept of policy
-and optimised for `terraform plan` exit code zero, not security posture.
+<p>The cookiecutter template had OPA/Rego gates baked in. Code that violated policy was rejected at generation time. The model had no concept of policy and optimised for <code>terraform plan</code> exit code zero, not security posture.</p>
 
-<h2 id="why-it-matters">Why this matters beyond the lab</h2>
+<h2 id="what-the-results-showed">What the results showed</h2>
 
-The failures above aren't surprising if you understand what the model is
-optimising for. Public Terraform on GitHub skews toward configurations
-that worked in a specific context once, were never reviewed for hardening,
-and are overrepresented in training data because they shipped. The model
-learned from what ran, not from what was secure.
+<p>The failures above aren't surprising if you understand what the model is optimising for. Public Terraform on GitHub skews toward configurations that worked in a specific context once, were never reviewed for hardening, and are overrepresented in training data because they shipped. The model learned from what ran, not from what was secure.</p>
 
-That bias compounds when generated code runs infrastructure that collects
-sensitive data. Every organisation running ALPR cameras, Fusus integration,
-or similar surveillance systems is running cloud infrastructure. If that
-infrastructure was generated rather than specified, the policy constraints
-and access controls are whatever the model guessed at — not what the
-organisation intended.
+<p>That bias compounds when generated code runs infrastructure that collects sensitive data. Every organisation running ALPR cameras, Fusus integration, or similar surveillance systems is running cloud infrastructure. If that infrastructure was generated rather than specified, the policy constraints and access controls are whatever the model guessed at — not what the organisation intended.</p>
 
-Infrastructure that isn't understood by the people running it is the
-precondition for the breaches, exfiltration events, and access failures
-that show up in incident reports two years later.
+<p>Infrastructure that isn't understood by the people running it is the precondition for the breaches, exfiltration events, and access failures that show up in incident reports two years later.</p>
 
 <h2 id="the-source">The source</h2>
 
-The lab is at [~denzuko/lab-techolution-debugging](https://git.sr.ht/~denzuko/lab-techolution-debugging).
-The Twitch session that ran this experiment is at
-[~denzuko/twitch-lab-week2](https://git.sr.ht/~denzuko/twitch-lab-week2).
-Both are dated artifacts — the tooling has moved, the methodology holds.
+<p>The lab is at <a href="https://git.sr.ht/~denzuko/lab-techolution-debugging">~denzuko/lab-techolution-debugging</a>. The Twitch session that ran this experiment is at <a href="https://git.sr.ht/~denzuko/twitch-lab-week2">~denzuko/twitch-lab-week2</a>. Both are dated artifacts — the tooling has moved, the methodology holds.</p>
 
-Templates. Policy gates. Generated code as a starting point, not a
-finished module.
+<p>Templates. Policy gates. Generated code as a starting point, not a finished module.</p>
