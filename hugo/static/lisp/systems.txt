@@ -1,1 +1,2 @@
-DwightASpencerCom dwightaspencer DwightASpencerCom named-readtables
+# project system-file system-name deps
+DwightASpencerCom dwightaspencercom dwightaspencercom named-readtables

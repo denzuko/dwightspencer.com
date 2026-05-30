@@ -1,4 +1,4 @@
-;;;; dwightaspencer.asd — ASDF system definition for dwightaspencer.com corpus
+;;;; dwightaspencercom.asd — ASDF system definition for dwightaspencer.com corpus
 ;;;;
 ;;;; This site is a Common Lisp system. Load it from your REPL:
 ;;;;
