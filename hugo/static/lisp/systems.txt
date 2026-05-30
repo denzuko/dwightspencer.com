@@ -1,2 +1,2 @@
 # project system-file system-name deps
-DwightASpencerCom DwightASpencerCom-2026-05-30/dwightaspencercom dwightaspencercom named-readtables
+DwightASpencerCom dwightaspencercom dwightaspencercom named-readtables

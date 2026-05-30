@@ -92,7 +92,7 @@ jobs:
           # systems.txt: first line MUST start with # (Quicklisp cdb.lisp requirement)
           # system-file must be the path within the tarball without .asd extension
           printf "# project system-file system-name deps\n"             > ${DIST_DIR}/systems.txt
-          printf "DwightASpencerCom %s/dwightaspencercom dwightaspencercom named-readtables\n"             "${RELEASE}" >> ${DIST_DIR}/systems.txt
+          printf "DwightASpencerCom dwightaspencercom dwightaspencercom named-readtables\n"             >> ${DIST_DIR}/systems.txt
 
           sed -i "s/^version .*/version ${VERSION}/" static/distinfo.txt 2>/dev/null || true
 
