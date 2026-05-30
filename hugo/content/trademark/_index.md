@@ -1,7 +1,7 @@
 +++
 title       = "Trademark Policy"
 date        = "2026-05-29"
-description = "Trademark policy for Dwight Spencer, @denzuko, Da Planet Security, and Da Planet Radio. Covers permitted and prohibited use, nominative fair use, and enforcement."
+description = "Trademark policy for Dwight Spencer, @denzuko, and Da Planet Security. Covers permitted and prohibited use, nominative fair use, and enforcement."
 layout      = "single"
 type        = "policy"
 aliases     = ["/trademark/"]
@@ -40,9 +40,7 @@ The following are personal trademarks and identity markers of Dwight Spencer:
 | Mark | Context |
 |------|---------|
 | **Da Planet Security** | Managed security services, DevOps consulting, and infrastructure services |
-| **Da Planet Radio** | Internet radio broadcast service at klaxon.dapla.net |
 | **dapla.net** | Domain and network identity |
-| **klaxon.dapla.net** | Stream endpoint identity |
 | IANA PEN **42387** | Protocol and standards identity |
 | D&B DUNS **039-271-257** | Business identity |
 
@@ -61,7 +59,6 @@ service they identify, provided all of the following are true:
 
 **Examples of permitted nominative use:**
 - "Based on a technique described by Dwight Spencer at dwightaspencer.com"
-- "Listening to Da Planet Radio at klaxon.dapla.net"
 - "Pull request reviewed by @denzuko"
 
 ### 2.2 Attribution in derivative works
@@ -96,8 +93,7 @@ Without prior written permission, you may not:
 
 - Use any mark in connection with commercial products or services without a
   separate written license agreement
-- Use **Da Planet Security** or **Da Planet Radio** in any competing or
-  related service offering
+- Use **Da Planet Security** in any competing or related service offering
 
 ### 3.3 Misleading association
 
