@@ -25,7 +25,7 @@ aliases     = ["/projects/"]
 <dd>Single-header C library implementing the optical telegraph protocol (Discworld/GNU Terry Pratchett). D'ni base-25 encoding. The transmission layer for the rotoscoped game.</dd>
 
 <dt>Rotoscoped platforming adventure (in progress)</dt>
-<dd>Built on clacks.h. Benchmark ceiling: bullet-hell (twitch-based). Floor: turn-based strategy. Albany/Troy area setting, ARG integration via Ellison Digital Minerals.</dd>
+<dd>Built on clacks.h. Benchmark ceiling: bullet-hell (twitch-based). Floor: turn-based strategy. Albany/Troy area setting.</dd>
 
 <dt><a href="https://github.com/denzuko/ml-prolog-pokemon">ml-prolog-pokemon</a></dt>
 <dd>Architecture study — micro-Prolog engine in Common Lisp. Same logic-engine.lisp powers corpus.lisp on this site.</dd>
@@ -38,7 +38,7 @@ aliases     = ["/projects/"]
 <dd>Self-hosted stack: HAProxy, Podman quadlets, ZFS (<code>storage/</code> pool), rootless systemd. FreeBSD/NetBSD targets. gorkon/klaxon nodes.</dd>
 
 <dt><a href="https://klaxon.dapla.net">Da Planet Radio</a></dt>
-<dd>Icecast-based streaming — Liquidsoap 2.3.2 automation, GStreamer UDP studio input, Eggdrop IRC ecosystem (BOFH/PFY/HR_Pam/Ellison bots). ARG integration via Ellison Digital Minerals.</dd>
+<dd>Icecast-based streaming — Liquidsoap 2.3.2 automation, GStreamer UDP studio input, Eggdrop IRC ecosystem (BOFH/PFY/HR_Pam bots).</dd>
 
 <dt>hack.dapla.net</dt>
 <dd>Soft Serve SSH git server + 3270 BBS/CICS interface. <a href="/posts/08-the-shell-is-gone/">Currently offline</a> — rebuilding on Podman quadlets. Returns with proper architecture.</dd>

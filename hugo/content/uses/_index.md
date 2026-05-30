@@ -53,7 +53,7 @@ aliases     = ["/uses/"]
 
 <ul>
 <li>Da Planet Radio — Liquidsoap 2.3.2 + Icecast, GStreamer UDP studio input</li>
-<li>Eggdrop IRC bots — BOFH, PFY, HR_Pam, Ellison (TCL persona scripts)</li>
+<li>Eggdrop IRC bots — BOFH/PFY ecosystem (TCL persona scripts)</li>
 <li>Ham radio — amateur license; radiograms, APRS</li>
 </ul>
 
