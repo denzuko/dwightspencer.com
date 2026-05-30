@@ -73,7 +73,8 @@ jobs:
           TGZ="${DIST_DIR}/${RELEASE}.tgz"
 
           mkdir -p /tmp/qdist/${RELEASE}
-          cp ${DIST_DIR}/*.lisp ${DIST_DIR}/*.asd /tmp/qdist/${RELEASE}/ 2>/dev/null || true
+          cp ${DIST_DIR}/*.lisp /tmp/qdist/${RELEASE}/ 2>/dev/null || true
+          cp ${DIST_DIR}/dwightaspencercom.asd /tmp/qdist/${RELEASE}/dwightaspencercom.asd
           cp public/corpus.lisp /tmp/qdist/${RELEASE}/corpus.lisp
 
           tar czf /tmp/${RELEASE}.tgz -C /tmp/qdist "${RELEASE}/"
@@ -81,10 +82,17 @@ jobs:
 
           SIZE=$(wc -c < ${DIST_DIR}/${RELEASE}.tgz)
           MD5=$(md5sum ${DIST_DIR}/${RELEASE}.tgz | cut -d' ' -f1)
-          SHA1=$(tar -xOf ${DIST_DIR}/${RELEASE}.tgz | sha1sum | cut -d' ' -f1)
+          SHA1=$(sha1sum ${DIST_DIR}/${RELEASE}.tgz | cut -d' ' -f1)
 
-          echo "${RELEASE} http://dwightaspencer.com/lisp/${RELEASE}.tgz ${SIZE} ${MD5} ${SHA1} ${RELEASE} ${RELEASE}/dwightaspencer.asd" \
-            > ${DIST_DIR}/releases.txt
+          # releases.txt: first line MUST start with # (Quicklisp cdb.lisp requirement)
+          printf "# project-name url size md5 sha1 prefix system-files\n"             > ${DIST_DIR}/releases.txt
+          printf "%s http://dwightaspencer.com/lisp/%s.tgz %s %s %s %s %s/dwightaspencercom.asd
+"             "${RELEASE}" "${RELEASE}" "${SIZE}" "${MD5}" "${SHA1}" "${RELEASE}" "${RELEASE}"             >> ${DIST_DIR}/releases.txt
+
+          # systems.txt: first line MUST start with # (Quicklisp cdb.lisp requirement)
+          # system-file must be the path within the tarball without .asd extension
+          printf "# project system-file system-name deps\n"             > ${DIST_DIR}/systems.txt
+          printf "DwightASpencerCom %s/dwightaspencercom dwightaspencercom named-readtables\n"             "${RELEASE}" >> ${DIST_DIR}/systems.txt
 
           sed -i "s/^version .*/version ${VERSION}/" static/distinfo.txt 2>/dev/null || true
 
