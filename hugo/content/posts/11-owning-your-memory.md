@@ -23,11 +23,6 @@ og_image    = "/assets/og-posts.png"
   label = "post 09 covers warrant canary infrastructure and what happens when the standards body disappears"
 +++
 
-<p><code>example.c</code> is 330 lines. It compiles to a single binary with no external
-dependencies. It implements a reference-counted memory arena, a non-blocking
-channel, and structural OOP dispatch — all in ISO C99, all ten NASA Power of
-Ten rules applied throughout.</p>
-
 <h2 id="supply-chain">Dependencies</h2>
 
 <pre><code>&lt;stdio.h&gt;   — libc
@@ -332,9 +327,7 @@ have been taken over. The Rust toolchain, the Go runtime, and npm each
 have CVEs in the NVD. Moving memory management into a new runtime shifts
 the attack surface; it does not remove it.</p>
 
-<p>Three libc headers is a different kind of answer to that problem.
-The nginx, OpenSSH, and Linux kernel codebases give the same answer.</p>
+<p>The nginx, OpenSSH, and Linux kernel codebases give the same answer.</p>
 
-<p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/09-after-the-canary/" style="color:#9a9a9a">post 09</a> covers warrant canary infrastructure and what happens when the standards body disappears</span></p>
 
 
