@@ -37,8 +37,6 @@ aliases     = ["/projects/"]
 <dt>dapla.net</dt>
 <dd>Self-hosted stack: HAProxy, Podman quadlets, ZFS (<code>storage/</code> pool), rootless systemd. FreeBSD/NetBSD targets. gorkon/klaxon nodes.</dd>
 
-<dt><a href="https://klaxon.dapla.net">Da Planet Radio</a></dt>
-<dd>Icecast-based streaming — Liquidsoap 2.3.2 automation, GStreamer UDP studio input, Eggdrop IRC ecosystem (BOFH/PFY/HR_Pam bots).</dd>
 
 <dt>hack.dapla.net</dt>
 <dd>Soft Serve SSH git server + 3270 BBS/CICS interface. <a href="/posts/08-the-shell-is-gone/">Currently offline</a> — rebuilding on Podman quadlets. Returns with proper architecture.</dd>

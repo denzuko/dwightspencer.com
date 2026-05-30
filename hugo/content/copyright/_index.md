@@ -11,7 +11,6 @@ related_policies = [
   {title = "Data Usage Policy", url = "/data-usage/"},
   {title = "DMCA Policy",       url = "/dmca/"},
   {title = "Trademark Policy",  url = "/trademark/"},
-  {title = "Stream Asset Policy", url = "/stream-policy/"},
   {title = "TDM Policy (JSON)", url = "/.well-known/tdm-policy.json"}
 ]
 +++

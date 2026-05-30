@@ -23,8 +23,6 @@ Central Avenue Surveillance Spine coverage (Flock/Fusus/Raven infrastructure).</
 <p>Rebuilding <code>hack.dapla.net</code> on Podman quadlets — Soft Serve + 3270 BBS/CICS front end.
 <a href="/posts/08-the-shell-is-gone/">Status post</a> has the detail.</p>
 
-<p>Da Planet Radio (<a href="https://klaxon.dapla.net">klaxon.dapla.net</a>) —
-Liquidsoap 2.3.2 automation, Icecast on gorkon.dapla.net.</p>
 
 <h2>Open source</h2>
 

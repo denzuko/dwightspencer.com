@@ -9,8 +9,7 @@ related_policies = [
   {title = "Copyright & IP Notice", url = "/copyright/"},
   {title = "DMCA Policy",           url = "/dmca/"},
   {title = "Terms of Use",          url = "/terms/"},
-  {title = "Stream Asset Policy",   url = "/stream-policy/"}
-]
+  ]
 +++
 
 This policy covers trademarks, service marks, and personal identifiers

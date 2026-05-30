@@ -9,8 +9,7 @@ related_policies = [
   {title = "Copyright & IP Notice", url = "/copyright/"},
   {title = "Trademark Policy",      url = "/trademark/"},
   {title = "Terms of Use",          url = "/terms/"},
-  {title = "Stream Asset Policy",   url = "/stream-policy/"}
-]
+  ]
 +++
 
 This policy covers **dwightaspencer.com** and **Da Planet Radio**
@@ -157,8 +156,6 @@ those blanket licenses, identify the asset by:
 - Track title, artist, and rights holder
 - Evidence that the work is not covered by the applicable blanket license
 
-See the [Stream Asset Policy](/stream-policy/) for the full content
-licensing framework and asset submission guidelines.
 
 ---
 
