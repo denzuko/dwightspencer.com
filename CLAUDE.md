@@ -18,14 +18,17 @@ hugo/content/now/              /now page (quarterly update)
 hugo/content/projects/         /projects page
 hugo/content/uses/             /uses page
 hugo/content/media/            /media page (nav link)
-hugo/content/{privacy,cookies,terms,copyright,data-usage}/
+hugo/content/{privacy,cookies,terms,copyright,data-usage,dmca,trademark,stream-policy}/
 hugo/layouts/partials/finger.html   Plain pre/code — NO monokai wrapper
 hugo/layouts/partials/css.html      All CSS — dark mode, search, policy, tags
 hugo/layouts/partials/head.html     OG meta, Schema.org, Layer 2 HTML comment
 hugo/layouts/partials/search.html   Pagefind UI container (no inline script)
 hugo/layouts/partials/header.html   Nav: posts · tags · series · media · ⌕ · ☀︎
 hugo/layouts/taxonomy/series.html   Per-series post list (len .Pages not .Count)
-hugo/layouts/_default/baseof.html   All post-DOM JS in one DOMContentLoaded block
+hugo/layouts/_default/baseof.html   All post-DOM JS in one DOMContentLoaded block; mermaid partial injection
+hugo/layouts/_default/_markup/      Render hooks (render-codeblock-mermaid.html)
+hugo/layouts/partials/mermaid.html  Conditional mermaid loader (self-hosted v11.15.0)
+hugo/static/js/mermaid.min.js       Self-hosted mermaid UMD build
 hugo/static/lisp/              Quicklisp dist; corpus.lisp is Hugo-generated
 hugo/static/.well-known/       security.txt, webfinger, canary.txt, tdm-policy
 hugo/MIGRATION.md              Backlog — v2, v2.5, v3
@@ -85,4 +88,4 @@ Layers 4–23 reserved. Do not fill speculatively.
   regenerates on every `hugo --gc`
 
 ## Current post count
-10 posts: 00-hellowrld through 09-after-the-canary
+11 posts: 00-hellowrld through 10-three-runtimes-one-site, 11-owning-your-memory
