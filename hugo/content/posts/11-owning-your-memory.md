@@ -7,7 +7,7 @@ slug        = "11-owning-your-memory"
 keywords    = ["c99", "arena allocator", "memory safety", "supply chain", "nasa power of ten", "systems programming", "devops", "infosec", "open source", "sovereignty"]
 tags        = ["c99", "systems", "devops", "infosec", "architecture", "open-source", "privacy", "sovereignty"]
 categories  = ["articles"]
-series      = ["Infrastructure Independence"]
+series      = ["Dead Reckoning"]
 schema_type = "TechArticle"
 aeo_expertise = "DevOps, Security, Open Source, Systems Programming, C99"
 aliases     = ["/11-owning-your-memory/"]
@@ -19,8 +19,8 @@ og_image    = "/assets/og-posts.png"
   caption = "Post 11 architecture: standards layer → arena → object lifecycle → channel → hardened assert → single-exit cleanup"
 
 [related_post]
-  slug  = "09-after-the-canary"
-  label = "post 09 covers warrant canary infrastructure and what happens when the standards body disappears"
+  slug  = "03-rules-types-and-glue"
+  label = "post 03 evaluates the same layered-standards approach across Prolog, Coalton, and Common Lisp"
 +++
 
 <h2 id="supply-chain">Dependencies</h2>
