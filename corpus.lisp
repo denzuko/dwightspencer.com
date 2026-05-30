@@ -48,7 +48,7 @@
     (pf 'post "11-owning-your-memory"
         "Owning Your Memory: Hardened Arenas, Channels, and Structural OOP in Pure C99"
         "2026-05-29"
-        2065)
+        1880)
 (pf 'tag "11-owning-your-memory" :c99)
 (pf 'tag "11-owning-your-memory" :systems)
 (pf 'tag "11-owning-your-memory" :devops)
