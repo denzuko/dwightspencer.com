@@ -62,8 +62,8 @@
         "Architecture overview: coding standards, arena, object lifecycle, channel, assert, single-exit"
         "Architecture flowchart for example.c. Four standards layers feed into the implementation: ISO C99, all ten NASA Power of Ten rules, tsoding conventions (Yoda conditions, zero-init arenas), and project rules (no system calls, no goto in C, BDD-first workflow). The static arena holds eight typed slots. Objects are allocated by scanning for a free slot, retained by incrementing a ref_count, and released by decrementing it — zeroing the payload and freeing the slot when the count reaches zero. INVALID_HANDLE is UINT16_MAX. The channel is a ring buffer living in slot zero; send retains and enqueues, recv dequeues and transfers ownership to the caller. Assertions trap via __builtin_trap, which emits ud2 on x86 and raises SIGILL. Single-exit is a do-while-zero loop with break on error; cleanup releases any live handles unconditionally.")
 (pf 'related "11-owning-your-memory"
-        "09-after-the-canary"
-        "post 09 covers warrant canary infrastructure and what happens when the standards body disappears")
+        "03-rules-types-and-glue"
+        "post 03 evaluates the same layered-standards approach across Prolog, Coalton, and Common Lisp")
 
     ;; The Watchers You Fed: Chapter Preview
     (pf 'post "04-watchers-you-fed"
@@ -144,6 +144,9 @@
 (pf 'tag "03-rules-types-and-glue" :prolog)
 (pf 'tag "03-rules-types-and-glue" :open-source)
 (pf 'author "03-rules-types-and-glue" "0009-0001-0066-4646")
+(pf 'related "03-rules-types-and-glue"
+        "11-owning-your-memory"
+        "post 11 applies the same constraint-as-design principle to C99 arena allocation")
 
     ;; GitHub's TOS Won't Save You: Why Your Code, Privacy & Copyrights Are at Risk
     (pf 'post "02-github-tos-wont-save-you"
