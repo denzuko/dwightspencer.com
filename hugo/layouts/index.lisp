@@ -34,6 +34,7 @@
 ;;;;   (author slug orcid)
 ;;;;   (artifact name descriptor path)   ; Easter egg / metadata artifacts
 ;;;;   (diagram slug index title alt-text) ; Mermaid diagrams embedded in post
+;;;;   (related  slug target label)          ; related_post front matter cross-reference
 
 (defun assert-post-facts (db)
   "Assert all post, tag, author, and artifact facts into DB.
@@ -57,6 +58,11 @@
     (pf 'diagram {{ printf "%q" $slug }} {{ $i }}
         {{ printf "%q" (default "" $d.title) }}
         {{ printf "%q" (default "" $d.alt) }})
+{{ end -}}
+{{ with .Params.related_post -}}
+    (pf 'related {{ printf "%q" $slug }}
+        {{ printf "%q" .slug }}
+        {{ printf "%q" .label }})
 {{ end -}}
 {{ end }}  )
   db)
@@ -130,3 +136,27 @@
                   :title (cdr (assoc '?t    env))
                   :alt   (cdr (assoc '?alt  env))))
           (logic:db-prove-all kb '(diagram ?slug ?i ?t ?alt))))
+
+(defun post-related (kb slug)
+  "Return a plist for the related post of SLUG in KB, or NIL.
+   Plist keys: :target :label
+   Only returns a value if SLUG has a related_post front matter entry."
+  (let ((env (logic:db-prove-first kb `(related ,slug ?target ?label))))
+    (when env
+      (list :target (cdr (assoc '?target env))
+            :label  (cdr (assoc '?label  env))))))
+
+(defun posts-related-to (kb target-slug)
+  "Return a list of slugs whose related_post points at TARGET-SLUG.
+   Enables reverse traversal: find all posts that cite a given post."
+  (logic:db-var-all kb `(related ?slug ,target-slug ?label) '?slug))
+
+(defun all-related (kb)
+  "Return all (related slug target label) facts as plists.
+   Keys: :slug :target :label
+   Enables full graph traversal of the post relationship network."
+  (mapcar (lambda (env)
+            (list :slug   (cdr (assoc '?slug   env))
+                  :target (cdr (assoc '?target env))
+                  :label  (cdr (assoc '?label  env))))
+          (logic:db-prove-all kb '(related ?slug ?target ?label))))
