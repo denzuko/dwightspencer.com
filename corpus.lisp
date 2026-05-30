@@ -40,7 +40,7 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 11 posts."
+   Generated from 12 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 
@@ -64,6 +64,20 @@
 (pf 'related "11-owning-your-memory"
         "03-rules-types-and-glue"
         "post 03 evaluates the same layered-standards approach across Prolog, Coalton, and Common Lisp")
+
+    ;; neural.sh: A Shell Script Where a Plugin Used to Be
+    (pf 'post "11-neural-sh"
+        "neural.sh: A Shell Script Where a Plugin Used to Be"
+        "2026-05-26"
+        631)
+(pf 'tag "11-neural-sh" :infrastructure)
+(pf 'tag "11-neural-sh" :open-source)
+(pf 'tag "11-neural-sh" :privacy)
+(pf 'tag "11-neural-sh" :history)
+(pf 'author "11-neural-sh" "0009-0001-0066-4646")
+(pf 'related "11-neural-sh"
+        "11-owning-your-memory"
+        "post 11 covers the same constraint-as-design argument applied to C99 memory management")
 
     ;; The Watchers You Fed: Chapter Preview
     (pf 'post "04-watchers-you-fed"
