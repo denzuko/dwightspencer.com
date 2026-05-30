@@ -121,6 +121,10 @@ copyright     = "Copyright 2026 Dwight Spencer. All rights reserved. AI training
   avatarURL = "https://stream-assets.cdn.dwightaspencer.com/assets/avatar.jpg"
   cf2faVerify = "a39e4b2b07da17e"
 
+  # Series registered in hugo.toml (via taxonomies):
+  #   Infrastructure Independence — DevOps, self-hosting, platform sovereignty
+  #   The Watchers You Fed        — surveillance, Fourth Amendment, civil liberties
+  #   Dead Reckoning              — systems programming, auditable code, constraint as design
   # CTA — swap text/url when Patreon/book/MSP pipelines go live
   # e.g. "Buy the book" / "https://..." or "Hire Da Planet Security" / "https://dapla.net"
   [params.cta]
