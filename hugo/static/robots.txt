@@ -35,6 +35,9 @@ Allow: /llms.txt
 Allow: /robots.txt
 Allow: /.well-known/security.txt
 Allow: /.well-known/privacy-policy
+Allow: /dmca/
+Allow: /trademark/
+Allow: /stream-policy/
 Allow: /.well-known/tdm-policy.json
 Allow: /.well-known/did.json
 Allow: /.well-known/canary.txt

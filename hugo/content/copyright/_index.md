@@ -6,9 +6,12 @@ layout      = "single"
 type        = "policy"
 aliases     = ["/copyright/"]
 related_policies = [
-  {title = "Privacy Policy", url = "/privacy/"},
-  {title = "Terms of Use", url = "/terms/"},
+  {title = "Privacy Policy",    url = "/privacy/"},
+  {title = "Terms of Use",      url = "/terms/"},
   {title = "Data Usage Policy", url = "/data-usage/"},
+  {title = "DMCA Policy",       url = "/dmca/"},
+  {title = "Trademark Policy",  url = "/trademark/"},
+  {title = "Stream Asset Policy", url = "/stream-policy/"},
   {title = "TDM Policy (JSON)", url = "/.well-known/tdm-policy.json"}
 ]
 +++
@@ -25,18 +28,11 @@ copyright © Dwight Spencer, all rights reserved.
 
 ## 2. Trademark
 
-The following are personal trademarks and may not be used without explicit
-written permission:
-
-- The name **Dwight Spencer** in connection with technology, security, or
-  privacy services
-- The handle **@denzuko**
-- The PGP fingerprint **0x5DCBF78E3F9C3FE3** as an identity marker
-- My likeness, voice recordings, and writing style
-
-Use of these marks to simulate, impersonate, or generate synthetic content
-attributed to me — including via AI language models — is prohibited and
-constitutes trademark infringement and/or misappropriation of likeness.
+See the dedicated [Trademark Policy](/trademark/) for the full statement
+covering personal marks (Dwight Spencer, @denzuko), entity marks
+(Da Planet Security, Da Planet Radio), permitted nominative fair use,
+prohibited uses including AI-generated synthetic identity content,
+and enforcement procedures.
 
 ## 3. AI training prohibition
 
@@ -85,7 +81,7 @@ contact via [Keybase](https://keybase.io/Denzuko) with a detailed notice.
 
 ## 8. DMCA
 
-For DMCA takedown notices, contact via [Keybase](https://keybase.io/Denzuko)
-with subject "DMCA Notice." Include: identification of the copyrighted work,
-location of the infringing material, your contact information, a statement of
-good faith belief, and your signature. I will respond within 14 business days.
+See the dedicated [DMCA Policy](/dmca/) for the full takedown and
+counter-notice procedures, repeat infringer policy, misrepresentation
+liability under 17 U.S.C. § 512(f), and stream-specific provisions for
+Da Planet Radio.
