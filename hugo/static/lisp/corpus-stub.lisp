@@ -21,9 +21,9 @@
 
 ;;; These constants are also defined in the Hugo-generated corpus.lisp.
 ;;; The bundled stub provides them so the system loads without a live fetch.
-(defconstant +dist-root+    "https://dwightaspencer.com")
-(defconstant +search-index+ "https://dwightaspencer.com/pagefind/pagefind.js")
-(defconstant +corpus-url+   "https://dwightaspencer.com/corpus.lisp")
+(defparameter +dist-root+    "https://dwightaspencer.com")
+(defparameter +search-index+ "https://dwightaspencer.com/pagefind/pagefind.js")
+(defparameter +corpus-url+   "https://dwightaspencer.com/corpus.lisp")
 
 (defun make-site-kb ()
   "Create and populate the site knowledge base.

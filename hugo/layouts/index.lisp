@@ -22,10 +22,10 @@
 (named-readtables:in-readtable :standard)
 (in-package #:dsc/corpus)
 
-(defconstant +dist-root+    "{{ .Site.Params.canonicalBase }}")
-(defconstant +search-index+ "{{ .Site.Params.canonicalBase }}/pagefind/pagefind.js")
-(defconstant +corpus-url+   "{{ .Site.Params.canonicalBase }}/corpus.lisp")
-(defconstant +build-date+   "{{ now.Format "2006-01-02" }}")
+(defparameter +dist-root+    "{{ .Site.Params.canonicalBase }}")
+(defparameter +search-index+ "{{ .Site.Params.canonicalBase }}/pagefind/pagefind.js")
+(defparameter +corpus-url+   "{{ .Site.Params.canonicalBase }}/corpus.lisp")
+(defparameter +build-date+   "{{ now.Format "2006-01-02" }}")
 
 ;;;; ── Fact assertion ──────────────────────────────────────────────────────────
 ;;;; Fact schemas (mirrors ml-prolog-pokemon catalog approach):
