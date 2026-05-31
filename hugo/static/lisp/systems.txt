@@ -1,2 +1,0 @@
-# project system-file system-name deps
-DwightASpencerCom dwightaspencercom dwightaspencercom named-readtables

@@ -37,9 +37,6 @@ jobs:
         run: hugo --minify --gc
 
       - name: Generate per-post OG images
-        # Playwright screenshots og-card.html → static/assets/og/{slug}.png
-        # Must run after first build (og-card.html exists) and before second
-        # build so Hugo's fileExists() picks up the images.
         working-directory: hugo
         run: |
           npx --yes playwright install --with-deps chromium 2>/dev/null
@@ -58,53 +55,22 @@ jobs:
         working-directory: hugo
         run: hugo --minify --gc
 
-      - name: Package Quicklisp dist
-        working-directory: hugo
+      - name: Package Quicklisp dist via redist
         run: |
-          set -e
-          if [ ! -f "public/corpus.lisp" ]; then
-            echo "corpus.lisp not in build output — skipping"
-            exit 0
-          fi
+          # Download the redist precompiled binary from shirakumo.org
+          curl -fsSL "https://shirakumo.org/project/dist/releases/latest/linux-x86_64.tgz" \
+            -o /tmp/redist.tgz
+          tar xf /tmp/redist.tgz -C /tmp
+          chmod +x /tmp/redist
 
-          VERSION=$(date +%Y-%m-%d)
-          RELEASE="DwightASpencerCom-${VERSION}"
-          DIST_DIR="static/lisp"
-          TGZ="${DIST_DIR}/${RELEASE}.tgz"
+          # Run redist compile from the dist config directory
+          # distinfo.lisp in the repo root defines the dist and project sources
+          cd dist
+          /tmp/redist compile -v
 
-          mkdir -p /tmp/qdist/${RELEASE}
-          cp ${DIST_DIR}/*.lisp /tmp/qdist/${RELEASE}/ 2>/dev/null || true
-          cp ${DIST_DIR}/dwightaspencercom.asd /tmp/qdist/${RELEASE}/dwightaspencercom.asd
-          cp public/corpus.lisp /tmp/qdist/${RELEASE}/corpus.lisp
-
-          tar czf /tmp/${RELEASE}.tgz -C /tmp/qdist "${RELEASE}/"
-          cp /tmp/${RELEASE}.tgz ${DIST_DIR}/${RELEASE}.tgz
-
-          SIZE=$(wc -c < ${DIST_DIR}/${RELEASE}.tgz)
-          MD5=$(md5sum ${DIST_DIR}/${RELEASE}.tgz | cut -d' ' -f1)
-          SHA1=$(sha1sum ${DIST_DIR}/${RELEASE}.tgz | cut -d' ' -f1)
-
-          # releases.txt: first line MUST start with # (Quicklisp cdb.lisp requirement)
-          {
-            echo "# project-name url size md5 sha1 prefix system-files"
-            echo "${RELEASE} http://dwightaspencer.com/lisp/${RELEASE}.tgz ${SIZE} ${MD5} ${SHA1} ${RELEASE} ${RELEASE}/dwightaspencercom.asd"
-          } > ${DIST_DIR}/releases.txt
-
-          # systems.txt: first line MUST start with # (Quicklisp cdb.lisp requirement)
-          # system-file-name (col 1) must be basename only — no release prefix
-          {
-            echo "# project system-file system-name deps"
-            echo "DwightASpencerCom dwightaspencercom dwightaspencercom named-readtables"
-          } > ${DIST_DIR}/systems.txt
-
-          sed -i "s/^version .*/version ${VERSION}/" static/distinfo.txt 2>/dev/null || true
-
-          mkdir -p public/lisp
-          cp ${DIST_DIR}/${RELEASE}.tgz public/lisp/
-          cp ${DIST_DIR}/releases.txt public/lisp/releases.txt
-          cp ${DIST_DIR}/systems.txt public/lisp/systems.txt 2>/dev/null || true
-
-          echo "Dist packaged: ${SIZE} bytes sha1=${SHA1}"
+          # Copy the generated release files into the Hugo public output
+          mkdir -p "$GITHUB_WORKSPACE/hugo/public/lisp"
+          cp -r releases/. "$GITHUB_WORKSPACE/hugo/public/lisp/"
 
       - name: Index with Pagefind
         working-directory: hugo
