@@ -21,7 +21,9 @@
    #:db-prove-all
    #:db-var-all
    ;; internals (exposed for corpus layer)
-   #:%var-p #:%unify #:%subst #:%lookup #:db-clauses #:prolog-db))
+   #:%var-p #:%walk #:%unify #:%subst #:%lookup #:db-clauses #:prolog-db
+   ;; struct predicate
+   #:prolog-db-p))
 
 ;;; ── Corpus layer — post/tag/author facts ─────────────────────────────────────
 ;;; Mirrors pokemon-catalog: assert-catalog-facts → assert-post-facts
@@ -55,11 +57,18 @@
 ;;; Loading this system extends it with corpus + render capabilities.
 (defpackage #:DwightASpencerCom
   (:use #:cl #:dsc/logic #:dsc/corpus #:dsc/render)
+  ;; Shadow corpus symbols re-exported as 1-arg wrappers using global *kb*
+  (:shadow #:find-post #:find-by-tag #:all-posts)
   (:export
+   ;; State
+   #:*kb*
    ;; From the homepage finger block — still works
    #:finger
    #:Self
    #:AboutMe
+   ;; Knowledge base
+   #:make-kb
+   #:kb
    ;; Corpus queries
    #:query
    #:find-post
