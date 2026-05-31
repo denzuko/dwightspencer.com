@@ -57,7 +57,7 @@ jobs:
 
       - name: Package Quicklisp dist via redist
         run: |
-          apt-get install -y -qq libarchive-tools
+          sudo apt-get install -y -qq libarchive-tools
 
           # Download redist precompiled binary from Codeberg (moved from shirakumo.org)
           REDIST_URL="https://codeberg.org/shirakumo/redist/releases/download/v2.0.12/redist-linux.zip"
