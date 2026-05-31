@@ -4,8 +4,8 @@ on:
   push:
     branches: [master]
   schedule:
-    - cron: '0 6 * * *'   # 06:00 UTC nightly — picks up publishDate posts
-  workflow_dispatch:       # manual deploy button in Actions UI
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -32,7 +32,7 @@ jobs:
           cp -r brand/static/assets/. hugo/static/assets/brand/
           cp brand/data/brand.yaml hugo/data/brand.yaml
 
-      - name: Build (first pass — generates og-card.html per post)
+      - name: Build (first pass)
         working-directory: hugo
         run: hugo --minify --gc
 
@@ -49,28 +49,52 @@ jobs:
               "file://$(pwd)/$card" \
               "static/assets/og/${slug}.png" 2>/dev/null || true
           done
-          echo "OG images generated: $(ls static/assets/og/*.png 2>/dev/null | wc -l)"
+          echo "OG images: $(ls static/assets/og/*.png 2>/dev/null | wc -l)"
 
-      - name: Build (second pass — picks up OG images via fileExists)
+      - name: Build (second pass)
         working-directory: hugo
         run: hugo --minify --gc
 
       - name: Package Quicklisp dist via redist
         run: |
-          # Download the redist precompiled binary from shirakumo.org
-          curl -fsSL "https://shirakumo.org/project/dist/releases/latest/linux-x86_64.tgz" \
-            -o /tmp/redist.tgz
-          tar xf /tmp/redist.tgz -C /tmp
-          chmod +x /tmp/redist
+          apt-get install -y -qq libarchive-tools
 
-          # Run redist compile from the dist config directory
-          # distinfo.lisp in the repo root defines the dist and project sources
-          cd dist
-          /tmp/redist compile -v
+          # Download redist precompiled binary from Codeberg (moved from shirakumo.org)
+          REDIST_URL="https://codeberg.org/shirakumo/redist/releases/download/v2.0.12/redist-linux.zip"
+          curl -fsSL "$REDIST_URL" -o /tmp/redist.zip
+          unzip -q /tmp/redist.zip -d /tmp/redist-bin
+          chmod +x /tmp/redist-bin/redist
+          REDIST=/tmp/redist-bin/redist
 
-          # Copy the generated release files into the Hugo public output
-          mkdir -p "$GITHUB_WORKSPACE/hugo/public/lisp"
-          cp -r releases/. "$GITHUB_WORKSPACE/hugo/public/lisp/"
+          # Stage lisp source files + Hugo-generated corpus.lisp into a local git repo
+          # redist requires a cloneable source; we can't use the main repo (gh-pages default branch)
+          mkdir -p /tmp/lisp-src/DwightASpencerCom
+          cp hugo/static/lisp/*.lisp hugo/static/lisp/*.asd \
+             /tmp/lisp-src/DwightASpencerCom/
+          cp hugo/public/corpus.lisp \
+             /tmp/lisp-src/DwightASpencerCom/corpus.lisp
+
+          git -C /tmp/lisp-src init -b master
+          git -C /tmp/lisp-src config user.email "ci@dapla.net"
+          git -C /tmp/lisp-src config user.name "CI"
+          git -C /tmp/lisp-src add .
+          git -C /tmp/lisp-src commit -m "release"
+
+          # Run redist: add-dist, add project from local git, compile
+          export STORAGE_FILE=/tmp/redistout/distinfo.sexp
+          export DIST_OUTPUT_DIR=/tmp/redistout/releases
+          mkdir -p /tmp/redistout
+
+          $REDIST add-dist DwightASpencerCom \
+            --url "http://dwightaspencer.com/lisp/"
+          $REDIST add "file:///tmp/lisp-src" \
+            --name DwightASpencerCom \
+            --verbose
+          $REDIST compile -v
+
+          # Copy redist output into Hugo public dir
+          mkdir -p hugo/public/lisp
+          cp -r /tmp/redistout/releases/. hugo/public/lisp/
 
       - name: Index with Pagefind
         working-directory: hugo
