@@ -82,21 +82,31 @@
   (dsc/logic:db-prove-all (kb) goal))
 
 (defun find-post (slug)
-  "Find a post by slug. Example: (find-post \"03-rules-types-and-glue\")"
+  "Find a post by SLUG in the site corpus.
+Returns a plist with keys :slug, :title, :date, :words, or NIL if not found.
+Uses the global site knowledge base (see kb).
+Example: (find-post \"03-rules-types-and-glue\")"
   (dsc/corpus:find-post (kb) slug))
 
 (defun find-by-tag (tag)
-  "Find all posts with TAG. Example: (find-by-tag :privacy)"
+  "Return all post slugs in the site corpus that carry TAG (a keyword).
+Uses the global site knowledge base (see kb).
+Example: (find-by-tag :privacy) => list of slug strings."
   (dsc/corpus:find-by-tag (kb) tag))
 
 (defun all-posts ()
-  "List all post slugs in the corpus."
+  "Return a list of all post slugs in the site corpus.
+Uses the global site knowledge base (see kb).
+Example: (all-posts) => list of slug strings."
   (dsc/corpus:all-posts (kb)))
 
 ;;;; ── Render entry point ──────────────────────────────────────────────────────
 
 (defmethod render ((target (eql :ps)) stream (kb null))
-  "Render with default kb when none provided."
+  "Render the site corpus to STREAM in PostScript format.
+Specialisation for TARGET=:ps and KB=NIL: supplies the global knowledge base.
+Uses kb to obtain or create the global instance.
+Example: (render :ps *standard-output* nil)"
   (dsc/render:render :postscript stream (kb)))
 
 ;;;; ── Quicklisp dist declaration ──────────────────────────────────────────────
