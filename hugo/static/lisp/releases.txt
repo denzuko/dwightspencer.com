@@ -1,2 +1,0 @@
-# project-name url size md5 sha1 prefix system-files
-DwightASpencerCom http://dwightaspencer.com/lisp/DwightASpencerCom-2026-05-30.tgz 10807 78b64af8f04eeffccb552066389c0d8b a0d58731329788c896c159d7af361af7c9f32105 DwightASpencerCom-2026-05-30 DwightASpencerCom-2026-05-30/dwightaspencercom.asd
