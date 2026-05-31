@@ -86,7 +86,7 @@ jobs:
           mkdir -p /tmp/redistout
 
           $REDIST add-dist DwightASpencerCom \
-            --url "http://dwightaspencer.com/lisp/"
+            --url "http://dwightaspencer.com/lisp"
           $REDIST add "file:///tmp/lisp-src" \
             --name DwightASpencerCom \
             --verbose
@@ -95,6 +95,9 @@ jobs:
           # Copy redist output into Hugo public dir
           mkdir -p hugo/public/lisp
           cp -r /tmp/redistout/releases/. hugo/public/lisp/
+          # Expose top-level distinfo at /distinfo.txt
+          # Clients subscribed to the old distinfo-subscription-url follow this.
+          cp /tmp/redistout/releases/dwightaspencercom.txt hugo/public/distinfo.txt
 
       - name: Index with Pagefind
         working-directory: hugo
