@@ -11,13 +11,14 @@
 ;;; Architecture: github.com/denzuko/ml-prolog-pokemon/logic-engine.lisp
 ;;; Same prolog-db struct, same db-assert/db-prove-all interface.
 ;;; Posts become facts exactly as Pokémon moves became facts in the study.
-(defpackage #:dsc/logic
+(defpackage #:com.dwightaspencer/logic
   (:use #:cl)
   (:export
    ;; database
    #:make-post-kb
    #:db-assert
    #:db-prove-first
+   #:db-provable-p
    #:db-prove-all
    #:db-var-all
    ;; internals (exposed for corpus layer)
@@ -31,9 +32,9 @@
 ;;;   (post   slug title date word-count)
 ;;;   (tag    slug tag-name)
 ;;;   (author slug orcid)
-(defpackage #:dsc/corpus
+(defpackage #:com.dwightaspencer/corpus
   (:use #:cl)
-  (:local-nicknames (#:logic #:dsc/logic))
+  (:local-nicknames (#:logic #:com.dwightaspencer/logic))
   (:export
    #:assert-post-facts
    #:find-post
@@ -41,14 +42,16 @@
    #:all-posts
    #:all-tags
    #:make-site-kb
+   #:load-live-corpus
+   #:+corpus-url+
    ;; search index
    #:+search-index+
    #:+dist-root+))
 
 ;;; ── Render layer — PostScript output ─────────────────────────────────────────
-(defpackage #:dsc/render
+(defpackage #:com.dwightaspencer/render
   (:use #:cl)
-  (:local-nicknames (#:corpus #:dsc/corpus))
+  (:local-nicknames (#:corpus #:com.dwightaspencer/corpus))
   (:export
    #:render))
 
@@ -56,12 +59,13 @@
 ;;; This is the package the finger block declares on the homepage.
 ;;; Loading this system extends it with corpus + render capabilities.
 (defpackage #:DwightASpencerCom
-  (:use #:cl #:dsc/logic #:dsc/corpus #:dsc/render)
+  (:use #:cl #:com.dwightaspencer/logic #:com.dwightaspencer/corpus #:com.dwightaspencer/render)
   ;; Shadow corpus symbols re-exported as 1-arg wrappers using global *kb*
   (:shadow #:find-post #:find-by-tag #:all-posts)
   (:export
    ;; State
    #:*kb*
+   #:*self*
    ;; From the homepage finger block — still works
    #:finger
    #:Self
@@ -69,6 +73,7 @@
    ;; Knowledge base
    #:make-kb
    #:kb
+   #:load-live-corpus
    ;; Corpus queries
    #:query
    #:find-post
@@ -76,3 +81,28 @@
    #:all-posts
    ;; Render
    #:render))
+
+(defpackage #:com.dwightaspencer/rag
+  (:use #:cl)
+  (:local-nicknames (#:logic  #:com.dwightaspencer/logic)
+                    (#:corpus #:com.dwightaspencer/corpus))
+  (:export
+   #:char-trigrams
+   #:word-trigrams
+   #:build-trigram-index
+   #:trigram-similarity
+   #:extract-tonal-rules
+   #:tonal-match-p
+   #:ast-category-match-p
+   #:*category-compatibility*
+   #:token-result
+   #:token-result-token
+   #:token-result-probability
+   #:token-result-category
+   #:token-result-tonal-pass
+   #:token-result-ast-pass
+   #:token-result-score
+   #:score-candidate
+   #:score-candidates
+   #:select-token
+   #:generate-response))

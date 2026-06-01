@@ -15,7 +15,7 @@
 ;;;;   (series slug series-name position)
 
 (named-readtables:in-readtable :standard)
-(in-package #:dsc/logic)
+(in-package #:com.dwightaspencer/logic)
 
 ;;;; ── Prolog database ─────────────────────────────────────────────────────────
 
@@ -103,8 +103,15 @@ handling unbound variables (distinguished from NIL by assoc presence)."
   (%prove db (list goal) '()))
 
 (defun db-prove-first (db goal)
-  "Return first solution for GOAL or NIL."
+  "Return first solution environment for GOAL, or NIL if no solutions.
+For ground goals (no variables) a successful match returns NIL (empty env).
+Use db-provable-p for unambiguous boolean success checks."
   (first (db-prove-all db goal)))
+
+(defun db-provable-p (db goal)
+  "Return T if GOAL has at least one solution in DB, NIL otherwise.
+Correctly handles ground goals where the successful env is NIL."
+  (not (null (db-prove-all db goal))))
 
 (defun db-var-all (db goal var)
   "Return all ground bindings of VAR across solutions of GOAL.
