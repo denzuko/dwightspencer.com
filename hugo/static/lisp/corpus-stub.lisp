@@ -55,8 +55,12 @@ generated file with a real assert-post-facts. This stub ships a noop
 assert-post-facts as a fallback so the system loads without the
 tarball, but the KB will be empty until the real corpus is loaded.
 
-To get a populated KB without the Quicklisp tarball:
-  (load \"https://dwightaspencer.com/corpus.lisp\") ; requires HTTP client
+To get a populated KB without the Quicklisp tarball, fetch and eval
+the live corpus using dexador:
+
+  (ql:quickload :dexador)
+  (eval (read (make-string-input-stream
+                (dex:get +corpus-url+))))
   (dsc/corpus:make-site-kb)
 
 Example:
