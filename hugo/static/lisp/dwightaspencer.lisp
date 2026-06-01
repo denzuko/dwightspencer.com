@@ -34,29 +34,29 @@
 
 (defmethod AboutMe ((object Self))
   "Just a SysOp turned founder of #devops now coding AI, Blockchain, Commercial Systems."
-  '(:Resume
-    '(:Education (list :UoP :Cornell))
-    '(:Languages (list :Golang :ANSI-C :ASM :TypeScript :Python :CommonLisp))
-    '(:Projects  (list '(:Metis       "https://github.com/3um-Group")
-                       '(:2600_Mod    "https://reddit.com/r/2600")
-                       '(:corpus      "https://dwightaspencer.com/lisp/")
-                       '(:game-study  "https://github.com/denzuko/ml-prolog-pokemon")))
-    '(:Volunteering (list '(:Score    "https://Score.org")
-                          '(:Archive  "https://archive.org")
-                          '(:9front   "https://only9fans.com")
-                          '(:Debian   "https://debian.org")))
-    '(:Certs (list '(:RHCE              "February 2007")
-                   '(:AWS-SA            "March 2015")
-                   '(:Amazon-Leadership "March 2019")
-                   '(:GCP-Architect     "January 2022")
-                   '(:CISM              "June 2022")
-                   '(:ORCID             "https://orcid.org/0009-0001-0066-4646")
-                   '(:Keybase           "https://Keybase.io/Denzuko/pubkey")
-                   '(:Agile-Manifesto   "CompuTEK Industries, May 2009")))
-    '(:Tools (list :AlpineLinux :VIM :Vlime :VimWiki :entr :zmk :gnumake
-                   :plan9ports :git-flow :git-bug :git-email
-                   :charmbracelet_soft_serve :notmuch-mail :slrn
-                   :Ansible :Terraform :Podman :Nomad :Consul :Ollama))))
+  `(:Resume
+    (:Education  (:UoP :Cornell))
+    (:Languages  (:Golang :ANSI-C :ASM :TypeScript :Python :CommonLisp))
+    (:Projects   ((:Metis       "https://github.com/3um-Group")
+                  (:2600_Mod    "https://reddit.com/r/2600")
+                  (:corpus      "https://dwightaspencer.com/lisp/")
+                  (:game-study  "https://github.com/denzuko/ml-prolog-pokemon")))
+    (:Volunteering ((:Score    "https://Score.org")
+                    (:Archive  "https://archive.org")
+                    (:9front   "https://only9fans.com")
+                    (:Debian   "https://debian.org")))
+    (:Certs      ((:RHCE              "February 2007")
+                  (:AWS-SA            "March 2015")
+                  (:Amazon-Leadership "March 2019")
+                  (:GCP-Architect     "January 2022")
+                  (:CISM              "June 2022")
+                  (:ORCID             "https://orcid.org/0009-0001-0066-4646")
+                  (:Keybase           "https://Keybase.io/Denzuko/pubkey")
+                  (:Agile-Manifesto   "CompuTEK Industries, May 2009")))
+    (:Tools      (:AlpineLinux :VIM :Vlime :VimWiki :entr :zmk :gnumake
+                  :plan9ports :git-flow :git-bug :git-email
+                  :charmbracelet_soft_serve :notmuch-mail :slrn
+                  :Ansible :Terraform :Podman :Nomad :Consul :Ollama))))
 
 (defun finger ()
   (let ((dwight (make-instance 'Self)))

@@ -349,11 +349,28 @@
   (of-type app:Self (make-instance 'app:Self)))
 
 (define-test app/AboutMe
-  "AboutMe method returns a plist with expected keys on a Self instance."
+  "AboutMe returns a backquote-constructed list: (:resume section...).
+Each section is (:key value). Single top-level backtick — standard CL
+idiom for static config data."
   (let* ((self (make-instance 'app:Self))
          (info (app:AboutMe self)))
     (true (listp info))
-    (true (member :Resume info))))
+    (is eq :resume (first info))
+    (true (every #'listp (rest info)))
+    (let ((keys (mapcar #'first (rest info))))
+      (true (member :education    keys))
+      (true (member :languages    keys))
+      (true (member :projects     keys))
+      (true (member :volunteering keys))
+      (true (member :certs        keys))
+      (true (member :tools        keys)))
+    (let ((edu (second (assoc :education (rest info)))))
+      (true (listp edu))
+      (true (every #'keywordp edu)))
+    (let ((tools (second (assoc :tools (rest info)))))
+      (true (listp tools))
+      (true (plusp (length tools)))
+      (true (every #'keywordp tools)))))
 
 (define-test app/finger
   "finger writes non-empty output to *standard-output*."
