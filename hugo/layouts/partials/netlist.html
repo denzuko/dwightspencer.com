@@ -1,0 +1,88 @@
+{{- if .Store.Get "hasNetlist" -}}
+<script src="{{ "/js/netlistsvg.bundle.js" | relURL }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var containers = document.querySelectorAll('.netlist-render[data-netlist]');
+  if (!containers.length || typeof netlistsvg === 'undefined') return;
+
+  var skinUrl = '{{ "/js/netlistsvg-default-skin.svg" | relURL | absURL }}';
+
+  containers.forEach(function (el) {
+    var raw = el.getAttribute('data-netlist');
+    if (!raw) return;
+
+    var netlistJson;
+    try {
+      netlistJson = JSON.parse(raw);
+    } catch (e) {
+      el.innerHTML = '<span class="netlist-error">Invalid netlist JSON: ' +
+        e.message.replace(/</g, '&lt;') + '</span>';
+      return;
+    }
+
+    /* netlistsvg.render(skinData, netlistData) returns an SVG string */
+    fetch(skinUrl)
+      .then(function (r) { return r.text(); })
+      .then(function (skinSvg) {
+        try {
+          var svg = netlistsvg.render(skinSvg, netlistJson);
+          el.innerHTML = svg;
+          /* Make SVG responsive */
+          var svgEl = el.querySelector('svg');
+          if (svgEl) {
+            svgEl.removeAttribute('width');
+            svgEl.removeAttribute('height');
+            svgEl.style.maxWidth = '100%';
+            svgEl.style.height = 'auto';
+          }
+        } catch (e) {
+          el.innerHTML = '<span class="netlist-error">Render error: ' +
+            e.message.replace(/</g, '&lt;') + '</span>';
+        }
+      })
+      .catch(function (e) {
+        /* Skin fetch failed — try with null (uses default built-in skin) */
+        try {
+          var svg = netlistsvg.render(null, netlistJson);
+          el.innerHTML = svg;
+        } catch (err) {
+          el.innerHTML = '<span class="netlist-error">Could not render schematic.</span>';
+        }
+      });
+  });
+});
+</script>
+<style>
+.netlist-figure { margin: 2rem 0; }
+.netlist-container { overflow-x: auto; }
+.netlist-render svg { max-width: 100%; height: auto; }
+.netlist-render .netlist-loading {
+  display: block;
+  text-align: center;
+  padding: 1rem;
+  color: var(--muted, #6b7280);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .85rem;
+}
+.netlist-error {
+  display: block;
+  padding: .5rem;
+  background: #2d1b1b;
+  color: #ff6b6b;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .8rem;
+  border-left: 3px solid #ff1744;
+}
+.netlist-caption {
+  text-align: center;
+  font-size: .82rem;
+  color: #777;
+  margin-top: .5rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+[data-theme="dark"] .netlist-caption { color: #666; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .netlist-caption { color: #666; }
+}
+</style>
+{{- end -}}

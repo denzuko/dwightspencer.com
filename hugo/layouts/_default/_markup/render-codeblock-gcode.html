@@ -1,0 +1,34 @@
+{{- /* render-codeblock-gcode.html
+     Renders G-code toolpath previews using gcode-preview (WebGL/three.js).
+     Usage in Markdown:
+       ```gcode
+       G28 ; Home
+       G1 X50 Y50 Z0.3 E5 F3000
+       ...
+       ```
+     Front matter metadata (optional):
+       [[diagrams]]
+       index = 0           # 0-based, matches order of gcode blocks
+       title = "..."
+       alt   = "..."
+       caption = "..."
+*/ -}}
+{{- $idx      := .Page.Store.Get "gcodeCount" | default 0 -}}
+{{- $diagrams := .Page.Params.diagrams -}}
+{{- $meta     := index $diagrams $idx -}}
+<figure class="gcode-figure" data-pagefind-ignore>
+  <div class="gcode-container">
+    <canvas class="gcode-canvas"
+            data-gcode="{{ .Inner | htmlEscape }}"
+            aria-hidden="true"
+            width="600" height="400">
+    </canvas>
+    {{- with $meta -}}
+    {{- with .title }}<p class="gcode-title sr-only" data-pagefind-body>Toolpath: {{ . }}</p>{{- end -}}
+    {{- with .alt }}<p class="gcode-alt sr-only" data-pagefind-body>{{ . }}</p>{{- end -}}
+    {{- with .caption }}<figcaption class="gcode-caption" data-pagefind-body>{{ . }}</figcaption>{{- end -}}
+    {{- end }}
+  </div>
+</figure>
+{{- .Page.Store.Set "hasGcode" true -}}
+{{- .Page.Store.Set "gcodeCount" (add $idx 1) -}}
