@@ -170,11 +170,11 @@
     kb))
 
 (define-test corpus/load-live-corpus-guard
-  "load-live-corpus has a runtime guard for dexador presence."
-  ;; Verify the guard exists by inspecting the function source is not needed —
-  ;; just confirm the function is bound and callable (it will error without dexador,
-  ;; which is the correct behaviour; we test the error path only when dexador loads).
-  (true (fboundp 'com.dwightaspencer/corpus:load-live-corpus)))
+  "load-live-corpus falls back to bundled KB when dexador is unavailable."
+  (true (fboundp 'com.dwightaspencer/corpus:load-live-corpus))
+  ;; Without dexador loaded, should return a prolog-db rather than erroring
+  (let ((kb (com.dwightaspencer/corpus:load-live-corpus)))
+    (true (com.dwightaspencer/logic:prolog-db-p kb))))
 
 (define-test corpus/load-live-corpus-exported
   "load-live-corpus is exported from both com.dwightaspencer/corpus and DwightASpencerCom."
@@ -389,6 +389,12 @@ idiom for static config data."
   (let ((out (with-output-to-string (*standard-output*)
                (app:finger))))
     (true (plusp (length out)))))
+
+(define-test app/auto-init
+  "Module load auto-initialises *self* and *kb*."
+  (of-type app:Self app:*self*)
+  (true (not (null app:*kb*)))
+  (true (com.dwightaspencer/logic:prolog-db-p app:*kb*)))
 
 (define-test app/make-kb-and-kb
   "make-kb populates *kb*; kb returns it; subsequent calls reuse it."

@@ -76,18 +76,25 @@
   (or *kb* (make-kb)))
 
 (defun load-live-corpus (&optional url)
-  "Fetch, eval, and set the global KB from the live corpus at URL.
-Requires dexador: (ql:quickload :dexador).
+  "Fetch the live corpus, set *kb*, and return it.
+dexador is loaded automatically as an ASDF dependency.
 URL defaults to com.dwightaspencer/corpus:+corpus-url+.
 Sets *kb* to the freshly populated knowledge base and returns it.
 
 Example:
-  (ql:quickload :dexador)
   (DwightASpencerCom:load-live-corpus)
   (DwightASpencerCom:all-posts)"
-  (setf *kb* (if url
-                 (com.dwightaspencer/corpus:load-live-corpus url)
-                 (com.dwightaspencer/corpus:load-live-corpus))))
+  (let* ((target (or url com.dwightaspencer/corpus:+corpus-url+))
+         (db     (com.dwightaspencer/logic:make-post-kb)))
+    (if (find-package :dexador)
+        (let ((src (funcall (intern "GET" :dexador) target)))
+          (with-input-from-string (s src)
+            (loop for form = (read s nil s)
+                  until (eq form s)
+                  do (eval form)))
+          (com.dwightaspencer/corpus:assert-post-facts db))
+        (com.dwightaspencer/corpus:assert-post-facts db))
+    (setf *kb* db)))
 
 (defun query (goal)
   "Run a Prolog query against the site corpus.
@@ -130,3 +137,14 @@ Example: (render :ps *standard-output* nil)"
 (defparameter +dist-name+    "DwightASpencerCom")
 (defparameter +dist-version+ "2026-05-23")
 (defparameter +dist-root+    com.dwightaspencer/corpus:+dist-root+)
+
+;;;; ── Module initialisation ──────────────────────────────────────────────────
+;;; Load time: create the canonical Self instance and populate *kb* from the
+;;; bundled corpus. Users only need (ql:quickload :DwightASpencerCom) — no
+;;; separate setup. To refresh from the live site: (load-live-corpus).
+
+(eval-when (:load-toplevel :execute)
+  (defparameter *self* (make-instance 'Self)
+    "The canonical Self instance, created at module load time.")
+  (unless *kb*
+    (make-kb)))

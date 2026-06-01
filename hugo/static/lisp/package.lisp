@@ -42,6 +42,7 @@
    #:all-tags
    #:make-site-kb
    #:load-live-corpus
+   #:+corpus-url+
    ;; search index
    #:+search-index+
    #:+dist-root+))
@@ -63,6 +64,7 @@
   (:export
    ;; State
    #:*kb*
+   #:*self*
    ;; From the homepage finger block — still works
    #:finger
    #:Self

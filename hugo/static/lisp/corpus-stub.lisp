@@ -56,9 +56,8 @@ assert-post-facts as a fallback so the system loads without the
 tarball, but the KB will be empty until the real corpus is loaded.
 
 To get a populated KB without the Quicklisp tarball, use
-load-live-corpus (requires dexador):
+load-live-corpus (dexador loaded automatically as an ASDF dependency):
 
-  (ql:quickload :dexador)
   (com.dwightaspencer/corpus:load-live-corpus)
 
 Example:
@@ -72,25 +71,29 @@ Example:
   "Fetch the live corpus from URL using dexador, eval it into the current
 image, and return a freshly populated knowledge base.
 
-Requires dexador (available via Quicklisp):
-  (ql:quickload :dexador)
+dexador is an ASDF dependency — loaded automatically with the system.
 
 URL defaults to +corpus-url+ (https://dwightaspencer.com/corpus.lisp).
 Returns a prolog-db with all post/tag/author facts asserted.
-Signals an error if dexador is not loaded or the fetch fails.
+Falls back to the bundled corpus KB (may be empty stub) if dexador
+is unavailable.
 
 Example:
-  (ql:quickload :dexador)
   (let ((kb (com.dwightaspencer/corpus:load-live-corpus)))
     (com.dwightaspencer/corpus:all-posts kb))"
-  (unless (find-package :dexador)
-    (error "dexador is not loaded. Run (ql:quickload :dexador) first."))
-  (let ((src (funcall (intern "GET" :dexador) url)))
-    (with-input-from-string (s src)
-      (loop for form = (read s nil s)
-            until (eq form s)
-            do (eval form))))
-  (make-site-kb))
+  (let ((db (logic:make-post-kb)))
+    (if (find-package :dexador)
+        (let ((src (funcall (intern "GET" :dexador) url)))
+          (with-input-from-string (s src)
+            (loop for form = (read s nil s)
+                  until (eq form s)
+                  do (eval form)))
+          ;; assert-post-facts now points to the freshly eval'd live version
+          (assert-post-facts db))
+        (progn
+          (format *debug-io* "~&; dexador unavailable — returning bundled corpus KB~%")
+          (assert-post-facts db)))
+    db))
 
 ;;; ── Corpus query functions ────────────────────────────────────────────────
 

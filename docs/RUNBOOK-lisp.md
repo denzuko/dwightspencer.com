@@ -28,19 +28,22 @@ curl -s https://dwightaspencer.com/corpus.lisp | head -5
 ```lisp
 (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
 (ql:quickload :DwightASpencerCom)
+;; Self instance and corpus KB are auto-initialised at load time.
 (DwightASpencerCom:finger)
 (DwightASpencerCom:all-posts)
 (DwightASpencerCom:find-by-tag :privacy)
 (DwightASpencerCom:query '(tag ?s :infrastructure))
 ```
 
-## Load the live corpus without the Quicklisp tarball
-
-Requires dexador:
+## Refresh corpus to latest live build
 
 ```lisp
-(ql:quickload :dexador)
-(DwightASpencerCom:load-live-corpus)   ; fetches corpus.lisp, populates *kb*
+;; Pull the latest CI-packaged snapshot:
+(ql:update-dist "dwightaspencercom" :prompt nil)
+(ql:quickload :DwightASpencerCom)
+
+;; Or fetch corpus.lisp directly from the site (dexador auto-loaded via ASDF):
+(DwightASpencerCom:load-live-corpus)
 (DwightASpencerCom:all-posts)
 ```
 
