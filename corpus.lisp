@@ -5,7 +5,7 @@
 ;;;; Do not edit directly — update hugo/data/author.yaml or post front matter.
 ;;;; Regenerate: hugo --gc (runs on every site build)
 ;;;;
-;;;; This file implements the dsc/corpus package (see package.lisp).
+;;;; This file implements the com.dwightaspencer/corpus package (see package.lisp).
 ;;;; It is loaded as part of the DwightASpencerCom ASDF system:
 ;;;;
 ;;;;   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
@@ -16,11 +16,11 @@
 ;;;;   (DwightASpencerCom:find-post "03-rules-types-and-glue")
 ;;;;   (DwightASpencerCom:all-posts)
 ;;;;
-;;;; Within dsc/corpus, dsc/logic is available as the local nickname 'logic'
-;;;; per (:local-nicknames (#:logic #:dsc/logic)) in package.lisp.
+;;;; Within com.dwightaspencer/corpus, com.dwightaspencer/logic is available as the local nickname 'logic'
+;;;; per (:local-nicknames (#:logic #:com.dwightaspencer/logic)) in package.lisp.
 
 (named-readtables:in-readtable :standard)
-(in-package #:dsc/corpus)
+(in-package #:com.dwightaspencer/corpus)
 
 (defparameter +dist-root+    "https://dwightaspencer.com")
 (defparameter +search-index+ "https://dwightaspencer.com/pagefind/pagefind.js")

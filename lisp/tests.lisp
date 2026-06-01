@@ -11,26 +11,26 @@
 ;;;;   sbcl --load run-tests.lisp
 ;;;;
 ;;;; Coverage targets — every exported and internal function:
-;;;;   dsc/logic:   make-post-kb, db-assert, db-prove-all, db-prove-first,
+;;;;   com.dwightaspencer/logic:   make-post-kb, db-assert, db-prove-all, db-prove-first,
 ;;;;                db-var-all, %var-p, %unify, %subst, %lookup, %norm-goal, %prove
-;;;;   dsc/corpus:  make-site-kb, assert-post-facts (stub), find-post,
+;;;;   com.dwightaspencer/corpus:  make-site-kb, assert-post-facts (stub), find-post,
 ;;;;                find-by-tag, all-posts, all-tags, +dist-root+, +search-index+
-;;;;   dsc/render:  ps-escape, ps-show, ps-page-setup, render-prolog,
+;;;;   com.dwightaspencer/render:  ps-escape, ps-show, ps-page-setup, render-prolog,
 ;;;;                render-title-page, render-post-page, render-epilog, render
 ;;;;   DwightASpencerCom: finger, Self, AboutMe, make-kb, kb, query,
 ;;;;                      find-post, find-by-tag, all-posts, render
 
 (defpackage #:dwightaspencercom-tests
   (:use #:cl #:parachute)
-  (:local-nicknames (#:logic  #:dsc/logic)
-                    (#:corpus #:dsc/corpus)
-                    (#:render #:dsc/render)
+  (:local-nicknames (#:logic  #:com.dwightaspencer/logic)
+                    (#:corpus #:com.dwightaspencer/corpus)
+                    (#:render #:com.dwightaspencer/render)
                     (#:app    #:DwightASpencerCom)))
 
 (in-package #:dwightaspencercom-tests)
 
 ;;;; ─────────────────────────────────────────────────────────────────────────
-;;;; Suite: dsc/logic — micro-Prolog engine
+;;;; Suite: com.dwightaspencer/logic — micro-Prolog engine
 ;;;; ─────────────────────────────────────────────────────────────────────────
 
 (define-test logic/make-post-kb
@@ -139,7 +139,7 @@
     (is eq :post (car normed))))
 
 ;;;; ─────────────────────────────────────────────────────────────────────────
-;;;; Suite: dsc/corpus — corpus layer
+;;;; Suite: com.dwightaspencer/corpus — corpus layer
 ;;;; ─────────────────────────────────────────────────────────────────────────
 
 (define-test corpus/constants
@@ -168,6 +168,18 @@
     (logic:db-assert kb '(tag  "03-gamma" :foss))
     (logic:db-assert kb '(author "01-alpha" "0009-0001-0066-4646"))
     kb))
+
+(define-test corpus/load-live-corpus-guard
+  "load-live-corpus falls back to bundled KB when dexador is unavailable."
+  (true (fboundp 'com.dwightaspencer/corpus:load-live-corpus))
+  ;; Without dexador loaded, should return a prolog-db rather than erroring
+  (let ((kb (com.dwightaspencer/corpus:load-live-corpus)))
+    (true (com.dwightaspencer/logic:prolog-db-p kb))))
+
+(define-test corpus/load-live-corpus-exported
+  "load-live-corpus is exported from both com.dwightaspencer/corpus and DwightASpencerCom."
+  (true (find-symbol "LOAD-LIVE-CORPUS" :com.dwightaspencer/corpus))
+  (true (find-symbol "LOAD-LIVE-CORPUS" :DwightASpencerCom)))
 
 (define-test corpus/find-post
   "find-post returns plist for known slug, NIL for unknown."
@@ -215,7 +227,7 @@
   (is equal '() (corpus:all-tags (logic:make-post-kb))))
 
 ;;;; ─────────────────────────────────────────────────────────────────────────
-;;;; Suite: dsc/render — PostScript output
+;;;; Suite: com.dwightaspencer/render — PostScript output
 ;;;; ─────────────────────────────────────────────────────────────────────────
 
 (define-test render/ps-escape
@@ -349,17 +361,40 @@
   (of-type app:Self (make-instance 'app:Self)))
 
 (define-test app/AboutMe
-  "AboutMe method returns a plist with expected keys on a Self instance."
+  "AboutMe returns a backquote-constructed list: (:resume section...).
+Each section is (:key value). Single top-level backtick — standard CL
+idiom for static config data."
   (let* ((self (make-instance 'app:Self))
          (info (app:AboutMe self)))
     (true (listp info))
-    (true (member :Resume info))))
+    (is eq :resume (first info))
+    (true (every #'listp (rest info)))
+    (let ((keys (mapcar #'first (rest info))))
+      (true (member :education    keys))
+      (true (member :languages    keys))
+      (true (member :projects     keys))
+      (true (member :volunteering keys))
+      (true (member :certs        keys))
+      (true (member :tools        keys)))
+    (let ((edu (second (assoc :education (rest info)))))
+      (true (listp edu))
+      (true (every #'keywordp edu)))
+    (let ((tools (second (assoc :tools (rest info)))))
+      (true (listp tools))
+      (true (plusp (length tools)))
+      (true (every #'keywordp tools)))))
 
 (define-test app/finger
   "finger writes non-empty output to *standard-output*."
   (let ((out (with-output-to-string (*standard-output*)
                (app:finger))))
     (true (plusp (length out)))))
+
+(define-test app/auto-init
+  "Module load auto-initialises *self* and *kb*."
+  (of-type app:Self app:*self*)
+  (true (not (null app:*kb*)))
+  (true (com.dwightaspencer/logic:prolog-db-p app:*kb*)))
 
 (define-test app/make-kb-and-kb
   "make-kb populates *kb*; kb returns it; subsequent calls reuse it."
