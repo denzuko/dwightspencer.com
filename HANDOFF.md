@@ -49,8 +49,12 @@ git remote set-url origin "https://denzuko:${GH_TOKEN}@github.com/denzuko/dwight
 - **Avatar:** self-hosted at `stream-assets.cdn.dwightaspencer.com/assets/avatar.jpg`
 - **Fonts:** self-hosted woff2 in `hugo/static/fonts/` — no Google Fonts
 - **CTA:** "One less dependency" → buymeacoffee.com/denzuko
-- **Corpus:** `(ql:quickload :DwightASpencerCom)` — dsc/logic → dsc/corpus →
-  DwightASpencerCom package hierarchy. See `docs/RUNBOOK-lisp.md`.
+- **Corpus:** `(ql:quickload :DwightASpencerCom)` — com.dwightaspencer/logic →
+  com.dwightaspencer/corpus → DwightASpencerCom (reverse-domain namespace).
+  `(DwightASpencerCom:load-live-corpus)` fetches live corpus (dexador auto-loaded).
+  `(ql:update-dist "dwightaspencercom")` pulls the latest CI build.
+  At load time, Self and the corpus KB are auto-initialised.
+  See `docs/RUNBOOK-lisp.md`.
 - **Easter egg:** `/.well-known/file_id.diz` — XM Core BBS ANSI splash,
   SAUCE header intact. Discoverable via corpus `(query '(tag ?s :bbs))`,
   `humans.txt`, `llms.txt`.

@@ -18,7 +18,7 @@
 ;;;;   - Colophon: IANA PEN, ORCID, PGP fingerprint, Agile Manifesto note
 
 (named-readtables:in-readtable :standard)
-(in-package #:dsc/render)
+(in-package #:com.dwightaspencer/render)
 
 ;;;; ── PostScript primitives ───────────────────────────────────────────────────
 
