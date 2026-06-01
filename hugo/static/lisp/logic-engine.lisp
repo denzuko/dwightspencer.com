@@ -15,7 +15,7 @@
 ;;;;   (series slug series-name position)
 
 (named-readtables:in-readtable :standard)
-(in-package #:dsc/logic)
+(in-package #:com.dwightaspencer/logic)
 
 ;;;; ── Prolog database ─────────────────────────────────────────────────────────
 

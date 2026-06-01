@@ -1,20 +1,20 @@
 ;;;; corpus-stub.lisp — bundled stub for DwightASpencerCom system
 ;;;;
-;;;; Implements the dsc/corpus package as a source file in the ASDF system.
+;;;; Implements the com.dwightaspencer/corpus package as a source file in the ASDF system.
 ;;;; The Hugo-generated corpus.lisp replaces this at build time with live
 ;;;; post facts asserted into the knowledge base; this stub provides a
 ;;;; loadable fallback for REPL use and testing.
 ;;;;
 ;;;; Package hierarchy:
-;;;;   dsc/logic        — micro-Prolog engine (make-post-kb, db-assert, etc.)
-;;;;   dsc/corpus       — THIS FILE — post/tag/author facts (uses dsc/logic)
-;;;;   dsc/render       — PostScript output (uses dsc/corpus)
+;;;;   com.dwightaspencer/logic   — micro-Prolog engine (make-post-kb, db-assert, etc.)
+;;;;   com.dwightaspencer/corpus  — THIS FILE — post/tag/author facts (uses dsc/logic)
+;;;;   com.dwightaspencer/render  — PostScript output (uses dsc/corpus)
 ;;;;   DwightASpencerCom — top-level; ql:quickload target; uses all three
 ;;;;
-;;;; Local nickname: within dsc/corpus, dsc/logic is available as 'logic'
-;;;; per (:local-nicknames (#:logic #:dsc/logic)) in package.lisp.
+;;;; Local nickname: within com.dwightaspencer/corpus, com.dwightaspencer/logic is available as 'logic'
+;;;; per (:local-nicknames (#:logic #:com.dwightaspencer/logic)) in package.lisp.
 
-(in-package #:dsc/corpus)
+(in-package #:com.dwightaspencer/corpus)
 
 ;;; ── Site configuration constants ──────────────────────────────────────────
 
@@ -49,7 +49,7 @@ See also: make-site-kb, which calls this automatically."
 
 (defun make-site-kb ()
   "Create and populate the site knowledge base.
-Returns a dsc/logic:prolog-db populated with post, tag, and author
+Returns a com.dwightaspencer/logic:prolog-db populated with post, tag, and author
 facts. In the CI-built Quicklisp tarball, corpus.lisp is the Hugo-
 generated file with a real assert-post-facts. This stub ships a noop
 assert-post-facts as a fallback so the system loads without the
@@ -59,11 +59,11 @@ To get a populated KB without the Quicklisp tarball, use
 load-live-corpus (requires dexador):
 
   (ql:quickload :dexador)
-  (dsc/corpus:load-live-corpus)
+  (com.dwightaspencer/corpus:load-live-corpus)
 
 Example:
-  (let ((kb (dsc/corpus:make-site-kb)))
-    (dsc/corpus:all-posts kb))"
+  (let ((kb (com.dwightaspencer/corpus:make-site-kb)))
+    (com.dwightaspencer/corpus:all-posts kb))"
   (let ((db (logic:make-post-kb)))
     (assert-post-facts db)
     db))
@@ -81,8 +81,8 @@ Signals an error if dexador is not loaded or the fetch fails.
 
 Example:
   (ql:quickload :dexador)
-  (let ((kb (dsc/corpus:load-live-corpus)))
-    (dsc/corpus:all-posts kb))"
+  (let ((kb (com.dwightaspencer/corpus:load-live-corpus)))
+    (com.dwightaspencer/corpus:all-posts kb))"
   (unless (find-package :dexador)
     (error "dexador is not loaded. Run (ql:quickload :dexador) first."))
   (let ((src (funcall (intern "GET" :dexador) url)))

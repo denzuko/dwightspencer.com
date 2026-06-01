@@ -11,26 +11,26 @@
 ;;;;   sbcl --load run-tests.lisp
 ;;;;
 ;;;; Coverage targets — every exported and internal function:
-;;;;   dsc/logic:   make-post-kb, db-assert, db-prove-all, db-prove-first,
+;;;;   com.dwightaspencer/logic:   make-post-kb, db-assert, db-prove-all, db-prove-first,
 ;;;;                db-var-all, %var-p, %unify, %subst, %lookup, %norm-goal, %prove
-;;;;   dsc/corpus:  make-site-kb, assert-post-facts (stub), find-post,
+;;;;   com.dwightaspencer/corpus:  make-site-kb, assert-post-facts (stub), find-post,
 ;;;;                find-by-tag, all-posts, all-tags, +dist-root+, +search-index+
-;;;;   dsc/render:  ps-escape, ps-show, ps-page-setup, render-prolog,
+;;;;   com.dwightaspencer/render:  ps-escape, ps-show, ps-page-setup, render-prolog,
 ;;;;                render-title-page, render-post-page, render-epilog, render
 ;;;;   DwightASpencerCom: finger, Self, AboutMe, make-kb, kb, query,
 ;;;;                      find-post, find-by-tag, all-posts, render
 
 (defpackage #:dwightaspencercom-tests
   (:use #:cl #:parachute)
-  (:local-nicknames (#:logic  #:dsc/logic)
-                    (#:corpus #:dsc/corpus)
-                    (#:render #:dsc/render)
+  (:local-nicknames (#:logic  #:com.dwightaspencer/logic)
+                    (#:corpus #:com.dwightaspencer/corpus)
+                    (#:render #:com.dwightaspencer/render)
                     (#:app    #:DwightASpencerCom)))
 
 (in-package #:dwightaspencercom-tests)
 
 ;;;; ─────────────────────────────────────────────────────────────────────────
-;;;; Suite: dsc/logic — micro-Prolog engine
+;;;; Suite: com.dwightaspencer/logic — micro-Prolog engine
 ;;;; ─────────────────────────────────────────────────────────────────────────
 
 (define-test logic/make-post-kb
@@ -139,7 +139,7 @@
     (is eq :post (car normed))))
 
 ;;;; ─────────────────────────────────────────────────────────────────────────
-;;;; Suite: dsc/corpus — corpus layer
+;;;; Suite: com.dwightaspencer/corpus — corpus layer
 ;;;; ─────────────────────────────────────────────────────────────────────────
 
 (define-test corpus/constants
@@ -174,11 +174,11 @@
   ;; Verify the guard exists by inspecting the function source is not needed —
   ;; just confirm the function is bound and callable (it will error without dexador,
   ;; which is the correct behaviour; we test the error path only when dexador loads).
-  (true (fboundp 'dsc/corpus:load-live-corpus)))
+  (true (fboundp 'com.dwightaspencer/corpus:load-live-corpus)))
 
 (define-test corpus/load-live-corpus-exported
-  "load-live-corpus is exported from both dsc/corpus and DwightASpencerCom."
-  (true (find-symbol "LOAD-LIVE-CORPUS" :dsc/corpus))
+  "load-live-corpus is exported from both com.dwightaspencer/corpus and DwightASpencerCom."
+  (true (find-symbol "LOAD-LIVE-CORPUS" :com.dwightaspencer/corpus))
   (true (find-symbol "LOAD-LIVE-CORPUS" :DwightASpencerCom)))
 
 (define-test corpus/find-post
@@ -227,7 +227,7 @@
   (is equal '() (corpus:all-tags (logic:make-post-kb))))
 
 ;;;; ─────────────────────────────────────────────────────────────────────────
-;;;; Suite: dsc/render — PostScript output
+;;;; Suite: com.dwightaspencer/render — PostScript output
 ;;;; ─────────────────────────────────────────────────────────────────────────
 
 (define-test render/ps-escape

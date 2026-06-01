@@ -69,7 +69,7 @@
 
 (defun make-kb ()
   "Create and populate the site knowledge base."
-  (setf *kb* (dsc/corpus:make-site-kb)))
+  (setf *kb* (com.dwightaspencer/corpus:make-site-kb)))
 
 (defun kb ()
   "Return the site knowledge base, creating it if necessary."
@@ -78,7 +78,7 @@
 (defun load-live-corpus (&optional url)
   "Fetch, eval, and set the global KB from the live corpus at URL.
 Requires dexador: (ql:quickload :dexador).
-URL defaults to dsc/corpus:+corpus-url+.
+URL defaults to com.dwightaspencer/corpus:+corpus-url+.
 Sets *kb* to the freshly populated knowledge base and returns it.
 
 Example:
@@ -86,33 +86,33 @@ Example:
   (DwightASpencerCom:load-live-corpus)
   (DwightASpencerCom:all-posts)"
   (setf *kb* (if url
-                 (dsc/corpus:load-live-corpus url)
-                 (dsc/corpus:load-live-corpus))))
+                 (com.dwightaspencer/corpus:load-live-corpus url)
+                 (com.dwightaspencer/corpus:load-live-corpus))))
 
 (defun query (goal)
   "Run a Prolog query against the site corpus.
    Example: (query '(tag ?s :privacy))
             (query '(post ?slug ?title ?date ?wc))"
-  (dsc/logic:db-prove-all (kb) goal))
+  (com.dwightaspencer/logic:db-prove-all (kb) goal))
 
 (defun find-post (slug)
   "Find a post by SLUG in the site corpus.
 Returns a plist with keys :slug, :title, :date, :words, or NIL if not found.
 Uses the global site knowledge base (see kb).
 Example: (find-post \"03-rules-types-and-glue\")"
-  (dsc/corpus:find-post (kb) slug))
+  (com.dwightaspencer/corpus:find-post (kb) slug))
 
 (defun find-by-tag (tag)
   "Return all post slugs in the site corpus that carry TAG (a keyword).
 Uses the global site knowledge base (see kb).
 Example: (find-by-tag :privacy) => list of slug strings."
-  (dsc/corpus:find-by-tag (kb) tag))
+  (com.dwightaspencer/corpus:find-by-tag (kb) tag))
 
 (defun all-posts ()
   "Return a list of all post slugs in the site corpus.
 Uses the global site knowledge base (see kb).
 Example: (all-posts) => list of slug strings."
-  (dsc/corpus:all-posts (kb)))
+  (com.dwightaspencer/corpus:all-posts (kb)))
 
 ;;;; ── Render entry point ──────────────────────────────────────────────────────
 
@@ -121,7 +121,7 @@ Example: (all-posts) => list of slug strings."
 Specialisation for TARGET=:ps and KB=NIL: supplies the global knowledge base.
 Uses kb to obtain or create the global instance.
 Example: (render :ps *standard-output* nil)"
-  (dsc/render:render :postscript stream (kb)))
+  (com.dwightaspencer/render:render :postscript stream (kb)))
 
 ;;;; ── Quicklisp dist declaration ──────────────────────────────────────────────
 ;;; This file is also the Quicklisp dist root.
@@ -129,4 +129,4 @@ Example: (render :ps *standard-output* nil)"
 
 (defparameter +dist-name+    "DwightASpencerCom")
 (defparameter +dist-version+ "2026-05-23")
-(defparameter +dist-root+    dsc/corpus:+dist-root+)
+(defparameter +dist-root+    com.dwightaspencer/corpus:+dist-root+)
