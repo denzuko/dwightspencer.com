@@ -75,6 +75,20 @@
   "Return the site knowledge base, creating it if necessary."
   (or *kb* (make-kb)))
 
+(defun load-live-corpus (&optional url)
+  "Fetch, eval, and set the global KB from the live corpus at URL.
+Requires dexador: (ql:quickload :dexador).
+URL defaults to dsc/corpus:+corpus-url+.
+Sets *kb* to the freshly populated knowledge base and returns it.
+
+Example:
+  (ql:quickload :dexador)
+  (DwightASpencerCom:load-live-corpus)
+  (DwightASpencerCom:all-posts)"
+  (setf *kb* (if url
+                 (dsc/corpus:load-live-corpus url)
+                 (dsc/corpus:load-live-corpus))))
+
 (defun query (goal)
   "Run a Prolog query against the site corpus.
    Example: (query '(tag ?s :privacy))

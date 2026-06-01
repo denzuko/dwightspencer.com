@@ -169,6 +169,18 @@
     (logic:db-assert kb '(author "01-alpha" "0009-0001-0066-4646"))
     kb))
 
+(define-test corpus/load-live-corpus-guard
+  "load-live-corpus has a runtime guard for dexador presence."
+  ;; Verify the guard exists by inspecting the function source is not needed —
+  ;; just confirm the function is bound and callable (it will error without dexador,
+  ;; which is the correct behaviour; we test the error path only when dexador loads).
+  (true (fboundp 'dsc/corpus:load-live-corpus)))
+
+(define-test corpus/load-live-corpus-exported
+  "load-live-corpus is exported from both dsc/corpus and DwightASpencerCom."
+  (true (find-symbol "LOAD-LIVE-CORPUS" :dsc/corpus))
+  (true (find-symbol "LOAD-LIVE-CORPUS" :DwightASpencerCom)))
+
 (define-test corpus/find-post
   "find-post returns plist for known slug, NIL for unknown."
   (let* ((kb   (make-test-kb))

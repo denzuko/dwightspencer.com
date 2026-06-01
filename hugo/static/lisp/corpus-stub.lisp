@@ -55,13 +55,11 @@ generated file with a real assert-post-facts. This stub ships a noop
 assert-post-facts as a fallback so the system loads without the
 tarball, but the KB will be empty until the real corpus is loaded.
 
-To get a populated KB without the Quicklisp tarball, fetch and eval
-the live corpus using dexador:
+To get a populated KB without the Quicklisp tarball, use
+load-live-corpus (requires dexador):
 
   (ql:quickload :dexador)
-  (eval (read (make-string-input-stream
-                (dex:get +corpus-url+))))
-  (dsc/corpus:make-site-kb)
+  (dsc/corpus:load-live-corpus)
 
 Example:
   (let ((kb (dsc/corpus:make-site-kb)))
@@ -69,6 +67,30 @@ Example:
   (let ((db (logic:make-post-kb)))
     (assert-post-facts db)
     db))
+
+(defun load-live-corpus (&optional (url +corpus-url+))
+  "Fetch the live corpus from URL using dexador, eval it into the current
+image, and return a freshly populated knowledge base.
+
+Requires dexador (available via Quicklisp):
+  (ql:quickload :dexador)
+
+URL defaults to +corpus-url+ (https://dwightaspencer.com/corpus.lisp).
+Returns a prolog-db with all post/tag/author facts asserted.
+Signals an error if dexador is not loaded or the fetch fails.
+
+Example:
+  (ql:quickload :dexador)
+  (let ((kb (dsc/corpus:load-live-corpus)))
+    (dsc/corpus:all-posts kb))"
+  (unless (find-package :dexador)
+    (error "dexador is not loaded. Run (ql:quickload :dexador) first."))
+  (let ((src (funcall (intern "GET" :dexador) url)))
+    (with-input-from-string (s src)
+      (loop for form = (read s nil s)
+            until (eq form s)
+            do (eval form))))
+  (make-site-kb))
 
 ;;; ── Corpus query functions ────────────────────────────────────────────────
 

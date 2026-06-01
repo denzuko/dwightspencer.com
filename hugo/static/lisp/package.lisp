@@ -41,6 +41,7 @@
    #:all-posts
    #:all-tags
    #:make-site-kb
+   #:load-live-corpus
    ;; search index
    #:+search-index+
    #:+dist-root+))
@@ -69,6 +70,7 @@
    ;; Knowledge base
    #:make-kb
    #:kb
+   #:load-live-corpus
    ;; Corpus queries
    #:query
    #:find-post
