@@ -7,8 +7,8 @@
 ;;;;
 ;;;; Package hierarchy:
 ;;;;   com.dwightaspencer/logic   — micro-Prolog engine (make-post-kb, db-assert, etc.)
-;;;;   com.dwightaspencer/corpus  — THIS FILE — post/tag/author facts (uses dsc/logic)
-;;;;   com.dwightaspencer/render  — PostScript output (uses dsc/corpus)
+;;;;   com.dwightaspencer/corpus  — THIS FILE — post/tag/author facts (uses com.dwightaspencer/logic)
+;;;;   com.dwightaspencer/render  — PostScript output (uses com.dwightaspencer/corpus)
 ;;;;   DwightASpencerCom — top-level; ql:quickload target; uses all three
 ;;;;
 ;;;; Local nickname: within com.dwightaspencer/corpus, com.dwightaspencer/logic is available as 'logic'
