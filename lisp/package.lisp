@@ -18,6 +18,7 @@
    #:make-post-kb
    #:db-assert
    #:db-prove-first
+   #:db-provable-p
    #:db-prove-all
    #:db-var-all
    ;; internals (exposed for corpus layer)
@@ -80,3 +81,28 @@
    #:all-posts
    ;; Render
    #:render))
+
+(defpackage #:com.dwightaspencer/rag
+  (:use #:cl)
+  (:local-nicknames (#:logic  #:com.dwightaspencer/logic)
+                    (#:corpus #:com.dwightaspencer/corpus))
+  (:export
+   #:char-trigrams
+   #:word-trigrams
+   #:build-trigram-index
+   #:trigram-similarity
+   #:extract-tonal-rules
+   #:tonal-match-p
+   #:ast-category-match-p
+   #:*category-compatibility*
+   #:token-result
+   #:token-result-token
+   #:token-result-probability
+   #:token-result-category
+   #:token-result-tonal-pass
+   #:token-result-ast-pass
+   #:token-result-score
+   #:score-candidate
+   #:score-candidates
+   #:select-token
+   #:generate-response))
