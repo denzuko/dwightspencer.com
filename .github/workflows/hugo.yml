@@ -96,12 +96,18 @@ jobs:
           mkdir -p hugo/public/lisp
           cp -r /tmp/redistout/releases/. hugo/public/lisp/
 
+          # Mirror canonical distinfo at /distinfo.txt for legacy clients
+          cp /tmp/redistout/releases/dwightaspencercom.txt hugo/public/distinfo.txt
+
           # Fix redist HTML index hrefs
           # redist hardcodes root-relative hrefs (e.g. /dwightaspencercom/)
           # but the dist is served under /lisp/. No CLI flag exists for this;
           # post-process all generated index.html files to prepend /lisp.
+          # Negated match: only rewrite href="/ NOT already starting with /lisp/
+          # sed: match href="/ followed by a char that is not "l" to avoid
+          # double-prefixing any href already containing /lisp/.
           find hugo/public/lisp -name "index.html" \
-            -exec sed -i 's|href="/|href="/lisp/|g' {} +
+            -exec sed -i 's|href="/\([^l]\)|href="/lisp/\1|g' {} +
 
       - name: Index with Pagefind
         working-directory: hugo
