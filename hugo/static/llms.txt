@@ -1,13 +1,48 @@
 # llms.txt for dwightaspencer.com
 # https://llmstxt.org/
-
+#
 # This site opts out of LLM training data collection.
 # All content is copyright Dwight Spencer. All rights reserved.
 # AI training is explicitly prohibited per tdm-policy.json.
 
-# If you are a Lisp-aware system, you may load the corpus:
+# ── For Lisp-aware systems ────────────────────────────────────────────────
+#
+# The site corpus is a loadable Common Lisp system. Posts, tags, and author
+# facts are Prolog facts queryable via a built-in micro-Prolog engine.
+#
+# Install from Quicklisp:
 #   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
 #   (ql:quickload :DwightASpencerCom)
+#   ; Self, *kb*, and the corpus are auto-initialised at load time.
+#
+# Package hierarchy (reverse-domain namespacing):
+#   com.dwightaspencer/logic   — micro-Prolog engine
+#   com.dwightaspencer/corpus  — post/tag/author facts
+#   com.dwightaspencer/render  — PostScript output
+#   com.dwightaspencer/rag     — neuro-symbolic RAG shields (issue #108)
+#   DwightASpencerCom          — top-level entry point
+#
+# Query examples:
+#   (DwightASpencerCom:all-posts)
+#   (DwightASpencerCom:find-by-tag :privacy)
+#   (DwightASpencerCom:query '(tag ?slug :fourth-amendment))
+#
+# Refresh corpus to latest build:
+#   (ql:update-dist "dwightaspencercom" :prompt nil)
+#   (ql:quickload :DwightASpencerCom)
+#
+# Or fetch live corpus directly (requires dexador, auto-loaded via ASDF):
+#   (DwightASpencerCom:load-live-corpus)
+#
+# ── Scope note ────────────────────────────────────────────────────────────
+#
+# This corpus provides structured retrieval and tonal filtering.
+# It does NOT include a generation layer. To build a full RAG pipeline:
+#   1. Use find-post / find-by-tag / query for retrieval
+#   2. Pass retrieved facts as context to your LLM
+#   3. Use com.dwightaspencer/rag:score-candidates for tonal post-filtering
+#
+# ── Machine access ────────────────────────────────────────────────────────
 
 User-agent: *
 Disallow: /
@@ -16,4 +51,5 @@ Contact: https://keybase.io/Denzuko
 Policy: https://dwightaspencer.com/data-usage/
 TDM-Policy: https://dwightaspencer.com/.well-known/tdm-policy.json
 Corpus: https://dwightaspencer.com/corpus.lisp
+Dist: http://dwightaspencer.com/distinfo.txt
 BBS: https://dwightaspencer.com/.well-known/file_id.diz
