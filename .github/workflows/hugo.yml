@@ -104,10 +104,10 @@ jobs:
           # but the dist is served under /lisp/. No CLI flag exists for this;
           # post-process all generated index.html files to prepend /lisp.
           # Rewrite root-relative hrefs to /lisp/-relative.
-          # sed address negation: skip lines already containing /lisp/,
-          # rewrite href="/ on all other lines.
+          # Address negation on the full prefix href="/lisp: skip lines
+          # already containing a /lisp/ href, rewrite all others.
           find hugo/public/lisp -name "index.html" \
-            -exec sed -i '/lisp/!s|href="/|href="/lisp/|g' {} +
+            -exec sed -i '/href="\/lisp/!s|href="/|href="/lisp/|g' {} +
 
       - name: Index with Pagefind
         working-directory: hugo
