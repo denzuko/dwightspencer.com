@@ -54,6 +54,24 @@ bio_expert_witness: |
   infrastructure and systems design is published at dwightaspencer.com.
   ORCID 0009-0001-0066-4646.
 
+bio_orcid: |
+  Dwight Spencer is the principal of Da Planet Security, a managed security
+  and infrastructure practice founded in 2003. He is the Technology Chair of
+  Restore The Fourth, the national organization advancing Fourth Amendment
+  protections against AI-powered surveillance infrastructure, where he leads
+  technical audits of surveillance technologies and compliance gap analysis
+  across state and federal jurisdictions.
+
+  His work spans infrastructure sovereignty, DevSecOps, and the legal and
+  technical dimensions of surveillance accountability. He is the author of
+  The Watchers You Fed (forthcoming) — a practical guide to understanding
+  and resisting algorithmic surveillance. He is a Developer and Archivist
+  Team Member at the Internet Archive, an InfraGard member, and a SCORE
+  mentor.
+
+  Research and writing at dwightaspencer.com. IANA PEN 42387.
+  SAM.gov SIN 54151S. Agile Manifesto signatory (CompuTEK Industries, 2009).
+
 site_description: "Systems design, infrastructure sovereignty, and digital civil liberties. Principal, Da Planet Security (est. 2003). Technology Chair, Restore The Fourth."
 
 # bio: inline blurb for whoami block and finger.html — keep concise
