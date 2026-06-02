@@ -193,3 +193,77 @@ Represents corpus.lisp site content as Prolog facts."
       ;; AST fails (adjective does not satisfy verb slot)
       (false (rag:token-result-ast-pass r))
       (is = 0.0 (rag:token-result-score r)))))
+
+;;;; ── Extended retrieval + context layer (BDD-first, written before implementation) ─
+;;;;
+;;;; Remaining pieces short of LLM API integration:
+;;;;   find-similar       — trigram-ranked post retrieval for adjacent questions
+;;;;   serialize-context  — corpus posts → plain text context block for LLM input
+;;;;   context-for-question — find-similar + serialize-context combined
+;;;;   tonal-rules-for    — expose tonal Prolog facts as inspectable list
+;;;;
+;;;; These are written FIRST. All must fail until implementation exists.
+
+(define-test rag/find-similar-returns-list
+  "find-similar returns a list of (:slug :score) plists sorted descending."
+  (let* ((kb  (make-corpus-kb))
+         (res (rag:find-similar kb "code execution systems")))
+    (true (listp res))
+    (when res
+      (let ((r (first res)))
+        (true (stringp (getf r :slug)))
+        (true (floatp  (getf r :score)))
+        (true (>= (getf r :score) 0.0))
+        (true (<= (getf r :score) 1.0))))
+    (when (cdr res)
+      (true (>= (getf (first res) :score)
+                (getf (second res) :score))))))
+
+(define-test rag/find-similar-ranks-adjacent
+  "find-similar surfaces adjacent posts even for unseen phrasings."
+  (let* ((kb  (make-corpus-kb))
+         ;; 'lisp language features' is adjacent to 'Lisp Elegance' title
+         (res (rag:find-similar kb "lisp language features")))
+    (true (listp res))
+    ;; lisp-elegance must appear in results
+    (true (member "lisp-elegance" res
+                  :key (lambda (r) (getf r :slug))
+                  :test #'equal))))
+
+(define-test rag/serialize-context-non-empty
+  "serialize-context converts post plists to a non-empty plain-text string."
+  (let* ((kb    (make-corpus-kb))
+         (posts (list (corpus:find-post kb "code-execution")
+                      (corpus:find-post kb "lisp-elegance")))
+         (ctx   (rag:serialize-context posts)))
+    (true (stringp ctx))
+    (true (plusp (length ctx)))
+    (true (search "Code Execution" ctx))
+    (true (search "Lisp Elegance"  ctx))))
+
+(define-test rag/serialize-context-empty-input
+  "serialize-context of nil/empty returns empty string."
+  (is equal "" (rag:serialize-context '()))
+  (is equal "" (rag:serialize-context nil)))
+
+(define-test rag/context-for-question-returns-string
+  "context-for-question returns a non-empty string for a known-adjacent query."
+  (let* ((kb  (make-corpus-kb))
+         (ctx (rag:context-for-question kb "lisp elegance")))
+    (true (stringp ctx))
+    (true (plusp (length ctx)))))
+
+(define-test rag/tonal-rules-for-known-noun
+  "tonal-rules-for returns token strings for a known noun context."
+  (let* ((kb    (make-corpus-kb))
+         (rules (rag:extract-tonal-rules kb))
+         (toks  (rag:tonal-rules-for rules :code)))
+    (true (listp toks))
+    (true (every #'stringp toks))
+    (true (member "fast" toks :test #'equal))))
+
+(define-test rag/tonal-rules-for-unknown-noun
+  "tonal-rules-for returns empty list for unknown noun context."
+  (let* ((kb    (make-corpus-kb))
+         (rules (rag:extract-tonal-rules kb)))
+    (is equal '() (rag:tonal-rules-for rules :completely-unknown))))
