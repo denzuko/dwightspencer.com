@@ -103,11 +103,16 @@ jobs:
           # redist hardcodes root-relative hrefs (e.g. /dwightaspencercom/)
           # but the dist is served under /lisp/. No CLI flag exists for this;
           # post-process all generated index.html files to prepend /lisp.
-          # Negated match: only rewrite href="/ NOT already starting with /lisp/
-          # sed: match href="/ followed by a char that is not "l" to avoid
-          # double-prefixing any href already containing /lisp/.
-          find hugo/public/lisp -name "index.html" \
-            -exec sed -i 's|href="/\([^l]\)|href="/lisp/\1|g' {} +
+          # Rewrite root-relative hrefs to /lisp/-relative.
+          # Sentinel approach to protect hrefs already containing /lisp/:
+          #   1) href="/lisp/ → SENTINELLISP   (protect full prefix)
+          #   2) href="/      → href="/lisp/   (rewrite all remaining)
+          #   3) SENTINELLISP → href="/lisp/   (restore)
+          find hugo/public/lisp -name "index.html" -exec sed -i \
+            -e 's|href="/lisp/|SENTINELLISP|g' \
+            -e 's|href="/|href="/lisp/|g' \
+            -e 's|SENTINELLISP|href="/lisp/|g' \
+            {} +
 
       - name: Index with Pagefind
         working-directory: hugo
