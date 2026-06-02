@@ -95,9 +95,19 @@ jobs:
           # Copy redist output into Hugo public dir
           mkdir -p hugo/public/lisp
           cp -r /tmp/redistout/releases/. hugo/public/lisp/
-          # Expose top-level distinfo at /distinfo.txt
-          # Clients subscribed to the old distinfo-subscription-url follow this.
+
+          # Mirror canonical distinfo at /distinfo.txt for legacy clients
           cp /tmp/redistout/releases/dwightaspencercom.txt hugo/public/distinfo.txt
+
+          # Fix redist HTML index hrefs
+          # redist hardcodes root-relative hrefs (e.g. /dwightaspencercom/)
+          # but the dist is served under /lisp/. No CLI flag exists for this;
+          # post-process all generated index.html files to prepend /lisp.
+          # Rewrite root-relative hrefs to /lisp/-relative.
+          # Address negation on the full prefix href="/lisp: skip lines
+          # already containing a /lisp/ href, rewrite all others.
+          find hugo/public/lisp -name "index.html" \
+            -exec sed -i '/href="\/lisp/!s|href="/|href="/lisp/|g' {} +
 
       - name: Index with Pagefind
         working-directory: hugo
