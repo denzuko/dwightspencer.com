@@ -105,4 +105,8 @@
    #:score-candidate
    #:score-candidates
    #:select-token
-   #:generate-response))
+   #:generate-response
+   #:find-similar
+   #:serialize-context
+   #:context-for-question
+   #:tonal-rules-for))
