@@ -148,3 +148,56 @@ Returns a token-result. Score is probability when both shields pass, else 0.0."
   (format nil template
           (or (select-token kb noun-context required-category candidates)
               "[no valid token]")))
+
+;;; ── Retrieval layer ─────────────────────────────────────────────────────
+
+(defun find-similar (kb query-string &key (top-n 5))
+  "Return posts from KB ranked by trigram similarity to QUERY-STRING.
+Each result is a plist with :slug and :score (float 0.0-1.0), sorted
+descending. Adjacent questions are surfaced via character trigrams even
+when not verbatim matches. TOP-N limits results (default 5)."
+  (let ((q-tgs (remove-duplicates
+                (char-trigrams (string-downcase query-string))
+                :test #'equal))
+        (results '()))
+    (dolist (slug (corpus:all-posts kb))
+      (let* ((post   (corpus:find-post kb slug))
+             (t-tgs  (remove-duplicates
+                      (char-trigrams (string-downcase
+                                      (or (getf post :title) "")))
+                      :test #'equal))
+             (common (count-if (lambda (tg) (member tg t-tgs :test #'equal))
+                               q-tgs))
+             (denom  (+ (length q-tgs) (length t-tgs)))
+             (score  (if (zerop denom) 0.0 (float (/ (* 2 common) denom)))))
+        (when (plusp score)
+          (push (list :slug slug :score score) results))))
+    (let ((ranked (sort results #'> :key (lambda (r) (getf r :score)))))
+      (if top-n (subseq ranked 0 (min top-n (length ranked))) ranked))))
+
+(defun serialize-context (posts)
+  "Serialize a list of post plists to a plain-text context block.
+Each post is rendered as a titled section suitable for LLM prompt input."
+  (if (null posts)
+      ""
+      (with-output-to-string (s)
+        (dolist (post posts)
+          (when post
+            (format s "=== ~A (~A, ~A words) ===~%slug: ~A~%~%"
+                    (or (getf post :title) "")
+                    (or (getf post :date)  "")
+                    (or (getf post :words) 0)
+                    (or (getf post :slug)  "")))))))
+
+(defun context-for-question (kb question &key (top-n 3))
+  "Retrieve posts similar to QUESTION from KB and return as a context string.
+Combines find-similar and serialize-context. TOP-N limits retrieval (default 3)."
+  (serialize-context
+   (mapcar (lambda (r) (corpus:find-post kb (getf r :slug)))
+           (find-similar kb question :top-n top-n))))
+
+;;; ── Tonal rule introspection ─────────────────────────────────────────────
+
+(defun tonal-rules-for (rules-db noun-context)
+  "Return all token strings tonally compatible with NOUN-CONTEXT in RULES-DB."
+  (logic:db-var-all rules-db `(tonal-match ,noun-context ?token) '?token))
