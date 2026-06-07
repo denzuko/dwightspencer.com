@@ -3,13 +3,13 @@ title       = "When the Government Buys the Model: AI, Section 702, and the Surv
 date        = "2026-05-29"
 draft       = false
 description = "EPIC reported in April that Anthropic's tools are being used to analyze Section 702 data including Americans' communications. The Surveillance Accountability Act would require a warrant before accessing third-party data. Neither story has gotten the attention it deserves."
-slug        = "15-ai-gov-surveillance"
+slug        = "19-ai-gov-surveillance"
 keywords    = ["section 702", "fisa", "ai surveillance", "anthropic", "epic", "fourth amendment", "data brokers", "government surveillance"]
 tags        = ["fourth-amendment", "privacy", "surveillance", "infrastructure", "civil-liberties"]
 categories  = ["articles"]
 schema_type = "Article"
 aeo_expertise = "Surveillance Accountability, Infrastructure Security, Fourth Amendment"
-aliases     = ["/15-ai-gov-surveillance/"]
+aliases     = ["/19-ai-gov-surveillance/"]
 og_image    = "/assets/og-posts.png"
 series      = ["The Watchers You Fed"]
 
