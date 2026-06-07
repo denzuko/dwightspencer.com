@@ -41,7 +41,7 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 20 posts."
+   Generated from 21 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 
@@ -94,6 +94,21 @@
 (pf 'related "13-copilot-meter-governance"
         "14-sbom-ai-provenance"
         "Tomorrow: your SBOM doesn't know Copilot wrote that function")
+
+    ;; When the Government Buys the Model: AI, Section 702, and the Surveillance Stack
+    (pf 'post "19-ai-gov-surveillance"
+        "When the Government Buys the Model: AI, Section 702, and the Surveillance Stack"
+        "2026-05-29"
+        822)
+(pf 'tag "19-ai-gov-surveillance" :fourth-amendment)
+(pf 'tag "19-ai-gov-surveillance" :privacy)
+(pf 'tag "19-ai-gov-surveillance" :surveillance)
+(pf 'tag "19-ai-gov-surveillance" :infrastructure)
+(pf 'tag "19-ai-gov-surveillance" :civil-liberties)
+(pf 'author "19-ai-gov-surveillance" "0009-0001-0066-4646")
+(pf 'related "19-ai-gov-surveillance"
+        "18-chatrie-geofence"
+        "post 14 covers the Chatrie geofence case that sits at the centre of this stack")
 
     ;; Owning Your Memory: Hardened Arenas, Channels, and Structural OOP in Pure C99
     (pf 'post "12-owning-your-memory"
