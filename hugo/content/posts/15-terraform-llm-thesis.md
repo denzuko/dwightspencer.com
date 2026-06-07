@@ -3,13 +3,13 @@ title       = "LLM-Generated Terraform vs Cookiecutter: What the Lab Showed"
 date        = "2026-05-26"
 draft       = false
 description = "In May 2023 I ran the same infrastructure build two ways on a live Twitch stream — LLM-generated Terraform against cookiecutter atomic modules. The results weren't close."
-slug        = "12-terraform-llm-thesis"
+slug        = "15-terraform-llm-thesis"
 keywords    = ["terraform", "llm", "infrastructure", "security", "cookiecutter", "iac", "opa", "rego", "devsecops"]
 tags        = ["infrastructure", "devops", "open-source"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "Infrastructure as Code, DevSecOps, Security, LLM Tooling"
-aliases     = ["/12-terraform-llm-thesis/"]
+aliases     = ["/15-terraform-llm-thesis/"]
 og_image    = "/assets/og-posts.png"
 series      = ["Infrastructure Independence"]
 
