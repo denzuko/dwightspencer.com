@@ -18,7 +18,7 @@
 ;;;;   - Colophon: IANA PEN, ORCID, PGP fingerprint, Agile Manifesto note
 
 (named-readtables:in-readtable :standard)
-(in-package #:dsc/render)
+(in-package #:com.dwightaspencer/render)
 
 ;;;; ── PostScript primitives ───────────────────────────────────────────────────
 
@@ -57,7 +57,7 @@
     (format stream "%%CreationDate: ~4,'0D-~2,'0D-~2,'0D~%" year mon day)
     (format stream "%%DocumentFonts: Courier Helvetica Helvetica-Bold~%")
     (format stream "%%Pages: (atend)~%")
-    (format stream "%%EndComments~%~%")))
+    (format stream "%%EndComments~%~%"))
   ;; Prolog — font definitions and layout constants
   (format stream "%%BeginProlog~%")  (format stream "/inch { 72 mul } def~%")
   (format stream "/pageW 8.5 inch def~%")
@@ -84,13 +84,14 @@
   (format stream "(Dwight Spencer) dup stringwidth pop 2 div neg 0 rmoveto show~%")
   ;; Credentials
   (format stream "/Helvetica findfont 11 scalefont setfont~%")
-  (dolist (line '("Principal, Da Planet Security"
-                  "Technology Chair, Restore The Fourth"
-                  "IANA PEN 42387  |  ORCID 0009-0001-0066-4646"
-                  "Agile Manifesto signatory, CompuTEK Industries, May 2009"))
-    (format stream "bodyW 2 div ~A moveto~%" (decf 480 22))
-    (format stream "(~A) dup stringwidth pop 2 div neg 0 rmoveto show~%"
-            (ps-escape line)))
+  (let ((y 480))
+    (dolist (line '("Principal, Da Planet Security"
+                    "Technology Chair, Restore The Fourth"
+                    "IANA PEN 42387  |  ORCID 0009-0001-0066-4646"
+                    "Agile Manifesto signatory, CompuTEK Industries, May 2009"))
+      (format stream "bodyW 2 div ~A moveto~%" (decf y 22))
+      (format stream "(~A) dup stringwidth pop 2 div neg 0 rmoveto show~%"
+              (ps-escape line))))
   ;; Tagline
   (format stream "/Helvetica findfont 10 scalefont setfont~%")
   (format stream "0 60 moveto (Code is speech. Platforms are not neutral.) show~%")

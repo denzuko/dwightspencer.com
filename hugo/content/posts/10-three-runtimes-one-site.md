@@ -13,6 +13,10 @@ schema_type = "TechArticle"
 aeo_expertise = "DevOps, Open Source, Architecture, Systems Design"
 aliases     = ["/10-three-runtimes/"]
 og_image    = "/assets/og-posts.png"
+
+[related_post]
+  slug  = "03-rules-types-and-glue"
+  label = "post 03 covers the logic engine architecture in the Pokémon study context"
 +++
 
 <p class="meta"><em>Assumes working familiarity with Lisp, a basic tolerance for
@@ -226,4 +230,3 @@ primary output is still whatever format the audience reads, and the
 build still runs on every change. The difference is that the artifact
 produced by the build is a program, not just a directory tree.</p>
 
-<p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/03-rules-types-and-glue/" style="color:#9a9a9a">post 03</a> covers the logic engine architecture in the Pokémon study context</span></p>

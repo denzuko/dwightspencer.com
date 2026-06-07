@@ -18,14 +18,17 @@ hugo/content/now/              /now page (quarterly update)
 hugo/content/projects/         /projects page
 hugo/content/uses/             /uses page
 hugo/content/media/            /media page (nav link)
-hugo/content/{privacy,cookies,terms,copyright,data-usage}/
+hugo/content/{privacy,cookies,terms,copyright,data-usage,dmca,trademark,stream-policy}/
 hugo/layouts/partials/finger.html   Plain pre/code — NO monokai wrapper
 hugo/layouts/partials/css.html      All CSS — dark mode, search, policy, tags
 hugo/layouts/partials/head.html     OG meta, Schema.org, Layer 2 HTML comment
 hugo/layouts/partials/search.html   Pagefind UI container (no inline script)
 hugo/layouts/partials/header.html   Nav: posts · tags · series · media · ⌕ · ☀︎
 hugo/layouts/taxonomy/series.html   Per-series post list (len .Pages not .Count)
-hugo/layouts/_default/baseof.html   All post-DOM JS in one DOMContentLoaded block
+hugo/layouts/_default/baseof.html   All post-DOM JS in one DOMContentLoaded block; mermaid partial injection
+hugo/layouts/_default/_markup/      Render hooks (render-codeblock-mermaid.html)
+hugo/layouts/partials/mermaid.html  Conditional mermaid loader (self-hosted v11.15.0)
+hugo/static/js/mermaid.min.js       Self-hosted mermaid UMD build
 hugo/static/lisp/              Quicklisp dist; corpus.lisp is Hugo-generated
 hugo/static/.well-known/       security.txt, webfinger, canary.txt, tdm-policy
 hugo/MIGRATION.md              Backlog — v2, v2.5, v3
@@ -42,6 +45,30 @@ hugo/ARCHITECTURE.md           Mermaid diagrams — build pipeline, Lisp layers
 - Finger block: plain `<pre><code>` — no monokai/highlight wrapper
 - Voice: terminal/BBS/SysOp, adversarial toward platform overreach
 - Tone: "expert reviewed" not "peer reviewed"
+
+## Post closing convention
+
+Posts close in one of two ways depending on type:
+
+**`related_post` front matter** (rendered by `single.html` as `; → post NN ...`):
+Use for posts in a running series or with a direct predecessor. The terminal-register
+closer is a reader signal, not boilerplate. Set `slug` and `label` in front matter;
+never author the `<p class="finger-exit">` paragraph manually in post body.
+
+```toml
+[related_post]
+  slug  = "05-infrastructure-independence"
+  label = "post 05 covers the philosophy in more depth"
+```
+
+**Contextual closer** (authored directly in post body):
+Use for standalone reference posts (resource lists, references sections) and
+historical/personal accounts (credentials block, series teaser). Posts 02–07
+demonstrate the pattern. Do not add `related_post` to these.
+
+The `finger-exit` class and `; →` register is reserved for the two template
+contexts: `index.html` (homepage finger block exit) and `single.html`
+(via `related_post` front matter). It does not appear anywhere else.
 
 ## Entity separation (strict)
 - dwightaspencer.com = personal publishing platform only
@@ -85,4 +112,4 @@ Layers 4–23 reserved. Do not fill speculatively.
   regenerates on every `hugo --gc`
 
 ## Current post count
-10 posts: 00-hellowrld through 09-after-the-canary
+11 posts: 00-hellowrld through 10-three-runtimes-one-site, 11-owning-your-memory

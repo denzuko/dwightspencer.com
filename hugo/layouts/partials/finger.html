@@ -11,18 +11,13 @@
 (defclass Self () ())
 (defmethod AboutMe ((object Self))
   "{{ $a.bio | htmlEscape }}"
-  '(:Resume
-      '(:Education   (list{{ range $a.education }} {{ .symbol }}{{ end }}))
-      '(:Languages   (list{{ range $a.languages }}
-                        {{ . }}{{ end }}))
-      '(:Projects    (list{{ range $a.projects }}
-                        '({{ .symbol }} "{{ .url }}"){{ end }}))
-      '(:Volunteering (list{{ range $a.volunteering }}
-                        '({{ .symbol }} "{{ .url }}"){{ end }}))
-      '(:Certs       (list{{ range $a.certs }}
-                        '({{ .symbol }} "{{ .date }}"){{ end }}))
-      '(:Tools       (list{{ range $a.tools }}
-                        {{ . }}{{ end }}))))
+  `(:Resume
+      (:Education   ({{ range $a.education }}{{ .symbol }} {{ end }}))
+      (:Languages   ({{ range $a.languages }}{{ . }} {{ end }}))
+      (:Projects    ({{ range $a.projects }}({{ .symbol }} "{{ .url }}") {{ end }}))
+      (:Volunteering ({{ range $a.volunteering }}({{ .symbol }} "{{ .url }}") {{ end }}))
+      (:Certs       ({{ range $a.certs }}({{ .symbol }} "{{ .date }}") {{ end }}))
+      (:Tools       ({{ range $a.tools }}{{ . }} {{ end }}))))
 
 (defun finger ()
   (let ((DwightSpencer (make-instance 'Self)))

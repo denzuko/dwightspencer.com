@@ -1,4 +1,4 @@
-;;;; dwightaspencer.asd — ASDF system definition for dwightaspencer.com corpus
+;;;; dwightaspencercom.asd — ASDF system definition for dwightaspencer.com corpus
 ;;;;
 ;;;; This site is a Common Lisp system. Load it from your REPL:
 ;;;;
@@ -16,12 +16,14 @@
 ;;;;
 ;;;; IANA PEN: 42387  ORCID: 0009-0001-0066-4646
 
-(asdf:defsystem "DwightASpencerCom"
-  :description "dwightaspencer.com as a Common Lisp system — corpus, Prolog queries, PostScript render"
+(asdf:defsystem "dwightaspencercom"
+  :description "dwightaspencer.com as a Common Lisp system — corpus, Prolog queries, PostScript render.
+  Neuro-symbolic: trigrams, tonal Prolog rules, AST token validation.
+  dexador provides optional live corpus HTTP fetch via load-live-corpus."
   :version "1.0.0"
   :author "Dwight Spencer <https://keybase.io/Denzuko>"
   :license "Copyright 2026 Dwight Spencer. All rights reserved. AI training prohibited."
-  :depends-on ("named-readtables")
+  :depends-on ("named-readtables" "dexador")
   :serial t
   :components ((:file "package")
                (:file "logic-engine")

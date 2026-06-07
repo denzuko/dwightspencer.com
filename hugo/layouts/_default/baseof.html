@@ -15,11 +15,11 @@
   <body lang="{{ .Site.LanguageCode }}" class="{{ block "bodyclass" . }}{{ end }}">
     <a class="skip-link" href="#main">Skip to main</a>
     <main id="main">
-      <div class="site-header">
+      <div class="site-header" data-pagefind-ignore>
         {{- partial "header.html" . }}
         {{- partial "search.html" . }}
       </div>
-      <div class="content">
+      <div class="content" data-pagefind-body>
         {{- block "main" . }}{{ end }}
         {{- partial "footer.html" . }}
       </div>
@@ -86,5 +86,8 @@
         }
       });
     </script>
+    {{- partial "mermaid.html" . }}
+    {{- partial "netlist.html" . }}
+    {{- partial "gcode.html" . }}
   </body>
 </html>

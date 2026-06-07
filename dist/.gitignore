@@ -1,0 +1,5 @@
+# redist working directories — do not commit
+sources/
+releases/
+distinfo/
+*.cdb

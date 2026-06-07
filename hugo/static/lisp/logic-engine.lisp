@@ -15,13 +15,19 @@
 ;;;;   (series slug series-name position)
 
 (named-readtables:in-readtable :standard)
-(in-package #:dsc/logic)
+(in-package #:com.dwightaspencer/logic)
 
 ;;;; ── Prolog database ─────────────────────────────────────────────────────────
 
 (defstruct (prolog-db (:conc-name db-))
   "Isolated Prolog database. make-post-kb returns a fresh one per call."
   (clauses (make-hash-table :test 'eq) :type hash-table))
+
+(defun %var-p (x)
+  "T if X is a Prolog variable — symbol whose name starts with ?."
+  (and (symbolp x)
+       (plusp (length (symbol-name x)))
+       (char= #\? (char (symbol-name x) 0))))
 
 (defun db-assert (db fact)
   "Assert FACT into DB, normalising symbols to keywords."
@@ -34,31 +40,39 @@
                        fact)))
     (push kfact (gethash (car kfact) (db-clauses db)))))
 
-(defun %var-p (x)
-  "T if X is a Prolog variable — symbol whose name starts with ?."
-  (and (symbolp x)
-       (plusp (length (symbol-name x)))
-       (char= #\? (char (symbol-name x) 0))))
+(defun %walk (x env)
+  "Walk X through ENV, following variable bindings until reaching an unbound
+variable or a non-variable term. Returns the terminal value."
+  (if (%var-p x)
+      (let ((binding (assoc x env)))
+        (if binding
+            (%walk (cdr binding) env)
+            x))
+      x))
 
 (defun %unify (x y env)
-  "Unify X and Y under ENV. Returns extended env or :fail."
-  (let ((xv (if (%var-p x) (cdr (assoc x env)) x))
-        (yv (if (%var-p y) (cdr (assoc y env)) y)))
+  "Unify X and Y under ENV. Returns extended env or :fail.
+Uses %walk to resolve variable chains before comparison, correctly
+handling unbound variables (distinguished from NIL by assoc presence)."
+  (let ((xv (%walk x env))
+        (yv (%walk y env)))
     (cond ((equal xv yv) env)
           ((%var-p xv)   (acons xv yv env))
           ((%var-p yv)   (acons yv xv env))
           ((and (consp xv) (consp yv))
            (let ((e2 (%unify (car xv) (car yv) env)))
-             (unless (eq e2 :fail) (%unify (cdr xv) (cdr yv) e2))))
+             (if (eq e2 :fail)
+                 :fail
+                 (%unify (cdr xv) (cdr yv) e2))))
           (t :fail))))
 
 (defun %subst (term env)
-  "Substitute variables in TERM using ENV."
-  (cond ((%var-p term)
-         (let ((v (cdr (assoc term env))))
-           (if v (%subst v env) term)))
-        ((consp term) (mapcar (lambda (x) (%subst x env)) term))
-        (t term)))
+  "Substitute variables in TERM using ENV. Follows variable chains via %walk."
+  (let ((walked (%walk term env)))
+    (cond ((%var-p walked) walked)             ; unbound variable
+          ((consp walked)
+           (mapcar (lambda (x) (%subst x env)) walked))
+          (t walked))))
 
 (defun %lookup (db key)
   "Return clauses in DB whose head functor matches KEY."
@@ -89,15 +103,29 @@
   (%prove db (list goal) '()))
 
 (defun db-prove-first (db goal)
-  "Return first solution for GOAL or NIL."
+  "Return first solution environment for GOAL, or NIL if no solutions.
+For ground goals (no variables) a successful match returns NIL (empty env).
+Use db-provable-p for unambiguous boolean success checks."
   (first (db-prove-all db goal)))
 
+(defun db-provable-p (db goal)
+  "Return T if GOAL has at least one solution in DB, NIL otherwise.
+Correctly handles ground goals where the successful env is NIL."
+  (not (null (db-prove-all db goal))))
+
 (defun db-var-all (db goal var)
-  "Return all bindings of VAR across solutions of GOAL."
-  (mapcar (lambda (env)
-            (let ((v (cdr (assoc var env))))
-              (if v (%subst v env) var)))
-          (db-prove-all db goal)))
+  "Return all ground bindings of VAR across solutions of GOAL.
+Only includes results where VAR is actually bound in the solution.
+Solutions where VAR remains unbound are silently excluded.
+
+Example:
+  (db-var-all kb '(tag ?slug :privacy) '?slug)
+  ;; => (list of slug strings with the :privacy tag)"
+  (let ((results '()))
+    (dolist (env (db-prove-all db goal) (nreverse results))
+      (let ((binding (assoc var env)))
+        (when binding
+          (push (%subst (cdr binding) env) results))))))
 
 (defun make-post-kb ()
   "Create a fresh post knowledge base. Call assert-post-facts to populate."

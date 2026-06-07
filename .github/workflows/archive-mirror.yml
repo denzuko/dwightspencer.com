@@ -1,0 +1,64 @@
+name: Mirror site to Internet Archive
+
+# Triggers after the Hugo deploy workflow completes successfully,
+# and on manual dispatch for ad-hoc re-mirrors.
+on:
+  workflow_run:
+    workflows: ["Deploy Hugo site"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 1
+
+      - name: Install internetarchive CLI
+        run: pip3 install internetarchive --break-system-packages
+
+      - name: Configure ia credentials
+        env:
+          IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+          IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+        run: |
+          mkdir -p ~/.config/internetarchive
+          cat > ~/.config/internetarchive/ia.ini << EOF
+          [s3]
+          access = ${IA_ACCESS_KEY}
+          secret = ${IA_SECRET_KEY}
+          EOF
+
+      - name: Upload site to Internet Archive
+        run: |
+          # Item identifier: dwightaspencer-com
+          # mediatype:web preserves the files as a web mirror.
+          # --no-derive skips IA's post-processing (appropriate for static HTML).
+          # --checksum skips files already uploaded with matching checksums,
+          # making re-runs idempotent.
+          ia upload dwightaspencer-com . \
+            --metadata="title:dwightaspencer.com" \
+            --metadata="creator:Dwight Spencer" \
+            --metadata="subject:privacy;infosec;devops;security;fourth amendment;open source;common lisp;hugo" \
+            --metadata="description:Personal site of Dwight Spencer — principal at Da Planet Security, Technology Chair at Restore The Fourth. Code is speech. Platforms are not neutral." \
+            --metadata="publisher:dwightaspencer.com" \
+            --metadata="language:eng" \
+            --metadata="licenseurl:https://dwightaspencer.com/data-usage/" \
+            --metadata="rights:All rights reserved. AI training prohibited per tdm-policy.json." \
+            --metadata="mediatype:web" \
+            --no-derive \
+            --checksum \
+            --quiet
+
+          echo "Mirror: https://archive.org/details/dwightaspencer-com"

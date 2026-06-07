@@ -1,0 +1,32 @@
+{{- /* render-codeblock-netlist.html
+     Renders KiCad/Yosys JSON netlists using netlistsvg.
+     Usage in Markdown:
+       ```netlist
+       { "modules": { ... } }
+       ```
+     Front matter skins (optional):
+       [[diagrams]]
+       index = 0          # 0-based, matches order of netlist blocks
+       title = "..."
+       alt   = "..."
+       caption = "..."
+*/ -}}
+{{- $idx      := .Page.Store.Get "netlistCount" | default 0 -}}
+{{- $diagrams := .Page.Params.diagrams -}}
+{{- $meta     := index $diagrams $idx -}}
+<figure class="netlist-figure" data-pagefind-ignore>
+  <div class="netlist-container">
+    <div class="netlist-render"
+         data-netlist="{{ .Inner | htmlEscape }}"
+         aria-hidden="true">
+      <span class="netlist-loading">Loading schematic…</span>
+    </div>
+    {{- with $meta -}}
+    {{- with .title }}<p class="netlist-title sr-only" data-pagefind-body>Schematic: {{ . }}</p>{{- end -}}
+    {{- with .alt }}<p class="netlist-alt sr-only" data-pagefind-body>{{ . }}</p>{{- end -}}
+    {{- with .caption }}<figcaption class="netlist-caption" data-pagefind-body>{{ . }}</figcaption>{{- end -}}
+    {{- end }}
+  </div>
+</figure>
+{{- .Page.Store.Set "hasNetlist" true -}}
+{{- .Page.Store.Set "netlistCount" (add $idx 1) -}}

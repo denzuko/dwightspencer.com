@@ -1,0 +1,96 @@
+{{- if .Store.Get "hasGcode" -}}
+<script src="{{ "/js/gcode-preview.js" | relURL }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var canvases = document.querySelectorAll('canvas.gcode-canvas[data-gcode]');
+  if (!canvases.length) return;
+
+  var GCP = (window.GCodePreview && window.GCodePreview.WebGLPreview)
+            ? window.GCodePreview
+            : (window.GCodePreviewModule && window.GCodePreviewModule.GCodePreview)
+            ? window.GCodePreviewModule.GCodePreview
+            : null;
+
+  if (!GCP || !GCP.WebGLPreview) {
+    console.warn('gcode-preview: WebGLPreview not found');
+    return;
+  }
+
+  /* Detect dark mode for background colour */
+  var darkNow = document.documentElement.getAttribute('data-theme') === 'dark' ||
+    (!localStorage.getItem('theme') &&
+     window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+  canvases.forEach(function (canvas) {
+    var raw = canvas.getAttribute('data-gcode');
+    if (!raw) return;
+
+    /* Decode HTML entities from the Hugo htmlEscape call */
+    var txt = document.createElement('textarea');
+    txt.innerHTML = raw;
+    var gcode = txt.value;
+
+    /* Fit canvas to container width */
+    var container = canvas.parentElement;
+    canvas.width  = container.offsetWidth || 600;
+    canvas.height = Math.round(canvas.width * 0.6);
+
+    try {
+      var preview = new GCP.WebGLPreview({
+        canvas:              canvas,
+        backgroundColor:     darkNow ? '#0d1117' : '#f8f8f8',
+        extrusionColor:      darkNow ? '#39ff14' : '#1a7a1a',
+        travelColor:         darkNow ? '#444444' : '#cccccc',
+        renderTravel:        false,
+        renderTubes:         false,
+        initialCameraPosition: [-100, 400, 450]
+      });
+      preview.processGCode(gcode);
+    } catch (e) {
+      /* WebGL unavailable or parse error — show fallback */
+      var fallback = document.createElement('pre');
+      fallback.className = 'gcode-fallback';
+      fallback.textContent = gcode.slice(0, 500) +
+        (gcode.length > 500 ? '\n; … truncated' : '');
+      canvas.parentNode.replaceChild(fallback, canvas);
+    }
+  });
+
+  /* Re-render on theme toggle */
+  var btn = document.getElementById('themeToggle');
+  if (btn) btn.addEventListener('click', function () { window.location.reload(); });
+});
+</script>
+<style>
+.gcode-figure { margin: 2rem 0; }
+.gcode-container { overflow: hidden; border-radius: 4px; }
+canvas.gcode-canvas {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  touch-action: none;
+}
+pre.gcode-fallback {
+  background: var(--panel, #0d1117);
+  color: var(--text, #d1fae5);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .8rem;
+  padding: 1rem;
+  overflow-x: auto;
+  border-left: 3px solid var(--amber, #ffab00);
+  margin: 0;
+}
+.gcode-caption {
+  text-align: center;
+  font-size: .82rem;
+  color: #777;
+  margin-top: .5rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+[data-theme="dark"] .gcode-caption { color: #666; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .gcode-caption { color: #666; }
+}
+</style>
+{{- end -}}

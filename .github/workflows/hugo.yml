@@ -4,8 +4,8 @@ on:
   push:
     branches: [master]
   schedule:
-    - cron: '0 6 * * *'   # 06:00 UTC nightly — picks up publishDate posts
-  workflow_dispatch:       # manual deploy button in Actions UI
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -32,14 +32,11 @@ jobs:
           cp -r brand/static/assets/. hugo/static/assets/brand/
           cp brand/data/brand.yaml hugo/data/brand.yaml
 
-      - name: Build (first pass — generates og-card.html per post)
+      - name: Build (first pass)
         working-directory: hugo
         run: hugo --minify --gc
 
       - name: Generate per-post OG images
-        # Playwright screenshots og-card.html → static/assets/og/{slug}.png
-        # Must run after first build (og-card.html exists) and before second
-        # build so Hugo's fileExists() picks up the images.
         working-directory: hugo
         run: |
           npx --yes playwright install --with-deps chromium 2>/dev/null
@@ -52,48 +49,65 @@ jobs:
               "file://$(pwd)/$card" \
               "static/assets/og/${slug}.png" 2>/dev/null || true
           done
-          echo "OG images generated: $(ls static/assets/og/*.png 2>/dev/null | wc -l)"
+          echo "OG images: $(ls static/assets/og/*.png 2>/dev/null | wc -l)"
 
-      - name: Build (second pass — picks up OG images via fileExists)
+      - name: Build (second pass)
         working-directory: hugo
         run: hugo --minify --gc
 
-      - name: Package Quicklisp dist
-        working-directory: hugo
+      - name: Package Quicklisp dist via redist
         run: |
-          set -e
-          if [ ! -f "public/corpus.lisp" ]; then
-            echo "corpus.lisp not in build output — skipping"
-            exit 0
-          fi
+          sudo apt-get install -y -qq libarchive-tools
 
-          VERSION=$(date +%Y-%m-%d)
-          RELEASE="DwightASpencerCom-${VERSION}"
-          DIST_DIR="static/lisp"
-          TGZ="${DIST_DIR}/${RELEASE}.tgz"
+          # Download redist precompiled binary from Codeberg (moved from shirakumo.org)
+          REDIST_URL="https://codeberg.org/shirakumo/redist/releases/download/v2.0.12/redist-linux.zip"
+          curl -fsSL "$REDIST_URL" -o /tmp/redist.zip
+          unzip -q /tmp/redist.zip -d /tmp/redist-bin
+          chmod +x /tmp/redist-bin/redist
+          REDIST=/tmp/redist-bin/redist
 
-          mkdir -p /tmp/qdist/${RELEASE}
-          cp ${DIST_DIR}/*.lisp ${DIST_DIR}/*.asd /tmp/qdist/${RELEASE}/ 2>/dev/null || true
-          cp public/corpus.lisp /tmp/qdist/${RELEASE}/corpus.lisp
+          # Stage lisp source files + Hugo-generated corpus.lisp into a local git repo
+          # redist requires a cloneable source; we can't use the main repo (gh-pages default branch)
+          mkdir -p /tmp/lisp-src/DwightASpencerCom
+          cp hugo/static/lisp/*.lisp hugo/static/lisp/*.asd \
+             /tmp/lisp-src/DwightASpencerCom/
+          cp hugo/public/corpus.lisp \
+             /tmp/lisp-src/DwightASpencerCom/corpus.lisp
 
-          tar czf /tmp/${RELEASE}.tgz -C /tmp/qdist "${RELEASE}/"
-          cp /tmp/${RELEASE}.tgz ${DIST_DIR}/${RELEASE}.tgz
+          git -C /tmp/lisp-src init -b master
+          git -C /tmp/lisp-src config user.email "ci@dapla.net"
+          git -C /tmp/lisp-src config user.name "CI"
+          git -C /tmp/lisp-src add .
+          git -C /tmp/lisp-src commit -m "release"
 
-          SIZE=$(wc -c < ${DIST_DIR}/${RELEASE}.tgz)
-          MD5=$(md5sum ${DIST_DIR}/${RELEASE}.tgz | cut -d' ' -f1)
-          SHA1=$(tar -xOf ${DIST_DIR}/${RELEASE}.tgz | sha1sum | cut -d' ' -f1)
+          # Run redist: add-dist, add project from local git, compile
+          export STORAGE_FILE=/tmp/redistout/distinfo.sexp
+          export DIST_OUTPUT_DIR=/tmp/redistout/releases
+          mkdir -p /tmp/redistout
 
-          echo "${RELEASE} http://dwightaspencer.com/lisp/${RELEASE}.tgz ${SIZE} ${MD5} ${SHA1} ${RELEASE} ${RELEASE}/dwightaspencer.asd" \
-            > ${DIST_DIR}/releases.txt
+          $REDIST add-dist DwightASpencerCom \
+            --url "http://dwightaspencer.com/lisp"
+          $REDIST add "file:///tmp/lisp-src" \
+            --name DwightASpencerCom \
+            --verbose
+          $REDIST compile -v
 
-          sed -i "s/^version .*/version ${VERSION}/" static/distinfo.txt 2>/dev/null || true
+          # Copy redist output into Hugo public dir
+          mkdir -p hugo/public/lisp
+          cp -r /tmp/redistout/releases/. hugo/public/lisp/
 
-          mkdir -p public/lisp
-          cp ${DIST_DIR}/${RELEASE}.tgz public/lisp/
-          cp ${DIST_DIR}/releases.txt public/lisp/releases.txt
-          cp ${DIST_DIR}/systems.txt public/lisp/systems.txt 2>/dev/null || true
+          # Mirror canonical distinfo at /distinfo.txt for legacy clients
+          cp /tmp/redistout/releases/dwightaspencercom.txt hugo/public/distinfo.txt
 
-          echo "Dist packaged: ${SIZE} bytes sha1=${SHA1}"
+          # Fix redist HTML index hrefs
+          # redist hardcodes root-relative hrefs (e.g. /dwightaspencercom/)
+          # but the dist is served under /lisp/. No CLI flag exists for this;
+          # post-process all generated index.html files to prepend /lisp.
+          # Rewrite root-relative hrefs to /lisp/-relative.
+          # Address negation on the full prefix href="/lisp: skip lines
+          # already containing a /lisp/ href, rewrite all others.
+          find hugo/public/lisp -name "index.html" \
+            -exec sed -i '/href="\/lisp/!s|href="/|href="/lisp/|g' {} +
 
       - name: Index with Pagefind
         working-directory: hugo

@@ -13,6 +13,11 @@ aliases     = ["/03-rules-types-and-glue/"]
 og_image    = "/assets/og-posts.png"
 venue       = "arXiv"
 arxiv_submit = true
+series      = ["Dead Reckoning"]
+
+[related_post]
+  slug  = "12-owning-your-memory"
+  label = "post 12 applies the same constraint-as-design principle to C99 arena allocation"
 +++
 
 <h2 id="abstract">Abstract</h2>

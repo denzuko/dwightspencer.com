@@ -5,7 +5,7 @@
 ;;;; Do not edit directly — update hugo/data/author.yaml or post front matter.
 ;;;; Regenerate: hugo --gc (runs on every site build)
 ;;;;
-;;;; This file implements the dsc/corpus package (see package.lisp).
+;;;; This file implements the com.dwightaspencer/corpus package (see package.lisp).
 ;;;; It is loaded as part of the DwightASpencerCom ASDF system:
 ;;;;
 ;;;;   (ql-dist:install-dist "http://dwightaspencer.com/distinfo.txt" :prompt nil)
@@ -16,16 +16,16 @@
 ;;;;   (DwightASpencerCom:find-post "03-rules-types-and-glue")
 ;;;;   (DwightASpencerCom:all-posts)
 ;;;;
-;;;; Within dsc/corpus, dsc/logic is available as the local nickname 'logic'
-;;;; per (:local-nicknames (#:logic #:dsc/logic)) in package.lisp.
+;;;; Within com.dwightaspencer/corpus, com.dwightaspencer/logic is available as the local nickname 'logic'
+;;;; per (:local-nicknames (#:logic #:com.dwightaspencer/logic)) in package.lisp.
 
 (named-readtables:in-readtable :standard)
-(in-package #:dsc/corpus)
+(in-package #:com.dwightaspencer/corpus)
 
-(defconstant +dist-root+    "{{ .Site.Params.canonicalBase }}")
-(defconstant +search-index+ "{{ .Site.Params.canonicalBase }}/pagefind/pagefind.js")
-(defconstant +corpus-url+   "{{ .Site.Params.canonicalBase }}/corpus.lisp")
-(defconstant +build-date+   "{{ now.Format "2006-01-02" }}")
+(defparameter +dist-root+    "{{ .Site.Params.canonicalBase }}")
+(defparameter +search-index+ "{{ .Site.Params.canonicalBase }}/pagefind/pagefind.js")
+(defparameter +corpus-url+   "{{ .Site.Params.canonicalBase }}/corpus.lisp")
+(defparameter +build-date+   "{{ now.Format "2006-01-02" }}")
 
 ;;;; ── Fact assertion ──────────────────────────────────────────────────────────
 ;;;; Fact schemas (mirrors ml-prolog-pokemon catalog approach):
@@ -33,6 +33,9 @@
 ;;;;   (tag    slug keyword)
 ;;;;   (author slug orcid)
 ;;;;   (artifact name descriptor path)   ; Easter egg / metadata artifacts
+;;;;   (diagram slug index title alt-text) ; Mermaid diagrams embedded in post
+;;;;   (related  slug target label)          ; related_post front matter cross-reference
+;;;;   (page     slug title section date)    ; all non-post pages (policy, now, uses, etc.)
 
 (defun assert-post-facts (db)
   "Assert all post, tag, author, and artifact facts into DB.
@@ -52,7 +55,29 @@
     (pf 'tag {{ printf "%q" $slug }} :{{ . | lower | replaceRE "[^a-z0-9]" "-" }})
 {{ end -}}
     (pf 'author {{ printf "%q" $slug }} "{{ $.Site.Data.author.orcid }}")
-{{ end }}  )
+{{ range $i, $d := .Params.diagrams -}}
+    (pf 'diagram {{ printf "%q" $slug }} {{ $i }}
+        {{ printf "%q" (default "" $d.title) }}
+        {{ printf "%q" (default "" $d.alt) }})
+{{ end -}}
+{{ with .Params.related_post -}}
+    (pf 'related {{ printf "%q" $slug }}
+        {{ printf "%q" .slug }}
+        {{ printf "%q" .label }})
+{{ end -}}
+{{ end }}
+
+{{/* Non-post pages: policy, now, uses, projects, media, series, taxonomy */}}
+{{ range (where .Site.RegularPages "Section" "!=" "posts") -}}
+  {{- $slug    := .Params.slug | default .File.BaseFileName -}}
+  {{- $section := .Section | default "root" -}}
+  {{- $date    := .Date.Format "2006-01-02" -}}
+  (pf 'page {{ printf "%q" $slug }}
+      {{ printf "%q" .Title }}
+      {{ printf "%q" $section }}
+      {{ printf "%q" $date }})
+{{ end }}
+  )
   db)
 
 ;;;; ── Knowledge base construction ────────────────────────────────────────────
@@ -104,3 +129,65 @@
   (remove-duplicates
    (logic:db-var-all kb '(tag ?slug ?tag) '?tag)
    :test #'equal))
+
+(defun post-diagrams (kb slug)
+  "Return a list of diagram plists for post SLUG in KB.
+   Each plist has keys: :index :title :alt
+   Returns NIL if the post has no diagrams."
+  (mapcar (lambda (env)
+            (list :index (cdr (assoc '?i   env))
+                  :title (cdr (assoc '?t   env))
+                  :alt   (cdr (assoc '?alt env))))
+          (logic:db-prove-all kb `(diagram ,slug ?i ?t ?alt))))
+
+(defun all-diagrams (kb)
+  "Return a list of all diagram facts in KB as plists.
+   Keys: :slug :index :title :alt"
+  (mapcar (lambda (env)
+            (list :slug  (cdr (assoc '?slug env))
+                  :index (cdr (assoc '?i    env))
+                  :title (cdr (assoc '?t    env))
+                  :alt   (cdr (assoc '?alt  env))))
+          (logic:db-prove-all kb '(diagram ?slug ?i ?t ?alt))))
+
+(defun post-related (kb slug)
+  "Return a plist for the related post of SLUG in KB, or NIL.
+   Plist keys: :target :label
+   Only returns a value if SLUG has a related_post front matter entry."
+  (let ((env (logic:db-prove-first kb `(related ,slug ?target ?label))))
+    (when env
+      (list :target (cdr (assoc '?target env))
+            :label  (cdr (assoc '?label  env))))))
+
+(defun posts-related-to (kb target-slug)
+  "Return a list of slugs whose related_post points at TARGET-SLUG.
+   Enables reverse traversal: find all posts that cite a given post."
+  (logic:db-var-all kb `(related ?slug ,target-slug ?label) '?slug))
+
+(defun all-related (kb)
+  "Return all (related slug target label) facts as plists.
+   Keys: :slug :target :label
+   Enables full graph traversal of the post relationship network."
+  (mapcar (lambda (env)
+            (list :slug   (cdr (assoc '?slug   env))
+                  :target (cdr (assoc '?target env))
+                  :label  (cdr (assoc '?label  env))))
+          (logic:db-prove-all kb '(related ?slug ?target ?label))))
+
+(defun all-pages (kb)
+  "Return all non-post pages in KB as plists. Keys: :slug :title :section :date"
+  (mapcar (lambda (env)
+            (list :slug    (cdr (assoc '?slug    env))
+                  :title   (cdr (assoc '?title   env))
+                  :section (cdr (assoc '?section env))
+                  :date    (cdr (assoc '?date    env))))
+          (logic:db-prove-all kb '(page ?slug ?title ?section ?date))))
+
+(defun find-page (kb slug)
+  "Find a non-post page by slug. Returns plist or NIL."
+  (let ((env (logic:db-prove-first kb `(page ,slug ?title ?section ?date))))
+    (when env
+      (list :slug    slug
+            :title   (cdr (assoc '?title   env))
+            :section (cdr (assoc '?section env))
+            :date    (cdr (assoc '?date    env))))))

@@ -22,5 +22,8 @@
     </div>
     {{- end }}
   </div>
+  {{- with .Params.related_post }}
+  <p class="finger-exit"><span style="color:#75715e">; &#8594; <a href="/posts/{{ .slug }}/" style="color:#9a9a9a">{{ .label }}</a></span></p>
+  {{- end }}
 </section>
 {{- end }}

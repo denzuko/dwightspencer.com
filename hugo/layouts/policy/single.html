@@ -10,7 +10,7 @@
   <div class="policy-body">
     {{ .Content }}
   </div>
-  <nav class="policy-nav">
+  <nav class="policy-nav" data-pagefind-ignore>
     <p>
       {{- range .Params.related_policies }}
       <a href="{{ .url }}">{{ .title }}</a>

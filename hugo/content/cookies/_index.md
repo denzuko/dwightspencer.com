@@ -12,6 +12,10 @@ related_policies = [
 ]
 +++
 
+This policy applies to **dwightaspencer.com**, operated by Dwight Spencer (@denzuko). Contact: [keybase.io/Denzuko](https://keybase.io/Denzuko).
+
+---
+
 ## tl;dr
 
 This site sets **no first-party cookies**. No consent banner is needed.
