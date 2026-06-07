@@ -56,4 +56,4 @@ series      = ["The Watchers You Fed"]
 
 <p>A decision before the end of June 2026. If the court rules narrowly on procedural requirements for geofence warrants, the third-party doctrine question remains open for the next case. If the court rules on the doctrine itself, the implications extend to every piece of data stored on third-party infrastructure — which, for most people, is most of their data.</p>
 
-<p>RT4 is watching. The Fourth Amendment Is Not For Sale Act — which would close the data broker loophole for government purchases of location data — passed the House Appropriations Committee 32-25 in May as a spending rider. <em>Chatrie</em> and the data broker fight are the same fight running on parallel tracks. One is in the courts. One is in Congress. Neither is finished.</p>
+<p>The Fourth Amendment Is Not For Sale Act — which would close the data broker loophole for government purchases of location data — passed the House Appropriations Committee 32-25 in May as a spending rider. <em>Chatrie</em> and the data broker fight are the same fight running on parallel tracks. One is in the courts. One is in Congress. Neither is finished.</p>
