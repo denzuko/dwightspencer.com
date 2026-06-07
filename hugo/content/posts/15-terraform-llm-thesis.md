@@ -25,18 +25,23 @@ a canary token and honeypot stack on Google Cloud for teaching monitoring intern
 VPC, IAM, compute, logging pipeline, alerting. Full stack from Terraform up.
 Not a toy. An environment where the security properties were the point.
 
-Path one: describe the architecture in plain English, generate Terraform modules with an
-LLM, iterate until `terraform plan` ran clean.
+The first build used an LLM. I described the target architecture in plain English and
+asked the model to generate Terraform modules, iterating on the output until
+`terraform plan` ran clean.
 
-Path two: [cookiecutter](https://cookiecutter.readthedocs.io/) with hand-written atomic
-modules. One module per responsibility. OPA/Rego policy constraints baked into the
-template. Run the tool, answer the prompts, apply.
+The second used [cookiecutter](https://github.com/cookiecutter/cookiecutter) —
+a project scaffolding tool that generates directory structures and file contents from
+templates and user-supplied variable values. The cookiecutter template for this lab was
+hand-written: one module per responsibility, with OPA/Rego policy constraints embedded
+directly in the template structure so any generated output was validated against defined
+rules before it could be applied. I ran the template, supplied the variable values for
+this specific environment, and applied the result.
 
 ## What the comparison showed
 
 The LLM path required multiple iteration cycles per module. Provider API drift alone
 caused three full cycles on the IAM module — the model's training data didn't match the
-current provider schema. The cookiecutter path was one pass: generate, fill values, apply.
+current provider schema. The cookiecutter path went through a single cycle: template generation, variable substitution, apply.
 At module count, the gap compounds linearly.
 
 Correctness was not close. The cookiecutter path produced zero apply-time failures. The
@@ -61,8 +66,7 @@ shipped.
 
 ## Why policy-as-code closes the gap the model can't close itself
 
-The cookiecutter template had OPA/Rego gates baked in. Code that violated policy was
-rejected at generation time — before it ever reached a plan or apply step. The model
+The cookiecutter template had OPA/Rego gates wired into the generation step. Code that violated policy was rejected before it ever reached a plan or apply step. The model
 had no such feedback loop. It had training signal from public repositories and exit codes
 from the Terraform CLI. Neither of those tells it whether the IAM binding is too
 permissive for the environment it's being deployed into.
