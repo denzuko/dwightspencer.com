@@ -3,17 +3,17 @@ title       = "The Copilot Meter Shock Is a Governance Problem"
 date        = "2026-06-03"
 draft       = false
 description = "GitHub Copilot switched to token-based billing on June 1. The community is arguing about cost. The actual problem is that AI tooling was never brought under the same governance controls as every other cloud service."
-slug        = "12-copilot-meter-governance"
+slug        = "13-copilot-meter-governance"
 keywords    = ["github", "copilot", "devsecops", "governance", "cicd", "ai", "billing", "cloudnative", "pipeline"]
 tags        = ["devops", "infosec", "cloudnative"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "DevSecOps, CI/CD Pipeline Security, Cloud Governance, AI Tooling"
-aliases     = ["/12-copilot-meter-governance/"]
+aliases     = ["/13-copilot-meter-governance/"]
 og_image    = "/assets/og-posts.png"
 
 [related_post]
-  slug  = "12-sbom-ai-provenance"
+  slug  = "14-sbom-ai-provenance"
   label = "Tomorrow: your SBOM doesn't know Copilot wrote that function"
 +++
 

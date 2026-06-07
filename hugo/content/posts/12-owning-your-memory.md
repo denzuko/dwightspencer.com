@@ -3,14 +3,14 @@ title       = "Owning Your Memory: Hardened Arenas, Channels, and Structural OOP
 date        = "2026-05-29"
 draft       = false
 description = "Reference-counted arena, non-blocking channel, and structural OOP dispatch in ISO C99. Zero external dependencies, zero heap, all ten NASA Power of Ten rules applied. Companion source included."
-slug        = "11-owning-your-memory"
+slug        = "12-owning-your-memory"
 keywords    = ["c99", "arena allocator", "memory safety", "supply chain", "nasa power of ten", "systems programming", "devops", "infosec", "open source", "sovereignty"]
 tags        = ["c99", "systems", "devops", "infosec", "architecture", "open-source", "privacy", "sovereignty"]
 categories  = ["articles"]
 series      = ["Dead Reckoning"]
 schema_type = "TechArticle"
 aeo_expertise = "DevOps, Security, Open Source, Systems Programming, C99"
-aliases     = ["/11-owning-your-memory/"]
+aliases     = ["/12-owning-your-memory/"]
 og_image    = "/assets/og-posts.png"
 
 [[diagrams]]
@@ -318,7 +318,7 @@ this easier to verify than scattered early returns.</p>
 # Hello, Pure ANSI C99 World via BSD!
 </code></pre>
 
-<p><a href="/posts/11-owning-your-memory/example.c">example.c</a> &#8212; BSD-2-Clause.</p>
+<p><a href="/posts/12-owning-your-memory/example.c">example.c</a> &#8212; BSD-2-Clause.</p>
 
 <h2 id="context">Context</h2>
 
