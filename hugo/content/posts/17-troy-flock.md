@@ -58,27 +58,13 @@ series      = ["The Watchers You Fed"]
 
 <li>Auto-renewal clause means inaction = continuation</li>
 
-<li>When legislature tries to assert oversight, executive characterizes</li>
+<li>When legislature tries to assert oversight, executive characterizes it as an attack on public safety</li>
+
+<li>Vendor provides political support — Flock's national network means local law enforcement has relationships with the company independent of the city council</li>
+
+<li>By the time residents notice, the infrastructure is operational, the data is flowing, and the contractual leverage is gone</li>
 
 </ol>
-
-<p>it as an attack on public safety</p>
-
-<ol>
-
-<li>Vendor provides political support — Flock's national network means</li>
-
-</ol>
-
-<p>local law enforcement has relationships with the company independent of the city council</p>
-
-<ol>
-
-<li>By the time residents notice, the infrastructure is operational, the</li>
-
-</ol>
-
-<p>data is flowing, and the contractual leverage is gone</p>
 
 <p>The $78,000 figure is deliberately below thresholds that would trigger more rigorous procurement review in most municipalities. It's not the contract cost that matters — it's the data it generates and the infrastructure it normalizes.</p>
 
