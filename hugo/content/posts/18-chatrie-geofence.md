@@ -3,13 +3,13 @@ title       = "Chatrie v. United States: The Cloud Storage Question the Supreme 
 date        = "2026-05-28"
 draft       = false
 description = "The Supreme Court heard arguments in Chatrie v. United States on April 27. The question is whether geofence warrants violate the Fourth Amendment. The real question is whether storing your life on someone else's server destroys your constitutional protection over it."
-slug        = "14-chatrie-geofence"
+slug        = "18-chatrie-geofence"
 keywords    = ["chatrie", "geofence warrant", "fourth amendment", "scotus", "google", "location data", "cloud storage", "privacy"]
 tags        = ["fourth-amendment", "privacy", "civil-liberties", "surveillance"]
 categories  = ["articles"]
 schema_type = "Article"
 aeo_expertise = "Fourth Amendment, Surveillance Accountability, Digital Privacy Law"
-aliases     = ["/14-chatrie-geofence/"]
+aliases     = ["/18-chatrie-geofence/"]
 og_image    = "/assets/og-posts.png"
 series      = ["The Watchers You Fed"]
 
