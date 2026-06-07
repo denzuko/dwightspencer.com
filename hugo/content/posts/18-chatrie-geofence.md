@@ -14,7 +14,7 @@ og_image    = "/assets/og-posts.png"
 series      = ["The Watchers You Fed"]
 
 [related_post]
-  slug  = "13-troy-flock"
+  slug  = "17-troy-flock"
   label = "post 13 covers the municipal procurement side of the same infrastructure"
 +++
 
