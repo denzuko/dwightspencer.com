@@ -14,7 +14,7 @@ og_image    = "/assets/og-posts.png"
 series      = ["The Watchers You Fed"]
 
 [related_post]
-  slug  = "14-chatrie-geofence"
+  slug  = "18-chatrie-geofence"
   label = "post 14 covers the Chatrie geofence case that sits at the centre of this stack"
 +++
 
