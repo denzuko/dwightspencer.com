@@ -28,7 +28,7 @@ series      = ["The Watchers You Fed"]
 
 <p>The doctrine made sense in 1979 when the Supreme Court applied it to bank records. It does not map cleanly to 2026.</p>
 
-<p>Justice Gorsuch pressed on this at oral argument. If voluntarily storing information with Google destroys Fourth Amendment protection, what about email? Documents? Photos? Calendar entries? Modern people don't store the substance of their lives in filing cabinets anymore — they store it on servers owned by corporations that operate under terms of service most people have never read. If that storage constitutes voluntary disclosure to a third party that the government can access without a warrant, the Fourth Amendment contracts substantially without anyone formally changing the text.</p>
+<p>Justice Gorsuch pressed on this at oral argument: if voluntarily storing information with Google destroys Fourth Amendment protection, the same logic reaches email, documents, photos, and calendar entries. Modern people don't store the substance of their lives in filing cabinets anymore — they store it on servers owned by corporations that operate under terms of service most people have never read. If that storage constitutes voluntary disclosure to a third party the government can access without a warrant, the Fourth Amendment contracts substantially without anyone formally changing the text.</p>
 
 <h2 id="what-a-geofence-warrant-actually-does">What a geofence warrant actually does</h2>
 
