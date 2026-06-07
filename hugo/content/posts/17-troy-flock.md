@@ -92,6 +92,6 @@ figure is below procurement thresholds that would trigger more rigorous review i
 municipalities — that's not incidental.</p>
 
 <p>The technical picture of what the Flock/Fusus/Raven architecture looks like at scale —
-the surveillance spine running on Albany's Central Avenue — is the subject of a separate
-writeup RT4 Albany has been building. The Troy fight is the governance layer on top of
-that infrastructure. Both are worth understanding in sequence.</p>
+the surveillance spine documented on Albany's Central Avenue — is the subject of a
+separate writeup. The Troy fight is the governance layer on top of that infrastructure.
+Both are worth understanding in sequence.</p>
