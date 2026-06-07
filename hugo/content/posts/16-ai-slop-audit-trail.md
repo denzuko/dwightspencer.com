@@ -3,13 +3,13 @@ title       = "AI Slop and the Missing Audit Trail Are the Same Bug"
 date        = "2026-06-04"
 draft       = false
 description = "geohot's Eternal Sloptember describes a quality problem. The SBOM AI provenance gap is the same problem from the audit direction. Two sides of one failure mode — and in security contexts, that failure mode is silent until it isn't."
-slug        = "13-ai-slop-audit-trail"
+slug        = "16-ai-slop-audit-trail"
 keywords    = ["ai", "devsecops", "sbom", "provenance", "cicd", "supply-chain", "infosec", "geohot"]
 tags        = ["devsecops", "infosec", "devops"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "DevSecOps, Supply Chain Security, AI Tooling, Incident Response"
-aliases     = ["/13-ai-slop-audit-trail/"]
+aliases     = ["/16-ai-slop-audit-trail/"]
 og_image    = "/assets/og-posts.png"
 series      = ["Infrastructure Independence"]
 
