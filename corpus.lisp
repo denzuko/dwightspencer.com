@@ -41,7 +41,7 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 19 posts."
+   Generated from 20 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 
@@ -68,6 +68,19 @@
 (pf 'related "14-sbom-ai-provenance"
         "13-copilot-meter-governance"
         "Yesterday: the Copilot billing change is a governance problem")
+
+    ;; AI Slop and the Missing Audit Trail Are the Same Bug
+    (pf 'post "16-ai-slop-audit-trail"
+        "AI Slop and the Missing Audit Trail Are the Same Bug"
+        "2026-06-04"
+        1126)
+(pf 'tag "16-ai-slop-audit-trail" :devsecops)
+(pf 'tag "16-ai-slop-audit-trail" :infosec)
+(pf 'tag "16-ai-slop-audit-trail" :devops)
+(pf 'author "16-ai-slop-audit-trail" "0009-0001-0066-4646")
+(pf 'related "16-ai-slop-audit-trail"
+        "14-sbom-ai-provenance"
+        "post 12b: your SBOM does not know Copilot wrote that function")
 
     ;; The Copilot Meter Shock Is a Governance Problem
     (pf 'post "13-copilot-meter-governance"
