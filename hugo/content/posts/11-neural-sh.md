@@ -47,14 +47,23 @@ plumb start neural "$1"
 * &gt; 10000
 | neural "summarise this email in two sentences" &gt;&gt; ~/.mail/summaries
 
+# procmail milter — classify and tag before delivery
+:0 fw
+| neural "output one of: technical, personal, spam" | \
+  xargs -I{} formail -A "X-Neural-Class: {}"
+
 # mailcap — pipe text/plain attachments through neural for classification
 text/plain; neural "classify: technical, personal, or spam?" &lt; %s
 
-# notmuch + fzf — search mail, pipe selected thread to neural
+# notmuch + fzf — pipe selected thread to neural for triage
 notmuch search --output=messages tag:inbox | \
   fzf --preview 'notmuch show {}' | \
   xargs notmuch show | \
   neural "what action does this thread require?"
+
+# notmuch + fzf — extract follow-up tasks from flagged thread
+notmuch show thread:$(notmuch search --output=threads tag:flagged | head -1) | \
+  neural "list action items from this thread"
 </code></pre>
 
 <p>That last pipeline is a real workflow — triage your inbox without leaving the terminal, without a plugin, without anything that knows about LLMs except the final stage of the pipe. The upstream tools are unchanged.</p>
@@ -65,11 +74,9 @@ notmuch search --output=messages tag:inbox | \
 
 <p>neural.sh was built for environments where local inference isn't available: SDF, Panix, a Raspberry Pi, Termux, Plan 9. The OPENAI_API_KEY environment variable was how OpenAI's own documentation specified key handling at the time, and how every tool in the space worked. The architecture was always pointed at the shell — what sat at the other end of the socket was configuration.</p>
 
-<p>That configuration lives in <code>config.m4</code>, a DSL consumed at build time by <code>neural.m4</code>. The model is not hardcoded — <code>text-davinci-003</code> was the default because it was current in May 2023. Pointing neural.sh at a different endpoint or model is a one-line change to <code>config.m4</code> and a <code>sed</code> pass on <code>neural.m4</code>. The build system handles the rest.</p>
+<p>That configuration lives in <code>config.m4</code>, a DSL consumed at build time by <code>neural.m4</code>. The model is not hardcoded — <code>text-davinci-003</code> was the default because it was current in May 2023. Adding a new model or a local Ollama endpoint is a one-line change to <code>config.m4</code> and a <code>sed</code> pass on <code>neural.m4</code>. Where local inference is available, neural.sh routes there without modification. The interface doesn't change. The data stops leaving.</p>
 
-<p>Where local inference is available — Ollama, llama.cpp, anything with an OpenAI-compatible API — neural.sh routes there without modification. The interface doesn't change. The data stops leaving.</p>
-
-<h2 id="where-it-went">Where it went</h2>
+<h2 id="the-architecture-held">The architecture held</h2>
 
 <p>neural.sh is unmaintained. The <code>text-davinci-003</code> default was deprecated by OpenAI in January 2024. The source is on sourcehut as a dated artifact.</p>
 
@@ -77,4 +84,13 @@ notmuch search --output=messages tag:inbox | \
 
 <h2 id="contribute">Contribute</h2>
 
-<p>The repo is at <a href="https://git.sr.ht/~denzuko/neural.sh">~denzuko/neural.sh</a>. The model configuration is a one-line change. Patches and model support updates welcome via <code>git send-email</code> to the <a href="https://lists.sr.ht/~denzuko/neural.sh-devel">devel list</a> — read the source, understand the <code>config.m4</code> DSL, send a clean patch. That's what good infrastructure looks like.</p>
+<p>The source is at <a href="https://git.sr.ht/~denzuko/neural.sh">git.sr.ht/~denzuko/neural.sh</a>. The mailing lists are on sourcehut:</p>
+
+<ul>
+  <li><a href="https://lists.sr.ht/~denzuko/neural.sh-devel">neural.sh-devel</a> — patches and development discussion</li>
+  <li><a href="https://lists.sr.ht/~denzuko/neural.sh-discuss">neural.sh-discuss</a> — general chat</li>
+  <li><a href="https://lists.sr.ht/~denzuko/neural.sh-announce">neural.sh-announce</a> — release announcements</li>
+  <li><a href="https://lists.sr.ht/~denzuko/neural.sh-fdn">neural.sh-fdn</a> — ASCII-armored binary releases</li>
+</ul>
+
+<p>Adding model support is a one-line change to <code>config.m4</code>. Read the source, understand the DSL, send a patch to neural.sh-devel via <code>git send-email</code>. That is how good infrastructure grows.</p>
