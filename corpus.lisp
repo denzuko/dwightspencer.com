@@ -163,7 +163,7 @@
     (pf 'post "11-neural-sh"
         "neural.sh: A Shell Script Where a Plugin Used to Be"
         "2026-05-26"
-        631)
+        689)
 (pf 'tag "11-neural-sh" :infrastructure)
 (pf 'tag "11-neural-sh" :open-source)
 (pf 'tag "11-neural-sh" :privacy)
