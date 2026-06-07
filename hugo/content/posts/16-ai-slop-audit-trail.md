@@ -14,13 +14,13 @@ og_image    = "/assets/og-posts.png"
 series      = ["Infrastructure Independence"]
 
 [related_post]
-  slug  = "12-sbom-ai-provenance"
+  slug  = "14-sbom-ai-provenance"
   label = "post 12b: your SBOM does not know Copilot wrote that function"
 +++
 
 <p>geohot published "The Eternal Sloptember" a few weeks ago. The argument: AI agents frontload progress but never achieve polish. Low performers using agents produce high-volume output with no feedback loop to catch errors. Organizations with weak review culture drown in it. The post is about code quality, and the discourse around it has mostly stayed in that lane.</p>
 
-<p>The SBOM provenance problem — documented <a href="/12-sbom-ai-provenance/">here last week</a> — is about audit trails. SBOM tooling accurately enumerates dependencies but records nothing about AI-generated code provenance: which model, which version, whether a human reviewed the output before it hit a protected branch.</p>
+<p>The SBOM provenance problem — documented <a href="/14-sbom-ai-provenance/">here last week</a> — is about audit trails. SBOM tooling accurately enumerates dependencies but records nothing about AI-generated code provenance: which model, which version, whether a human reviewed the output before it hit a protected branch.</p>
 
 <p>These look like different problems. They are the same bug.</p>
 
