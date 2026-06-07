@@ -58,4 +58,4 @@ series      = ["The Watchers You Fed"]
 
 <p>Section 702 / AI intersection: watch for DOD contract disclosures, FOIA requests from EFF and EPIC, and any public reporting on how commercial AI tools are being used in intelligence analysis. The Anthropic/DOD situation is not the last instance of this conflict.</p>
 
-<p>RT4 is watching all of these. The Fourth Amendment applies in 2026 for the same reason it applied in 1791: the government has powerful tools for surveillance and limited institutional incentive to restrain itself. The mechanisms change. The principle doesn't.</p>
+<p>The legislative and judicial answers are still being worked out. The engineering answer is available now. These tracks are not separate — the outcome of <em>Chatrie</em>, the data broker rider, and the Section 702/AI intersection will set the constraints inside which every infrastructure decision operates. Watching them is part of running infrastructure in 2026.</p>
