@@ -41,7 +41,7 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 18 posts."
+   Generated from 19 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 
@@ -102,6 +102,20 @@
 (pf 'related "12-owning-your-memory"
         "03-rules-types-and-glue"
         "post 03 evaluates the same layered-standards approach across Prolog, Coalton, and Common Lisp")
+
+    ;; Chatrie v. United States: The Cloud Storage Question the Supreme Court Has to Answer
+    (pf 'post "18-chatrie-geofence"
+        "Chatrie v. United States: The Cloud Storage Question the Supreme Court Has to Answer"
+        "2026-05-28"
+        822)
+(pf 'tag "18-chatrie-geofence" :fourth-amendment)
+(pf 'tag "18-chatrie-geofence" :privacy)
+(pf 'tag "18-chatrie-geofence" :civil-liberties)
+(pf 'tag "18-chatrie-geofence" :surveillance)
+(pf 'author "18-chatrie-geofence" "0009-0001-0066-4646")
+(pf 'related "18-chatrie-geofence"
+        "17-troy-flock"
+        "post 13 covers the municipal procurement side of the same infrastructure")
 
     ;; Troy, NY: How a Surveillance Contract Captured a City
     (pf 'post "17-troy-flock"

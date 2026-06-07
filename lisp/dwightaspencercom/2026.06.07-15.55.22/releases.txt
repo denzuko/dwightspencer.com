@@ -1,2 +1,0 @@
-# project url size file-md5 content-sha1 prefix [system-file1...system-fileN]
-DwightASpencerCom http://dwightaspencer.com/lisp/archives/DwightASpencerCom/DwightASpencerCom-47d4febb426b9c92844ff8e7e6d577b1939203cc.tgz 31056 26105d1de1ca5839e51bb2c22131e11c 59b971f7a38035e05eeed3885026659205394dec DwightASpencerCom-47d4febb426b9c92844ff8e7e6d577b1939203cc DwightASpencerCom/dwightaspencercom.asd
