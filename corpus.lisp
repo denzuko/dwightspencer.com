@@ -41,7 +41,7 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 16 posts."
+   Generated from 17 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 
@@ -116,6 +116,19 @@
 (pf 'related "11-neural-sh"
         "12-owning-your-memory"
         "post 12 covers the same constraint-as-design argument applied to C99 memory management")
+
+    ;; LLM-Generated Terraform Does Not Know What Your Architecture Is For
+    (pf 'post "15-terraform-llm-thesis"
+        "LLM-Generated Terraform Does Not Know What Your Architecture Is For"
+        "2026-05-26"
+        758)
+(pf 'tag "15-terraform-llm-thesis" :infrastructure)
+(pf 'tag "15-terraform-llm-thesis" :devops)
+(pf 'tag "15-terraform-llm-thesis" :open-source)
+(pf 'author "15-terraform-llm-thesis" "0009-0001-0066-4646")
+(pf 'related "15-terraform-llm-thesis"
+        "11-neural-sh"
+        "post 11 covers the Unix shell approach to the same LLM tooling problem")
 
     ;; Three Runtimes, One Site: A Case for Self-Documenting Infrastructure
     (pf 'post "10-three-runtimes-one-site"
