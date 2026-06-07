@@ -41,54 +41,65 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 15 posts."
+   Generated from 16 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
 
+    ;; The SADM Incident Is an OT Visibility Story
+    (pf 'post "20-sadm-ot-visibility"
+        "The SADM Incident Is an OT Visibility Story"
+        "2026-06-07"
+        1096)
+(pf 'tag "20-sadm-ot-visibility" :ot)
+(pf 'tag "20-sadm-ot-visibility" :ics)
+(pf 'tag "20-sadm-ot-visibility" :infrastructure)
+(pf 'tag "20-sadm-ot-visibility" :security)
+(pf 'author "20-sadm-ot-visibility" "0009-0001-0066-4646")
+
     ;; Your SBOM Does Not Know Copilot Wrote That Function
-    (pf 'post "12-sbom-ai-provenance"
+    (pf 'post "14-sbom-ai-provenance"
         "Your SBOM Does Not Know Copilot Wrote That Function"
         "2026-06-04"
         590)
-(pf 'tag "12-sbom-ai-provenance" :devsecops)
-(pf 'tag "12-sbom-ai-provenance" :infosec)
-(pf 'tag "12-sbom-ai-provenance" :devops)
-(pf 'author "12-sbom-ai-provenance" "0009-0001-0066-4646")
-(pf 'related "12-sbom-ai-provenance"
-        "12-copilot-meter-governance"
+(pf 'tag "14-sbom-ai-provenance" :devsecops)
+(pf 'tag "14-sbom-ai-provenance" :infosec)
+(pf 'tag "14-sbom-ai-provenance" :devops)
+(pf 'author "14-sbom-ai-provenance" "0009-0001-0066-4646")
+(pf 'related "14-sbom-ai-provenance"
+        "13-copilot-meter-governance"
         "Yesterday: the Copilot billing change is a governance problem")
 
     ;; The Copilot Meter Shock Is a Governance Problem
-    (pf 'post "12-copilot-meter-governance"
+    (pf 'post "13-copilot-meter-governance"
         "The Copilot Meter Shock Is a Governance Problem"
         "2026-06-03"
         474)
-(pf 'tag "12-copilot-meter-governance" :devops)
-(pf 'tag "12-copilot-meter-governance" :infosec)
-(pf 'tag "12-copilot-meter-governance" :cloudnative)
-(pf 'author "12-copilot-meter-governance" "0009-0001-0066-4646")
-(pf 'related "12-copilot-meter-governance"
-        "12-sbom-ai-provenance"
+(pf 'tag "13-copilot-meter-governance" :devops)
+(pf 'tag "13-copilot-meter-governance" :infosec)
+(pf 'tag "13-copilot-meter-governance" :cloudnative)
+(pf 'author "13-copilot-meter-governance" "0009-0001-0066-4646")
+(pf 'related "13-copilot-meter-governance"
+        "14-sbom-ai-provenance"
         "Tomorrow: your SBOM doesn't know Copilot wrote that function")
 
     ;; Owning Your Memory: Hardened Arenas, Channels, and Structural OOP in Pure C99
-    (pf 'post "11-owning-your-memory"
+    (pf 'post "12-owning-your-memory"
         "Owning Your Memory: Hardened Arenas, Channels, and Structural OOP in Pure C99"
         "2026-05-29"
         1811)
-(pf 'tag "11-owning-your-memory" :c99)
-(pf 'tag "11-owning-your-memory" :systems)
-(pf 'tag "11-owning-your-memory" :devops)
-(pf 'tag "11-owning-your-memory" :infosec)
-(pf 'tag "11-owning-your-memory" :architecture)
-(pf 'tag "11-owning-your-memory" :open-source)
-(pf 'tag "11-owning-your-memory" :privacy)
-(pf 'tag "11-owning-your-memory" :sovereignty)
-(pf 'author "11-owning-your-memory" "0009-0001-0066-4646")
-(pf 'diagram "11-owning-your-memory" 0
+(pf 'tag "12-owning-your-memory" :c99)
+(pf 'tag "12-owning-your-memory" :systems)
+(pf 'tag "12-owning-your-memory" :devops)
+(pf 'tag "12-owning-your-memory" :infosec)
+(pf 'tag "12-owning-your-memory" :architecture)
+(pf 'tag "12-owning-your-memory" :open-source)
+(pf 'tag "12-owning-your-memory" :privacy)
+(pf 'tag "12-owning-your-memory" :sovereignty)
+(pf 'author "12-owning-your-memory" "0009-0001-0066-4646")
+(pf 'diagram "12-owning-your-memory" 0
         "Architecture overview: coding standards, arena, object lifecycle, channel, assert, single-exit"
         "Architecture flowchart for example.c. Four standards layers feed into the implementation: ISO C99, all ten NASA Power of Ten rules, tsoding conventions (Yoda conditions, zero-init arenas), and project rules (no system calls, no goto in C, BDD-first workflow). The static arena holds eight typed slots. Objects are allocated by scanning for a free slot, retained by incrementing a ref_count, and released by decrementing it — zeroing the payload and freeing the slot when the count reaches zero. INVALID_HANDLE is UINT16_MAX. The channel is a ring buffer living in slot zero; send retains and enqueues, recv dequeues and transfers ownership to the caller. Assertions trap via __builtin_trap, which emits ud2 on x86 and raises SIGILL. Single-exit is a do-while-zero loop with break on error; cleanup releases any live handles unconditionally.")
-(pf 'related "11-owning-your-memory"
+(pf 'related "12-owning-your-memory"
         "03-rules-types-and-glue"
         "post 03 evaluates the same layered-standards approach across Prolog, Coalton, and Common Lisp")
 
@@ -103,8 +114,8 @@
 (pf 'tag "11-neural-sh" :history)
 (pf 'author "11-neural-sh" "0009-0001-0066-4646")
 (pf 'related "11-neural-sh"
-        "11-owning-your-memory"
-        "post 11 covers the same constraint-as-design argument applied to C99 memory management")
+        "12-owning-your-memory"
+        "post 12 covers the same constraint-as-design argument applied to C99 memory management")
 
     ;; Three Runtimes, One Site: A Case for Self-Documenting Infrastructure
     (pf 'post "10-three-runtimes-one-site"
@@ -200,8 +211,8 @@
 (pf 'tag "03-rules-types-and-glue" :open-source)
 (pf 'author "03-rules-types-and-glue" "0009-0001-0066-4646")
 (pf 'related "03-rules-types-and-glue"
-        "11-owning-your-memory"
-        "post 11 applies the same constraint-as-design principle to C99 arena allocation")
+        "12-owning-your-memory"
+        "post 12 applies the same constraint-as-design principle to C99 arena allocation")
 
     ;; GitHub's TOS Won't Save You: Why Your Code, Privacy & Copyrights Are at Risk
     (pf 'post "02-github-tos-wont-save-you"
