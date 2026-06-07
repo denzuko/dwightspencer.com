@@ -3,17 +3,17 @@ title       = "Your SBOM Does Not Know Copilot Wrote That Function"
 date        = "2026-06-04"
 draft       = false
 description = "SBOM tooling accurately enumerates dependencies. It records nothing about AI-generated code provenance. With CMMC Level 2 Phase 2 assessments starting November 2026, that gap is no longer latent."
-slug        = "12-sbom-ai-provenance"
+slug        = "14-sbom-ai-provenance"
 keywords    = ["sbom", "devsecops", "cmmc", "ai", "copilot", "supply-chain", "provenance", "cicd", "compliance"]
 tags        = ["devsecops", "infosec", "devops"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "DevSecOps, Supply Chain Security, CMMC Compliance, AI Tooling"
-aliases     = ["/12-sbom-ai-provenance/"]
+aliases     = ["/14-sbom-ai-provenance/"]
 og_image    = "/assets/og-posts.png"
 
 [related_post]
-  slug  = "12-copilot-meter-governance"
+  slug  = "13-copilot-meter-governance"
   label = "Yesterday: the Copilot billing change is a governance problem"
 +++
 

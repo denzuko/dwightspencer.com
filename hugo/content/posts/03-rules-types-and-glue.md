@@ -16,8 +16,8 @@ arxiv_submit = true
 series      = ["Dead Reckoning"]
 
 [related_post]
-  slug  = "11-owning-your-memory"
-  label = "post 11 applies the same constraint-as-design principle to C99 arena allocation"
+  slug  = "12-owning-your-memory"
+  label = "post 12 applies the same constraint-as-design principle to C99 arena allocation"
 +++
 
 <h2 id="abstract">Abstract</h2>

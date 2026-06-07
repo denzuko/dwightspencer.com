@@ -14,8 +14,8 @@ og_image    = "/assets/og-posts.png"
 series      = ["Dead Reckoning"]
 
 [related_post]
-  slug  = "11-owning-your-memory"
-  label = "post 11 covers the same constraint-as-design argument applied to C99 memory management"
+  slug  = "12-owning-your-memory"
+  label = "post 12 covers the same constraint-as-design argument applied to C99 memory management"
 +++
 
 <p>After installing ALE, I went looking at what else w0rp had written. <a href="https://github.com/dense-analysis/neural">neural.vim</a> was there — a Vim plugin for ChatGPT integration, from the same author who built one of the most solid LSP implementations in the Vim ecosystem.</p>
