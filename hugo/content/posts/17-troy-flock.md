@@ -2,7 +2,7 @@
 title       = "Troy, NY: How a Surveillance Contract Captured a City"
 date        = "2026-05-27"
 draft       = false
-description = "Mayor Mantello declared a public safety emergency to pay a Flock camera contract her city council had blocked. The council filed an Article 78 lawsuit. The fight is still live. Here's the contract mechanism that made it possible — and why it matters beyond Troy."
+description = "Mayor Mantello declared a public safety emergency to pay a Flock camera contract her city council had blocked. The council filed an Article 78 lawsuit. The fight is still live. The contract mechanism that made it possible — and why it matters beyond Troy."
 slug        = "17-troy-flock"
 keywords    = ["flock safety", "alpr", "surveillance", "troy ny", "fourth amendment", "procurement", "civil liberties", "rt4"]
 tags        = ["privacy", "surveillance", "fourth-amendment", "civil-liberties"]
@@ -78,8 +78,20 @@ series      = ["The Watchers You Fed"]
 
 <h2 id="what-is-in-motion">What is in motion</h2>
 
-<p>If you're in Troy: the public hearing on the local ALPR law has passed, but the council is still moving the legislation. Contact your council member. The Article 78 is in Rensselaer County Supreme Court — public records.</p>
+<p>The Article 78 is in Rensselaer County Supreme Court. The council's local ALPR law is
+still moving through the legislative process. Both tracks are running simultaneously
+because the council doesn't trust the partial compromise — national database search
+disabled, some data-sharing safeguards added — to hold without the legal and legislative
+backstops in place.</p>
 
-<p>If you're in any other municipality with Flock cameras: FOIL the contract. Look for the auto-renewal clause. Look for the data retention terms. Look for what "disabling" national database access actually means in the contract language versus in practice.</p>
+<p>For anyone tracking this pattern in their own municipality: Flock contracts are public
+records subject to FOIL requests in New York. The auto-renewal clause, data retention
+terms, and the definition of what "disabling" national database access means in practice
+versus in the contract language are the specific provisions worth examining. The $78,000
+figure is below procurement thresholds that would trigger more rigorous review in most
+municipalities — that's not incidental.</p>
 
-<p>If you want the technical picture of what ALPR infrastructure looks like at scale — the Flock/Fusus/Raven architecture running on Albany's Central Avenue — that writeup is coming. RT4 Albany has been documenting it.</p>
+<p>The technical picture of what the Flock/Fusus/Raven architecture looks like at scale —
+the surveillance spine running on Albany's Central Avenue — is the subject of a separate
+writeup RT4 Albany has been building. The Troy fight is the governance layer on top of
+that infrastructure. Both are worth understanding in sequence.</p>
