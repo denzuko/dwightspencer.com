@@ -3,13 +3,13 @@ title       = "Troy, NY: How a Surveillance Contract Captured a City"
 date        = "2026-05-27"
 draft       = false
 description = "Mayor Mantello declared a public safety emergency to pay a Flock camera contract her city council had blocked. The council filed an Article 78 lawsuit. The fight is still live. Here's the contract mechanism that made it possible — and why it matters beyond Troy."
-slug        = "13-troy-flock"
+slug        = "17-troy-flock"
 keywords    = ["flock safety", "alpr", "surveillance", "troy ny", "fourth amendment", "procurement", "civil liberties", "rt4"]
 tags        = ["privacy", "surveillance", "fourth-amendment", "civil-liberties"]
 categories  = ["articles"]
 schema_type = "Article"
 aeo_expertise = "Surveillance Accountability, Civil Liberties, Municipal Technology Policy"
-aliases     = ["/13-troy-flock/"]
+aliases     = ["/17-troy-flock/"]
 og_image    = "/assets/og-posts.png"
 series      = ["The Watchers You Fed"]
 
