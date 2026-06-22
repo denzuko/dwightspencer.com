@@ -52,19 +52,12 @@ suite with CECI-level testing via expect+s3270.
 
 <h2 id="open-source">Open source</h2>
 
-<p>Active projects:</p>
-
 <ul>
 <li><code>mlisp</code> — zero-dependency SBCL mailing list manager. Email as actor-based pub/sub. <a href="https://github.com/denzuko/mlisp">github.com/denzuko/mlisp</a></li>
 <li><code>odoo-mcp-server</code> — C99 MCP JSON-RPC 2.0 server, WASM/Cloudflare Workers target. tsoding/arena.h, nob.h build driver, BDD-first discipline throughout.</li>
 <li><code>r2-asset-sync</code> — five release channels (POSIX shell, GitHub Actions composite, Terraform module, Ansible Galaxy role, nob.h DAG), all merged, v1.0.0 tagged.</li>
 <li><code>clacks.h</code> — single-header C library implementing an optical telegraph wire protocol (Discworld Clacks + D'ni encoding). Macros only.</li>
 </ul>
-
-<p>Recently archived: <code>sext</code> (Common Lisp AST-to-JSON attestation tool) — aborted after
-a Tier 1/2/3 structural finding. The safe version fails silently on macro-using code;
-the correct version crosses the trust boundary it was meant to guard.
-<a href="/posts/23-lisp-attestation-hackers/">Post 23</a> has the post-mortem.</p>
 
 <h2 id="community">Community</h2>
 
