@@ -13,18 +13,12 @@ aliases     = ["/now/"]
 
 <p>
 <em>The Watchers You Fed: Turn the Lens</em> — manuscript at ~64,700 words across twelve
-chapters, targeting KDP release before Labor Day 2026. HOPE 26 accepted the talk:
+chapters, targeting KDP release before Labour Day 2026. HOPE 26 accepted the talk:
 "The Watchers You F.E.D." (Feds, Extractors, Data-brokers), August 14–16 in New
 York City. The talk is the pre-order launch vehicle. Chapters surface here as
 posts before the book ships — the current arc covers Third-Party Doctrine, ALPR
 municipal contracts, AI capability compression, and the voluntary identity capture
 built into age verification infrastructure.
-</p>
-
-<p>
-GRID_BREAK_518 zine series — Issues 01–03 in production for RT4 Albany.
-Central Avenue Surveillance Spine coverage (Flock/Fusus/Raven infrastructure in
-the Capital Region).
 </p>
 
 <h2 id="infrastructure">Infrastructure</h2>
@@ -51,7 +45,7 @@ the edge, Cloudflare Zero Trust tunnel, VRRP via keepalived.
 </p>
 
 <p>
-EDM/DPR back-office on BRICKS_TS — COBOL and REXX programs against PostgreSQL
+EDM/DPR back-office on BRICKS_TS — COBOL and REXX programmes against PostgreSQL
 via EXEC SQL. PostScript report generation through <code>pg_notify</code>. Four-tier test
 suite with CECI-level testing via expect+s3270.
 </p>
@@ -70,16 +64,15 @@ suite with CECI-level testing via expect+s3270.
 <p>Recently archived: <code>sext</code> (Common Lisp AST-to-JSON attestation tool) — aborted after
 a Tier 1/2/3 structural finding. The safe version fails silently on macro-using code;
 the correct version crosses the trust boundary it was meant to guard.
-<a href="/posts/21-lisp-attestation-hackers/">Post 21</a> has the post-mortem.</p>
+<a href="/posts/23-lisp-attestation-hackers/">Post 23</a> has the post-mortem.</p>
 
-<h2 id="advocacy">Advocacy</h2>
+<h2 id="community">Community</h2>
 
 <p>
 Technology Chair, Restore The Fourth (national). Current RT4 TWG published
 standards: RT4-TWG-2026-001 (Signal Desktop Technical Brief),
 RT4-STD-2026-001 (Technical Brief Reporting Standard). The TWG scope is
-technical tools and standards for RT4 members — not public policy analysis,
-which stays in this byline.
+technical tools and standards for RT4 members.
 </p>
 
 <p>
@@ -99,7 +92,6 @@ systems. The usual stack of <em>2600</em> and HPR backlog.
 <h2 id="radio">Radio</h2>
 
 <p>
-Da Planet Radio — <a href="https://klaxon.dapla.net">klaxon.dapla.net</a>. Live and recorded. The Ellison Digital
-Minerals ARG runs through the feed as diegetic internal communications. HPR
-contributions when the manuscript allows.
+Da Planet Radio — <a href="https://klaxon.dapla.net">klaxon.dapla.net</a>. Live and recorded.
+HPR contributions when the manuscript allows.
 </p>
