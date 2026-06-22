@@ -41,9 +41,37 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 21 posts."
+   Generated from 23 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
+
+    ;; The Awesome Motive Attack Is a CDN Trust Problem, Not a Plugin Problem
+    (pf 'post "22-cdn-trust-supply-chain"
+        "The Awesome Motive Attack Is a CDN Trust Problem, Not a Plugin Problem"
+        "2026-06-16"
+        865)
+(pf 'tag "22-cdn-trust-supply-chain" :infrastructure)
+(pf 'tag "22-cdn-trust-supply-chain" :devsecops)
+(pf 'tag "22-cdn-trust-supply-chain" :supplychain)
+(pf 'tag "22-cdn-trust-supply-chain" :infosec)
+(pf 'author "22-cdn-trust-supply-chain" "0009-0001-0066-4646")
+(pf 'related "22-cdn-trust-supply-chain"
+        "14-sbom-ai-provenance"
+        "post 14 covers the SBOM provenance gap this attack makes concrete")
+
+    ;; CIRCIA's Town Halls Close This Week. The 72-Hour Clock Doesn't.
+    (pf 'post "21-circia-72-hour-clock"
+        "CIRCIA's Town Halls Close This Week. The 72-Hour Clock Doesn't."
+        "2026-06-16"
+        702)
+(pf 'tag "21-circia-72-hour-clock" :infrastructure)
+(pf 'tag "21-circia-72-hour-clock" :ot)
+(pf 'tag "21-circia-72-hour-clock" :ics)
+(pf 'tag "21-circia-72-hour-clock" :devsecops)
+(pf 'author "21-circia-72-hour-clock" "0009-0001-0066-4646")
+(pf 'related "21-circia-72-hour-clock"
+        "20-sadm-ot-visibility"
+        "post 20 covers the OT boundary visibility problem CIRCIA reporting is designed to surface")
 
     ;; The SADM Incident Is an OT Visibility Story
     (pf 'post "20-sadm-ot-visibility"
