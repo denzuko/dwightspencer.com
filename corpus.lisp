@@ -41,9 +41,21 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 23 posts."
+   Generated from 24 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
+
+    ;; Why Lisp Is Only for Hackers
+    (pf 'post "23-lisp-attestation-hackers"
+        "Why Lisp Is Only for Hackers"
+        "2026-06-21"
+        875)
+(pf 'tag "23-lisp-attestation-hackers" :lisp)
+(pf 'tag "23-lisp-attestation-hackers" :governance)
+(pf 'tag "23-lisp-attestation-hackers" :finops)
+(pf 'tag "23-lisp-attestation-hackers" :static-analysis)
+(pf 'tag "23-lisp-attestation-hackers" :devsecops)
+(pf 'author "23-lisp-attestation-hackers" "0009-0001-0066-4646")
 
     ;; The Awesome Motive Attack Is a CDN Trust Problem, Not a Plugin Problem
     (pf 'post "22-cdn-trust-supply-chain"
