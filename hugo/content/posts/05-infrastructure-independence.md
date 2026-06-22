@@ -19,7 +19,7 @@ Part of the Infrastructure Independence series.</em></p>
 
 <h2 id="abstract">Abstract</h2>
 
-<p>Self-hosting is having a moment. It's also attracting a lot of bad advice.
+<p>Self-hosting is having a moment. It is also attracting a lot of bad advice.
 This article cuts through the homelab fantasy to answer the questions that
 actually matter: what is worth hosting yourself, what is not, what the real
 threat model is, and how to build infrastructure that survives you being
@@ -31,7 +31,7 @@ unavailable for two weeks.</p>
 correct and useless. <em>Which</em> data? From whom? At what cost?</p>
 
 <p>The realistic threat model for a privacy-conscious individual or small
-organization in 2026 is:</p>
+organisation in 2026 is:</p>
 
 <ol>
 <li><strong>Commercial surveillance</strong> — platforms monetizing behavioral data</li>

@@ -23,7 +23,7 @@ og_image    = "/assets/og-posts.png"
 <p>If you came here from
 <a href="/posts/00-hellowrld/">post 00</a> expecting to SSH into
 <code>hack.dapla.net</code> and find research papers and easter eggs —
-you can't. It's returning 503. The SSH port is closed. The service is offline.</p>
+you cannot. It is returning 503. The SSH port is closed. The service is offline.</p>
 
 <p>This post is the status update that post 00 implicitly promised.</p>
 
@@ -41,7 +41,7 @@ The node is a playground: tools to use, abuse, and iterate on.</p>
 
 <p>Soft Serve and
 <a href="https://github.com/charmbracelet/wish">Wish</a>
-never got along. You couldn't actually clone code or browse documents in
+never got along. You could not actually clone code or browse documents in
 any reliable way. What looked like a git host was mostly a maintenance
 surface with no users.</p>
 
@@ -57,7 +57,7 @@ migration was ready to justify it.</p>
 
 <h2 id="what-comes-back">What might come back</h2>
 
-<p>Honest answer: unclear, and that's fine. Some options on the table:</p>
+<p>Honest answer: unclear, and that is fine. Some options on the table:</p>
 
 <ul>
 <li>A <a href="https://github.com/moshix/bricks_ts">3270/bricks</a>-style terminal experience or proper BBS — the node has the right aesthetic for it</li>
@@ -76,11 +76,11 @@ Whatever goes there will be something worth showing up for.</p>
 <p>This is what self-hosting actually looks like. Temporary arrangements
 calcify. A service that was supposed to be scaffolding becomes load-bearing.
 Then the thing it was scaffolding never gets built, and the scaffolding
-itself doesn't work well enough to justify keeping.</p>
+itself does not work well enough to justify keeping.</p>
 
-<p>The answer isn't to move back to a managed platform.
-The answer is to let things that aren't working die cleanly,
-and build the replacement when you know what it's actually for.</p>
+<p>The answer is not to move back to a managed platform.
+The answer is to let things that are not working die cleanly,
+and build the replacement when you know what it is actually for.</p>
 
-<p><code>hack.dapla.net</code> will be back when there's something worth putting there.</p>
+<p><code>hack.dapla.net</code> will be back when there is something worth putting there.</p>
 

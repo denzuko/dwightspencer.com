@@ -31,20 +31,20 @@ no operational overhead to think about. That pricing had a side effect: it made 
 exempt from the same governance treatment every other cloud service gets.
 
 IAM policies, cost alerts, pipeline budget thresholds, audit logging — all the standard
-controls that go on compute, storage, and egress didn't get applied to AI because AI was
+controls that go on compute, storage, and egress did not get applied to AI because AI was
 a subscription, not a meter.
 
-That's over now.
+That is over now.
 
 ## The specific problem for pipeline operators
 
-The change that matters for anyone running Copilot at organization scale: Copilot code
+The change that matters for anyone running Copilot at organisation scale: Copilot code
 review now draws from both AI Credits and GitHub Actions minutes as separate line items
 for the same workflow step.
 
 A review workflow running automatically on every pull request is now a variable-cost event
-with two meters running simultaneously. GitHub's usage dashboard doesn't give per-workflow
-granularity by default. You can hit the end of the billing cycle with a line item you can't
+with two meters running simultaneously. GitHub's usage dashboard does not give per-workflow
+granularity by default. You can hit the end of the billing cycle with a line item you cannot
 attribute to a specific workflow without additional instrumentation.
 
 This is the same problem cloud egress had in 2015. The meter was always there — it was
@@ -53,7 +53,7 @@ governance controls find out simultaneously.
 
 ## The controls that belong on AI tooling
 
-These are not exotic. They're the same controls you'd put on any cloud service with
+These are not exotic. They are the same controls you'd put on any cloud service with
 variable consumption.
 
 **Model tier policies per workflow type.** Autocomplete, code review, and agentic sessions
@@ -66,11 +66,11 @@ notification before you hit your budget ceiling is a morning's work.
 
 **Explicit gates on agentic workloads.** Copilot agentic sessions are the highest-cost
 use case. Triggering them automatically on every PR event without a human approval step
-is a policy decision — it just wasn't labeled as one until the billing model made it visible.
+is a policy decision — it just was not labelled as one until the billing model made it visible.
 
 ## What this actually signals
 
-The teams that are annoyed right now are the teams that didn't build governance because
+The teams that are annoyed right now are the teams that did not build governance because
 the pricing made governance feel unnecessary. The billing model change is Microsoft
 removing the subsidy that made that feel reasonable.
 

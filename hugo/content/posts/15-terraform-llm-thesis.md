@@ -40,7 +40,7 @@ this specific environment, and applied the result.
 ## What the comparison showed
 
 The LLM path required multiple iteration cycles per module. Provider API drift alone
-caused three full cycles on the IAM module — the model's training data didn't match the
+caused three full cycles on the IAM module — the model's training data did not match the
 current provider schema. The cookiecutter path went through a single cycle: template generation, variable substitution, apply.
 At module count, the gap compounds linearly.
 
@@ -64,23 +64,23 @@ which skews toward configurations that worked in a specific context once, were n
 reviewed for hardening, and are overrepresented in training data precisely because they
 shipped.
 
-## Why policy-as-code closes the gap the model can't close itself
+## Why policy-as-code closes the gap the model cannot close itself
 
 The cookiecutter template had OPA/Rego gates wired into the generation step. Code that violated policy was rejected before it ever reached a plan or apply step. The model
 had no such feedback loop. It had training signal from public repositories and exit codes
 from the Terraform CLI. Neither of those tells it whether the IAM binding is too
-permissive for the environment it's being deployed into.
+permissive for the environment it is being deployed into.
 
 This is the gap that matters. An LLM generating Terraform is doing pattern matching
 against public infrastructure code, most of which was written without explicit security
-constraints in the template. The model doesn't know your threat model. It doesn't know
-that this VPC should never peer with that one. It doesn't know that this logging pipeline
+constraints in the template. The model does not know your threat model. It does not know
+that this VPC should never peer with that one. It does not know that this logging pipeline
 handles data subject to retention requirements. It knows what Terraform that ran looked
 like, and it produces more of that.
 
 Policy-as-code is the mechanism that carries the architecture intent the model cannot
 infer. An OPA/Rego gate that checks "does this VPC peering connect networks that should be
-isolated" is not redundant with `terraform validate` — it's the layer that validates
+isolated" is not redundant with `terraform validate` — it is the layer that validates
 semantic correctness against your specific requirements, which the CLI cannot do and the
 model will not do reliably.
 
@@ -98,5 +98,5 @@ The first produces infrastructure that is right.
 The lab is at [~denzuko/lab-techolution-debugging](https://git.sr.ht/~denzuko/lab-techolution-debugging).
 The stream session that ran this experiment is at
 [~denzuko/twitch-lab-week2](https://git.sr.ht/~denzuko/twitch-lab-week2). Both are dated
-artifacts — the tooling has moved, the methodology holds. The VPC peering misconfiguration
+artefacts — the tooling has moved, the methodology holds. The VPC peering misconfiguration
 is documented in the commit history.

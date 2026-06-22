@@ -23,7 +23,7 @@ og_image    = "/assets/og-posts.png"
 I referenced
 <a href="https://web.archive.org/web/2024*/https://github.com/canarytail/standard">Canarytail</a>
 as an attempt to formalize the warrant canary into a machine-readable standard.
-As of May 2026, the <code>canarytail</code> GitHub organization does not resolve.
+As of May 2026, the <code>canarytail</code> GitHub organisation does not resolve.
 The website <code>canarytail.org</code> returns nothing. The org appears to have been
 deleted entirely — not archived, not transferred, deleted.</p>
 
@@ -40,26 +40,26 @@ periodically check a text file.</p>
 
 <p>The standard saw some adoption in the privacy-tooling community.
 A handful of projects built verification tooling against it.
-Organizations that implemented it cited it in their privacy documentation.</p>
+organisations that implemented it cited it in their privacy documentation.</p>
 
 <p>Now those citations are dead links, the verification tools point at
-a deleted repository, and any organization that told users
+a deleted repository, and any organisation that told users
 "our canary is Canarytail-compliant" is now citing a standard
 that no longer has a canonical source.</p>
 
 <h2 id="the-dependency-problem">The dependency problem this illustrates</h2>
 
-<p>A warrant canary is supposed to be evidence that an organization
+<p>A warrant canary is supposed to be evidence that an organisation
 has not been compromised or coerced. Grounding that evidence in a
-third-party standard maintained by a volunteer organization with
+third-party standard maintained by a volunteer organisation with
 no institutional backing is precisely the wrong architecture for
 the job.</p>
 
 <p>Consider what "Canarytail-compliant" actually meant in practice:</p>
 
 <ul>
-<li>Your canary's schema was defined by a GitHub org you don't control</li>
-<li>The canonical validator lived at a URL you don't control</li>
+<li>Your canary's schema was defined by a GitHub org you do not control</li>
+<li>The canonical validator lived at a URL you do not control</li>
 <li>The standard's continued existence depended on a small group
 of maintainers staying interested and keeping the org alive</li>
 <li>When the org deleted itself, every implementation that
@@ -98,7 +98,7 @@ readability, defined inline, not by reference to an external standard</li>
 <p><strong>The signing key</strong> should be published at a URL the issuer controls
 (<code>/.well-known/pgp-key.txt</code> is conventional) and cross-referenced in
 <code>security.txt</code>. Keybase works as an additional attestation layer;
-it shouldn't be the only one.</p>
+it should not be the only one.</p>
 
 <p><strong>Monitoring</strong> should check for the file's presence and signature validity
 from infrastructure the relying party controls — not a third-party
@@ -119,7 +119,7 @@ references <code>github.com/canarytail</code> or <code>canarytail.org</code>:</p
 <li>Remove the reference or replace it with a Wayback Machine
 archive link (<code>web.archive.org</code> has snapshots through at least 2024)</li>
 <li>Evaluate whether your canary's structure depends on the Canarytail
-schema — if so, document your schema inline so it's self-describing</li>
+schema — if so, document your schema inline so it is self-describing</li>
 <li>Consider this an opportunity to audit the canary's other
 dependencies for the same single-point-of-failure problem</li>
 </ol>
@@ -139,8 +139,8 @@ become invisible maintenance debt when they go dark.</p>
 The answer is to evaluate any standard you depend on for attestation
 or compliance using the same adversarial lens you'd apply to
 any other single point of failure: what happens when this is gone?
-If the answer is "our canary becomes unverifiable," that's a
-design problem to fix before it's forced on you.</p>
+If the answer is "our canary becomes unverifiable," that is a
+design problem to fix before it is forced on you.</p>
 
 
 <h2 id="update-the-canary-should-live-in-the-infrastructure">Update: the canary should live in the infrastructure</h2>

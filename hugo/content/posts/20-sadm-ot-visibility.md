@@ -16,7 +16,7 @@ og_image    = "/assets/og-posts.png"
 <p>In May 2026, Dragos published findings from an investigation into
 a municipal water utility in Monterrey, Mexico.
 An unidentified threat actor, tracked by Gambit Security as part of a
-broader campaign against Mexican government organizations, used
+broader campaign against Mexican government organisations, used
 Anthropic's Claude to assist an intrusion that began in IT and
 attempted to reach OT.</p>
 
@@ -43,7 +43,7 @@ Both failed. The underlying control systems were never accessed.
 Dragos found no evidence the attacker gained any visibility into
 SADM's physical water management operations.</p>
 
-<p>The Dragos investigation reviewed more than 350 artifacts from the
+<p>The Dragos investigation reviewed more than 350 artefacts from the
 adversary's infrastructure — AI-generated scripts, offensive tools,
 and interaction logs.
 Claude served as the primary technical executor,
@@ -90,7 +90,7 @@ environments actually implement is the architecture that produces the
 96 percent figure year after year.</p>
 
 <p>Replacing the AI tool with a skilled human analyst who knows what a
-vNode interface is doesn't change the story.
+vNode interface is does not change the story.
 The exposure was the flat boundary.
 The AI just made finding it faster and cheaper.</p>
 
@@ -121,7 +121,7 @@ automation devices in the first pass and not finding them at all.</p>
 <p>The SADM intrusion was undetected during the reconnaissance and
 password spraying phase.
 It was discovered weeks later in a forensic investigation.
-For smaller environments that can't retain Dragos,
+For smaller environments that cannot retain Dragos,
 the monitoring controls that would have surfaced this earlier are not exotic:</p>
 
 <ul>
@@ -134,8 +134,8 @@ reviewed in a post-incident forensic dump.</li>
 OT-adjacent infrastructure. Two rounds of password spraying against
 a web application should be detectable in real time.</li>
 
-<li><strong>Asset inventory for OT-adjacent services.</strong> If you don't know
-the vNode interface exists, you can't monitor it. A periodic scan
+<li><strong>Asset inventory for OT-adjacent services.</strong> If you do not know
+the vNode interface exists, you cannot monitor it. A periodic scan
 of your automation VLAN's listening services, compared against a
 known-good baseline, surfaces what an attacker's reconnaissance
 would find.</li>
@@ -150,7 +150,7 @@ assumed-safe internal network.</p>
 
 <p>The Dragos report documents a genuine capability change.
 An attacker who would previously have needed ICS domain expertise
-to recognize a vNode interface as a strategically significant target
+to recognise a vNode interface as a strategically significant target
 now needs only the ability to run a commercial LLM against internal
 network enumeration output.</p>
 

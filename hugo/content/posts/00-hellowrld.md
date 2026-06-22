@@ -22,7 +22,7 @@ one understands system design andymore.</p>
 We can get down to the real fun.</p>
 <h3 id="-ssh-hackdaplanet-help">$ ssh hack.dapla.net help</h3>
 <p><em>Update, May 2026: <code>hack.dapla.net</code> is currently offline.
-<a href="/posts/08-the-shell-is-gone/">Post 08</a> has the full status and what's coming next.</em></p>
+<a href="/posts/08-the-shell-is-gone/">Post 08</a> has the full status and what is coming next.</em></p>
 <p>
 
   

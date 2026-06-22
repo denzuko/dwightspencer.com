@@ -23,7 +23,7 @@ All rights reserved. No AI training. No reproduction without written permission.
 
 <h2 id="prologue">Prologue: The Infrastructure You Built</h2>
 
-<p>You didn't build the surveillance state. But you fed it.</p>
+<p>You did not build the surveillance state. But you fed it.</p>
 
 <p>Every check-in, every search, every purchase routed through a platform's
 payment processor, every commute tracked by a license plate reader you drove

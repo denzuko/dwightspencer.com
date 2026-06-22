@@ -16,7 +16,7 @@ og_image    = "/assets/og-posts.png"
 
 <p class="meta"><em>Written in my capacity as Technology Chair, <a href="https://restorethe4th.com">Restore The Fourth</a>.
 This is a personal technical brief, not legal advice, and does not constitute
-a formal position of Restore The Fourth national organization without separate
+a formal position of Restore The Fourth national organisation without separate
 ratification. Expert reviewed.</em></p>
 
 <h2 id="abstract">Abstract</h2>
@@ -24,7 +24,7 @@ ratification. Expert reviewed.</em></p>
 <p>The Fourth Amendment doctrine developed for physical searches is structurally
 inadequate for AI-powered mass surveillance. Automated License Plate Readers
 (ALPRs), predictive analytics platforms, and commercial data fusion are
-creating searchable records of population movement, association, and behavior
+creating searchable records of population movement, association, and behaviour
 at a scale and resolution that no warrant system was designed to govern.
 This brief documents the technical architecture, identifies the doctrinal
 gaps, and proposes technical and legislative remedies.</p>
@@ -34,7 +34,7 @@ gaps, and proposes technical and legislative remedies.</p>
 <h3 id="1-1-alpr">1.1 Automated License Plate Readers</h3>
 
 <p>Flock Safety deploys fixed and mobile ALPR cameras that capture license
-plates, vehicle make/model/color, and associated metadata (timestamp,
+plates, vehicle make/model/colour, and associated metadata (timestamp,
 GPS coordinates, direction of travel) for every vehicle that passes within
 range. Data is uploaded in near-real-time to a cloud platform accessible
 to subscribing law enforcement agencies.</p>

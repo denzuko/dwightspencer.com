@@ -25,7 +25,7 @@ series      = ["Dead Reckoning"]
 layers in a game simulation engine: Prolog for rule-based knowledge, an
 ML-style type system (Coalton DSL) for typed computation, and Common Lisp as
 glue and tooling. The domain is a Gen-I Pokémon Yellow battle simulator —
-chosen for its well-specified rules, enumerable state space, and rich catalog
+chosen for its well-specified rules, enumerable state space, and rich catalogue
 data. We report benchmark results across SBCL (native compilation) and ECL
 (C-native and bytecode), document where each paradigm excels, and give honest
 findings about the friction at language boundaries. The central conclusion is
@@ -41,7 +41,7 @@ rather than as a runtime layer competing with C.</p>
 <h2 id="1-introduction">1. Introduction</h2>
 <p>Game simulation engines solve a recurring architectural problem: a large,
 structured body of rules (damage formulas, type interactions, status effects,
-item behaviors) must be applied efficiently to a dynamic state that changes
+item behaviours) must be applied efficiently to a dynamic state that changes
 every frame or turn. The naive approach &#8212; encode everything as C structs and
 switch statements &#8212; is fast but brittle. Rules are scattered across source
 files, adding a new mechanic requires touching multiple sites, and testing
@@ -72,7 +72,7 @@ implementations.</p>
 <h2 id="2-architecture">2. Architecture</h2>
 <p>The system is structured as three layers with strict ownership boundaries.</p>
 <pre><code>&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
-&#9474;  PROLOG  (logic-engine.lisp + catalog.lisp)                 &#9474;
+&#9474;  PROLOG  (logic-engine.lisp + catalogue.lisp)                 &#9474;
 &#9474;  Rules: type chart &#183; item effects &#183; team validity           &#9474;
 &#9474;  Facts: 151 Pok&#233;mon &#183; 85 moves &#183; 19 items &#183; all trainers   &#9474;
 &#9474;  Queries: suggest-badge-team &#183; usable-item-p &#183; team-valid-p &#9474;
@@ -89,7 +89,7 @@ implementations.</p>
                            &#9474;  plist&#8594;Pokemon &#183; match-outcome
 &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9580;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
 &#9474;  CL GLUE  (simulator.lisp &#8212; ~80 lines)                      &#9474;
-&#9474;  Bridges catalog plists to Coalton values                   &#9474;
+&#9474;  Bridges catalogue plists to Coalton values                   &#9474;
 &#9474;  Entry points: run-simulation &#183; run-badge-battle            &#9474;
 &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</code></pre>
 <p>The boundary rule is explicit: <strong>Prolog owns facts and rules; Coalton owns
@@ -139,7 +139,7 @@ early version of the loop body used a CL <code>cond</code> that had no <code>dra
 in the codebase.</p>
 
 <h3 id="2-3-the-cl-glue-layer">2.3 The CL Glue Layer</h3>
-<p><code>simulator.lisp</code> is ~80 lines with no logic. It bridges catalog data
+<p><code>simulator.lisp</code> is ~80 lines with no logic. It bridges catalogue data
 (plists) to Coalton values and exposes human-readable entry points.
 The <code>match-outcome</code> macro required three iterations due to cross-package
 symbol resolution: <code>BattleOutcome/Victor</code>&#8217;s slot is <code>POKEMON-SIM::|_0|</code>

@@ -58,7 +58,7 @@ browser then executes with the same trust it extends to code served from the
 site itself.</p>
 
 <p>There is no SLSA attestation for a CDN endpoint. There is no Sigstore signature
-on JavaScript fetched at runtime. The SBOM and artifact attestation framework
+on JavaScript fetched at runtime. The SBOM and artefact attestation framework
 assumes a build-time dependency graph. Runtime third-party script inclusion
 sits outside that model, and it represents a substantial fraction of the actual
 attack surface for web applications at scale.</p>

@@ -32,7 +32,7 @@ og_image    = "/assets/og-posts.png"
 
 <h2>Section D.8 — The AI Waiver Clause</h2>
 
-<p>In one of the most aggressive clauses in any major platform's TOS, Section D.8 doesn't merely permit AI training on your code — it compels you to waive your own protective terms:</p>
+<p>In one of the most aggressive clauses in any major platform's TOS, Section D.8 does not merely permit AI training on your code — it compels you to waive your own protective terms:</p>
 
 <p><small><em>Highlighted: rights you are forced to waive</em></small></p>
 <blockquote>
@@ -268,7 +268,7 @@ make lint</code></pre>
 
 <h3>Part 4b — Bridge CI During Transition with hottub</h3>
 
-<p>If you are running a gradual migration and still have a GitHub mirror active, <a href="https://github.com/emersion/hottub">hottub</a> — also by Simon Ser (<code>~emersion</code>) — acts as a CI bridge that forwards GitHub Check run events to <code>builds.sr.ht</code>. This lets you keep GitHub as a read-only mirror for contributors who haven't switched yet, while all actual CI runs execute on SourceHut. A <a href="https://hottub.emersion.fr/">public hosted instance</a> is available if you don't want to self-host.</p>
+<p>If you are running a gradual migration and still have a GitHub mirror active, <a href="https://github.com/emersion/hottub">hottub</a> — also by Simon Ser (<code>~emersion</code>) — acts as a CI bridge that forwards GitHub Check run events to <code>builds.sr.ht</code>. This lets you keep GitHub as a read-only mirror for contributors who have not switched yet, while all actual CI runs execute on SourceHut. A <a href="https://hottub.emersion.fr/">public hosted instance</a> is available if you do not want to self-host.</p>
 
 <h4>Step 1 — Register a GitHub App for the Checks API</h4>
 
@@ -300,7 +300,7 @@ go build
 -gh-private-key &lt;path/to/private-key.pem&gt; \
 -gh-webhook-secret &lt;webhook-secret&gt;</code></pre>
 
-<p>Optionally, register an <a href="https://meta.sr.ht/oauth2/client-registration">sr.ht OAuth2 client</a> (redirection URI: <code>https://&lt;your-domain&gt;/authorize-srht</code>) to improve the user authorisation flow, then pass its credentials:</p>
+<p>Optionally, register an <a href="https://meta.sr.ht/oauth2/client-registration">sr.ht OAuth2 client</a> (redirection URI: <code>https://&lt;your-domain&gt;/authorise-srht</code>) to improve the user authorisation flow, then pass its credentials:</p>
 
 <pre><code>./hottub \
 -gh-app-id &lt;app-id&gt; \

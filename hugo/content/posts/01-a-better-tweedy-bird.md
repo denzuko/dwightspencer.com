@@ -15,10 +15,10 @@ og_image    = "/assets/og-posts.png"
 +++
 
 <h1 id="warrent-canaries">Warrent Canaries</h1>
-<p><em>Update, May 2026: The Canarytail organization and website are no longer online.
+<p><em>Update, May 2026: The Canarytail organisation and website are no longer online.
 <a href="/posts/09-after-the-canary/">Post 09</a> documents what happened and what
 resilient canary infrastructure looks like without third-party dependencies.</em></p>
-<p>A warrant canary is a statement that declares that an organization has
+<p>A warrant canary is a statement that declares that an organisation has
 not taken certain actions or received certain requests for information from
 government or law enforcement authorities. Many services use warrant canaries
 to let users know how private their data is. There are even attempts to

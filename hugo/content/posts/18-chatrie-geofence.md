@@ -28,7 +28,7 @@ series      = ["The Watchers You Fed"]
 
 <p>The doctrine made sense in 1979 when the Supreme Court applied it to bank records. It does not map cleanly to 2026.</p>
 
-<p>Justice Gorsuch pressed on this at oral argument: if voluntarily storing information with Google destroys Fourth Amendment protection, the same logic reaches email, documents, photos, and calendar entries. Modern people don't store the substance of their lives in filing cabinets anymore — they store it on servers owned by corporations that operate under terms of service most people have never read. If that storage constitutes voluntary disclosure to a third party the government can access without a warrant, the Fourth Amendment contracts substantially without anyone formally changing the text.</p>
+<p>Justice Gorsuch pressed on this at oral argument: if voluntarily storing information with Google destroys Fourth Amendment protection, the same logic reaches email, documents, photos, and calendar entries. Modern people do not store the substance of their lives in filing cabinets anymore — they store it on servers owned by corporations that operate under terms of service most people have never read. If that storage constitutes voluntary disclosure to a third party the government can access without a warrant, the Fourth Amendment contracts substantially without anyone formally changing the text.</p>
 
 <h2 id="what-a-geofence-warrant-actually-does">What a geofence warrant actually does</h2>
 
@@ -36,7 +36,7 @@ series      = ["The Watchers You Fed"]
 
 <p>The Fifth Circuit, in a separate case, held that geofence warrants are inherently overbroad and violate the Fourth Amendment — that the initial search of the full database, not just the eventual identification of a suspect, is the constitutional problem. The Fourth Circuit disagreed. The split is why <em>Chatrie</em> is at the Supreme Court.</p>
 
-<p>The constitutional issue is that the search begins with no probable cause as to any individual — it's a dragnet, justified by the crime scene location, that sweeps in everyone who happened to be nearby. A person who was at that credit union legitimately, with no connection to the robbery, had their movements extracted and reviewed by law enforcement. They were never told.</p>
+<p>The constitutional issue is that the search begins with no probable cause as to any individual — it is a dragnet, justified by the crime scene location, that sweeps in everyone who happened to be nearby. A person who was at that credit union legitimately, with no connection to the robbery, had their movements extracted and reviewed by law enforcement. They were never told.</p>
 
 <h2 id="how-the-justices-read">How the justices read it</h2>
 
@@ -46,9 +46,9 @@ series      = ["The Watchers You Fed"]
 
 <h2 id="the-infrastructure-question">The infrastructure question</h2>
 
-<p>The self-hosting argument and the Fourth Amendment argument are the same argument from different directions. If you control your own infrastructure, geofence warrants can't reach it. If you store your Location History with Google, it can.</p>
+<p>The self-hosting argument and the Fourth Amendment argument are the same argument from different directions. If you control your own infrastructure, geofence warrants cannot reach it. If you store your Location History with Google, it can.</p>
 
-<p>One major tech company has stated in its transparency reports that it doesn't maintain data in a form that responds to geofence warrants. Another changed its location data practices specifically to limit exposure to geofence requests. Those are engineering choices with constitutional consequences.</p>
+<p>One major tech company has stated in its transparency reports that it does not maintain data in a form that responds to geofence warrants. Another changed its location data practices specifically to limit exposure to geofence requests. Those are engineering choices with constitutional consequences.</p>
 
 <p>The court's decision will establish the legal floor. The engineering floor is yours to set.</p>
 

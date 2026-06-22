@@ -32,7 +32,7 @@ absorbs and brands practitioner knowledge.</p>
 doing what would later be called DevOps work: integrating development and
 operations workflows, automating deployment pipelines, treating infrastructure
 as code, and applying feedback loops from production systems to development
-velocity. We didn't have a name for it. We called it "Developer Operations"
+velocity. We did not have a name for it. We called it "Developer Operations"
 in internal documentation and client proposals.</p>
 
 <p>I was presenting these concepts at local technical meetups and user groups
@@ -68,7 +68,7 @@ provenance tracking. The dispute was settled without admission.</p>
 
 <p>The DevOps name was coined by practitioners. Within five years, every major
 enterprise software vendor had a "DevOps" product suite, a "DevOps" certification
-program, and a "DevOps" consulting practice. The practitioner community that
+programme, and a "DevOps" consulting practice. The practitioner community that
 developed the underlying concepts received attribution in conference keynotes
 and essentially nothing else.</p>
 
@@ -84,7 +84,7 @@ the authoritative definition.</p>
 and copyright — to suppress practitioner methodology development and sharing
 is a structural feature of the enterprise software industry, not an edge case.
 The asymmetry is total: a large corporation can sustain a meritless IP claim
-for longer than a small firm can sustain the legal defense.</p>
+for longer than a small firm can sustain the legal defence.</p>
 
 <p>The practical implication for practitioners: document everything, date
 everything, publish early. Public disclosure is prior art. A dated blog post,
