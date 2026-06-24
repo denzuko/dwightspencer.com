@@ -28,11 +28,11 @@ mainframe design, but because they were solving the same problems under
 different constraints.</p>
 
 <p>The platform is <a href="https://github.com/moshix/BRICKS_TS">BRICKS_TS</a>, a Go
-implementation of a CICS-compatible 3270 transaction server with embedded
+implementation of the CICS transaction model, running a 3270-compatible server with embedded
 COBOL and REXX interpreters and PostgreSQL via EXEC SQL. It runs on modern
 Linux hosts alongside a Postgres database, without the need for emulation,
 compilers, nor legacy MVS subsystems. You write a <code>.cob</code> or <code>.rexx</code>
-file, register a four-character TRANSID in <code>transactions.conf</code>, and it
+file, register a TRANSID of four characters in <code>transactions.conf</code>, and it
 runs. Stripping the mainframe hardware away leaves the architecture exposed,
 and the architecture is legible to anyone who has built a web application in
 the last twenty years.</p>
@@ -46,7 +46,7 @@ finds the programme name, loads it, and executes it.</p>
 
 <p>The web framework generation arrived at the same answer from a different
 direction. The constraint was stateless HTTP rather than expensive terminal
-sessions, the identifiers became URL paths rather than four-character codes,
+sessions, the identifiers became URL paths rather than codes of four characters,
 and the lookup table became a route configuration file rather than a compiled
 PCT. The structural answer is the same: a registration step maps an identifier
 to executable logic, and the framework handles dispatch.</p>
@@ -84,7 +84,7 @@ economically necessary — regenerating a full screen on every interaction was
 expensive, so the system needed to distinguish between what changed and what
 did not. The web framework generation arrived at the same separation through
 template engines and component models, driven by the different constraint of
-maintaining consistency between server-rendered HTML and client-side state.</p>
+maintaining consistency between HTML generated on the server and state held on the client.</p>
 
 <p>MVC's formal articulation came from Trygve Reenskaug at Xerox PARC in 1979,
 five years after CICS had this pattern in production. The separation was not a
