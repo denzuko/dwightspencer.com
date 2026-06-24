@@ -19,11 +19,11 @@ series      = ["Dead Reckoning"]
 +++
 
 <p>I have been running a CICS transaction server on a Linux host with PostgreSQL
-as the back-end, writing COBOL and REXX programmes that issue EXEC CICS and
-EXEC SQL statements, and watching the four-char TRANSID dispatch table route
+as the back end, writing COBOL and REXX programmes that issue EXEC CICS and
+EXEC SQL statements, and watching the four-character TRANSID dispatch table route
 requests to compiled programmes. The thing that keeps becoming obvious is that
 none of this is old. The abstractions are the same abstractions every web
-framework re-derived between 1995 and 2015. CICS just did it in production
+framework rediscovered between 1995 and 2015. CICS just did it in production
 first.</p>
 
 <p>The platform is <a href="https://github.com/moshix/BRICKS_TS">BRICKS_TS</a>, a Go
@@ -42,9 +42,9 @@ programme. The user types <code>CLNT</code> and presses Enter. CICS looks up CLN
 PCT, finds the programme name, loads it into the region, and executes it.
 When the programme finishes, CICS returns control.</p>
 
-<p>In contemporary terms, this is URL routing: the four-char string is the
+<p>In contemporary terms, this is URL routing: the four-character string is the
 path, the PCT is the route table, the CICS region is the application server,
-and the programme is the controller. Rails did not invent this. It re-invented it with slashes and
+and the programme is the controller. Rails did not invent this. It reinvented it with slashes and
 variable interpolation, and it took until the late 1990s for the web to
 catch up to where CICS was in 1974.</p>
 
@@ -97,8 +97,8 @@ and the called programme receives. State that needs to persist across user
 interactions goes into temporary storage or the CICS Auxiliary Data Store.</p>
 
 <p>This is the HTTP session model. The COMMAREA is the cookie or the session
-token. Temporary storage is the server-side session store. The pattern that
-web frameworks spent years debating — client-side state versus server-side
+token. Temporary storage is the server session store. The pattern that
+web frameworks spent years debating — state held by the client versus state held by the server
 state, where to put the JWT, how to handle session invalidation — is the
 same problem CICS architects were solving in the 1970s under different names.</p>
 
@@ -183,7 +183,7 @@ to have solved the same problems differently.</p>
 <p>A new framework that claims a clean separation between view and logic
 can be evaluated against BMS maps, which separated them completely in 1974
 with no shared state between the map definition and the programme. A framework
-that calls its routing convention-based can be compared against a four-char
+that calls its routing convention-based can be compared against a four-character
 TRANSID in a flat file, which is as terse as routing gets. A framework whose
 ORM hides SQL has not resolved the impedance mismatch between the relational
 model and the host language — it has moved the surprise from compile time
