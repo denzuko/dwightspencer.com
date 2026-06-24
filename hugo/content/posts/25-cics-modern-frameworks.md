@@ -28,10 +28,10 @@ first.</p>
 
 <p>The platform is <a href="https://github.com/moshix/BRICKS_TS">BRICKS_TS</a>, a Go
 implementation of a CICS-compatible 3270 transaction server with embedded
-COBOL and REXX interpreters and PostgreSQL via EXEC SQL. No Hercules. No JCL.
-No MVS. You write a <code>.cob</code> or <code>.rexx</code> file, register a four-character
-TRANSID in <code>transactions.conf</code>, and it runs. The simplicity of that
-registration step is the point of this post.</p>
+COBOL and REXX interpreters and PostgreSQL via EXEC SQL. It runs on a Linux
+host with a standard Postgres installation — no mainframe, no Hercules emulator,
+no JCL. You write a <code>.cob</code> or <code>.rexx</code> file, register a four-character
+TRANSID in <code>transactions.conf</code>, and it runs.</p>
 
 <h2 id="the-transid-is-a-url">The TRANSID is a URL</h2>
 
