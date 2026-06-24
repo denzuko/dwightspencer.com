@@ -20,11 +20,10 @@ series      = ["Dead Reckoning"]
 
 <p>I have been running CICS transactions against a Postgres database on a Linux
 host, writing COBOL and REXX that most of the people who read this site have
-never touched. The thing that becomes obvious is that the architecture is not
-alien. The routing table, the separation of map from logic, the explicit passing of state between
-transactions: the web framework generation arrived at the same structural answers independently,
-not because they were copying mainframe design, but because they were solving the same problems
-under different constraints.</p>
+never touched. The architecture is not alien. The web framework generation
+worked out the same answers to the same problems independently, not by copying
+mainframe design but by working under different material constraints on problems
+that have the same shape.</p>
 
 <p>The platform is <a href="https://github.com/moshix/BRICKS_TS">BRICKS_TS</a>, a Go
 implementation of the CICS transaction model with a 3270 terminal server, embedded
