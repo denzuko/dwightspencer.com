@@ -41,9 +41,23 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 25 posts."
+   Generated from 26 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
+
+    ;; Convergent Design: What BRICKS_TS Revealed About Web Frameworks
+    (pf 'post "25-cics-modern-frameworks"
+        "Convergent Design: What BRICKS_TS Revealed About Web Frameworks"
+        "2026-06-23"
+        1307)
+(pf 'tag "25-cics-modern-frameworks" :infrastructure)
+(pf 'tag "25-cics-modern-frameworks" :devops)
+(pf 'tag "25-cics-modern-frameworks" :open-source)
+(pf 'tag "25-cics-modern-frameworks" :foss)
+(pf 'author "25-cics-modern-frameworks" "0009-0001-0066-4646")
+(pf 'related "25-cics-modern-frameworks"
+        "15-terraform-llm-thesis"
+        "post 15 covers a related argument about the gap between code that runs and architecture that is correct")
 
     ;; Age Verification Is Identity Capture
     (pf 'post "24-age-verification-identity-capture"
