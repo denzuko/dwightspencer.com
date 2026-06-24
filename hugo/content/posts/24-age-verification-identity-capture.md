@@ -7,14 +7,14 @@ tags        = ["privacy", "surveillance", "infosec", "FourthAmendment", "infrast
 categories  = ["articles"]
 keywords    = ["age verification","identity capture","biometric","zero-knowledge proof","surveillance","privacy","COPPA","KOSA"]
 series      = ["The Watchers You Fed"]
-[related_post]
-  slug  = "04-watchers-you-fed"
-  label = "post 04 introduces the Watchers thesis that age verification extends"
 slug        = "24-age-verification-identity-capture"
 aliases     = ["/24-age-verification-identity-capture/"]
 og_image    = "/assets/og-posts.png"
 schema_type = "TechArticle"
 aeo_expertise = "Privacy Engineering, Identity Systems, Surveillance Infrastructure"
+[related_post]
+  slug  = "04-watchers-you-fed"
+  label = "post 04 introduces the Watchers thesis that age verification extends"
 +++
 
 <p>Age verification is the name on the label. The contents are different. What these
