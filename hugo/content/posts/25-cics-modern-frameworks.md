@@ -2,7 +2,7 @@
 title       = "Convergent Design: What BRICKS_TS Revealed About Web Frameworks"
 date        = "2026-06-23"
 draft       = false
-description = "Running CICS transactions against a Postgres database on a Linux host makes something obvious: the architecture is not alien. The routing table, the separation of map from logic separation, and explicit state handoff are the same structural answers the web framework generation arrived at independently, because they were solving the same problems under different constraints."
+description = "Running CICS transactions against a Postgres database on a Linux host makes something obvious: the architecture is not alien. The routing table, the separation of map from logic separation, and the explicit passing of state between transactions are the same structural answers the web framework generation arrived at independently, because they were solving the same problems under different constraints."
 slug        = "25-cics-modern-frameworks"
 keywords    = ["CICS","COBOL","BRICKS_TS","mainframe","web frameworks","SQL","REXX","software architecture","convergent design","history"]
 tags        = ["infrastructure","devops","open-source","foss"]
@@ -21,8 +21,8 @@ series      = ["Dead Reckoning"]
 <p>I have been running CICS transactions against a Postgres database on a Linux
 host, writing COBOL and REXX that most of the people who read this site have
 never touched. The thing that becomes obvious is that the architecture is not
-alien. The routing table, the separation of map from logic, the explicit state
-handoff between transactions — these are the same structural answers the web
+alien. The routing table, the separation of map from logic, the explicit passing of state between
+transactions — these are the same structural answers the web
 framework generation arrived at independently, not because they were copying
 mainframe design, but because they were solving the same problems under
 different constraints.</p>
