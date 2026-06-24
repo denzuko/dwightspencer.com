@@ -20,14 +20,12 @@ series      = ["Dead Reckoning"]
 
 <p>I have been running CICS transactions against a Postgres database on a Linux
 host, writing COBOL and REXX that most of the people who read this site have
-never touched. Whilst seemingly foreign to practitioners whose frame of
-reference is MVC frameworks and containerised microservices, the architecture
-is recognisable. The same design constraints that shaped CICS in production
-have paid forward across decades and language generations, each time
-re-emerging from the same source: the business needs of organisations that
-need to route requests, separate display from logic, and carry state across
-stateless interactions. Those constraints built CICS. They are still
-operating today.</p>
+never touched. The same design constraints that production business
+needs imposed on IBM in the 1970s have paid forward across every language
+generation since. What CICS solved for routing, display separation, and state
+management under the constraints of expensive terminal sessions, the web
+framework generation solved again under the constraints of stateless HTTP.
+The problems did not change. The constraints shaped the same answers.</p>
 
 <p>The platform is <a href="https://github.com/moshix/BRICKS_TS">BRICKS_TS</a>, a Go
 implementation of the CICS transaction model with a 3270 terminal server, embedded
