@@ -25,7 +25,7 @@ needs imposed on IBM in the 1970s have paid forward across every language
 generation since. What CICS solved for routing, display separation, and state
 management under the constraints of expensive terminal sessions, the web
 framework generation solved again under the constraints of stateless HTTP.
-The problems did not change. The constraints shaped the same answers.</p>
+The constraints shaped the same answers because the problems were the same.</p>
 
 <p>The platform is <a href="https://github.com/moshix/BRICKS_TS">BRICKS_TS</a>, a Go
 implementation of the CICS transaction model with a 3270 terminal server, embedded
