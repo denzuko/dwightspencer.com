@@ -28,7 +28,7 @@ mainframe design, but because they were solving the same problems under
 different constraints.</p>
 
 <p>The platform is <a href="https://github.com/moshix/BRICKS_TS">BRICKS_TS</a>, a Go
-implementation of the CICS transaction model, running a 3270-compatible server with embedded
+implementation of the CICS transaction model with a 3270 terminal server, embedded
 COBOL and REXX interpreters and PostgreSQL via EXEC SQL. It runs on modern
 Linux hosts alongside a Postgres database, without the need for emulation,
 compilers, nor legacy MVS subsystems. You write a <code>.cob</code> or <code>.rexx</code>
