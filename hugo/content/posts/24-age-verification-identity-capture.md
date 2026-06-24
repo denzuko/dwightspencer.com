@@ -3,8 +3,12 @@ title       = "Age Verification Is Identity Capture"
 date        = "2026-06-22"
 description = "The technical architecture behind age assurance systems — what data is captured, where it flows, who holds it, and why the cryptographic alternative that would solve the stated problem is not being deployed."
 tags        = ["privacy", "surveillance", "infosec", "FourthAmendment", "infrastructure"]
+categories  = ["articles"]
+keywords    = ["age verification","identity capture","biometric","ZK proof","surveillance","privacy","COPPA","KOSA","Watchers"]
 series      = ["The Watchers You Fed"]
-related_post = "04-watchers-you-fed"
+[related_post]
+  slug  = "04-watchers-you-fed"
+  label = "post 04 introduces the Watchers thesis that age verification extends"
 layout      = "single"
 type        = "posts"
 slug        = "24-age-verification-identity-capture"
