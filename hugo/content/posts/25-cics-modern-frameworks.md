@@ -42,9 +42,9 @@ programme. The user types <code>CLNT</code> and presses Enter. CICS looks up CLN
 PCT, finds the programme name, loads it into the region, and executes it.
 When the programme finishes, CICS returns control.</p>
 
-<p>This is URL routing. The four-char string is the path. The PCT is the route
-table. The CICS region is the application server. The programme is the
-controller. Rails did not invent this. It re-invented it with slashes and
+<p>In contemporary terms, this is URL routing: the four-char string is the
+path, the PCT is the route table, the CICS region is the application server,
+and the programme is the controller. Rails did not invent this. It re-invented it with slashes and
 variable interpolation, and it took until the late 1990s for the web to
 catch up to where CICS was in 1974.</p>
 
@@ -59,9 +59,8 @@ AUDT:REXX:AUDTLOG::edm
 </code></pre>
 
 <p>Each line maps a TRANSID to a language, a programme name, an optional group,
-and a database connection. The router is a flat file. There is no annotation,
-no decorator, no attribute, no class hierarchy to inherit from. The convention
-is the configuration.</p>
+and a database connection. The router is a flat file, with no annotation, decorator, attribute,
+nor class hierarchy required. The convention is the configuration.</p>
 
 <p>Rails called this "convention over configuration" in 2004. CICS had the same
 idea thirty years earlier and expressed it more tersely.</p>
@@ -78,8 +77,8 @@ and a data structure; CICS renders the screen. The programme issues
 <p>The separation between the view definition and the rendering logic is complete.
 The programme does not construct screen output character by character. It
 populates a data structure and delegates rendering to the map definition.
-The map knows about layout. The programme knows about business logic.
-Neither knows about the other's implementation.</p>
+The map knows about layout, the programme knows about business logic,
+and neither has visibility into the other's implementation.</p>
 
 <p>JSX is the same separation. The template engine in Django, Jinja2, ERB, and
 Handlebars is the same separation. React's component model — props in, render
@@ -137,10 +136,9 @@ generates queries you did not write and cannot easily read.</p>
 <h2 id="vsam-is-the-key-value-store">VSAM is the key-value store</h2>
 
 <p>VSAM KSDS (Key-Sequenced Data Sets) are ordered, key-addressed file
-structures with efficient random and sequential access. EXEC CICS READ
-retrieves a record by key. EXEC CICS WRITE creates one. EXEC CICS REWRITE
-updates in place. EXEC CICS DELETE removes. The API is four operations on
-keyed records.</p>
+structures with efficient random and sequential access. The API is four operations on keyed records: EXEC CICS READ retrieves
+by key, EXEC CICS WRITE creates, EXEC CICS REWRITE updates in place,
+and EXEC CICS DELETE removes.</p>
 
 <p>This is Redis. This is DynamoDB. This is every key-value store that spent
 the 2000s and 2010s positioning itself as a NoSQL innovation. The innovation
