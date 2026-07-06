@@ -64,11 +64,10 @@ public static int sumOfSquaresOfEvens(List<Integer> numbers) {
 **TypeScript**
 
 ```typescript
-function sumOfSquaresOfEvens(numbers: number[]): number {
-  return numbers
+const sumOfSquaresOfEvens = (numbers: number[]): number =>
+  numbers
     .filter((n) => n % 2 === 0)
     .reduce((total, n) => total + n * n, 0);
-}
 ```
 
 <p>Each language carries a fixed overhead tied to its core grammar. A model cannot optimise that overhead away, and it persists whether or not the model needs it to understand the operation.</p>
