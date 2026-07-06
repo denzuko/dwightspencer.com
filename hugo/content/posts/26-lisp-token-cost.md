@@ -26,7 +26,7 @@ series      = ["Infrastructure Independence"]
 
 <p>Here we see a measurable payload reduction for anything injected into an LLM context window. That includes RAG snippets, few-shot examples, tool definitions, and code review context.</p>
 
-<p>The same function — sum the squares of the even numbers in a list — looks like this in three mainstream languages.</p>
+<p>To keep the comparison consistent, the same function appears in every example below: one that sums the squares of the even numbers in a given set.</p>
 
 **Go**
 
@@ -79,7 +79,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 }
 ```
 
-<p>These four are not arbitrary. TypeScript is now the most-used language on GitHub by contributor count, Java remains the language most Fortune 500 stacks are built on, Go is what runs the cloud infrastructure most teams already depend on — Docker and Kubernetes among them — and C# anchors a comparable share of enterprise .NET shops. If a team is maintaining any of this, the boilerplate tax described here is already being paid in production, not in a benchmark.</p>
+<p>These four language choices for our examples are not arbitrary. TypeScript is now the most-used language on GitHub by contributor count, Java remains the language most Fortune 500 stacks are built on, Go runs the cloud infrastructure most teams already depend on, and C# anchors a comparable share of enterprise .NET shops. If a team is maintaining any of this, the boilerplate tax described here is already being paid in production, not in a benchmark.</p>
 
 <p>The grammar itself produces that tax in all four cases, regardless of vendor or framework.</p>
 
@@ -99,7 +99,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 (defun sumSqEven(ns)(reduce #'+(mapcar(lambda(n)(* n n))(remove-if-not #'evenp ns))))
 ```
 
-<p>For a brace-family programmer, the structural difference is easier to see than to explain in prose. Every open brace in Go, Java, or TypeScript needs its own matching close brace, scattered wherever the nesting happens to end. Every open paren in Lisp closes the same way, but the closes all land in one run at the point the expression finishes.</p>
+<p>For a brace-family programmer, the structural difference is easier to see than to explain in prose. The comparison above uses an imperative loop for Go and a single nested expression for the token-golf Lisp, and that pairing is doing real work: statement-sequenced code scatters its closing tokens regardless of language, while a single-expression chain clusters them regardless of language too. Go's loop-and-conditional style is shown here because it is the more common enterprise pattern, but the contrast below is a style difference first, a language-family difference second.</p>
 
 <style>
 .token-translation{font-family:monospace;background:#eee;color:#000;border:1px solid #ccc;border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;overflow-x:auto;}
@@ -140,7 +140,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 <li><strong>Argument name shortening.</strong> <code>numbers</code> becomes <code>ns</code>, <code>n</code> stays <code>n</code>. This has a floor. A name cannot be shortened past what a competent reader needs to hold semantic state in a one-shot injection, but for anything the model is not going to be asked to maintain long-term, short binding names are a legitimate lever within a controlled scope.</li>
 </ol>
 
-<p>The compression above is surface-level. It still expresses the full computation. The deeper move is macro-driven DSL design, where a single symbol expands into a structural pattern that would otherwise cost dozens of tokens to spell out by hand. Rust's <code>macro_rules!</code> competes here. Its macro definition is comparable, and its call site measures tighter than Lisp's for this exact pattern. Where it splits off is scale: the moment a macro needs real AST-level transformation instead of pattern substitution, Rust leaves <code>macro_rules!</code> for procedural macros — a separate system requiring external crate dependencies and full token-stream parsing. Lisp's <code>defmacro</code> never bifurcates; the same mechanism that wrote <code>defpipe</code> above scales to arbitrary compile-time computation without reaching for another toolchain.</p>
+<p>The compression above is surface-level. It still expresses the full computation. The deeper move is macro-driven DSL design, where a single symbol expands into a structural pattern that would otherwise cost dozens of tokens to spell out by hand. Rust's <code>macro_rules!</code> competes here. Its macro definition is comparable, and its call site measures tighter than Lisp's for this exact pattern. Where it splits off is scale: the moment a macro needs real AST-level transformation instead of pattern substitution, Rust leaves <code>macro_rules!</code> for a separate system. Procedural macros require external crate dependencies and full token-stream parsing. Lisp's <code>defmacro</code> never bifurcates; the same mechanism that wrote <code>defpipe</code> above scales to arbitrary compile-time computation without reaching for another toolchain.</p>
 
 ```lisp
 (defmacro defpipe (name &rest steps)
@@ -153,7 +153,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
   #'compute-score)
 ```
 
-<p><code>defpipe</code> expands into a full <code>defun</code> with a threaded call chain. In a context window, <code>(defpipe normalizeAndScore #'string-downcase #'string-trim #'compute-score)</code> measures at 23 tokens under o200k_base. The equivalent hand-written Go version — a named function with three sequential reassignments and an explicit return — measures at 33. That gap holds at every call site, and it compounds each time the macro appears in a prompt, few-shot example, or tool spec.</p>
+<p><code>defpipe</code> expands into a full <code>defun</code> with a threaded call chain. In a context window, <code>(defpipe normalizeAndScore #'string-downcase #'string-trim #'compute-score)</code> measures at 23 tokens under o200k_base. The equivalent hand-written Go version is a named function with three sequential reassignments and an explicit return. It measures at 33. That gap holds at every call site, and it compounds each time the macro appears in a prompt, few-shot example, or tool spec.</p>
 
 <p>Word-based optimisation cannot touch this structural advantage. English-heavy tokenizers already compress common English words into single tokens, but they cannot compress a pattern of code into one token unless the language lets a developer name the pattern and have the compiler expand it back out. Macros are how Lisp does that at the source level, before the tokenizer ever sees the string.</p>
 
