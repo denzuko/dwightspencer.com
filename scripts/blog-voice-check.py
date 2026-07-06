@@ -131,12 +131,12 @@ def check_dramatic_emdash(prose: str):
         r"—\s*(?:something|not a|not just|not only|"
         r"(?:it|they|this|that|these|those)\s+(?:is|are|was|were|has|have|"
         r"does|do|did|cannot|can|will|would|belongs?|expresses?|competes?))\b"
-        r"[^.]{5,90}\.",
+        r"[^.<]{5,90}[.<]",
         re.I,
     )
     compound_pattern = re.compile(
-        r"—[^.]{0,60},\s*and\s+(?:its|their|his|her|the)\s+[\w\s]{1,25}?\s+"
-        r"(?:measures?|is|are|has|have|does|do|competes?|expands?|scales?)\b[^.]{0,90}\.",
+        r"—[^.<]{0,60},\s*and\s+(?:its|their|his|her|the)\s+[\w\s]{1,25}?\s+"
+        r"(?:measures?|is|are|has|have|does|do|competes?|expands?|scales?)\b[^.<]{0,90}[.<]",
         re.I,
     )
     matches = [m.group(0) for m in pattern.finditer(prose)]

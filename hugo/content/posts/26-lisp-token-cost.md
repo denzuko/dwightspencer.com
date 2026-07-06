@@ -162,7 +162,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 <tr><td>Go (readable)</td><td>50</td><td>Type keywords, braces, explicit return each cost separately</td></tr>
 <tr><td>Java (readable)</td><td>59</td><td>Access modifier and generic type erasure syntax adds overhead</td></tr>
 <tr><td>C# (readable)</td><td>59</td><td>Near-identical cost to Java; same brace-and-keyword overhead</td></tr>
-<tr><td>TypeScript (functional style)</td><td>51</td><td>Fewer braces than Go or Java, but chained method calls add their own overhead — token count lands close to Go's</td></tr>
+<tr><td>TypeScript (functional style)</td><td>51</td><td>Fewer braces than Go or Java, but chained method calls add their own overhead. Token count lands close to Go's.</td></tr>
 <tr><td>Lisp (readable, kebab-case)</td><td>39</td><td>No braces; hyphenated name still costs multiple subword tokens</td></tr>
 <tr><td>Lisp (token golf, camelCase, zero whitespace)</td><td>27</td><td>Single-token identifier, minimal reader-required whitespace</td></tr>
 <tr><td>Lisp (macro-abstracted call site)</td><td>23</td><td>Boilerplate lives in the macro definition, paid once, not per call site</td></tr>
