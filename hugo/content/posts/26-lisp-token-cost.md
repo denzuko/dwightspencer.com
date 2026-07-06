@@ -1,5 +1,5 @@
 +++
-title       = "Lisp Beats the ALGOL Family on Token Cost"
+title       = "Lisp Beats Every Modern Language on Token Cost"
 date        = "2026-07-05"
 draft       = false
 description = "Lisp is one of AI's oldest surviving languages, and it is also one of the cheapest to run through a tokenizer. Modern tokenizers punish boilerplate and reward structural minimisation, and Lisp's whitespace agnosticism, implicit returns, and macro-driven DSLs give it a compression ceiling that the ALGOL family — Go, Java, TypeScript, and most of enterprise software besides — cannot structurally reach."
@@ -23,7 +23,7 @@ series      = ["Infrastructure Independence"]
   label = "post 23 covers a related argument about the exact boundary Lisp's extensibility dissolves in attestation pipelines"
 +++
 
-# Lisp Beats the ALGOL Family on Token Cost
+# Lisp Beats Every Modern Language on Token Cost
 
 <p>Context windows are priced per token, not per character, and not per line of "readable" code. Modern tokenizers (o200k_base, Claude's tokenizer family) build their vocabularies from corpus frequency. Natural-language words compress into single tokens because English text dominates training corpora. Programming language syntax does not get the same courtesy — every language pays a structural tax, and the size of that tax is a function of how much boilerplate the grammar requires before intent gets expressed.</p>
 
