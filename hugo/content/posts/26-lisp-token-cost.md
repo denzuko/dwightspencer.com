@@ -1,8 +1,8 @@
 +++
-title       = "Lisp Beats Every Modern Language on Token Cost"
+title       = "Lisp Beats the ALGOL Family on Token Cost"
 date        = "2026-07-05"
 draft       = false
-description = "Lisp was AI's first language. It is also the cheapest one. Modern tokenizers punish boilerplate and reward structural minimisation, and Lisp's whitespace agnosticism, implicit returns, and macro-driven DSLs give it a compression ceiling that Go, Java, and TypeScript cannot structurally reach."
+description = "Lisp is one of AI's oldest surviving languages, and it is also one of the cheapest to run through a tokenizer. Modern tokenizers punish boilerplate and reward structural minimisation, and Lisp's whitespace agnosticism, implicit returns, and macro-driven DSLs give it a compression ceiling that the ALGOL family — Go, Java, TypeScript, and most of enterprise software besides — cannot structurally reach."
 slug        = "26-lisp-token-cost"
 keywords    = ["LLM", "tokenization", "Lisp", "token golf", "context window", "performance", "macros", "software architecture"]
 tags        = ["infrastructure", "devops", "foss", "selfhosted"]
@@ -23,11 +23,11 @@ series      = ["Infrastructure Independence"]
   label = "post 23 covers a related argument about the exact boundary Lisp's extensibility dissolves in attestation pipelines"
 +++
 
-# Lisp Beats Every Modern Language on Token Cost
+# Lisp Beats the ALGOL Family on Token Cost
 
 <p>Context windows are priced per token, not per character, and not per line of "readable" code. Modern tokenizers (o200k_base, Claude's tokenizer family) build their vocabularies from corpus frequency. Natural-language words compress into single tokens because English text dominates training corpora. Programming language syntax does not get the same courtesy — every language pays a structural tax, and the size of that tax is a function of how much boilerplate the grammar requires before intent gets expressed.</p>
 
-<p>Go, Java, and TypeScript — call them the brace family — carry fixed syntactic overhead that has nothing to do with the algorithm. It exists for the compiler, not for the idea being expressed. Lisp's grammar carries almost none of it. S-expressions are closing-paren-terminated rather than keyword-terminated, and whitespace is purely cosmetic. That gives Lisp a lever the others structurally lack; a compressible shape of the code and names inside it.</p>
+<p>Go, Java, and TypeScript are three examples of the ALGOL family — the block-structured, procedural lineage that traces back to ALGOL 60 and now covers most of enterprise software, Python and Rust and C included. All three examples here also happen to be brace-delimited, which carries fixed syntactic overhead that has nothing to do with the algorithm. It exists for the compiler, not for the idea being expressed. Lisp's grammar carries almost none of it. S-expressions are closing-paren-terminated rather than keyword-terminated, and whitespace is purely cosmetic. That gives Lisp a lever the ALGOL family structurally lacks; a compressible shape of the code and names inside it.</p>
 
 <p>Here we see a measurable payload reduction for anything injected into an LLM context window — RAG snippets, few-shot examples, tool definitions, or code review context.</p>
 
@@ -125,7 +125,7 @@ flowchart TB
 <li><strong>Argument name shortening.</strong> <code>numbers</code> becomes <code>ns</code>, <code>n</code> stays <code>n</code>. This has a floor — a name cannot be shortened past what a competent reader needs to hold semantic state in a one-shot injection — but for anything the model is not going to be asked to maintain long-term, short binding names are a legitimate lever within a controlled scope.</li>
 </ol>
 
-<p>The compression above is surface-level — it still expresses the full computation. The deeper move is macro-driven DSL design, where a single symbol expands into a structural pattern that would otherwise cost dozens of tokens to spell out by hand. This is where Lisp categorically outperforms the brace family: none of these example third generation languages allow the grammar itself to be extended, and Lisp does.</p>
+<p>The compression above is surface-level — it still expresses the full computation. The deeper move is macro-driven DSL design, where a single symbol expands into a structural pattern that would otherwise cost dozens of tokens to spell out by hand. This is where Lisp categorically outperforms the ALGOL family: none of these languages allow the grammar itself to be extended, and Lisp does.</p>
 
 ```lisp
 (defmacro defpipe (name &rest steps)
@@ -138,20 +138,20 @@ flowchart TB
   #'compute-score)
 ```
 
-<p><code>defpipe</code> expands into a full <code>defun</code> with a threaded call chain. In a context window, <code>(defpipe normalizeAndScore #'string-downcase #'string-trim #'compute-score)</code> is roughly a dozen tokens. The equivalent hand-written Go version — a named function with three sequential reassignments and an explicit return — runs well past thirty tokens before a single comment has been added. That gap holds at every call site, and it compounds each time the macro appears in a prompt, few-shot example, or tool spec.</p>
+<p><code>defpipe</code> expands into a full <code>defun</code> with a threaded call chain. In a context window, <code>(defpipe normalizeAndScore #'string-downcase #'string-trim #'compute-score)</code> measures at 23 tokens under o200k_base. The equivalent hand-written Go version — a named function with three sequential reassignments and an explicit return — measures at 33. That gap holds at every call site, and it compounds each time the macro appears in a prompt, few-shot example, or tool spec.</p>
 
 <p>This is the structural advantage word-based optimisation cannot touch: English-heavy tokenizers already compress common English words into single tokens, but they cannot compress a pattern of code into one token unless the language lets a developer name the pattern and have the compiler expand it back out. Macros are how Lisp does that at the source level, before the tokenizer ever sees the string.</p>
 
 <p>Rough token counts using a GPT/Claude-class BPE tokenizer, same algorithm, four implementations:</p>
 
 <table>
-<tr><th>Implementation</th><th>Approx. tokens</th><th>Notes</th></tr>
-<tr><td>Go (readable)</td><td>58</td><td>Type keywords, braces, explicit return each cost separately</td></tr>
-<tr><td>Java (readable)</td><td>61</td><td>Access modifier and generic type erasure syntax adds overhead</td></tr>
-<tr><td>TypeScript (functional style)</td><td>42</td><td>Arrow functions and chaining reduce brace count vs. Go/Java</td></tr>
-<tr><td>Lisp (readable, kebab-case)</td><td>34</td><td>No braces; hyphenated name still costs multiple subword tokens</td></tr>
-<tr><td>Lisp (token golf, camelCase, zero whitespace)</td><td>24</td><td>Single-token identifier, minimal reader-required whitespace</td></tr>
-<tr><td>Lisp (macro-abstracted call site)</td><td>12</td><td>Boilerplate lives in the macro definition, paid once, not per call site</td></tr>
+<tr><th>Implementation</th><th>Measured tokens (o200k_base)</th><th>Notes</th></tr>
+<tr><td>Go (readable)</td><td>50</td><td>Type keywords, braces, explicit return each cost separately</td></tr>
+<tr><td>Java (readable)</td><td>59</td><td>Access modifier and generic type erasure syntax adds overhead</td></tr>
+<tr><td>TypeScript (functional style)</td><td>51</td><td>Fewer braces than Go or Java, but chained method calls add their own overhead — token count lands close to Go's</td></tr>
+<tr><td>Lisp (readable, kebab-case)</td><td>39</td><td>No braces; hyphenated name still costs multiple subword tokens</td></tr>
+<tr><td>Lisp (token golf, camelCase, zero whitespace)</td><td>27</td><td>Single-token identifier, minimal reader-required whitespace</td></tr>
+<tr><td>Lisp (macro-abstracted call site)</td><td>23</td><td>Boilerplate lives in the macro definition, paid once, not per call site</td></tr>
 </table>
 
 <p>Due to commonalities in third-generation languages, the pattern holds across domains:</p>
@@ -159,7 +159,7 @@ flowchart TB
 <ul>
 <li><strong>Boilerplate tokens are fixed costs.</strong> <code>public static</code>, <code>func</code>, closing braces, and explicit <code>return</code> do not scale with algorithm complexity — they are a flat tax paid on every function regardless of what it does.</li>
 <li><strong>Structural tokens are cheaper than keyword tokens.</strong> A tokenizer represents <code>(</code> and <code>)</code> as single characters far more reliably than it represents <code>{</code>, <code>}</code>, and multi-word keywords, because parens appear in math notation and prose far more often than curly braces do, so they are better represented in the base vocabulary.</li>
-<li><strong>Macro amortisation only exists where the grammar is extensible.</strong> Every call site of <code>defpipe</code> pays 12 tokens instead of 30+. Multiply that by the number of times a pattern like this appears across a codebase being fed into a context window as few-shot examples or RAG snippets, and the savings compound linearly with call-site count — something naming discipline alone does not replicate in the brace family, which has no mechanism to name a structural pattern and let the compiler expand it back out.</li>
+<li><strong>Macro amortisation only exists where the grammar is extensible.</strong> Every call site of <code>defpipe</code> pays a fraction of the full expansion. Multiply that by the number of times a pattern like this appears across a codebase being fed into a context window as few-shot examples or RAG snippets, and the savings compound linearly with call-site count — something naming discipline alone does not replicate in the ALGOL family, which has no mechanism to name a structural pattern and let the compiler expand it back out.</li>
 </ul>
 
 <p>The whitespace and naming compression above is an injection-time transform, and it has no place in a codebase anyone has to maintain. Macro-driven compression is a different story: dense, macro-heavy Lisp is a documented production tradition, most associated with the "Let Over Lambda" school of macrology — not a novelty of token golf, but a pattern that applies to systems well outside this argument. What changes for context-window injection is the scale of the payoff. A macro that saves a maintainer a few lines of typing saves a model dozens of tokens at every call site, and that gap compounds across a system prompt or RAG corpus in a way it never does across a single human-read file.</p>
