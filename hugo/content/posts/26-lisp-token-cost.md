@@ -81,9 +81,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 
 <p>These four language choices for our examples are not arbitrary. TypeScript is now the most-used language on GitHub by contributor count, Java remains the language most Fortune 500 stacks are built on, Go runs the cloud infrastructure most teams already depend on, and C# anchors a comparable share of enterprise .NET shops. If a team is maintaining any of this, the boilerplate tax described here is already being paid in production, not in a benchmark.</p>
 
-<p>The grammar itself produces that tax in all four cases, regardless of vendor or framework.</p>
-
-<p>Each language carries a fixed overhead tied to its core grammar. A model cannot optimise that overhead away, and it persists whether or not the model needs it to understand the operation.</p>
+<p>That tax comes from the grammar itself in all four cases, not from the vendor or framework sitting on top of it. A model cannot optimise the overhead away, and it persists whether or not the model needs it to understand the operation.</p>
 
 <p>The same function looks like this written as standard, readable Lisp:</p>
 
