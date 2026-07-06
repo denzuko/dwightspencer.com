@@ -24,7 +24,7 @@ series      = ["Infrastructure Independence"]
 
 <p>Go, Java, and TypeScript are three examples of the ALGOL family. The ALGOL family is the block-structured, procedural lineage that traces back to ALGOL 60 and now covers most of enterprise software, Python and Rust and C included. All three examples here also happen to be brace-delimited, which carries fixed syntactic overhead that has nothing to do with the algorithm. It exists for the compiler, not for the idea being expressed. Lisp's grammar carries almost none of it. S-expressions are closing-paren-terminated rather than keyword-terminated, and whitespace is purely cosmetic. That gives Lisp a lever most of the ALGOL family lacks; a compressible shape of the code and names inside it.</p>
 
-<p>Here we see a measurable payload reduction for anything injected into an LLM context window — RAG snippets, few-shot examples, tool definitions, or code review context.</p>
+<p>Here we see a measurable payload reduction for anything injected into an LLM context window. That includes RAG snippets, few-shot examples, tool definitions, and code review context.</p>
 
 <p>The same function — sum the squares of the even numbers in a list — looks like this in three mainstream languages.</p>
 
