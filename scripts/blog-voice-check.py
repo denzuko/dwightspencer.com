@@ -30,11 +30,25 @@ INFO = "INFO"
 
 def strip_code_and_frontmatter(text: str) -> str:
     """Return prose only: no TOML frontmatter, no fenced code blocks, no inline
-    CSS style attributes (which legitimately contain words like 'color')."""
+    CSS style attributes or <style> blocks (which legitimately contain words
+    like 'color')."""
     body = text.split("+++", 2)[-1] if text.startswith("+++") else text
     body = re.sub(r"```.*?```", "", body, flags=re.S)
+    body = re.sub(r"<style>.*?</style>", "", body, flags=re.S)
     body = re.sub(r'style="[^"]*"', "", body)
     return body
+
+
+def check_forbidden_phrases(prose: str):
+    # Canonical list from the social-media content pipeline checker (June 2026
+    # session). Merged here rather than treated as a separate, newer standard.
+    phrases = [
+        "it's worth noting", "in conclusion", "this is why", "thread:",
+        "here's why", "here is why", "let's be clear", "make no mistake",
+    ]
+    tl = prose.lower()
+    hits = [p for p in phrases if p in tl]
+    return FAIL, "forbidden phrases (canonical list, social-pipeline checker)", hits
 
 
 def check_verb_contractions(prose: str):
@@ -128,7 +142,7 @@ def run_checks(path: str, extra_word_rules):
     word_count = len(prose_full.split())
 
     results = []
-    for fn in (check_verb_contractions, check_direct_address, check_self_referential,
+    for fn in (check_forbidden_phrases, check_verb_contractions, check_direct_address, check_self_referential,
                check_pundit_contrast, check_dramatic_colon, check_intensifiers,
                check_rhetorical_questions, check_american_spelling,
                check_telegraphic_fragments):

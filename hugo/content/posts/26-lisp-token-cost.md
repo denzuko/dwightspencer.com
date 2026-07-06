@@ -101,18 +101,35 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 
 <p>For a brace-family programmer, the structural difference is easier to see than to explain in prose. Every open brace in Go, Java, or TypeScript needs its own matching close brace, scattered wherever the nesting happens to end. Every open paren in Lisp closes the same way, but the closes all land in one run at the point the expression finishes.</p>
 
-<figure style="font-family:monospace;background:#1a1a18;border:1px solid #333;border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;overflow-x:auto;">
-<div style="font-size:.75rem;color:#999;margin-bottom:.75rem;letter-spacing:.03em;">
-  <span style="color:#7ec8e3;">■</span> keyword &nbsp;
-  <span style="color:#f0ede8;font-weight:700;">■</span> identifier &nbsp;
-  <span style="color:#ff8a80;">■</span> body / expression &nbsp;
-  <span style="color:#888;">■</span> structural punctuation
+<style>
+.token-translation{font-family:monospace;background:#eee;color:#000;border:1px solid #ccc;border-radius:4px;padding:1.25rem 1.5rem;margin:1.5rem 0;overflow-x:auto;}
+.token-translation .legend{font-size:.75rem;color:#777;margin-bottom:.75rem;letter-spacing:.03em;}
+.token-translation .code-lines{white-space:pre;line-height:2;}
+.token-translation .tok-kw{color:#1a73e8;}
+.token-translation .tok-id{color:#000;font-weight:700;}
+.token-translation .tok-expr{color:#c62828;}
+.token-translation .tok-punct{color:#777;}
+.token-translation figcaption{color:#777;font-size:.85rem;margin-top:1rem;}
+[data-theme="dark"] .token-translation{background:#1a1a18;color:#f0ede8;border-color:#333;}
+[data-theme="dark"] .token-translation .legend,
+[data-theme="dark"] .token-translation figcaption{color:#999;}
+[data-theme="dark"] .token-translation .tok-kw{color:#7ec8e3;}
+[data-theme="dark"] .token-translation .tok-id{color:#f0ede8;}
+[data-theme="dark"] .token-translation .tok-expr{color:#ff8a80;}
+[data-theme="dark"] .token-translation .tok-punct{color:#888;}
+</style>
+<figure class="token-translation">
+<div class="legend">
+  <span class="tok-kw">■</span> keyword &nbsp;
+  <span class="tok-id">■</span> identifier &nbsp;
+  <span class="tok-expr">■</span> body / expression &nbsp;
+  <span class="tok-punct">■</span> structural punctuation
 </div>
-<div style="white-space:pre; line-height:2;">
-<span style="color:#7ec8e3;">func</span> <span style="color:#f0ede8;font-weight:700;">sumOfSquaresOfEvens</span><span style="color:#888;">(</span>numbers<span style="color:#888;">) {</span> ... <span style="color:#7ec8e3;">return</span> <span style="color:#ff8a80;">total</span><span style="color:#888;">; }</span>
-<span style="color:#888;">(</span><span style="color:#7ec8e3;">defun</span> <span style="color:#f0ede8;font-weight:700;">sumSqEven</span><span style="color:#888;">(</span>ns<span style="color:#888;">)</span> ... <span style="color:#ff8a80;">(reduce #'+ ...)</span><span style="color:#888;">)</span>
+<div class="code-lines">
+<span class="tok-kw">func</span> <span class="tok-id">sumOfSquaresOfEvens</span><span class="tok-punct">(</span>numbers<span class="tok-punct">) {</span> ... <span class="tok-kw">return</span> <span class="tok-expr">total</span><span class="tok-punct">; }</span>
+<span class="tok-punct">(</span><span class="tok-kw">defun</span> <span class="tok-id">sumSqEven</span><span class="tok-punct">(</span>ns<span class="tok-punct">)</span> ... <span class="tok-expr">(reduce #'+ ...)</span><span class="tok-punct">)</span>
 </div>
-<figcaption style="color:#999;font-size:.85rem;margin-top:1rem;">Same keyword role, same identifier, same body — matched by colour across both lines. The brace-family close (<code>}</code>) pairs with <code>return</code> at the point the block ends. Lisp's close pairs with the whole expression at the end of the line, not with any single keyword.</figcaption>
+<figcaption>Same keyword role, same identifier, same body — matched by colour across both lines. The brace-family close (<code>}</code>) pairs with <code>return</code> at the point the block ends. Lisp's close pairs with the whole expression at the end of the line, not with any single keyword.</figcaption>
 </figure>
 
 <p>Three changes did the work:</p>
