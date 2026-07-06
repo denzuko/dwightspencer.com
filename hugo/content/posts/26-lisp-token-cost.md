@@ -85,7 +85,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 
 <p>Each language carries a fixed overhead tied to its core grammar. A model cannot optimise that overhead away, and it persists whether or not the model needs it to understand the operation.</p>
 
-<p>The equivalent, written as standard, readable Lisp:</p>
+<p>The same function looks like this written as standard, readable Lisp:</p>
 
 ```lisp
 (defun sum-of-squares-of-evens (numbers)
