@@ -3,13 +3,13 @@ title       = "Lisp Beats Every Modern Language on Token Cost"
 date        = "2026-07-05"
 draft       = false
 description = "Lisp was AI's first language. It is also the cheapest one. Modern tokenizers punish boilerplate and reward structural minimisation, and Lisp's whitespace agnosticism, implicit returns, and macro-driven DSLs give it a compression ceiling that Go, Java, and TypeScript cannot structurally reach."
-slug        = "26-token-golf-lisp-context-window"
+slug        = "26-lisp-token-cost"
 keywords    = ["LLM", "tokenization", "Lisp", "token golf", "context window", "performance", "macros", "software architecture"]
 tags        = ["infrastructure", "devops", "foss", "selfhosted"]
 categories  = ["articles"]
 schema_type = "TechArticle"
 aeo_expertise = "LLM Context Engineering, Lisp, Software Architecture"
-aliases     = ["/26-token-golf-lisp-context-window/"]
+aliases     = ["/26-lisp-token-cost/"]
 og_image    = "/assets/og-posts.png"
 series      = ["Infrastructure Independence"]
 
