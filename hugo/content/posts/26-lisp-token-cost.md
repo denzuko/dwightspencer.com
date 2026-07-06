@@ -13,6 +13,11 @@ aliases     = ["/26-lisp-token-cost/"]
 og_image    = "/assets/og-posts.png"
 series      = ["Infrastructure Independence"]
 
+[[diagrams]]
+  title   = "Closing-token structure: brace family versus S-expression family"
+  alt     = "Two-column flowchart. Left column, labelled brace family, shows the Go implementation of sumOfSquaresOfEvens as eight sequential steps, with the three closing braces highlighted in red and scattered at the points where the for loop, if statement, and function body each end. Right column, labelled S-expression family, shows the equivalent golfed Lisp function as four sequential steps, with the four closing parens highlighted in green and collapsed into a single run at the end of the final line."
+  caption = "Brace-closing tokens are scattered through the function body; paren-closing tokens collapse to one run at the end of the expression."
+
 [related_post]
   slug  = "23-lisp-attestation-hackers"
   label = "post 23 covers a related argument about the exact boundary Lisp's extensibility dissolves in attestation pipelines"
@@ -22,7 +27,7 @@ series      = ["Infrastructure Independence"]
 
 <p>Context windows are priced per token, not per character, and not per line of "readable" code. Modern tokenizers (o200k_base, Claude's tokenizer family) build their vocabularies from corpus frequency. Natural-language words compress into single tokens because English text dominates training corpora. Programming language syntax does not get the same courtesy — every language pays a structural tax, and the size of that tax is a function of how much boilerplate the grammar requires before intent gets expressed.</p>
 
-<p>Go, Java, and TypeScript carry fixed syntactic overhead that has nothing to do with the algorithm — it exists for the compiler, not for the idea being expressed. Lisp's grammar carries almost none of it: s-expressions are closing-paren-terminated rather than keyword-terminated, and whitespace is purely cosmetic. That gives Lisp a lever the others structurally lack: it compresses the shape of the code as well as the names inside it.</p>
+<p>Go, Java, and TypeScript — call them the brace family — carry fixed syntactic overhead that has nothing to do with the algorithm. It exists for the compiler, not for the idea being expressed. Lisp's grammar carries almost none of it. S-expressions are closing-paren-terminated rather than keyword-terminated, and whitespace is purely cosmetic. That gives Lisp a lever the others structurally lack; a compressible shape of the code and names inside it.</p>
 
 <p>Here we see a measurable payload reduction for anything injected into an LLM context window — RAG snippets, few-shot examples, tool definitions, or code review context.</p>
 
@@ -82,6 +87,36 @@ function sumOfSquaresOfEvens(numbers: number[]): number {
 (defun sumSqEven(ns)(reduce #'+(mapcar(lambda(n)(* n n))(remove-if-not #'evenp ns))))
 ```
 
+<p>For a brace-family programmer, the structural difference is easier to see than to explain in prose. Every open brace in Go, Java, or TypeScript needs its own matching close brace, scattered wherever the nesting happens to end. Every open paren in Lisp closes the same way, but the closes all land in one run at the point the expression is actually finished.</p>
+
+```mermaid
+flowchart TB
+    subgraph Brace["Brace family — closing tokens scattered through the function"]
+        direction TB
+        BA["func sumOfSquaresOfEvens(...) {"]
+        BB["  for ... {"]
+        BC["    if ... {"]
+        BD["      total += n * n"]
+        BE["    }"]
+        BF["  }"]
+        BG["  return total"]
+        BH["}"]
+        BA --> BB --> BC --> BD --> BE --> BF --> BG --> BH
+    end
+    subgraph SExpr["S-expression family — closing tokens collapse to one run"]
+        direction TB
+        SA["(defun sumSqEven (ns)"]
+        SB["  (reduce #'+"]
+        SC["    (mapcar (lambda (n) (* n n))"]
+        SD["      (remove-if-not #'evenp ns))))"]
+        SA --> SB --> SC --> SD
+    end
+    class BE,BF,BH brace
+    class SD sexpr
+    classDef brace fill:#5a1f1f,stroke:#ff6b6b,color:#fff
+    classDef sexpr fill:#1f3d2b,stroke:#4ade80,color:#fff
+```
+
 <p>Three changes did the work:</p>
 
 <ol>
@@ -90,7 +125,7 @@ function sumOfSquaresOfEvens(numbers: number[]): number {
 <li><strong>Argument name shortening.</strong> <code>numbers</code> becomes <code>ns</code>, <code>n</code> stays <code>n</code>. This has a floor — a name cannot be shortened past what a competent reader needs to hold semantic state in a one-shot injection — but for anything the model is not going to be asked to maintain long-term, short binding names are a legitimate lever within a controlled scope.</li>
 </ol>
 
-<p>The compression above is surface-level — it still expresses the full computation. The deeper move is macro-driven DSL design, where a single symbol expands into a structural pattern that would otherwise cost dozens of tokens to spell out by hand. This is where Lisp categorically outperforms Go, Java, and TypeScript: none of these example third generation languages allow the grammar itself to be extended, and Lisp does.</p>
+<p>The compression above is surface-level — it still expresses the full computation. The deeper move is macro-driven DSL design, where a single symbol expands into a structural pattern that would otherwise cost dozens of tokens to spell out by hand. This is where Lisp categorically outperforms the brace family: none of these example third generation languages allow the grammar itself to be extended, and Lisp does.</p>
 
 ```lisp
 (defmacro defpipe (name &rest steps)
@@ -124,9 +159,11 @@ function sumOfSquaresOfEvens(numbers: number[]): number {
 <ul>
 <li><strong>Boilerplate tokens are fixed costs.</strong> <code>public static</code>, <code>func</code>, closing braces, and explicit <code>return</code> do not scale with algorithm complexity — they are a flat tax paid on every function regardless of what it does.</li>
 <li><strong>Structural tokens are cheaper than keyword tokens.</strong> A tokenizer represents <code>(</code> and <code>)</code> as single characters far more reliably than it represents <code>{</code>, <code>}</code>, and multi-word keywords, because parens appear in math notation and prose far more often than curly braces do, so they are better represented in the base vocabulary.</li>
-<li><strong>Macro amortisation only exists where the grammar is extensible.</strong> Every call site of <code>defpipe</code> pays 12 tokens instead of 30+. Multiply that by the number of times a pattern like this appears across a codebase being fed into a context window as few-shot examples or RAG snippets, and the savings compound linearly with call-site count — something no amount of Go or Java naming discipline can replicate, because those languages have no mechanism to name a structural pattern and have the compiler, not the human, re-expand it.</li>
+<li><strong>Macro amortisation only exists where the grammar is extensible.</strong> Every call site of <code>defpipe</code> pays 12 tokens instead of 30+. Multiply that by the number of times a pattern like this appears across a codebase being fed into a context window as few-shot examples or RAG snippets, and the savings compound linearly with call-site count — something naming discipline alone does not replicate in the brace family, which has no mechanism to name a structural pattern and let the compiler expand it back out.</li>
 </ul>
 
-<p>The whitespace and naming compression above is an injection-time transform, and it has no place in a codebase anyone has to maintain. Macro-driven compression is a different story: dense, macro-heavy Lisp is a documented production tradition, most associated with the "Let Over Lambda" school of macrology, not a novelty invented for this argument. What changes for context-window injection is the scale of the payoff. A macro that saves a maintainer a few lines of typing saves a model dozens of tokens at every call site, and that gap compounds across a system prompt or RAG corpus in a way it never does across a single human-read file.</p>
+<p>The whitespace and naming compression above is an injection-time transform, and it has no place in a codebase anyone has to maintain. Macro-driven compression is a different story: dense, macro-heavy Lisp is a documented production tradition, most associated with the "Let Over Lambda" school of macrology — not a novelty of token golf, but a pattern that applies to systems well outside this argument. What changes for context-window injection is the scale of the payoff. A macro that saves a maintainer a few lines of typing saves a model dozens of tokens at every call site, and that gap compounds across a system prompt or RAG corpus in a way it never does across a single human-read file.</p>
 
-<p>Anyone building a system that stuffs code into a prompt at scale should measure the token cost before optimising it. The compression ceiling differs by language, and it is worth knowing which ceiling is actually in play.</p>
+<p>A live example sits closer to home than Go or Java. This site's own knowledge base — post, tag, and author facts asserted into a small Prolog engine — ships as a loadable Quicklisp system rather than a REST endpoint. A query like <code>(query '(tag ?s :selfhosted))</code> costs a handful of tokens either way, but the corpus loader that builds the underlying fact base is ordinary boilerplate: fine to write out in full for a human reading the source, worth compressing before it ever rides along in a RAG-retrieved context.</p>
+
+<p>For anyone architecting a system that injects code into a model's context window at scale, token cost is an infrastructure line item, not a style preference — it belongs in the same cost-and-risk model as bandwidth, storage, or compute. The compression ceiling differs by language, and knowing which ceiling is actually in play is part of the due diligence, not an optimisation to defer until the invoice makes the case.</p>
