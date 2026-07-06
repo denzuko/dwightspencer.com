@@ -79,7 +79,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 }
 ```
 
-<p>These four are not arbitrary. TypeScript is now the most-used language on GitHub by contributor count. Java remains the language most Fortune 500 stacks are built on. Go runs the cloud infrastructure most teams already depend on, Docker and Kubernetes among them. C# anchors a comparable share of enterprise .NET shops. If a team is maintaining any of this, the boilerplate tax described here is already being paid in production, not in a benchmark.</p>
+<p>These four are not arbitrary. TypeScript is now the most-used language on GitHub by contributor count, Java remains the language most Fortune 500 stacks are built on, Go is what runs the cloud infrastructure most teams already depend on — Docker and Kubernetes among them — and C# anchors a comparable share of enterprise .NET shops. If a team is maintaining any of this, the boilerplate tax described here is already being paid in production, not in a benchmark.</p>
 
 <p>That tax shows up the same way in all four, because it comes from the same place: the grammar itself, not the specific vendor or framework sitting on top of it.</p>
 
