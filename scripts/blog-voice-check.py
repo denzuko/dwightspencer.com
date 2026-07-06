@@ -117,12 +117,16 @@ def check_telegraphic_fragments(prose: str):
 
 
 def check_dramatic_emdash(prose: str):
-    """Em-dash followed by a clause that reads as a full independent thought
-    rather than a true parenthetical aside. ASA/MLA/Oxford formal register
-    prefers a full stop, semicolon, or subordinate clause here; the dash-as-
-    continuation is a journalistic/informal habit. Heuristic: dash followed
-    within a few words by a subject pronoun + finite verb, i.e. a clause that
-    could stand alone rather than a noun-phrase appositive."""
+    """Em-dash followed by a clause that reads as a full independent thought.
+    NOTE: this is NOT an ASA/MLA/Chicago requirement -- verified against the
+    actual ASA Style Guide, which explicitly endorses em-dash-plus-explanatory-
+    clause ("Our conclusion--the students sampled were not concerned...") as
+    correct usage. This is a house-style preference specific to this corpus:
+    content feeding arXiv backlinks, DOI-registered book chapters, and future
+    citation/excerpting needs sentences that stand alone when pulled out of
+    context. An em-dash-joined compound clause doesn't excerpt cleanly; a
+    complete sentence does. Warn-level, not a hard fail -- this is an editorial
+    preference for citability, not a grammar rule."""
     pattern = re.compile(
         r"—\s*(?:something|not a|not just|not only|"
         r"(?:it|they|this|that|these|those)\s+(?:is|are|was|were|has|have|"
@@ -131,7 +135,7 @@ def check_dramatic_emdash(prose: str):
         re.I,
     )
     matches = [m.group(0) for m in pattern.finditer(prose)]
-    return WARN, "em-dash joining an independent clause (formal register prefers '.' or ';')", matches
+    return WARN, "em-dash joining an independent clause (house rule for citation-ready prose, not an ASA/MLA requirement)", matches
 
 
 def check_structural_headers(body: str):
