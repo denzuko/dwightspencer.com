@@ -116,6 +116,24 @@ def check_telegraphic_fragments(prose: str):
     return WARN, "possible telegraphic fragment (noun phrase + colon, no finite verb)", flagged
 
 
+def check_dramatic_emdash(prose: str):
+    """Em-dash followed by a clause that reads as a full independent thought
+    rather than a true parenthetical aside. ASA/MLA/Oxford formal register
+    prefers a full stop, semicolon, or subordinate clause here; the dash-as-
+    continuation is a journalistic/informal habit. Heuristic: dash followed
+    within a few words by a subject pronoun + finite verb, i.e. a clause that
+    could stand alone rather than a noun-phrase appositive."""
+    pattern = re.compile(
+        r"—\s*(?:something|not a|not just|not only|"
+        r"(?:it|they|this|that|these|those)\s+(?:is|are|was|were|has|have|"
+        r"does|do|did|cannot|can|will|would|belongs?|expresses?|competes?))\b"
+        r"[^.]{5,90}\.",
+        re.I,
+    )
+    matches = [m.group(0) for m in pattern.finditer(prose)]
+    return WARN, "em-dash joining an independent clause (formal register prefers '.' or ';')", matches
+
+
 def check_structural_headers(body: str):
     hits = re.findall(r"^##", body, re.M)
     return FAIL, "markdown ## headers (zero precedent anywhere in corpus, all 11+ posts checked)", hits
@@ -143,7 +161,7 @@ def run_checks(path: str, extra_word_rules):
 
     results = []
     for fn in (check_forbidden_phrases, check_verb_contractions, check_direct_address, check_self_referential,
-               check_pundit_contrast, check_dramatic_colon, check_intensifiers,
+               check_pundit_contrast, check_dramatic_colon, check_dramatic_emdash, check_intensifiers,
                check_rhetorical_questions, check_american_spelling,
                check_telegraphic_fragments):
         severity, label, hits = fn(body)
