@@ -84,7 +84,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 }
 ```
 
-<p>These four are not arbitrary. TypeScript is now the most-used language on GitHub by contributor count, Java remains the language most Fortune 500 stacks are built on, Go is what runs the cloud infrastructure most teams already depend on — Docker and Kubernetes among them — and C# anchors a comparable share of enterprise .NET shops. If a team is maintaining any of this, the boilerplate tax described here is already being paid in production, not in a benchmark.</p>
+<p>These four are not arbitrary. TypeScript is now the most-used language on GitHub by contributor count. Java remains the language most Fortune 500 stacks are built on. Go runs the cloud infrastructure most teams already depend on, Docker and Kubernetes among them. C# anchors a comparable share of enterprise .NET shops. If a team is maintaining any of this, the boilerplate tax described here is already being paid in production, not in a benchmark.</p>
 
 <p>Each language carries a fixed overhead tied to its core grammar. A model cannot optimise that overhead away, and it persists whether or not the model needs it to understand the operation.</p>
 
@@ -102,7 +102,7 @@ public static int SumOfSquaresOfEvens(List<int> numbers) {
 (defun sumSqEven(ns)(reduce #'+(mapcar(lambda(n)(* n n))(remove-if-not #'evenp ns))))
 ```
 
-<p>For a brace-family programmer, the structural difference is easier to see than to explain in prose. Every open brace in Go, Java, or TypeScript needs its own matching close brace, scattered wherever the nesting happens to end. Every open paren in Lisp closes the same way, but the closes all land in one run at the point the expression is actually finished.</p>
+<p>For a brace-family programmer, the structural difference is easier to see than to explain in prose. Every open brace in Go, Java, or TypeScript needs its own matching close brace, scattered wherever the nesting happens to end. Every open paren in Lisp closes the same way, but the closes all land in one run at the point the expression finishes.</p>
 
 ```mermaid
 flowchart TB
@@ -140,7 +140,7 @@ flowchart TB
 <li><strong>Argument name shortening.</strong> <code>numbers</code> becomes <code>ns</code>, <code>n</code> stays <code>n</code>. This has a floor — a name cannot be shortened past what a competent reader needs to hold semantic state in a one-shot injection — but for anything the model is not going to be asked to maintain long-term, short binding names are a legitimate lever within a controlled scope.</li>
 </ol>
 
-<p>The compression above is surface-level — it still expresses the full computation. The deeper move is macro-driven DSL design, where a single symbol expands into a structural pattern that would otherwise cost dozens of tokens to spell out by hand. Rust's <code>macro_rules!</code> genuinely competes here — a comparable macro definition, and its call site measures tighter than Lisp's for this exact pattern. Where it splits off is scale: the moment a macro needs real AST-level transformation instead of pattern substitution, Rust leaves <code>macro_rules!</code> for procedural macros — a separate system requiring external crate dependencies and full token-stream parsing. Lisp's <code>defmacro</code> never bifurcates; the same mechanism that wrote <code>defpipe</code> above scales to arbitrary compile-time computation without reaching for another toolchain.</p>
+<p>The compression above is surface-level — it still expresses the full computation. The deeper move is macro-driven DSL design, where a single symbol expands into a structural pattern that would otherwise cost dozens of tokens to spell out by hand. Rust's <code>macro_rules!</code> competes here — a comparable macro definition, and its call site measures tighter than Lisp's for this exact pattern. Where it splits off is scale: the moment a macro needs real AST-level transformation instead of pattern substitution, Rust leaves <code>macro_rules!</code> for procedural macros — a separate system requiring external crate dependencies and full token-stream parsing. Lisp's <code>defmacro</code> never bifurcates; the same mechanism that wrote <code>defpipe</code> above scales to arbitrary compile-time computation without reaching for another toolchain.</p>
 
 ```lisp
 (defmacro defpipe (name &rest steps)
@@ -170,7 +170,7 @@ flowchart TB
 <tr><td>Lisp (macro-abstracted call site)</td><td>23</td><td>Boilerplate lives in the macro definition, paid once, not per call site</td></tr>
 </table>
 
-<p>Python is the honest exception, and worth stating plainly rather than around: written idiomatically as a generator expression fed to <code>sum()</code>, the same function measures at 29 tokens — fewer than readable Lisp, and close enough to the token golf version of Lisp that raw token count alone will not settle the argument. Python's syntax carries little of the ALGOL family's brace-and-keyword tax to begin with. What it lacks is the deeper mechanism: a way to name a structural pattern and have the interpreter expand it back out at the grammar level. Python has functions, decorators, and metaclasses, none of which extend syntax the way a macro does.</p>
+<p>Python is the honest exception, worth stating plainly: written idiomatically as a generator expression fed to <code>sum()</code>, the same function measures at 29 tokens — fewer than readable Lisp, and close enough to the token golf version of Lisp that raw token count alone will not settle the argument. Python's syntax carries little of the ALGOL family's brace-and-keyword tax to begin with. What it lacks is the deeper mechanism: a way to name a structural pattern and have the interpreter expand it back out at the grammar level. Python has functions, decorators, and metaclasses, none of which extend syntax the way a macro does.</p>
 
 <p>Due to commonalities in third-generation languages, the pattern holds across domains:</p>
 
@@ -184,4 +184,4 @@ flowchart TB
 
 <p>A live example sits closer to home than Go or Java. This site's own knowledge base — post, tag, and author facts asserted into a small Prolog engine — ships as a loadable Quicklisp system rather than a REST endpoint. A query like <code>(query '(tag ?s :selfhosted))</code> costs a handful of tokens either way, but the corpus loader that builds the underlying fact base is ordinary boilerplate: fine to write out in full for a human reading the source, worth compressing before it ever rides along in a RAG-retrieved context.</p>
 
-<p>For anyone architecting a system that injects code into a model's context window at scale, token cost is an infrastructure line item, not a style preference — it belongs in the same cost-and-risk model as bandwidth, storage, or compute. The compression ceiling differs by language, and knowing which ceiling is actually in play is part of the due diligence, not an optimisation to defer until the invoice makes the case.</p>
+<p>For anyone architecting a system that injects code into a model's context window at scale, token cost is an infrastructure line item, not a style preference — it belongs in the same cost-and-risk model as bandwidth, storage, or compute. The compression ceiling differs by language, and knowing which ceiling is in play is part of the due diligence, not an optimisation to defer until the invoice makes the case.</p>
