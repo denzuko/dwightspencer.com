@@ -1,8 +1,8 @@
 +++
-title       = "Boilerplate Is a Token Tax"
+title       = "Lisp Beats Every Modern Language on Token Cost"
 date        = "2026-07-05"
 draft       = false
-description = "Modern tokenizers punish boilerplate and reward structural minimisation. Lisp's whitespace agnosticism, implicit returns, and macro-driven DSLs give it a compression ceiling that Go, Java, and TypeScript cannot structurally reach."
+description = "Lisp was AI's first language. It is also the cheapest one. Modern tokenizers punish boilerplate and reward structural minimisation, and Lisp's whitespace agnosticism, implicit returns, and macro-driven DSLs give it a compression ceiling that Go, Java, and TypeScript cannot structurally reach."
 slug        = "26-token-golf-lisp-context-window"
 keywords    = ["LLM", "tokenization", "Lisp", "token golf", "context window", "performance", "macros", "software architecture"]
 tags        = ["infrastructure", "devops", "foss", "selfhosted"]
@@ -18,7 +18,7 @@ series      = ["Infrastructure Independence"]
   label = "post 23 covers a related argument about the exact boundary Lisp's extensibility dissolves in attestation pipelines"
 +++
 
-# Boilerplate Is a Token Tax
+# Lisp Beats Every Modern Language on Token Cost
 
 Context windows are priced per token, not per character, and not per line of "readable" code. That distinction is the entire argument of this post. Modern tokenizers (o200k_base, Claude's tokenizer family) build their vocabularies from corpus frequency. Natural-language words compress into single tokens because English text dominates training corpora. Programming language syntax does not get the same courtesy — every language pays a structural tax, and the size of that tax is a function of how much boilerplate the grammar requires you to type before you express intent.
 
