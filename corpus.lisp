@@ -41,9 +41,23 @@
   "Assert all post, tag, author, and artifact facts into DB.
    DB must be a prolog-db created by logic:make-post-kb.
    Returns DB.
-   Generated from 26 posts."
+   Generated from 27 posts."
   ;; pf = assert a prolog fact into db (shorthand for logic:db-assert)
   (flet ((pf (&rest fact) (logic:db-assert db fact)))
+
+    ;; Lisp Beats Every Modern Language on Token Cost
+    (pf 'post "26-lisp-token-cost"
+        "Lisp Beats Every Modern Language on Token Cost"
+        "2026-07-05"
+        1808)
+(pf 'tag "26-lisp-token-cost" :infrastructure)
+(pf 'tag "26-lisp-token-cost" :devops)
+(pf 'tag "26-lisp-token-cost" :foss)
+(pf 'tag "26-lisp-token-cost" :selfhosted)
+(pf 'author "26-lisp-token-cost" "0009-0001-0066-4646")
+(pf 'related "26-lisp-token-cost"
+        "23-lisp-attestation-hackers"
+        "post 23 covers a related argument about the exact boundary Lisp's extensibility dissolves in attestation pipelines")
 
     ;; Convergent Design: What BRICKS_TS Revealed About Web Frameworks
     (pf 'post "25-cics-modern-frameworks"
