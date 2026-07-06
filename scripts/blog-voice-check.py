@@ -134,8 +134,14 @@ def check_dramatic_emdash(prose: str):
         r"[^.]{5,90}\.",
         re.I,
     )
+    compound_pattern = re.compile(
+        r"—[^.]{0,60},\s*and\s+(?:its|their|his|her|the)\s+[\w\s]{1,25}?\s+"
+        r"(?:measures?|is|are|has|have|does|do|competes?|expands?|scales?)\b[^.]{0,90}\.",
+        re.I,
+    )
     matches = [m.group(0) for m in pattern.finditer(prose)]
-    return WARN, "em-dash joining an independent clause (house rule for citation-ready prose, not an ASA/MLA requirement)", matches
+    matches += [m.group(0) for m in compound_pattern.finditer(prose)]
+    return WARN, "em-dash joining an independent clause (won't extract cleanly for citation/RAG reuse)", matches
 
 
 def check_structural_headers(body: str):
