@@ -81,6 +81,30 @@ def check_dramatic_colon(prose: str):
     return WARN, "possible dramatic-reveal colon (verify it isn't introducing a list/code/table)", hits
 
 
+def check_hollow_self_description(prose: str):
+    """Sentences that are grammatically correct, pass every other check, and
+    still tell a reader nothing concrete because they describe the document's
+    own structure or an absence rather than giving actual reader value.
+    Caught by eye first (post-26 methodology appendix, 2026-07-09): 'Every
+    number in that article is independently reproducible from Sections 2 and
+    3 below, without needing the article's prose.' True, structurally sound,
+    and empty -- points at the document's own section numbers instead of
+    saying what a reader can do, and frames the value as an absence ('without
+    needing X') instead of a presence. Two syntactic signatures, both warn-
+    level since false positives are real (a genuine methodological limitation
+    can legitimately need 'without' framing)."""
+    self_referential_pointer = re.findall(
+        r"\b(?:Sections?|Chapters?)\s+\d+(?:\s+(?:and|through|to)\s+\d+)?\s+(?:below|above)\b[^.]{0,80}\.",
+        prose, re.I,
+    )
+    negative_property_framing = re.findall(
+        r"\bwithout\s+(?:needing|requiring)\s+[^.]{3,60}\.",
+        prose, re.I,
+    )
+    hits = self_referential_pointer + negative_property_framing
+    return WARN, "possible hollow self-description (structurally correct, says nothing concrete to a reader)", hits
+
+
 def check_intensifiers(prose: str):
     hits = re.findall(r"\b(genuinely|actually|really)\b", prose, re.I)
     return FAIL, "intensifier padding (zero instances across baseline corpus)", hits
@@ -173,7 +197,7 @@ def run_checks(path: str, extra_word_rules):
     for fn in (check_forbidden_phrases, check_verb_contractions, check_direct_address, check_self_referential,
                check_pundit_contrast, check_dramatic_colon, check_dramatic_emdash, check_intensifiers,
                check_rhetorical_questions, check_american_spelling,
-               check_telegraphic_fragments):
+               check_telegraphic_fragments, check_hollow_self_description):
         severity, label, hits = fn(body)
         results.append((severity, label, hits))
 
