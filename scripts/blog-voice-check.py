@@ -84,15 +84,20 @@ def check_dramatic_colon(prose: str):
 def check_hollow_self_description(prose: str):
     """Sentences that are grammatically correct, pass every other check, and
     still tell a reader nothing concrete because they describe the document's
-    own structure or an absence rather than giving actual reader value.
+    own structure, an absence, or the author's editorial choices rather than
+    giving actual reader value.
     Caught by eye first (post-26 methodology appendix, 2026-07-09): 'Every
     number in that article is independently reproducible from Sections 2 and
     3 below, without needing the article's prose.' True, structurally sound,
     and empty -- points at the document's own section numbers instead of
     saying what a reader can do, and frames the value as an absence ('without
-    needing X') instead of a presence. Two syntactic signatures, both warn-
-    level since false positives are real (a genuine methodological limitation
-    can legitimately need 'without' framing)."""
+    needing X') instead of a presence. A second pass the same day caught a
+    third variant: 'Sorted by category, not by narrative convenience' --
+    explaining why the author organized something a particular way, which is
+    editorial reasoning for the author's own benefit, not reader content.
+    Three syntactic signatures, all warn-level since false positives are real
+    (a genuine methodological limitation can legitimately need 'without'
+    framing; a genuine organizing principle can legitimately need stating)."""
     self_referential_pointer = re.findall(
         r"\b(?:Sections?|Chapters?)\s+\d+(?:\s+(?:and|through|to)\s+\d+)?\s+(?:below|above)\b[^.]{0,80}\.",
         prose, re.I,
@@ -101,7 +106,11 @@ def check_hollow_self_description(prose: str):
         r"\bwithout\s+(?:needing|requiring)\s+[^.]{3,60}\.",
         prose, re.I,
     )
-    hits = self_referential_pointer + negative_property_framing
+    editorial_choice_justification = re.findall(
+        r"\b(?:Sorted|Ordered|Organized|Organised|Arranged|Structured)\s+by\s+[^.]{3,60},?\s+not\s+(?:by\s+)?[^.]{3,40}\.",
+        prose, re.I,
+    )
+    hits = self_referential_pointer + negative_property_framing + editorial_choice_justification
     return WARN, "possible hollow self-description (structurally correct, says nothing concrete to a reader)", hits
 
 
