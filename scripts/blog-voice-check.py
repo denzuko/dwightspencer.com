@@ -114,6 +114,29 @@ def check_hollow_self_description(prose: str):
     return WARN, "possible hollow self-description (structurally correct, says nothing concrete to a reader)", hits
 
 
+def check_self_referential_process_narration(prose: str):
+    """Phrases that narrate the author's own verification or editorial
+    process rather than giving the reader content they can act on.
+    Different from an UNVERIFIED-style warning, which tells the reader
+    what to check themselves -- these tell the reader the author did
+    their job, which the reader has no way to act on either way.
+    Caught in denzuko/bknr.hashkv's README and docstrings (2026-08-24
+    session, cross-repo Claude quality-gate pass): 'Confirmed by direct
+    testing', 'disclosed up front', 'now with real numbers', 'worth
+    knowing', 'tested directly', 'found by adversarial testing',
+    'verified directly'."""
+    phrases = [
+        "confirmed by direct testing", "verified by direct testing",
+        "verified directly", "confirmed directly", "tested directly",
+        "confirmed live", "tested live", "found by adversarial testing",
+        "found by direct testing", "disclosed up front", "now with real numbers",
+        "worth knowing", "worth noting",
+    ]
+    tl = prose.lower()
+    hits = [p for p in phrases if p in tl]
+    return FAIL, "self-referential process narration (author's own verification act, not reader-actionable content)", hits
+
+
 def check_intensifiers(prose: str):
     hits = re.findall(r"\b(genuinely|actually|really)\b", prose, re.I)
     return FAIL, "intensifier padding (zero instances across baseline corpus)", hits
@@ -205,6 +228,7 @@ def run_checks(path: str, extra_word_rules):
     results = []
     for fn in (check_forbidden_phrases, check_verb_contractions, check_direct_address, check_self_referential,
                check_pundit_contrast, check_dramatic_colon, check_dramatic_emdash, check_intensifiers,
+               check_self_referential_process_narration,
                check_rhetorical_questions, check_american_spelling,
                check_telegraphic_fragments, check_hollow_self_description):
         severity, label, hits = fn(body)
