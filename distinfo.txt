@@ -1,8 +1,8 @@
 name: dwightaspencercom
-version: 2026.10.21-10.56.42
-system-index-url: http://dwightaspencer.com/lisp/dwightaspencercom/2026.10.21-10.56.42/systems.txt
-release-index-url: http://dwightaspencer.com/lisp/dwightaspencercom/2026.10.21-10.56.42/releases.txt
+version: 2026.10.22-10.56.24
+system-index-url: http://dwightaspencer.com/lisp/dwightaspencercom/2026.10.22-10.56.24/systems.txt
+release-index-url: http://dwightaspencer.com/lisp/dwightaspencercom/2026.10.22-10.56.24/releases.txt
 archive-base-url: http://dwightaspencer.com/lisp
-canonical-distinfo-url: http://dwightaspencer.com/lisp/dwightaspencercom/2026.10.21-10.56.42/dwightaspencercom.txt
+canonical-distinfo-url: http://dwightaspencer.com/lisp/dwightaspencercom/2026.10.22-10.56.24/dwightaspencercom.txt
 distinfo-subscription-url: http://dwightaspencer.com/lisp/dwightaspencercom.txt
 available-versions-url: http://dwightaspencer.com/lisp/dwightaspencercom-versions.txt
